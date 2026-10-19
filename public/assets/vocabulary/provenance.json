@@ -1,0 +1,8 @@
+{
+  "createdAt": "2026-10-19",
+  "creator": "ATLAS project implementation",
+  "license": "CC0-1.0",
+  "usage": "Original SVG concept illustrations for vocabulary learning. Not observational evidence, field photographs or real measurements.",
+  "assets": ["insects.svg", "measurement.svg", "compare.svg", "evidence.svg", "reference.svg", "before.svg", "pause.svg", "monitoring.svg"],
+  "sceneArtwork": "Existing project-owner-supplied assets retain their provenance in /assets/regions/nature-realm/artwork-provenance.json."
+}

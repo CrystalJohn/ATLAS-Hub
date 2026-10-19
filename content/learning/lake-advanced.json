@@ -1,0 +1,256 @@
+{
+  "mission": {
+    "id": "disappearing-lake",
+    "version": 1,
+    "title": "The Disappearing Lake",
+    "narrative": "The lake is losing life, not water. Compare measurements from the exposed bay and the healthy upstream reference. These are fictional field measurements.",
+    "objectives": [
+      "Use evidence to distinguish a plausible explanation from a supported one.",
+      "Relate temperature and dissolved oxygen without assuming temperature explains every oxygen deficit."
+    ],
+    "rewards": {
+      "xp": 60,
+      "evidence": "causal-reasoning"
+    },
+    "unlockEffects": [
+      "restore-ecosystem"
+    ],
+    "type": "REASONING",
+    "challenge": {
+      "observations": [
+        {
+          "id": "temperature",
+          "title": "Temperature transect",
+          "reading": "28°C / 18°C",
+          "detail": "Exposed bay: 28°C. Shaded reference: 18°C. Both sampled at dawn, same elevation, with calibrated probes."
+        },
+        {
+          "id": "oxygen",
+          "title": "Oxygen readings",
+          "reading": "3.1 / 8.8 mg/L",
+          "detail": "Exposed bay: 3.1 mg/L dissolved oxygen; reference: 8.8 mg/L. A brief controlled aeration in the bay raised oxygen to 6.0 mg/L and fish stopped gasping. Low oxygen is a direct stressor; warming alone does not explain the full deficit."
+        },
+        {
+          "id": "screen",
+          "title": "Pollution screen",
+          "reading": "No spike detected",
+          "detail": "Screened nutrients, ammonia and pesticides match reference levels. No spill, algal bloom or unusual organic load was observed. This weakens the tested pollution hypothesis; it does not rule out every contaminant."
+        }
+      ],
+      "question": "What is the best-supported immediate explanation for the fish distress?",
+      "options": [
+        {
+          "id": "oxygen-stress",
+          "text": "Low dissolved oxygen is stressing fish in the warmer bay.",
+          "feedback": "Supported by the low oxygen measurement and the fish response to controlled aeration. Warming reduces oxygen solubility, but further investigation is needed to explain the entire oxygen deficit."
+        },
+        {
+          "id": "toxic-spill",
+          "text": "A toxic chemical spill has been confirmed.",
+          "feedback": "The screen did not detect a spike in the tested substances. An untested contaminant remains possible, but no spill is confirmed by these data."
+        },
+        {
+          "id": "water-loss",
+          "text": "The lake has drained away.",
+          "feedback": "The lake level is unchanged. This investigation concerns declining aquatic life, not a measured drop in water level."
+        }
+      ],
+      "evidenceOptions": [
+        {
+          "id": "oxygen-response",
+          "text": "Oxygen is low, and fish improved during controlled aeration."
+        },
+        {
+          "id": "warm-reference",
+          "text": "The exposed bay is warmer than the shaded reference."
+        },
+        {
+          "id": "spill-rumor",
+          "text": "A visitor heard a rumor about a chemical spill."
+        }
+      ]
+    }
+  },
+  "variants": {
+    "A1": {
+      "goal": "Find a direct instruction in a short note.",
+      "passage": "Elara has two numbers. The bay is warm. The stream is cool. “Compare the numbers,” she says. Use a measurement, not a story. Check the water first. Then choose an idea.",
+      "vi": "Elara có số liệu ở hai nơi. Hãy so sánh số đo, đừng dùng một câu chuyện để kết luận. Kiểm tra nước trước rồi chọn cách giải thích.",
+      "questions": [
+        {
+          "id": "read",
+          "skill": "reading",
+          "prompt": "What should Elara use to check her idea?",
+          "options": [
+            {
+              "id": "rumour",
+              "text": "A visitor’s rumour confirms a spill."
+            },
+            {
+              "id": "evidence",
+              "text": "Compare the measured values before deciding."
+            },
+            {
+              "id": "appearance",
+              "text": "The water looks clear, so no measurements are needed."
+            }
+          ]
+        },
+        {
+          "id": "word",
+          "skill": "vocabulary",
+          "prompt": "In this field note, “measurement” means…",
+          "options": [
+            {
+              "id": "guess",
+              "text": "An idea that nobody has checked."
+            },
+            {
+              "id": "story",
+              "text": "A story told by a visitor."
+            },
+            {
+              "id": "measure",
+              "text": "A value found by checking with an instrument."
+            }
+          ]
+        }
+      ]
+    },
+    "A2": {
+      "goal": "Follow a comparison and distinguish a measurement from a guess.",
+      "passage": "Elara asks you to compare the bay with the shaded stream. The bay is warmer and has less oxygen. A visitor talks about a spill, but there is no measurement to confirm it. “Use the evidence before deciding,” Elara says.",
+      "vi": "Vịnh ấm hơn và có ít oxy hơn suối có bóng râm. Một người kể về vụ tràn hóa chất nhưng chưa có số đo xác nhận. Dùng bằng chứng trước khi quyết định.",
+      "questions": [
+        {
+          "id": "read",
+          "skill": "reading",
+          "prompt": "What should Elara use to check her idea?",
+          "options": [
+            {
+              "id": "rumour",
+              "text": "A visitor’s rumour confirms a spill."
+            },
+            {
+              "id": "evidence",
+              "text": "Compare the measured values before deciding."
+            },
+            {
+              "id": "appearance",
+              "text": "The water looks clear, so no measurements are needed."
+            }
+          ]
+        },
+        {
+          "id": "word",
+          "skill": "vocabulary",
+          "prompt": "In this field note, “measurement” means…",
+          "options": [
+            {
+              "id": "guess",
+              "text": "An idea that nobody has checked."
+            },
+            {
+              "id": "story",
+              "text": "A story told by a visitor."
+            },
+            {
+              "id": "measure",
+              "text": "A value found by checking with an instrument."
+            }
+          ]
+        }
+      ]
+    },
+    "B1": {
+      "goal": "Understand how a comparison supports a cautious conclusion.",
+      "passage": "The bay is warmer than the shaded reference and its oxygen measurement is lower. During a short, controlled aeration test, the fish stop gasping. Elara asks you to compare the measured values before deciding. A rumour about a spill is not enough to confirm one.",
+      "vi": "Số đo oxy ở vịnh thấp hơn nơi đối chứng. Cá ngừng ngáp khi được sục khí thử nghiệm có kiểm soát. Elara yêu cầu so sánh số đo; lời đồn chưa xác nhận được vụ tràn hóa chất.",
+      "questions": [
+        {
+          "id": "read",
+          "skill": "reading",
+          "prompt": "What evidence supports Elara’s next step?",
+          "options": [
+            {
+              "id": "rumour",
+              "text": "A visitor’s rumour confirms a spill."
+            },
+            {
+              "id": "evidence",
+              "text": "Compare the measured values before deciding."
+            },
+            {
+              "id": "appearance",
+              "text": "The water looks clear, so no measurements are needed."
+            }
+          ]
+        },
+        {
+          "id": "word",
+          "skill": "vocabulary",
+          "prompt": "In this field note, “measurement” means…",
+          "options": [
+            {
+              "id": "guess",
+              "text": "An idea that nobody has checked."
+            },
+            {
+              "id": "story",
+              "text": "A story told by a visitor."
+            },
+            {
+              "id": "measure",
+              "text": "A value found by checking with an instrument."
+            }
+          ]
+        }
+      ]
+    },
+    "B2": {
+      "goal": "Interpret a supported explanation without overstating causation.",
+      "passage": "The exposed bay is warmer than the shaded reference, while its dissolved oxygen measurement is substantially lower. Fish improve during controlled aeration. This evidence supports oxygen stress as an immediate problem, but it does not establish the cause of the entire deficit. Elara recommends comparing the measured values before attributing the change to a spill.",
+      "vi": "Phản ứng của cá khi sục khí hỗ trợ nhận định thiếu oxy là vấn đề trực tiếp. Tuy nhiên, bằng chứng chưa giải thích toàn bộ nguyên nhân. Cần so sánh số đo trước khi quy cho một vụ tràn hóa chất.",
+      "questions": [
+        {
+          "id": "read",
+          "skill": "reading",
+          "prompt": "Which interpretation respects the limits of the field note?",
+          "options": [
+            {
+              "id": "rumour",
+              "text": "A visitor’s rumour confirms a spill."
+            },
+            {
+              "id": "evidence",
+              "text": "Compare the measured values before deciding."
+            },
+            {
+              "id": "appearance",
+              "text": "The water looks clear, so no measurements are needed."
+            }
+          ]
+        },
+        {
+          "id": "word",
+          "skill": "vocabulary",
+          "prompt": "In this field note, “measurement” means…",
+          "options": [
+            {
+              "id": "guess",
+              "text": "An idea that nobody has checked."
+            },
+            {
+              "id": "story",
+              "text": "A story told by a visitor."
+            },
+            {
+              "id": "measure",
+              "text": "A value found by checking with an instrument."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+const c=(en:string,vi:string)=>({en,vi});
+export const lakeExchanges=[
+ {question:c('What is different?','Có gì khác nhau?'),reply:{A1:'The bay is warmer. It has less oxygen.',A2:'The bay is warmer than the stream. It also has less oxygen.',B1:'The bay is warmer than the stream, and its oxygen reading is lower.',B2:'The bay is warmer and has less oxygen than the stream. That comparison gives us a useful starting point.'},vi:'Vịnh ấm hơn và có ít oxy hơn suối.'},
+ {question:c('What does oxygen mean?','Oxygen nghĩa là gì?'),reply:{A1:'Fish need oxygen in the water.',A2:'Fish need oxygen in the water.',B1:'Fish need oxygen in the water. Here, we are checking how much is in the water.',B2:'Fish need oxygen from the water. The reading tells us how much is present; you do not need to calculate it.'},vi:'Oxy là một chất khí. Cá cần oxy trong nước.'},
+ {question:c('How do you know?','Làm sao bạn biết?'),reply:{A1:'Look at the numbers. Compare the two places.',A2:'Let’s compare the numbers from the two places.',B1:'We have a reading from each place. Let’s compare those before making a decision.',B2:'We can compare the readings and watch how the fish respond. A visitor’s story still needs checking.'},vi:'Hãy so sánh số đo ở hai nơi trước khi quyết định.'},
+];

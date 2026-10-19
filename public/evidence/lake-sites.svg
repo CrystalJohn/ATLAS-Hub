@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-labelledby="title desc">
+<title id="title">Two fictional sampling sites</title><desc id="desc">Original schematic: trees shade a stream on the left; sunlight reaches an exposed bay on the right. Not a photograph or real field observation. No measurement is inferred from the picture.</desc>
+<rect width="720" height="300" rx="24" fill="#edf5fb"/>
+<path d="M24 190Q170 145 344 181V276H24Z" fill="#87b6a3"/><path d="M376 190Q540 150 696 185V276H376Z" fill="#b8c99d"/>
+<path d="M23 231Q157 172 344 219V262Q164 216 23 272" fill="#63a7bc"/><path d="M376 220Q547 176 697 220V274Q520 241 376 264Z" fill="#63a7bc"/>
+<g fill="#2c7560" stroke="#28634e" stroke-width="7"><path d="M75 198V123M170 198V114M260 196V132"/><circle cx="75" cy="92" r="46"/><circle cx="170" cy="77" r="55"/><circle cx="260" cy="100" r="44"/></g>
+<path d="M47 184Q177 140 302 187L306 235Q165 213 44 239Z" fill="#183f48" opacity=".22"/>
+<circle cx="574" cy="69" r="31" fill="#f5c655"/><g stroke="#e6ab2d" stroke-width="5" stroke-linecap="round"><path d="M574 17V6M574 121V109M522 69H511M637 69H625M536 31L527 22M612 107L621 116M612 31L621 22M536 107L527 116"/></g>
+<path d="M360 20V280" stroke="#cad9e1" stroke-width="2" stroke-dasharray="6 6"/>
+<g font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#244d60"><text x="35" y="286">Shaded stream</text><text x="395" y="286">Sunlit bay</text></g>
+</svg>

@@ -1,0 +1,1556 @@
+[
+  {
+    "path": "mission.title",
+    "text": "The Disappearing Lake",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "mission.narrative",
+    "text": "Take a short walk with Elara. Visit the stream and the bay, compare what you find, and ask how to help the fish. All readings are made up for this story.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.objectives.0",
+    "text": "Ask a question and understand Elara’s answer.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "mission.objectives.1",
+    "text": "Compare two places using warmer and less.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "mission.observations.0.title",
+    "text": "Temperature transect",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.observations.0.reading",
+    "text": "28°C / 18°C",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.observations.0.detail",
+    "text": "Exposed bay: 28°C. Shaded reference: 18°C. Both sampled at dawn, same elevation, with calibrated probes.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.observations.1.title",
+    "text": "Oxygen readings",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.observations.1.reading",
+    "text": "3.1 / 8.8 mg/L",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.observations.1.detail",
+    "text": "Exposed bay: 3.1 mg/L dissolved oxygen; reference: 8.8 mg/L. A brief controlled aeration in the bay raised oxygen to 6.0 mg/L and fish stopped gasping. Low oxygen is a direct stressor; warming alone does not explain the full deficit.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "multiple-controls",
+      "temperature-capacity",
+      "case-aeration"
+    ]
+  },
+  {
+    "path": "mission.observations.2.title",
+    "text": "Pollution screen",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.observations.2.reading",
+    "text": "No spike detected",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.observations.2.detail",
+    "text": "Screened nutrients, ammonia and pesticides match reference levels. No spill, algal bloom or unusual organic load was observed. This weakens the tested pollution hypothesis; it does not rule out every contaminant.",
+    "classification": "case-inference",
+    "claimIds": [
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "mission.question",
+    "text": "From Elara’s notes, what is the problem for the fish?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "mission.options.0.text",
+    "text": "The fish have too little oxygen in the warmer bay.",
+    "classification": "case-inference",
+    "claimIds": [
+      "case-conclusion",
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "mission.options.0.feedback",
+    "text": "The bay has less oxygen, and adding air helped the fish. Elara still needs more checks to find the full cause.",
+    "classification": "case-inference",
+    "claimIds": [
+      "case-conclusion",
+      "multiple-controls",
+      "temperature-capacity"
+    ]
+  },
+  {
+    "path": "mission.options.1.text",
+    "text": "We know there was a chemical spill.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.options.1.feedback",
+    "text": "Elara’s checks did not confirm a spill. The visitor’s story needs more checking.",
+    "classification": "case-inference",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.options.2.text",
+    "text": "The lake has no water left.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.options.2.feedback",
+    "text": "The lake still has water. Look again at Elara’s notes about the fish.",
+    "classification": "case-inference",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.evidenceOptions.0",
+    "text": "Elara added air to the water, and the fish improved.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.evidenceOptions.1",
+    "text": "The bay is warmer than the stream.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "mission.evidenceOptions.2",
+    "text": "A visitor heard a story about a spill.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.A1.goal",
+    "text": "Understand a short instruction and compare two places.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.A1.passage",
+    "text": "The stream is cool. The bay is warmer. The fish need help. “What can we do?” you ask. Elara says, “Compare the numbers first.” A measurement is a number from a check. Elara adds air to the water. The fish look better.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.A1.vi",
+    "text": "Suối mát, vịnh ấm hơn và cá cần giúp đỡ. Elara bảo so sánh số đo trước. Khi cô thêm không khí vào nước, cá khá hơn.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.A1.questions.0.prompt",
+    "text": "What does Elara ask you to do?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.A1.questions.0.options.0",
+    "text": "Believe the visitor’s story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A1.questions.0.options.1",
+    "text": "Compare the numbers first.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A1.questions.0.options.2",
+    "text": "Only look at the clear water.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A1.questions.1.prompt",
+    "text": "Elara checks the water. What is a “measurement”?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.A1.questions.1.options.0",
+    "text": "A guess.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A1.questions.1.options.1",
+    "text": "A story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A1.questions.1.options.2",
+    "text": "A number from a check.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "english.A2.goal",
+    "text": "Ask what changed and understand a simple comparison.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.A2.passage",
+    "text": "“What is different?” you ask Elara. “The bay is warmer than the stream. It also has less oxygen,” she says. “How do you know?” you ask. Elara shows you a measurement from each place. “Compare the numbers first. A visitor’s story is not enough.” She adds air to the bay, and the fish look better.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.A2.vi",
+    "text": "Bạn hỏi điều gì khác nhau và làm sao biết được. Elara cho xem số đo: vịnh ấm hơn, ít oxy hơn. Cần so sánh số liệu, không chỉ nghe lời kể.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.A2.questions.0.prompt",
+    "text": "What does Elara want you to do before deciding?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.A2.questions.0.options.0",
+    "text": "Believe the visitor’s story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A2.questions.0.options.1",
+    "text": "Compare the numbers first.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A2.questions.0.options.2",
+    "text": "Only look at the clear water.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A2.questions.1.prompt",
+    "text": "Elara checks the water. What is a “measurement”?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.A2.questions.1.options.0",
+    "text": "A guess.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A2.questions.1.options.1",
+    "text": "A story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.A2.questions.1.options.2",
+    "text": "A number from a check.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "english.B1.goal",
+    "text": "Follow a conversation, compare information and ask a follow-up question.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.B1.passage",
+    "text": "You meet Elara beside the lake. “The water looks clear. Is everything okay?” you ask. “Let’s check,” she replies. “The bay is warmer than the stream and has less oxygen.” You ask how she knows. She points to a measurement from each place. “Compare the numbers first.” Adding air helps the fish, but Elara wants more checks before saying what caused the problem.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.B1.vi",
+    "text": "Nước trong chưa đủ để kết luận. Elara so sánh số đo và giải thích rằng thêm không khí giúp cá; vẫn cần kiểm tra thêm nguyên nhân.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.B1.questions.0.prompt",
+    "text": "What does Elara want you to do before deciding?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.B1.questions.0.options.0",
+    "text": "Believe the visitor’s story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B1.questions.0.options.1",
+    "text": "Compare the numbers first.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B1.questions.0.options.2",
+    "text": "Only look at the clear water.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B1.questions.1.prompt",
+    "text": "Elara checks the water. What is a “measurement”?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.B1.questions.1.options.0",
+    "text": "A guess.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B1.questions.1.options.1",
+    "text": "A story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B1.questions.1.options.2",
+    "text": "A number from a check.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "english.B2.goal",
+    "text": "Compare explanations and ask for clarification without jumping to conclusions.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.B2.passage",
+    "text": "“I heard there was a spill,” you tell Elara. “Could that explain the fish?” She suggests checking the information together. The bay is warmer than the stream and has less oxygen. A measurement from each site helps you compare them. “Compare the numbers first,” she says. The fish improve when she adds air, while the visitor’s story remains unconfirmed. “So we know what may help, but we still need to find out more?” you ask. Elara agrees.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.B2.vi",
+    "text": "Bạn và Elara kiểm tra thông tin thay vì vội tin lời đồn. Số đo và phản ứng của cá giúp chọn cách hỗ trợ; nguyên nhân vẫn cần được kiểm tra thêm.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "case-aeration",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "english.B2.questions.0.prompt",
+    "text": "What does Elara want you to do before deciding?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.B2.questions.0.options.0",
+    "text": "Believe the visitor’s story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B2.questions.0.options.1",
+    "text": "Compare the numbers first.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B2.questions.0.options.2",
+    "text": "Only look at the clear water.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B2.questions.1.prompt",
+    "text": "Elara checks the water. What is a “measurement”?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "english.B2.questions.1.options.0",
+    "text": "A guess.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B2.questions.1.options.1",
+    "text": "A story.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "english.B2.questions.1.options.2",
+    "text": "A number from a check.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "glossary.0.meaning",
+    "text": "số đo; kết quả đo",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.0.explanation",
+    "text": "Một giá trị được đo bằng dụng cụ; không phải lời đồn hay phỏng đoán.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.0.example",
+    "text": "The oxygen measurement is low.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.0.exampleVi",
+    "text": "Số đo lượng oxy thấp.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.1.meaning",
+    "text": "so sánh",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.1.explanation",
+    "text": "Xem hai hoặc nhiều giá trị để tìm điểm giống và khác nhau.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.1.example",
+    "text": "Compare the bay with the shaded site.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.1.exampleVi",
+    "text": "So sánh vịnh với khu vực có bóng râm.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.2.meaning",
+    "text": "bằng chứng",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.2.explanation",
+    "text": "Thông tin giúp kiểm tra hoặc hỗ trợ một cách giải thích.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.2.example",
+    "text": "Use evidence to check the idea.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.2.exampleVi",
+    "text": "Dùng bằng chứng để kiểm tra ý tưởng.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.3.meaning",
+    "text": "mốc đối chiếu; đối chứng",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.3.explanation",
+    "text": "Ở đây là địa điểm dùng làm mốc so sánh số đo.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.3.example",
+    "text": "The shaded stream is our reference.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "glossary.3.exampleVi",
+    "text": "Dòng suối có bóng râm là mốc đối chiếu của chúng ta.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.0.question.en",
+    "text": "What is different?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "conversation.0.question.vi",
+    "text": "Có gì khác nhau?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "conversation.0.reply.A1",
+    "text": "The bay is warmer. It has less oxygen.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.0.reply.A2",
+    "text": "The bay is warmer than the stream. It also has less oxygen.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.0.reply.B1",
+    "text": "The bay is warmer than the stream, and its oxygen reading is lower.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.0.reply.B2",
+    "text": "The bay is warmer and has less oxygen than the stream. That comparison gives us a useful starting point.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.0.reply.vi",
+    "text": "Vịnh ấm hơn và có ít oxy hơn suối.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.1.question.en",
+    "text": "What does oxygen mean?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "conversation.1.question.vi",
+    "text": "Oxygen nghĩa là gì?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "conversation.1.reply.A1",
+    "text": "Fish need oxygen in the water.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "conversation.1.reply.A2",
+    "text": "Fish need oxygen in the water.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "conversation.1.reply.B1",
+    "text": "Fish need oxygen in the water. Here, we are checking how much is in the water.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "conversation.1.reply.B2",
+    "text": "Fish need oxygen from the water. The reading tells us how much is present; you do not need to calculate it.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "conversation.1.reply.vi",
+    "text": "Oxy là một chất khí. Cá cần oxy trong nước.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "conversation.2.question.en",
+    "text": "How do you know?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "conversation.2.question.vi",
+    "text": "Làm sao bạn biết?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "conversation.2.reply.A1",
+    "text": "Look at the numbers. Compare the two places.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.2.reply.A2",
+    "text": "Let’s compare the numbers from the two places.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.2.reply.B1",
+    "text": "We have a reading from each place. Let’s compare those before making a decision.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.2.reply.B2",
+    "text": "We can compare the readings and watch how the fish respond. A visitor’s story still needs checking.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "conversation.2.reply.vi",
+    "text": "Hãy so sánh số đo ở hai nơi trước khi quyết định.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.mission.title",
+    "text": "The Disappearing Lake",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.mission.narrative",
+    "text": "The lake is losing life, not water. Compare measurements from the exposed bay and the healthy upstream reference. These are fictional field measurements.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.objectives.0",
+    "text": "Use evidence to distinguish a plausible explanation from a supported one.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.mission.objectives.1",
+    "text": "Relate temperature and dissolved oxygen without assuming temperature explains every oxygen deficit.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.mission.observations.0.title",
+    "text": "Temperature transect",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.0.reading",
+    "text": "28°C / 18°C",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.0.detail",
+    "text": "Exposed bay: 28°C. Shaded reference: 18°C. Both sampled at dawn, same elevation, with calibrated probes.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.1.title",
+    "text": "Oxygen readings",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.1.reading",
+    "text": "3.1 / 8.8 mg/L",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.1.detail",
+    "text": "Exposed bay: 3.1 mg/L dissolved oxygen; reference: 8.8 mg/L. A brief controlled aeration in the bay raised oxygen to 6.0 mg/L and fish stopped gasping. Low oxygen is a direct stressor; warming alone does not explain the full deficit.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "multiple-controls",
+      "temperature-capacity",
+      "case-aeration"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.2.title",
+    "text": "Pollution screen",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.2.reading",
+    "text": "No spike detected",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.observations.2.detail",
+    "text": "Screened nutrients, ammonia and pesticides match reference levels. No spill, algal bloom or unusual organic load was observed. This weakens the tested pollution hypothesis; it does not rule out every contaminant.",
+    "classification": "case-inference",
+    "claimIds": [
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.mission.question",
+    "text": "What is the best-supported immediate explanation for the fish distress?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.mission.options.0.text",
+    "text": "Low dissolved oxygen is stressing fish in the warmer bay.",
+    "classification": "case-inference",
+    "claimIds": [
+      "case-conclusion",
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "advanced.mission.options.0.feedback",
+    "text": "Supported by the low oxygen measurement and the fish response to controlled aeration. Warming reduces oxygen solubility, but further investigation is needed to explain the entire oxygen deficit.",
+    "classification": "case-inference",
+    "claimIds": [
+      "case-conclusion",
+      "multiple-controls",
+      "temperature-capacity"
+    ]
+  },
+  {
+    "path": "advanced.mission.options.1.text",
+    "text": "A toxic chemical spill has been confirmed.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.options.1.feedback",
+    "text": "The screen did not detect a spike in the tested substances. An untested contaminant remains possible, but no spill is confirmed by these data.",
+    "classification": "case-inference",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.options.2.text",
+    "text": "The lake has drained away.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.options.2.feedback",
+    "text": "The lake level is unchanged. This investigation concerns declining aquatic life, not a measured drop in water level.",
+    "classification": "case-inference",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.evidenceOptions.0",
+    "text": "Oxygen is low, and fish improved during controlled aeration.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.evidenceOptions.1",
+    "text": "The exposed bay is warmer than the shaded reference.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.mission.evidenceOptions.2",
+    "text": "A visitor heard a rumor about a chemical spill.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.goal",
+    "text": "Find a direct instruction in a short note.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.A1.passage",
+    "text": "Elara has two numbers. The bay is warm. The stream is cool. “Compare the numbers,” she says. Use a measurement, not a story. Check the water first. Then choose an idea.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis",
+      "case-conclusion"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.vi",
+    "text": "Elara có số liệu ở hai nơi. Hãy so sánh số đo, đừng dùng một câu chuyện để kết luận. Kiểm tra nước trước rồi chọn cách giải thích.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis",
+      "case-conclusion"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.questions.0.prompt",
+    "text": "What should Elara use to check her idea?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.A1.questions.0.options.0",
+    "text": "A visitor’s rumour confirms a spill.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.questions.0.options.1",
+    "text": "Compare the measured values before deciding.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.questions.0.options.2",
+    "text": "The water looks clear, so no measurements are needed.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.questions.1.prompt",
+    "text": "In this field note, “measurement” means…",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.A1.questions.1.options.0",
+    "text": "An idea that nobody has checked.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.questions.1.options.1",
+    "text": "A story told by a visitor.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A1.questions.1.options.2",
+    "text": "A value found by checking with an instrument.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.goal",
+    "text": "Follow a comparison and distinguish a measurement from a guess.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.A2.passage",
+    "text": "Elara asks you to compare the bay with the shaded stream. The bay is warmer and has less oxygen. A visitor talks about a spill, but there is no measurement to confirm it. “Use the evidence before deciding,” Elara says.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis",
+      "case-conclusion"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.vi",
+    "text": "Vịnh ấm hơn và có ít oxy hơn suối có bóng râm. Một người kể về vụ tràn hóa chất nhưng chưa có số đo xác nhận. Dùng bằng chứng trước khi quyết định.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis",
+      "case-conclusion"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.questions.0.prompt",
+    "text": "What should Elara use to check her idea?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.A2.questions.0.options.0",
+    "text": "A visitor’s rumour confirms a spill.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.questions.0.options.1",
+    "text": "Compare the measured values before deciding.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.questions.0.options.2",
+    "text": "The water looks clear, so no measurements are needed.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.questions.1.prompt",
+    "text": "In this field note, “measurement” means…",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.A2.questions.1.options.0",
+    "text": "An idea that nobody has checked.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.questions.1.options.1",
+    "text": "A story told by a visitor.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.A2.questions.1.options.2",
+    "text": "A value found by checking with an instrument.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.goal",
+    "text": "Understand how a comparison supports a cautious conclusion.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.B1.passage",
+    "text": "The bay is warmer than the shaded reference and its oxygen measurement is lower. During a short, controlled aeration test, the fish stop gasping. Elara asks you to compare the measured values before deciding. A rumour about a spill is not enough to confirm one.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis",
+      "case-conclusion"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.vi",
+    "text": "Số đo oxy ở vịnh thấp hơn nơi đối chứng. Cá ngừng ngáp khi được sục khí thử nghiệm có kiểm soát. Elara yêu cầu so sánh số đo; lời đồn chưa xác nhận được vụ tràn hóa chất.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis",
+      "case-conclusion"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.questions.0.prompt",
+    "text": "What evidence supports Elara’s next step?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.B1.questions.0.options.0",
+    "text": "A visitor’s rumour confirms a spill.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.questions.0.options.1",
+    "text": "Compare the measured values before deciding.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.questions.0.options.2",
+    "text": "The water looks clear, so no measurements are needed.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.questions.1.prompt",
+    "text": "In this field note, “measurement” means…",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.B1.questions.1.options.0",
+    "text": "An idea that nobody has checked.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.questions.1.options.1",
+    "text": "A story told by a visitor.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B1.questions.1.options.2",
+    "text": "A value found by checking with an instrument.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.goal",
+    "text": "Interpret a supported explanation without overstating causation.",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.B2.passage",
+    "text": "The exposed bay is warmer than the shaded reference, while its dissolved oxygen measurement is substantially lower. Fish improve during controlled aeration. This evidence supports oxygen stress as an immediate problem, but it does not establish the cause of the entire deficit. Elara recommends comparing the measured values before attributing the change to a spill.",
+    "classification": "case-inference",
+    "claimIds": [
+      "case-measurements",
+      "case-conclusion",
+      "multiple-controls"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.vi",
+    "text": "Phản ứng của cá khi sục khí hỗ trợ nhận định thiếu oxy là vấn đề trực tiếp. Tuy nhiên, bằng chứng chưa giải thích toàn bộ nguyên nhân. Cần so sánh số đo trước khi quy cho một vụ tràn hóa chất.",
+    "classification": "simulated-data",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis",
+      "case-conclusion"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.questions.0.prompt",
+    "text": "Which interpretation respects the limits of the field note?",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.B2.questions.0.options.0",
+    "text": "A visitor’s rumour confirms a spill.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.questions.0.options.1",
+    "text": "Compare the measured values before deciding.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.questions.0.options.2",
+    "text": "The water looks clear, so no measurements are needed.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.questions.1.prompt",
+    "text": "In this field note, “measurement” means…",
+    "classification": "fictional-scenario",
+    "claimIds": []
+  },
+  {
+    "path": "advanced.english.B2.questions.1.options.0",
+    "text": "An idea that nobody has checked.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.questions.1.options.1",
+    "text": "A story told by a visitor.",
+    "classification": "unconfirmed-hypothesis",
+    "claimIds": [
+      "spill-hypothesis",
+      "case-measurements"
+    ]
+  },
+  {
+    "path": "advanced.english.B2.questions.1.options.2",
+    "text": "A value found by checking with an instrument.",
+    "classification": "verified-fact",
+    "claimIds": [
+      "oxygen-life"
+    ]
+  },
+  {
+    "path": "advanced.glossary.0.meaning",
+    "text": "số đo; kết quả đo",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.0.explanation",
+    "text": "Một giá trị được đo bằng dụng cụ; không phải lời đồn hay phỏng đoán.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.0.example",
+    "text": "The oxygen measurement is low.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.0.exampleVi",
+    "text": "Số đo lượng oxy thấp.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.1.meaning",
+    "text": "so sánh",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.1.explanation",
+    "text": "Xem hai hoặc nhiều giá trị để tìm điểm giống và khác nhau.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.1.example",
+    "text": "Compare the bay with the shaded site.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.1.exampleVi",
+    "text": "So sánh vịnh với khu vực có bóng râm.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.2.meaning",
+    "text": "bằng chứng",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.2.explanation",
+    "text": "Thông tin giúp kiểm tra hoặc hỗ trợ một cách giải thích.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.2.example",
+    "text": "Use evidence to check the idea.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.2.exampleVi",
+    "text": "Dùng bằng chứng để kiểm tra ý tưởng.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.3.meaning",
+    "text": "mốc đối chiếu; đối chứng",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.3.explanation",
+    "text": "Ở đây là địa điểm dùng làm mốc so sánh số đo.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.3.example",
+    "text": "The shaded stream is our reference.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  },
+  {
+    "path": "advanced.glossary.3.exampleVi",
+    "text": "Dòng suối có bóng râm là mốc đối chiếu của chúng ta.",
+    "classification": "fictional-scenario",
+    "claimIds": [
+      "case-measurements",
+      "spill-hypothesis"
+    ]
+  }
+]

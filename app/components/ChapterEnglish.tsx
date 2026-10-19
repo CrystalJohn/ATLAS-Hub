@@ -1,0 +1,40 @@
+'use client';
+import {Bilingual,VietnameseSupport} from './Bilingual';
+import {useEffect,useRef,useState} from 'react';
+import {Popover} from '@base-ui/react/popover';
+import {ArrowLeft,ArrowRight,BookOpen,CheckCircle2,RotateCcw,Sparkles} from 'lucide-react';
+import type {EnglishLesson,GlossaryEntry,ReadingBand} from '../../content/english/chapter';
+import {atlasApi,type AtlasState,type EnglishResult} from './chapter-types';
+import {TrailBadge} from './TrailBadge';
+import {WordHelpPopover} from './WordHelpPopover';
+type Props={lesson:EnglishLesson;band:ReadingBand;attemptId:string;vietnamese:boolean;onSupport:(value:boolean)=>void;onState:(state:AtlasState)=>void;onBusy:(busy:boolean)=>void;onContinue:()=>void;initialItems?:('read'|'word')[]};
+export function ChapterEnglish({lesson,band,attemptId,vietnamese,onSupport,onState,onBusy,onContinue,initialItems}:Props){
+ const [queue]=useState<('read'|'word')[]>(()=>initialItems?.length?initialItems:['read','word']);
+ const [phase,setPhase]=useState<'read'|'question'|'done'>('read'),[index,setIndex]=useState(0),[choice,setChoice]=useState(''),[result,setResult]=useState<EnglishResult|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ const supported=useRef(vietnamese),lookedUp=useRef(false),feedbackRef=useRef<HTMLDivElement>(null),headingRef=useRef<HTMLHeadingElement>(null);
+ const [wordHelp]=useState(()=>Popover.createHandle<GlossaryEntry>());
+ const variant=lesson.variants[band],question=variant.questions.find(q=>q.id===queue[index])!;
+ useEffect(()=>{if(vietnamese)supported.current=true;},[vietnamese]);
+ useEffect(()=>{headingRef.current?.focus();},[phase,index]);
+ useEffect(()=>{if(result){feedbackRef.current?.focus();feedbackRef.current?.scrollIntoView({block:'nearest',behavior:'auto'});}},[result]);
+ const parts=variant.passage.split(new RegExp(`\\b(${lesson.glossary.map(g=>g.word).join('|')})\\b`,'gi'));
+ async function check(){if(busy||!choice||result)return;setBusy(true);onBusy(true);setError('');try{
+  const r=await atlasApi<EnglishResult>(`attempts/${attemptId}/english-item`,{lessonId:lesson.id,version:lesson.version,band,itemId:question.id,answer:choice,support:{vietnamese:supported.current,glossary:lookedUp.current}});setResult(r);onState(r.state);
+ }catch(e){setError(e instanceof Error?e.message:'Could not save. Try again.');}finally{setBusy(false);onBusy(false);}}
+ function advance(){if(index+1<queue.length){setIndex(i=>i+1);setChoice('');setResult(null);}else setPhase('done');}
+ function retry(){setChoice('');setResult(null);headingRef.current?.focus();}
+ return <VietnameseSupport value={vietnamese}><section className="chapter-english" aria-label="English learning activity">
+ <div className="lesson-meta"><span className="pill purple"><BookOpen size={14}/> <Bilingual text={"ENGLISH FIELDWORK"}/></span><span className="pill neutral"><Bilingual text={`Target ${band}`}/></span><label className="support-switch" lang="vi" title="Hiện bản hỗ trợ tiếng Việt kèm nội dung tiếng Anh"><input type="checkbox" checked={vietnamese} disabled={busy} onChange={e=>onSupport(e.target.checked)}/> Tiếng Việt</label></div>
+ <div className="lesson-progress" aria-label="English activity progress"><span style={{width:phase==='read'?'12%':phase==='done'?'100%':`${(index+1)/(queue.length+1)*100}%`}}/></div>
+ {phase==='read'?<><p className="overline"><Bilingual text={"RANGER ELARA’S FIELD NOTE"}/></p><h2 ref={headingRef} tabIndex={-1}><Bilingual text={lesson.title}/></h2><p className="soft-copy"><Bilingual text={variant.goal}/></p><div className="reading-paper"><BookOpen size={23}/><p>{parts.map((part,i)=>{const entry=lesson.glossary.find(w=>w.word===part.toLowerCase());return entry?<Popover.Trigger handle={wordHelp} payload={entry} className="word-tap" aria-label={`Word help: ${part}`} key={i} onClick={()=>{lookedUp.current=true;}}>{part}</Popover.Trigger>:part;})}</p></div>
+ <p className="micro-copy"><Bilingual text={"Tap an underlined word for a contextual example."}/></p>
+ <WordHelpPopover handle={wordHelp} vietnamese={vietnamese} lessonId={lesson.id} version={lesson.version}/>
+ {vietnamese&&<details className="translation" lang="vi"><summary>Giải thích tiếng Việt</summary><p>{variant.vi}</p></details>}
+ <div className="lesson-actions"><button className="play-button purple" onClick={()=>setPhase('question')}><Bilingual text={`Start ${queue.length} ${queue.length===1?'question':'questions'}`}/> <ArrowRight size={18}/></button><button className="quiet-button" onClick={onContinue}><Bilingual text={"Skip practice · return to mission"}/></button></div></>:phase==='question'?<><div className="question-heading"><span className="question-count">{index+1}/{queue.length}</span><p className="overline"><Bilingual text={question.skill==='reading'?'READ FOR MEANING':'WORDS IN CONTEXT'}/></p></div><h2 ref={headingRef} tabIndex={-1}><Bilingual text={question.prompt}/></h2><details className="reference-note"><summary><BookOpen size={16}/> <Bilingual text={"Read Elara’s note again"}/></summary><p>{variant.passage}</p>{vietnamese&&<p lang="vi">{variant.vi}</p>}</details>
+ <fieldset className="choice-grid" disabled={busy||!!result}><legend className="sr-only"><Bilingual text={"Choose one answer"}/></legend>{question.options.map((o,i)=><label className={`choice ${choice===o.id?'selected':''}`} key={o.id}><input type="radio" name="english-answer" checked={choice===o.id} onChange={()=>setChoice(o.id)}/><span className="choice-letter">{String.fromCharCode(65+i)}</span><span><Bilingual text={o.text}/></span>{choice===o.id&&<CheckCircle2 size={20}/>}</label>)}</fieldset>
+ {error&&<p role="alert" className="error-card">{error} <Bilingual text={"Your choice is kept."}/></p>}
+ {result?<div className={`answer-feedback ${result.correct?'correct':'retry'}`} ref={feedbackRef} tabIndex={-1} role="status"><div className="feedback-label">{result.correct?<CheckCircle2 size={22}/>:<RotateCcw size={22}/>}<strong><Bilingual text={result.correct?'Good catch!':'Let’s look a little closer.'}/></strong></div><p>{result.explanation}</p><blockquote>“{result.quote}”</blockquote>{!result.correct&&<p><strong><Bilingual text={"The meaning here:"}/></strong> <Bilingual text={result.correctText}/></p>}{vietnamese&&<p lang="vi" className="vi-copy">{result.explanationVi}</p>}<button className={`play-button ${result.correct?'mint':'gold'}`} onClick={result.correct?advance:retry}><Bilingual text={result.correct?(index+1<queue.length?'Next question':'See my learning recap'):'Try this question again'}/> {result.correct?<ArrowRight size={18}/>:<RotateCcw size={18}/>}</button></div>:<button className="play-button purple" disabled={!choice||busy} onClick={check}><Bilingual text={busy?'Saving your answer…':'Check my answer'}/> <ArrowRight size={18}/></button>}
+ <button className="quiet-button" disabled={busy} onClick={onContinue}><ArrowLeft size={15}/> <Bilingual text={"Back to field mission"}/></button></>:<div className="lesson-recap"><TrailBadge tone="purple" earned size={100}/><p className="overline"><Bilingual text={"PRACTICE SAVED"}/></p><h2 ref={headingRef} tabIndex={-1}><Bilingual text={"You followed the meaning."}/></h2><p><Bilingual text={"Reading and vocabulary from this expedition are now in your English journal."}/></p>{vietnamese&&<p className="vi-copy" lang="vi">Bạn đã hoàn thành lượt luyện này. Đây là kết quả bài tập, không phải đánh giá tổng thể trình độ tiếng Anh.</p>}<div className="word-collection"><h3><Bilingual text={"Words you met"}/></h3>{lesson.glossary.map(w=><span className="word-chip" key={w.word}>{w.word}{vietnamese&&<small lang="vi">{w.meaning}</small>}</span>)}</div><button className="play-button mint" onClick={onContinue}><Bilingual text={"Continue my expedition"}/> <ArrowRight size={18}/></button><p className="micro-copy"><Sparkles size={14}/> <Bilingual text={"Field mission rewards stay the same."}/></p></div>}
+ <p className="draft-note"><Bilingual text={"Private pilot · Content awaits educator review. Reading targets are not a proficiency rating."}/></p>
+ </section></VietnameseSupport>;
+}

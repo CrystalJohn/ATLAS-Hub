@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {handleAtlas} from '../lib/atlas/service.ts';
+const require=createRequire(import.meta.resolve('wrangler'));
+const {Miniflare}=require('miniflare');
+const mf=new Miniflare({modules:true,script:'export default {fetch(){return new Response("test")}}',compatibilityDate:'2026-05-15',d1Databases:['DB']});
+try{
+ const db=await mf.getD1Database('DB');
+ await db.prepare(await readFile(new URL('../drizzle/0000_parallel_guardian.sql',import.meta.url),'utf8')).run();
+ const call=async(path:string,body?:unknown,user='test-player',origin?:string)=>{
+  const r=await handleAtlas(new Request('https://atlas.test/api/'+path,{method:body===undefined?'GET':'POST',headers:{...(user?{'oai-authenticated-user-id':user}:{}),'Content-Type':'application/json',...(origin?{origin}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})}),db);
+  return {status:r.status,body:await r.json() as any};
+ };
+ const session=await call('session',{});assert.equal(session.body.xp,0);assert.equal((await call('state',undefined,'')).status,401);
+ assert.equal((await call('attempts',{missionId:'silent-forest'},'test-player','https://other.test')).status,403);
+ assert.equal((await call('attempts',{missionId:'restore-ecosystem'})).status,403);
+ const start=async(missionId:string)=>(await call('attempts',{missionId})).body.id;
+ const forest=await start('silent-forest');
+ const english={lessonId:'forest-field-note',version:1,band:'A2',answers:{read:'inspect',word:'cover'},support:{vietnamese:true,glossary:true}};
+ assert.equal((await call(`attempts/${forest}/english`,english)).status,400);
+ assert.equal((await call(`attempts/${forest}/observe`,{clueId:'canopy'},'another-player')).status,404);
+ const observe=async(id:string,clues:string[])=>{for(const clueId of clues)assert.equal((await call(`attempts/${id}/observe`,{clueId})).status,201);};
+ await observe(forest,['canopy','stream','wildlife']);
+ assert.equal((await call(`attempts/${forest}/submit`,{type:'DISCOVERY',answer:'unrelated'})).body.awardedXp,0);
+ assert.equal((await call(`attempts/${forest}/submit`,{type:'DISCOVERY',answer:'linked',xp:10000})).status,400);
+ assert.equal((await call(`attempts/${forest}/english`,{...english,answers:{read:'guess',word:'heat'}})).body.newEvidence,0);
+ const e=await call(`attempts/${forest}/english`,english);assert.equal(e.body.newEvidence,2);assert.equal(e.body.state.xp,0);assert.equal(e.body.state.mastery,'NOT_STARTED');
+ const concurrent=await Promise.all(Array.from({length:12},()=>call(`attempts/${forest}/submit`,{type:'DISCOVERY',answer:'linked'})));
+ assert.ok(concurrent.every(r=>r.status===201));assert.equal(concurrent.reduce((n,r)=>n+r.body.awardedXp,0),30);
+ assert.equal((await call(`attempts/${forest}/english`,english)).body.newEvidence,0);
+ const lake=await start('disappearing-lake');await observe(lake,['temperature','oxygen','screen']);
+ assert.equal((await call(`attempts/${lake}/submit`,{type:'REASONING',answer:'oxygen-stress',evidence:['oxygen-response','warm-reference']})).body.awardedXp,60);
+ const grove=await start('restore-ecosystem');
+ const complete=await call(`attempts/${grove}/submit`,{type:'PUZZLE',sequence:['aerate','shade','monitor','restock'],transfer:'reassess'});
+ assert.equal(complete.body.state.xp,210);assert.equal(complete.body.state.restored,true);assert.equal(complete.body.state.mastery,'PROFICIENT');assert.equal(complete.body.state.englishEvidence.length,2);assert.equal(complete.body.state.englishMastery.speaking.status,'NOT_ASSESSED');assert.equal(complete.body.state.englishMastery.cefrProficiency,null);
+ assert.deepEqual(complete.body.state.ledger.map((e:any)=>e.amount),[30,60,120]);
+ const returning=await call('session',{});assert.equal(returning.body.xp,210);assert.equal(returning.body.englishEvidence.length,2);
+ assert.equal((await call('state',undefined,'another-player')).body.xp,0);
+ const replay=await start('silent-forest');await observe(replay,['canopy','stream','wildlife']);assert.equal((await call(`attempts/${replay}/submit`,{type:'DISCOVERY',answer:'linked'})).body.awardedXp,0);
+ console.log('PASS: actual D1 schema, authenticated isolation, origin checks, strict validation, bilingual grading, 12 concurrent reward requests, full 210 XP chapter, persistence and replay protection.');
+}finally{await mf.dispose();}

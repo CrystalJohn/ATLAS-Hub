@@ -1,0 +1,6 @@
+Original SVGs lake-sites.svg, lake-comparison.svg and oxygen-concept.svg
+Creator: ATLAS project, 2026. Licensed under Creative Commons Attribution 4.0 (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+Credit: ATLAS project. These are original teaching schematics, not agency images.
+Scientific background: USGS Water Science School and EPA CADDIS, as linked in
+content/evidence/lake.ts. No agency endorsement or measurement provenance implied.

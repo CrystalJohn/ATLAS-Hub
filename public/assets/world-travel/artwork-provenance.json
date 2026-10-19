@@ -1,0 +1,10 @@
+{
+ "createdAt":"2026-10-19",
+ "creator":"Original ATLAS environment artwork generated with OpenAI image generation",
+ "assets":["airport.webp","shibuya.webp","restaurant.webp","asakusa.webp"],
+ "derivatives":"768x512 WebP versions, no compositional changes; originals retained in the generation workspace.",
+ "usage":"Fictional illustrated learning environments, not documentary photographs or accurate route maps. No third-party reference images were copied into the project.",
+ "rights":"Generated for this project using the built-in image generation tool. No third-party stock/photo license is asserted.",
+ "visualReferences":["https://www.narita-airport.jp/en/access/train/","https://www.japan.travel/en/spot/2177/","https://www.gotokyo.org/en/destinations/eastern-tokyo/asakusa/index.html"],
+ "promptRecord":"docs/world-travel/art-prompts.md"
+}

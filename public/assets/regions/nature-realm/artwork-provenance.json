@@ -1,0 +1,70 @@
+[
+  {
+    "siteId": "stream",
+    "providedLabel": "sunlit_mossy_forest_stream.png",
+    "uploadedName": "49EA4D01-2F29-40E0-9110-9DE158E30008.jpeg",
+    "sourceSha256": "4bb5ef711f1034f3eb98a773b465b912776d21be1b2acda51f0c757cff792126",
+    "file": "shaded-stream.png",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 3134744,
+    "pngSha256": "59891d99a8e0f133c979059a725d9156039c810649459743999f2dba34570fd3",
+    "encodingNote": "Uploaded JPEG decoded to RGB and saved losslessly as PNG at original dimensions. No retouching, baked text, image generation or physical crop.",
+    "rights": "User-supplied official ATLAS artwork, authorized for this project. No broader redistribution license or third-party authorship asserted.",
+    "purpose": "Fictional environment artwork only, not a field photograph or scientific measurement.",
+    "variants": [
+      {
+        "file": "shaded-stream-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 76604
+      },
+      {
+        "file": "shaded-stream-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 249480
+      },
+      {
+        "file": "shaded-stream-1448.webp",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 469962
+      }
+    ]
+  },
+  {
+    "siteId": "bay",
+    "providedLabel": "sunlit_turquoise_forest_lake.png",
+    "uploadedName": "458857DA-E6B3-498A-A2A7-2AD39E7C9251.jpeg",
+    "sourceSha256": "34bcf9812412b46e4250cfbef39008fb0ea3860fcbd7be894e69cd63c7a816ca",
+    "file": "sunlit-bay.png",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 3030325,
+    "pngSha256": "a363fe7a582c5d81d579cfbcd6eb4cf5972fc938899d3929fc3d51cdb6a087d5",
+    "encodingNote": "Uploaded JPEG decoded to RGB and saved losslessly as PNG at original dimensions. No retouching, baked text, image generation or physical crop.",
+    "rights": "User-supplied official ATLAS artwork, authorized for this project. No broader redistribution license or third-party authorship asserted.",
+    "purpose": "Fictional environment artwork only, not a field photograph or scientific measurement.",
+    "variants": [
+      {
+        "file": "sunlit-bay-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 75602
+      },
+      {
+        "file": "sunlit-bay-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 245046
+      },
+      {
+        "file": "sunlit-bay-1448.webp",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 448840
+      }
+    ]
+  }
+]

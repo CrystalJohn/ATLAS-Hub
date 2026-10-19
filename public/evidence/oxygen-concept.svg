@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-labelledby="title desc">
+<title id="title">Temperature and oxygen: a conceptual comparison</title><desc id="desc">Under otherwise comparable conditions, cooler water can hold more dissolved oxygen than warmer water. The dots are symbols, not measured concentrations. Temperature alone does not determine actual dissolved oxygen.</desc>
+<rect width="720" height="340" rx="24" fill="#f4f5fb"/>
+<g font-family="system-ui,sans-serif" fill="#314861" text-anchor="middle"><text x="180" y="42" font-size="22" font-weight="700">Cooler water</text><text x="540" y="42" font-size="22" font-weight="700">Warmer water</text></g>
+<path d="M58 78V230Q58 249 80 249H280Q302 249 302 230V78" fill="#cfeef5" stroke="#4c91a2" stroke-width="4"/>
+<path d="M418 78V230Q418 249 440 249H640Q662 249 662 230V78" fill="#e4e6f0" stroke="#9a91b0" stroke-width="4"/>
+<g fill="#297b9c"><circle cx="100" cy="124" r="9"/><circle cx="158" cy="117" r="9"/><circle cx="220" cy="125" r="9"/><circle cx="261" cy="158" r="9"/><circle cx="128" cy="169" r="9"/><circle cx="191" cy="176" r="9"/><circle cx="84" cy="211" r="9"/><circle cx="151" cy="219" r="9"/><circle cx="236" cy="211" r="9"/><circle cx="470" cy="125" r="9"/><circle cx="595" cy="137" r="9"/><circle cx="539" cy="181" r="9"/><circle cx="626" cy="218" r="9"/><circle cx="466" cy="213" r="9"/></g>
+<g font-family="system-ui,sans-serif" fill="#314861" text-anchor="middle" font-size="17"><text x="180" y="283">Can hold more oxygen</text><text x="540" y="283">Can hold less oxygen</text><text x="360" y="318" font-size="14">Concept only · symbolic dots · not a concentration scale</text></g>
+</svg>
