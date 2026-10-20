@@ -12,6 +12,17 @@ if (command === "build") {
   if (evidence.status !== 0) process.exit(evidence.status ?? 1);
 }
 
+// Vercel's Next.js builder requires .next/routes-manifest.json. The Sites
+// Vinext build emits a Cloudflare Worker instead, so select the native build
+// only in Vercel's build environment.
+if (command === "build" && process.env.VERCEL === "1") {
+  const result = spawnSync(process.execPath, [
+    fileURLToPath(new URL("../node_modules/next/dist/bin/next", import.meta.url)), "build", ...args,
+  ], { stdio: "inherit" });
+  if (result.error) throw result.error;
+  process.exit(result.status ?? 1);
+}
+
 
 if (managedLinux && command === "build") {
   const result = spawnSync("bash", [
