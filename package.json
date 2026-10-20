@@ -6,6 +6,11 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "dev:supabase": "node scripts/run-supabase-local.mjs",
+    "test:profile": "node scripts/test-profile.mts",
+    "preview:profile": "node scripts/profile-preview.mts",
+    "test:auth": "node scripts/test-supabase.mts",
+    "test:auth:http": "node scripts/test-auth-http.mts",
     "install:ci": "bash scripts/install-pnpm.sh",
     "dev": "node scripts/run-framework.mjs dev",
     "build": "node scripts/run-framework.mjs build",
@@ -17,6 +22,8 @@
     "@base-ui/react": "^1.7.0",
     "@hookform/resolvers": "^5.7.1",
     "@shadcn/react": "^0.3.0",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.117.3",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cmdk": "^1.1.1",

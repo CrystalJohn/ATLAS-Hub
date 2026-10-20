@@ -1,6 +1,15 @@
 // Fixed Vietnamese assistance for the private review pilot. Independent educator
 // review is pending. This presentation catalog does not import evaluation keys.
 export const vietnameseText:Record<string,string>={
+ 'Your interests could not be saved yet. Your choices are kept; please try again later.':'Chưa thể lưu sở thích lúc này. Lựa chọn của bạn vẫn được giữ; vui lòng thử lại sau.',
+ 'Choose each interest once.':'Mỗi sở thích chỉ được chọn một lần.',
+ 'Content awaits educator review. Reading targets are not a proficiency rating.':'Nội dung đang chờ thẩm định chuyên môn. Mức bài đọc không phải đánh giá trình độ.',
+ 'Choose a player name.':'Vui lòng chọn tên người chơi.',
+ 'Use 40 characters or fewer.':'Tên có tối đa 40 ký tự.',
+ 'Use a name without hidden or control characters.':'Tên không được chứa ký tự ẩn hoặc ký tự điều khiển.',
+ 'Your profile could not be loaded or saved. Please try again.':'Chưa thể tải hoặc lưu hồ sơ. Vui lòng thử lại.',
+ 'Your adventure needs a moment.':'Hành trình của bạn cần thêm một chút thời gian.',
+ 'Please try again shortly.':'Vui lòng thử lại sau ít phút.',
  "Arriving in Tokyo":"Đến Tokyo",
  "Finding your way":"Tìm đường",
  "A bowl, please":"Cho tôi một tô mì",
