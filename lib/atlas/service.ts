@@ -10,6 +10,8 @@ import {evaluate,SubmissionSchema} from '../../packages/mission-engine/src/index
 import {forestLesson} from '../../content/english/forest.ts';
 import {EnglishSubmissionSchema,evaluateEnglish} from '../../packages/english-engine/src/index.ts';
 import type {SavedWord} from '../../content/english/vocabulary.ts';
+import {d1ExpeditionStore,StorageUnavailable,type ExpeditionStore} from './storage.ts';
+import {sameOrigin} from './origin.ts';
 type Attempt={id:string;missionId:string;version:number;observed:string[];status:string;createdAt:string};
 type Ledger={id:string;missionId:string;contentVersion:number;amount:number;createdAt:string};
 type Expedition={progress:Progress;attempts:Attempt[];ledger:Ledger[];submissions:unknown[];savedVocabulary?:SavedWord[];travel?:PlayerTravelProgress};
@@ -28,14 +30,17 @@ function view(d:Expedition){
  }
  return {...projection(d.progress),travel:d.travel??emptyTravel(),ledger:d.ledger,missions:missions.map(publicMission),attempts:d.attempts,englishReview:[...review.values()]};
 }
+/** Sites alone supplies these trusted identity headers. Vercel uses the explicit verified-player entry point. */
 export async function handleAtlas(request:Request,database:D1Database):Promise<Response>{
+ return handleAtlasForPlayer(request,d1ExpeditionStore(database),request.headers.get('oai-authenticated-user-id'));
+}
+export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore,player:string|null):Promise<Response>{
  try{
   const url=new URL(request.url),path=url.pathname.slice(5).split('/').filter(Boolean);
-  const player=request.headers.get('oai-authenticated-user-id');
-  if(!player)throw new ApiError(401,'Sign in to this private Site to begin your expedition.');
-  if(request.method==='POST'&&request.headers.get('origin')&&request.headers.get('origin')!==url.origin)throw new ApiError(403,'Cross-origin request rejected');
+  if(!player)throw new ApiError(401,'Sign in to begin your expedition.');
+  if(request.method==='POST'&&request.headers.get('origin')&&!sameOrigin(request))throw new ApiError(403,'Cross-origin request rejected');
   const route=path.join('/');
-  if(route==='health'&&request.method==='GET')return Response.json({ok:true,persistence:'sites-d1'});
+  if(route==='health'&&request.method==='GET')return Response.json({ok:true,persistence:store.provider});
   let body:unknown;
   if(request.method==='POST'){
    const raw=await request.text();if(raw.length>16000)throw new ApiError(413,'Request too large');
@@ -43,10 +48,9 @@ export async function handleAtlas(request:Request,database:D1Database):Promise<R
   }
   // Read-after-write session + conditional revision update: one atomic document commit
   // preserves rewards, attempts and English evidence together across concurrent workers.
-  const db=database.withSession('first-primary');
-  await db.prepare('INSERT OR IGNORE INTO expeditions(player_id,revision,document) VALUES (?,0,?)').bind(player,JSON.stringify(fresh())).run();
+  await store.initialize(player,JSON.stringify(fresh()));
   for(let retry=0;retry<16;retry++){
-   const row=await db.prepare('SELECT revision,document FROM expeditions WHERE player_id=?').bind(player).first<{revision:number;document:string}>();
+   const row=await store.read(player);
    if(!row)throw new ApiError(503,'Expedition is temporarily unavailable');
    const d:Expedition=JSON.parse(row.document);
    if((route==='state'&&request.method==='GET')||(route==='session'&&request.method==='POST'))return Response.json(view(d));
@@ -133,13 +137,12 @@ export async function handleAtlas(request:Request,database:D1Database):Promise<R
      result={...outcome,newEvidence:additions.length,state:view(d)};
     }else throw new ApiError(404,'Unknown action');
    }else throw new ApiError(404,'Unknown route');
-   const written=await db.prepare('UPDATE expeditions SET document=?,revision=revision+1 WHERE player_id=? AND revision=?').bind(JSON.stringify(d),player,row.revision).run();
-   if(written.meta.changes===1)return Response.json(result,{status:201});
+   if(await store.compareAndSwap(player,row.revision,JSON.stringify(d)))return Response.json(result,{status:201});
   }
   throw new ApiError(409,'Another action is saving. Please retry.');
  }catch(e){
-  const status=e instanceof ApiError?e.status:e instanceof z.ZodError?400:500;
+  const status=e instanceof ApiError?e.status:e instanceof StorageUnavailable?503:e instanceof z.ZodError?400:500;
   if(status===500)console.error('ATLAS API error',e);
-  return Response.json({message:e instanceof ApiError?e.message:status===400?'Invalid challenge response':'Could not save your expedition. Please retry.'},{status});
+  return Response.json({message:e instanceof ApiError||e instanceof StorageUnavailable?e.message:status===400?'Invalid challenge response':'Could not save your expedition. Please retry.'},{status});
  }
 }

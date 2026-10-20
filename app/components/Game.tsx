@@ -4,7 +4,8 @@ import {useEffect,useRef,useState} from 'react';
 import {ArrowLeft,ArrowRight,BookOpen,Check,CheckCircle2,ChevronRight,Compass,Flame,HelpCircle,Leaf,Lock,Map,RotateCcw,ShieldCheck,Sparkles,Star,Search,TreePine,Trophy,Waves,X} from 'lucide-react';
 import {chapterLessons,lessonForMission,readingBands,type ReadingBand} from '../../content/english/chapter';
 import type {MissionId} from '../../packages/domain/src/index';
-import {atlasApi,type AtlasState,type Attempt,type SubjectResult} from './chapter-types';
+import {atlasApi,AtlasApiError,type AtlasState,type Attempt,type SubjectResult} from './chapter-types';
+import {AuthGate} from './AuthGate';
 import {ChapterEnglish} from './ChapterEnglish';
 import {MissionStory} from './MissionStory';
 import {TrailBadge} from './TrailBadge';
@@ -21,14 +22,16 @@ const accents=['purple','blue','mint'] as const;
 const icons=[TreePine,Waves,Leaf];
 const badgeNames=['Forest Scout','Lake Investigator','Habitat Guardian'];
 const chapterDescriptions=['Follow the clues. Find what changed.','Compare the evidence. Read between the lines.','Make a plan. Bring balance back.'];
-export default function Game({initialState=null}:{initialState?:AtlasState|null}){
+export default function Game({initialState=null,authProvider='chatgpt'}:{initialState?:AtlasState|null;authProvider?:'google'|'chatgpt'}){
  const [state,setState]=useState<AtlasState|null>(initialState),[view,setView]=useState<View>('journey'),[selected,setSelected]=useState<MissionId>('silent-forest'),[attempt,setAttempt]=useState<Attempt|null>(null),[phase,setPhase]=useState<Phase>('brief'),[clueIndex,setClueIndex]=useState(0);
  const [mapRealm,setMapRealm]=useState<'travel'|'nature'>('travel');
  const [band,setBand]=useState<ReadingBand>('A2'),[vi,setVi]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ const [authRequired,setAuthRequired]=useState(false);
  const [answer,setAnswer]=useState(''),[evidence,setEvidence]=useState<string[]>([]),[sequence,setSequence]=useState<string[]>([]),[transfer,setTransfer]=useState(''),[subjectStep,setSubjectStep]=useState<'answer'|'evidence'|'plan'|'transfer'>('answer'),[result,setResult]=useState<SubjectResult|null>(null),[reviewItems,setReviewItems]=useState<('read'|'word')[]|undefined>(),[round,setRound]=useState(0);
  const screenRef=useRef<HTMLElement>(null),feedbackRef=useRef<HTMLDivElement>(null);
- useEffect(()=>{atlasApi('session',{}).then(setState).catch(e=>setError(e.message));try{const p=JSON.parse(window.localStorage.getItem('atlas-language-support-v1')??'null');if(readingBands.includes(p?.band))setBand(p.band);if(typeof p?.vi==='boolean')setVi(p.vi);}catch{/* Optional preference storage. */}},[]);
- useEffect(()=>{screenRef.current?.focus({preventScroll:true});screenRef.current?.scrollIntoView({behavior:'auto',block:'start'});},[view,phase,selected,subjectStep,clueIndex]);
+ useEffect(()=>{const signIn=()=>{setState(null);setAuthRequired(true);setError('');};window.addEventListener('atlas:sign-in-required',signIn);return()=>window.removeEventListener('atlas:sign-in-required',signIn);},[]);
+ useEffect(()=>{atlasApi('session',{}).then(setState).catch(e=>{if(e instanceof AtlasApiError&&e.status===401)setAuthRequired(true);else setError(e.message);});try{const p=JSON.parse(window.localStorage.getItem('atlas-language-support-v1')??'null');if(readingBands.includes(p?.band))setBand(p.band);if(typeof p?.vi==='boolean')setVi(p.vi);}catch{/* Optional preference storage. */}},[]);
+ useEffect(()=>{screenRef.current?.focus({preventScroll:true});screenRef.current?.scrollIntoView({behavior:'auto',block:'start'});},[view,phase,selected,subjectStep,clueIndex,authRequired]);
  useEffect(()=>{if(result)feedbackRef.current?.focus();},[result]);
  function preferences(nextBand:ReadingBand,nextVi:boolean){setBand(nextBand);setVi(nextVi);try{window.localStorage.setItem('atlas-language-support-v1',JSON.stringify({band:nextBand,vi:nextVi}));}catch{/* In-memory preferences remain usable. */}}
  const mission=state?.missions.find(m=>m.id===selected),lesson=lessonForMission(selected)!,missionIndex=state?.missions.findIndex(m=>m.id===selected)??0;
@@ -37,7 +40,7 @@ export default function Game({initialState=null}:{initialState?:AtlasState|null}
  const observations=mission&&mission.type!=='PUZZLE'?mission.challenge.observations:[];
  const observed=attempt?.observed??[],clue=observations[clueIndex];
  const phaseList:{id:Phase;label:string}[]=mission?.id==='disappearing-lake'?[{id:'brief',label:'Story'},{id:'explore',label:'Discover'},{id:'subject',label:'Decide'},{id:'english',label:'English'},{id:'debrief',label:'Recap'}]:mission?.type==='PUZZLE'?[{id:'brief',label:'Story'},{id:'english',label:'English'},{id:'subject',label:'Decide'},{id:'debrief',label:'Recap'}]:[{id:'brief',label:'Story'},{id:'explore',label:'Discover'},{id:'english',label:'English'},{id:'subject',label:'Decide'},{id:'debrief',label:'Recap'}];
- async function run(fn:()=>Promise<void>){if(busy)return;setBusy(true);setError('');try{await fn();}catch(e){setError(e instanceof Error?e.message:'Something went wrong. Try again.');}finally{setBusy(false);}}
+ async function run(fn:()=>Promise<void>){if(busy)return;setBusy(true);setError('');try{await fn();}catch(e){if(e instanceof AtlasApiError&&e.status===401){setState(null);setAuthRequired(true);}else setError(e instanceof Error?e.message:'Something went wrong. Try again.');}finally{setBusy(false);}}
  function navigate(next:View){if(!busy){setError('');setView(next);}}
  function startEnglish(items?:('read'|'word')[]){setReviewItems(items);setRound(n=>n+1);setPhase('english');}
  function englishNext(){setPhase(state?.completed.includes(selected)?'debrief':'subject');}
@@ -66,8 +69,9 @@ export default function Game({initialState=null}:{initialState?:AtlasState|null}
  <div className="atlas-chrome"><header className="atlas-header"><button className="atlas-brand" disabled={busy} onClick={()=>navigate('journey')} aria-label="ATLAS journey home"><span><Compass size={25}/></span><strong>ATLAS<small>LEARN A LITTLE. EXPLORE A LOT.</small></strong></button><div className="traveller-stats"><span className="level-token"><Flame size={19}/> Lv. {state?.level??1}</span><span className="xp-token"><Star size={17}/><b data-testid="xp">{state?.xp??0}</b> XP</span></div></header>
  <nav className="atlas-navigation" aria-label="Main navigation">{([{id:'journey',label:'Journey',Icon:Compass},{id:'map',label:'World map',Icon:Map},{id:'journal',label:'My journal',Icon:BookOpen},{id:'help',label:'How to play',Icon:HelpCircle}] as const).map(t=><button key={t.id} disabled={busy} aria-current={view===t.id?'page':undefined} onClick={()=>navigate(t.id)}><t.Icon size={19}/><span><Bilingual text={t.label}/></span></button>)}</nav>
  </div><main id="chapter-screen" ref={screenRef} tabIndex={-1} className={`atlas-content view-${view}`}>
+ {state&&authProvider==='google'&&<form className="account-actions" action="/auth/logout" method="post"><button className="quiet-button" disabled={busy}>Sign out{vi&&<span lang="vi"> · Đăng xuất</span>}</button></form>}
  {error&&<div className="error-card" role="alert"><strong><Bilingual text={"Let’s try that again."}/></strong><p>{error}</p><button className="quiet-button" onClick={()=>setError('')}><Bilingual text={"Dismiss"}/></button></div>}
- {!state?<div className="welcome-loading"><Compass size={50}/><h1><Bilingual text={"Your trail is getting ready."}/></h1><p><Bilingual text={"Connecting to your saved expedition…"}/></p>{error&&<button className="play-button purple" onClick={()=>window.location.reload()}><Bilingual text={"Reconnect"}/></button>}</div>:<>
+ {!state?(authRequired?<AuthGate provider={authProvider} vietnamese={vi}/>:<div className="welcome-loading" aria-live="polite"><Compass size={50}/><h1><Bilingual text={error?"Your adventure needs a moment.":"Your trail is getting ready."}/></h1><p><Bilingual text={error?"Please try again shortly.":"Connecting to your saved expedition…"}/></p>{error&&<button className="play-button purple" onClick={()=>window.location.reload()}>Try again · Thử lại</button>}</div>):<>
  {view==='journey'&&<><section className="chapter-hero"><div><span className="pill light"><Leaf size={14}/> <Bilingual text={"NATURE REALM · CHAPTER 01"}/></span><h1><Bilingual text={"A little English."}/><br/><em><Bilingual text={"A big adventure."}/></em></h1><p>Follow Elara into the Forest of Origins. Read the clues, solve the mystery, and help a lake recover.</p>{vi&&<p className="hero-vi" lang="vi">Khám phá khu rừng, luyện tiếng Anh và tìm cách đưa sự sống trở lại hồ.</p>}<button className="play-button white" disabled={busy} onClick={()=>nextMission?openMission(nextMission.id):navigate('summary')}><Bilingual text={completed===0?'Begin my adventure':nextMission?'Continue my adventure':'See my expedition recap'}/><ArrowRight size={18}/></button></div><div className="hero-emblem" aria-hidden="true"><div className="hero-leaf"><TreePine size={95} strokeWidth={1.5}/><span><Sparkles size={30}/></span></div><span className="floating-star">✦</span><span className="floating-star second">✦</span></div></section>
  <div className="chapter-toolbar"><div><p className="overline"><Bilingual text={"YOUR LEARNING TRAIL"}/></p><h2><Bilingual text={"Forest of Origins"}/></h2></div><div className="target-picker"><label htmlFor="reading-band"><Bilingual text={"Reading target"}/></label><select id="reading-band" value={band} onChange={e=>preferences(e.target.value as ReadingBand,vi)}>{readingBands.map(b=><option key={b}>{b}</option>)}</select>{support}</div></div>
  <p className="micro-copy"><Bilingual text={"Choose the text difficulty you want to practise. It does not assign your English proficiency."}/></p>

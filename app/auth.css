@@ -1,0 +1,14 @@
+.auth-gate{width:min(100%,620px);margin:30px auto;padding:clamp(24px,5vw,48px);border:1px solid #e3dfee;border-radius:28px;background:#fff;text-align:center;color:#31304d;box-shadow:0 14px 48px #43335e0c}
+.auth-compass{display:grid;place-items:center;width:90px;height:90px;border-radius:28px;margin:0 auto 24px;background:#eee8fc;color:#7954c8}
+.auth-gate h1{font-size:clamp(28px,4vw,40px);line-height:1.2;margin:22px 0;font-weight:800;letter-spacing:-.7px}
+.auth-gate p{font-size:16px;line-height:1.7;color:#656478;margin:16px 0}
+.auth-gate p[lang=vi]{font-size:14px;color:#777383}
+.auth-gate>a.play-button{display:flex;flex-direction:column;text-decoration:none;justify-content:center;align-items:center;gap:4px;margin-top:28px;min-height:58px}
+.auth-gate>a.play-button span{font-size:12px;font-weight:500;opacity:.9}
+.auth-gate p.micro-copy{font-size:12px;line-height:1.65;color:#747181}
+.auth-gate .micro-copy>span[lang=vi]{display:block}
+.auth-gate>a.quiet-button{display:inline-flex;text-decoration:underline;min-height:44px;align-items:center}
+.auth-page{min-height:100dvh;background:#f6f4fc;padding:24px 16px;display:grid;align-items:center}
+.account-actions{display:flex;justify-content:flex-end;margin:0 0 12px}
+.account-actions button{min-height:44px;padding:8px 14px;font-size:13px}
+@media(max-width:480px){.auth-gate{margin:18px auto;border-radius:22px;padding:26px 20px}.auth-gate h1{font-size:29px}.auth-gate p{font-size:15px}}
