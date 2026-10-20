@@ -39,7 +39,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    ".sites-runtime/profile-next/types/**/*.ts",
+    ".sites-runtime/profile-next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

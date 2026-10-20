@@ -10,11 +10,11 @@ import {Bilingual} from './Bilingual';
 type WordIdentity=Pick<SavedWord,'lessonId'|'version'|'word'>;
 export type VocabularyStore={words:SavedWord[];loading:boolean;pending:boolean;error:string;reload:()=>void;toggle:(word:WordIdentity,saved:boolean)=>Promise<void>};
 export const VocabularyContext=createContext<VocabularyStore|null>(null);
-export function SavedVocabularyProvider({children,api=atlasApi}:{children:ReactNode;api?:<T>(path:string,data?:unknown)=>Promise<T>}){
+export function SavedVocabularyProvider({children,api=atlasApi,enabled=true}:{children:ReactNode;api?:<T>(path:string,data?:unknown)=>Promise<T>;enabled?:boolean}){
  const [words,setWords]=useState<SavedWord[]>([]),[loading,setLoading]=useState(true),[pending,setPending]=useState(false),[error,setError]=useState('');
  const saving=useRef(false),generation=useRef(0);
- async function load(){const current=++generation.current;setLoading(true);setError('');try{const response=await api<VocabularyResponse>('vocabulary');if(current===generation.current)setWords(response.words);}catch{if(current===generation.current)setError('Could not load saved words.');}finally{if(current===generation.current)setLoading(false);}}
- useEffect(()=>{void load();return()=>{generation.current++;};},[]);
+ async function load(){if(!enabled)return;const current=++generation.current;setLoading(true);setError('');try{const response=await api<VocabularyResponse>('vocabulary');if(current===generation.current)setWords(response.words);}catch{if(current===generation.current)setError('Could not load saved words.');}finally{if(current===generation.current)setLoading(false);}}
+ useEffect(()=>{if(enabled)void load();return()=>{generation.current++;};},[enabled]);
  async function toggle(word:WordIdentity,saved:boolean){
   if(saving.current||loading)return;saving.current=true;setPending(true);setError('');
   try{const response=await api<VocabularyResponse>('vocabulary',{lessonId:word.lessonId,version:word.version,word:word.word,saved});setWords(response.words);}catch{setError('Could not save this word. Try again.');}finally{saving.current=false;setPending(false);}

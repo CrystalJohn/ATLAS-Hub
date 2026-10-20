@@ -3,6 +3,7 @@ import { handleAtlasForPlayer } from './service.ts';
 import { supabaseExpeditionStore } from './supabase-storage.ts';
 import { SupabaseConfigurationError } from '../supabase/config.ts';
 import { sameOrigin } from './origin.ts';
+import { handlePlayerProfile } from './profile-handler.ts';
 
 type Dependencies = { getUser: () => Promise<User | null>; getAdmin: () => SupabaseClient };
 const json = (body: object, status = 200) => Response.json(body, {
@@ -23,7 +24,9 @@ export async function handleVercelAtlas(request: Request, deps: Dependencies): P
     if (!user || user.is_anonymous || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id)) {
       return json({ message: 'Sign in with Google to start or resume your adventure.', code: 'SIGN_IN_REQUIRED' }, 401);
     }
-    const response = await handleAtlasForPlayer(request, supabaseExpeditionStore(deps.getAdmin()), user.id);
+    const response = url.pathname === '/api/profile'
+      ? await handlePlayerProfile(request, deps.getAdmin(), user)
+      : await handleAtlasForPlayer(request, supabaseExpeditionStore(deps.getAdmin()), user.id);
     response.headers.set('Cache-Control', 'no-store, private');
     response.headers.set('X-Content-Type-Options', 'nosniff');
     return response;

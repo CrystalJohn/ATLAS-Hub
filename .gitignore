@@ -58,3 +58,7 @@ next-env.d.ts
 
 # Generated TypeScript incremental cache
 *.tsbuildinfo
+
+# Supabase CLI project link and local runtime state
+/supabase/.temp/
+/supabase/.branches/

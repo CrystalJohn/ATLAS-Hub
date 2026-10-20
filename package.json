@@ -6,6 +6,9 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "dev:supabase": "node scripts/run-supabase-local.mjs",
+    "test:profile": "node scripts/test-profile.mts",
+    "preview:profile": "node scripts/profile-preview.mts",
     "test:auth": "node scripts/test-supabase.mts",
     "test:auth:http": "node scripts/test-auth-http.mts",
     "install:ci": "bash scripts/install-pnpm.sh",

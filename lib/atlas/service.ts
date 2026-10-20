@@ -143,6 +143,6 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
  }catch(e){
   const status=e instanceof ApiError?e.status:e instanceof StorageUnavailable?503:e instanceof z.ZodError?400:500;
   if(status===500)console.error('ATLAS API error',e);
-  return Response.json({message:e instanceof ApiError||e instanceof StorageUnavailable?e.message:status===400?'Invalid challenge response':'Could not save your expedition. Please retry.'},{status});
+  return Response.json({message:e instanceof ApiError||e instanceof StorageUnavailable?e.message:status===400?'Invalid challenge response':'Could not save your expedition. Please retry.',...(e instanceof StorageUnavailable?{code:['PGRST205','42P01'].includes(e.code)?'DATABASE_SETUP_REQUIRED':'STORAGE_UNAVAILABLE'}:{})},{status});
  }
 }
