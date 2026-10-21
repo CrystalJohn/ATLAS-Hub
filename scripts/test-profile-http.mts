@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import type {ProfileTestBody} from './test-response-types.ts';
 
 // Run while `pnpm preview:profile` is active. These are real Next HTTP routes,
 // verified-cookie sessions and SDK calls against the loopback provider fixture.
@@ -7,7 +8,7 @@ const login = async (name: string) => (await fetch(`${fixture}/login/${name}`, {
 const alice = await login('alice'), bob = await login('bob');
 async function api(cookie: string, body?: unknown, origin = base) {
   const response = await fetch(`${base}/api/profile`, { method: body === undefined ? 'GET' : 'POST', headers: { cookie, origin, 'Content-Type': 'application/json' }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
-  return { status: response.status, body: await response.json() as any };
+  return { status: response.status, body: await response.json() as ProfileTestBody };
 }
 const snapshot = async () => await (await fetch(`${fixture}/control/snapshot`)).json() as { expeditions: unknown };
 const before = await snapshot(), original = (await api(alice)).body.profile;

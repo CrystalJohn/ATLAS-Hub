@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import ts from 'typescript';
-import {createElement} from 'react';
+import {createElement,type ReactNode} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {emptyProgress,projection} from '../packages/domain/src/index.ts';
 import {missions,publicMission} from '../content/missions/index.ts';
@@ -15,7 +15,8 @@ try{
  await compile('content/english/forest.ts','forest');await compile('content/english/chapter.ts','chapter',{"'./forest.ts'":"'./forest.mjs'"});
  await compile('content/localization/vi.ts','vi');
  await compile('app/components/Bilingual.tsx','Bilingual', {"'../../content/localization/vi'":"'./vi.mjs'"});
- await compile('app/components/MissionStory.tsx','MissionStory', {"'./Bilingual'":"'./Bilingual.mjs'","'../../content/localization/vi'":"'./vi.mjs'"});
+ await compile('app/components/useLocalPreference.ts','useLocalPreference');
+ await compile('app/components/MissionStory.tsx','MissionStory', {"'./Bilingual'":"'./Bilingual.mjs'","'../../content/localization/vi'":"'./vi.mjs'","'./useLocalPreference'":"'./useLocalPreference.mjs'"});
  await compile('app/components/chapter-types.ts','chapter-types');await compile('app/components/TrailBadge.tsx','TrailBadge');await compile('app/components/World.tsx','World');
  await compile('content/english/vocabulary.ts','vocabulary');
  await compile('content/travel/japan.ts','travel-japan');
@@ -47,19 +48,20 @@ try{
  await compile('lib/atlas/profile.ts','profile',{"'../../content/interests.ts'":"'./interests.mjs'"});
  await compile('lib/atlas/recommendations.ts','recommendations',{"'../../content/travel/japan.ts'":"'./travel-japan.mjs'"});
  await compile('app/components/InterestSuggestions.tsx','InterestSuggestions',{"'../../content/interests'":"'./interests.mjs'","'../../lib/atlas/recommendations'":"'./recommendations.mjs'"});
- await compile('app/components/useAccountProfile.ts','useAccountProfile',{"'./chapter-types'":"'./chapter-types.mjs'"});
+ // SSR projection fixture only. Identity/authorization is tested against real PG separately.
+ await writeFile(`${dir}/useAccountProfile.mjs`, `export function useAccountProfile(){return {profile:{playerId:'11111111-1111-4111-8111-111111111111',displayName:'SSR explorer',avatarUrl:null,readingBand:'A2',vietnameseSupport:true,interests:[]},loading:false,saving:false,error:'',save:async()=>true,reload:()=>{}};}`);
  await compile('app/components/AccountMenu.tsx','AccountMenu',{"'../../content/english/chapter'":"'./chapter.mjs'","'../../lib/atlas/profile'":"'./profile.mjs'","'../../content/interests'":"'./interests.mjs'"});
  await compile('app/components/Game.tsx','Game',{"'./AdventureRecovery'":"'./AdventureRecovery.mjs'","'./AuthGate'":"'./AuthGate.mjs'","'./AccountMenu'":"'./AccountMenu.mjs'","'./useAccountProfile'":"'./useAccountProfile.mjs'","'../../content/english/chapter'":"'./chapter.mjs'","'./chapter-types'":"'./chapter-types.mjs'","'./ChapterEnglish'":"'./ChapterEnglish.mjs'","'./TrailBadge'":"'./TrailBadge.mjs'","'./World'":"'./World.mjs'","'./Bilingual'":"'./Bilingual.mjs'","'./MissionStory'":"'./MissionStory.mjs'","'./EvidencePanel'":"'./EvidencePanel.mjs'","'./LakeInvestigation'":"'./LakeInvestigation.mjs'","'../../content/evidence/lake'":"'./lake.mjs'","'./SavedVocabulary'":"'./SavedVocabulary.mjs'","'./VocabularyNotebook'":"'./VocabularyNotebook.mjs'","'./travel/WorldTravel'":"'./WorldTravel.mjs'"});
  const {default:Game}=await import(pathToFileURL(`${process.cwd()}/${dir}/Game.mjs`).href);
  const {InterfaceLanguage}=await import(pathToFileURL(`${process.cwd()}/${dir}/Bilingual.mjs`).href);
- const inLocale=(locale:'en'|'vi',node:any)=>createElement(InterfaceLanguage,{value:{locale,setLocale:()=>{}}},node);
+ const inLocale=(locale:'en'|'vi',node:ReactNode)=>createElement(InterfaceLanguage,{value:{locale,setLocale:()=>{}}},node);
  const fresh={...projection(emptyProgress()),missions:missions.map(publicMission),attempts:[],ledger:[],englishReview:[]};
  const html=renderToStaticMarkup(createElement(Game,{initialState:fresh}));
  assert.ok(html.includes('A little English.'));assert.ok(html.includes('Begin my adventure'));assert.ok(html.includes('TRAIL LOCKED'));assert.ok(html.includes('My journal'));assert.ok(html.includes('Reading target'));assert.ok(html.includes('aria-label="Main navigation"'));assert.ok(html.includes('0/6'));assert.ok(!html.includes('>Hành trình<'));assert.ok(!html.includes('>Sổ tay<'));assert.ok(html.includes('Switch interface to Vietnamese'));const viHtml=renderToStaticMarkup(inLocale('vi',createElement(Game,{initialState:fresh})));assert.ok(viHtml.includes('Hành trình'));assert.ok(viHtml.includes('Sổ tay'));assert.ok(viHtml.includes('Cách chơi'));assert.ok(!viHtml.includes('>Journey<'));assert.ok(!viHtml.includes('translation-copy'));assert.ok(!html.includes('Recorded as item-specific'));
  const full={...fresh,...projection({xp:210,completed:missions.map(m=>m.id),evidence:['observation','causal-reasoning','recovery-transfer'],englishEvidence:chapterLessons.flatMap(l=>l.variants.A2.questions.map(q=>({key:`${l.id}:v1:A2:${q.id}`,missionId:l.missionId,lessonId:l.id,version:1,band:'A2' as const,skill:q.skill,itemId:q.id,attemptId:'done',support:{vietnamese:true,glossary:true},recordedAt:new Date().toISOString()})))})};
  const returning=renderToStaticMarkup(createElement(Game,{initialState:full}));assert.ok(returning.includes('See my expedition recap'));assert.ok(returning.includes('6/6'));assert.ok(!returning.includes('TRAIL LOCKED'));assert.ok(returning.includes('Review &amp; practise'));
  const {ChapterEnglish}=await import(pathToFileURL(`${process.cwd()}/${dir}/ChapterEnglish.mjs`).href);
- let variants=0;for(const lesson of chapterLessons)for(const band of readingBands){const props={lesson,band,attemptId:'owned-attempt',vietnamese:true,onSupport:()=>{},onState:()=>{},onBusy:()=>{},onContinue:()=>{}};const read=renderToStaticMarkup(createElement(ChapterEnglish,props));assert.ok(read.includes('Start 2 questions'));assert.ok(read.includes('Giải thích tiếng Việt'));assert.ok(read.includes('<details class="translation"')&&!read.includes('translation-visible'));assert.ok(read.includes(lesson.variants[band].vi));assert.ok(read.includes(lesson.title));assert.ok(read.includes('Skip practice'));assert.ok(read.includes('EDUCATOR')||read.includes('educator'));const review=renderToStaticMarkup(createElement(ChapterEnglish,{...props,initialItems:['word'],vietnamese:false}));assert.ok(review.includes('Start 1 question'));assert.ok(!review.includes('translation-visible'));assert.ok(!review.includes('class="translation-copy"'));assert.ok(!review.includes(lesson.variants[band].vi));variants++;}
+ for(const lesson of chapterLessons)for(const band of readingBands){const props={lesson,band,attemptId:'owned-attempt',vietnamese:true,onSupport:()=>{},onState:()=>{},onBusy:()=>{},onContinue:()=>{}};const read=renderToStaticMarkup(createElement(ChapterEnglish,props));assert.ok(read.includes('Start 2 questions'));assert.ok(read.includes('Giải thích tiếng Việt'));assert.ok(read.includes('<details class="translation"')&&!read.includes('translation-visible'));assert.ok(read.includes(lesson.variants[band].vi));assert.ok(read.includes(lesson.title));assert.ok(read.includes('Skip practice'));assert.ok(read.includes('EDUCATOR')||read.includes('educator'));const review=renderToStaticMarkup(createElement(ChapterEnglish,{...props,initialItems:['word'],vietnamese:false}));assert.ok(review.includes('Start 1 question'));assert.ok(!review.includes('translation-visible'));assert.ok(!review.includes('class="translation-copy"'));assert.ok(!review.includes(lesson.variants[band].vi));}
  const {MissionStory}=await import(pathToFileURL(`${process.cwd()}/${dir}/MissionStory.mjs`).href);
  const {VietnameseSupport,Bilingual}=await import(pathToFileURL(`${process.cwd()}/${dir}/Bilingual.mjs`).href);
  const {VocabularyContext,SavedWords,SaveWordButton}=await import(pathToFileURL(`${process.cwd()}/${dir}/SavedVocabulary.mjs`).href);

@@ -1,6 +1,6 @@
 # Chạy ATLAS local trên Windows
 
-Thư mục: `D:\ATLAS-Hub`. Branch đang làm: `fix/vercel-preview-build`.
+Thư mục: `D:\ATLAS-Hub`. Runtime duy nhất: native Next.js + Supabase PostgreSQL.
 Xem README để biết các thay đổi và quy trình migration bằng terminal.
 
 ## 1. Xem và thử ngay, không cần tài khoản Google
@@ -46,6 +46,7 @@ SUPABASE_SECRET_KEY=YOUR_SERVER_SECRET
    - `supabase/migrations/20261020090000_atlas_expeditions.sql`
    - `supabase/migrations/20261020110000_atlas_profiles.sql`
    - `supabase/migrations/20261020130000_atlas_profile_interests.sql`
+   - `supabase/migrations/20261021090000_auth02_expedition_integrity.sql` (review/readiness trước khi áp dụng staging/production)
 
 Áp dụng từ terminal theo [hướng dẫn CLI trong README](../README.md#3-chuẩn-bị-schema-supabase). Lần đầu dùng `supabase login` và `supabase link`; các lần sau chạy dry-run, `db push --linked --skip-vault`, rồi `migration list --linked`. Không cần mở SQL Editor mỗi lần. Không dùng `db reset` với database đang có dữ liệu.
 
@@ -59,12 +60,12 @@ pnpm.cmd dev:supabase
 
 Mở http://localhost:3000 và chọn đăng nhập Google. Chế độ này sử dụng dữ liệu Supabase thật; tiến trình và profile lưu theo UUID của tài khoản đã xác thực. Dừng bằng **Ctrl+C**.
 
-`pnpm dev` cũ chạy adapter Sites/Vinext, không phải chế độ Supabase trên branch này. Để thử phần tài khoản mới, dùng một trong hai cách trên.
+`pnpm.cmd dev` cũng chạy native Next/Supabase. `pnpm.cmd build` rồi `pnpm.cmd start` chạy bản production local; không cần biến `VERCEL`. D1 không còn là nhánh runtime. Để kiểm thử AUTH-02 với PostgreSQL thật và user test riêng, xem các lệnh `test:auth02`, `test:auth02:http` và `preview:auth02` trong README; fixture Auth không xác minh Google OAuth.
 
 ## Lỗi thường gặp
 
 - **Đã điền cấu hình nhưng vẫn 503:** Next không nạp `.env.example`. Cần có `.env.local` hoặc `.env` trong thư mục dự án. Sau khi tạo file, dừng/chạy lại `pnpm.cmd dev:supabase` nếu server chưa nạp cấu hình mới. Không đặt secret thật trong file mẫu được Git theo dõi.
-- **Google đăng nhập được nhưng profile vẫn 503:** nếu response có `PROFILE_SETUP_REQUIRED`, bảng `atlas_profiles` chưa được tạo. Review rồi chạy nội dung `supabase/migrations/20261020110000_atlas_profiles.sql` trong SQL Editor của đúng project Supabase. Phiên làm việc chỉ chuẩn bị SQL, không tự áp dụng lên DB thật.
+- **Google đăng nhập được nhưng profile vẫn 503:** nếu response có `PROFILE_SETUP_REQUIRED`, kiểm tra đúng project và migration `supabase/migrations/20261020110000_atlas_profiles.sql`. Review rồi áp dụng bằng CLI theo README; chạy app không tự tạo schema.
 - **Profile đọc được nhưng lưu sở thích báo `PROFILE_SCHEMA_UPDATE_REQUIRED`:** review rồi áp dụng `supabase/migrations/20261020130000_atlas_profile_interests.sql`. Migration chỉ thêm cột sở thích, không sửa expedition/XP. Form giữ lựa chọn hiện tại để thử lưu lại sau khi schema sẵn sàng.
 - **Port đang được dùng:** dừng cửa sổ server local cũ bằng Ctrl+C rồi chạy lại. Không mở hai chế độ cùng lúc trong checkout này.
 - **Không tìm thấy pnpm:** cài từ registry bằng `npm.cmd install -g pnpm@11.25.0`, rồi mở lại PowerShell.

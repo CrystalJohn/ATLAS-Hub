@@ -1,5 +1,7 @@
 # World Travel M0 — compatibility and implementation direction
 
+Historical M0 baseline. AUTH-02 (2026-10-21) replaces the active Sites/D1 runtime with native Next/Supabase only; gameplay/content contracts below remain relevant. See [ADR-003](../auth-02/ADR-003-player-ownership.md).
+
 Baseline: Sites ATLAS source 9c2fc154aff3f25633c37cf3026f6458c8c16614.
 
 The active deployment is React 19/Vinext on Cloudflare Workers with authenticated Sites identity and a D1 revision-checked expedition document. The upstream Nest/PostgreSQL artifact is not the live Site runtime. This feature extends the deployed adapter; it does not rebuild or migrate the original artifact.

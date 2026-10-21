@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "database": "native PostgreSQL 17.10 + PostgREST 12.2.3",
+  "auth": "Synthetic signed Auth fixture, NOT Google OAuth",
+  "checks": [
+    "Profile created/saved",
+    "Tokyo arrival completed: 30 XP and one stamp",
+    "Refresh resumes arrival step 1",
+    "Second encounter checkpoint saved at ask-route",
+    "Logout displays sign-in gate",
+    "New signed fixture login resumes directions step 1",
+    "Authoritative database snapshot byte-equivalent before/after login",
+    "Second browser account Bob has 0 XP, no checkpoint, no Resume for Alice"
+  ],
+  "oracle": {
+    "xp": 30,
+    "ledgerEntries": 1,
+    "stamps": 1,
+    "encounter": "jp-directions",
+    "step": 1,
+    "revision": 7
+  },
+  "consoleErrors": []
+}

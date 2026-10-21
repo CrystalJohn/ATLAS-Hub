@@ -2,6 +2,8 @@
 
 Status: implemented within the user's authorized World Travel scope, pending product review.
 
+AUTH-02 update (2026-10-21): the atomic document/revision decision is retained using **Supabase PostgreSQL only**. The D1 runtime described in the historical context below is retired from active routes. See [ADR-003](../auth-02/ADR-003-player-ownership.md) for ownership, database guards and resume contracts.
+
 Context: The existing server commits progression, ledger and learning evidence together through a D1 conditional revision update. Travel introduces ordered interactions and collectible stamps, while existing forest progress must survive unchanged.
 
 Decision: Keep the same document and optimistic concurrency loop. Add a versioned optional travel member. Extend the mission-engine package with a typed deterministic interaction evaluator. Share one first-clear ledger helper between forest and travel. The client supplies an action and expected step, never a completion flag, XP, stamp or proficiency score.

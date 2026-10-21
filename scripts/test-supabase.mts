@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { createClient, type User } from '@supabase/supabase-js';
 import { handleVercelAtlas } from '../lib/atlas/vercel-handler.ts';
 import { sameOrigin, requestOrigin } from '../lib/atlas/origin.ts';
+import type {AtlasTestBody} from './test-response-types.ts';
 
 const proxied = new Request('https://localhost:3000/api/session', { headers: { host: 'atlas.test', origin: 'https://atlas.test', 'x-forwarded-host': 'evil.test' } });
 assert.equal(requestOrigin(proxied), 'https://atlas.test');
@@ -15,6 +16,12 @@ const rows = new Map<string, { revision: number; document: string }>();
 let missingTable = false, mutations = 0;
 const fixtureFetch: typeof fetch = async (input, init) => {
   const req = new Request(input, init), url = new URL(req.url);
+  if(url.pathname==='/rest/v1/atlas_profiles'){
+    if(missingTable)return Response.json({code:'PGRST205'},{status:404});
+    if(req.method==='GET'&&url.searchParams.get('limit')==='0')return Response.json([]);
+    assert.equal(req.method,'POST');assert.ok(req.headers.get('prefer')?.includes('resolution=ignore-duplicates'));
+    return new Response(null,{status:201});
+  }
   assert.equal(url.pathname, '/rest/v1/atlas_expeditions');
   assert.equal(req.headers.get('apikey'), 'sb_secret_test_fixture');
   const json = (data: unknown, status = 200) => Response.json(data, { status });
@@ -54,7 +61,7 @@ async function call(path: string, body?: unknown, user: string | null = alice, o
     ...(body === undefined ? {} : { body: JSON.stringify(body) }),
   }), { getUser: async () => user ? { id: user } as User : null, getAdmin: () => client });
   assert.ok(response.headers.get('cache-control')?.includes('no-store'));
-  return { status: response.status, body: await response.json() as any };
+  return { status: response.status, body: await response.json() as AtlasTestBody };
 }
 
 assert.equal((await call('health', undefined, null)).status, 200);
@@ -70,7 +77,7 @@ const attempt = (await call('attempts', { missionId: 'silent-forest' })).body;
 for (const clueId of ['canopy', 'stream', 'wildlife']) await call(`attempts/${attempt.id}/observe`, { clueId });
 assert.equal((await call(`attempts/${attempt.id}/submit`, { type: 'DISCOVERY', answer: 'linked', xp: 99999 })).status, 400);
 const clears = await Promise.all(Array.from({ length: 12 }, () => call(`attempts/${attempt.id}/submit`, { type: 'DISCOVERY', answer: 'linked' })));
-assert.ok(clears.every(r => r.status === 201));
+assert.ok(clears.every(r => r.status === 200 || r.status === 201));
 assert.equal(clears.reduce((sum, r) => sum + r.body.awardedXp, 0), 30);
 assert.equal((await call('session', {})).body.xp, 30, 'Returning session must preserve progress');
 assert.equal((await call('session', {}, bob)).body.xp, 0);

@@ -1,26 +1,27 @@
 'use client';
-import {useEffect,useId,useState} from 'react';
+import {useId,useState} from 'react';
 import {forestLesson,readingBands,type ReadingBand} from '../../content/english/forest.js';
 import type {EnglishEvidence,projection} from '../../packages/domain/src/index.js';
+import {useLocalPreference} from './useLocalPreference';
 type LearningState=ReturnType<typeof projection>;
 type Outcome={correct:boolean;awardedXp:number;items:{itemId:string;skill:string;correct:boolean;feedback:string}[];state:LearningState};
 type Props={attemptId:string;observed:number;englishEvidence:EnglishEvidence[];onState:(state:LearningState)=>void;vietnamese:boolean;onVietnameseChange:(value:boolean)=>void;expanded:boolean;onExpandedChange:(value:boolean)=>void;onReturnToClues:()=>void;onBusyChange:(busy:boolean)=>void};
-const preferenceKey='atlas-language-support-v1';
+const preferenceKey='atlas-reading-band-v1';
+function isReadingBand(value:string):value is ReadingBand{return readingBands.includes(value as ReadingBand);}
+function readLegacyReadingBand():ReadingBand|null{try{const value:unknown=JSON.parse(window.localStorage.getItem('atlas-language-support-v1')??'null');if(value&&typeof value==='object'&&'band' in value&&typeof value.band==='string'&&isReadingBand(value.band))return value.band;}catch{/* Ignore malformed optional preferences. */}return null;}
 export function EnglishLearning({attemptId,observed,englishEvidence,onState,vietnamese:vi,onVietnameseChange,expanded,onExpandedChange,onReturnToClues,onBusyChange}:Props){
- const [band,setBand]=useState<ReadingBand>('A2'),[word,setWord]=useState('');
+ const [band,setBand]=useLocalPreference(preferenceKey,'A2',isReadingBand,readLegacyReadingBand),[word,setWord]=useState('');
  const [answers,setAnswers]=useState({read:'',word:''}),[busy,setBusy]=useState(false),[error,setError]=useState(''),[result,setResult]=useState<Outcome|null>(null);
  const [used,setUsed]=useState({vietnamese:vi,glossary:false});
  const glossaryId=useId();
- useEffect(()=>{try{const p=JSON.parse(window.localStorage.getItem(preferenceKey)??'null');if(p&&readingBands.includes(p.band)){setBand(p.band);}}catch{/* Preferences are optional; storage may be disabled. */}},[]);
- function preferences(nextBand:ReadingBand,nextVi:boolean){setBand(nextBand);onVietnameseChange(nextVi);setUsed(s=>({...s,vietnamese:s.vietnamese||nextVi}));try{window.localStorage.setItem(preferenceKey,JSON.stringify({band:nextBand,vi:nextVi}));}catch{/* Keep the current in-memory preference. */}}
- useEffect(()=>{if(vi)setUsed(current=>({...current,vietnamese:true}));},[vi]);
+ function preferences(nextBand:ReadingBand,nextVi:boolean){setBand(nextBand);onVietnameseChange(nextVi);setUsed(s=>({...s,vietnamese:s.vietnamese||nextVi}));}
  const variant=forestLesson.variants[band],entry=forestLesson.glossary.find(e=>e.word===word);
  const saved=englishEvidence.filter(e=>e.lessonId===forestLesson.id&&e.version===forestLesson.version&&e.band===band);
  const passage=variant.passage.split(/\b(shade|stream|insects|canopy)\b/gi);
  async function submit(){
   if(busy)return;setBusy(true);onBusyChange(true);setError('');setResult(null);
   try{
-   const response=await fetch(`/api/attempts/${attemptId}/english`,{method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(20000),body:JSON.stringify({lessonId:forestLesson.id,version:forestLesson.version,band,answers,support:used})});
+   const response=await fetch(`/api/attempts/${attemptId}/english`,{method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(20000),body:JSON.stringify({lessonId:forestLesson.id,version:forestLesson.version,band,answers,support:{...used,vietnamese:used.vietnamese||vi}})});
    const body=await response.json() as Outcome & {message?:string};if(!response.ok)throw new Error(body.message??'Could not check your practice. Try again.');
    setResult(body);onState(body.state);
   }catch(e){setError(e instanceof Error?e.message:'Could not connect. Try again.');}finally{setBusy(false);onBusyChange(false);}

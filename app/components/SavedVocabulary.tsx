@@ -11,15 +11,20 @@ type WordIdentity=Pick<SavedWord,'lessonId'|'version'|'word'>;
 export type VocabularyStore={words:SavedWord[];loading:boolean;pending:boolean;error:string;reload:()=>void;toggle:(word:WordIdentity,saved:boolean)=>Promise<void>};
 export const VocabularyContext=createContext<VocabularyStore|null>(null);
 export function SavedVocabularyProvider({children,api=atlasApi,enabled=true}:{children:ReactNode;api?:<T>(path:string,data?:unknown)=>Promise<T>;enabled?:boolean}){
- const [words,setWords]=useState<SavedWord[]>([]),[loading,setLoading]=useState(true),[pending,setPending]=useState(false),[error,setError]=useState('');
- const saving=useRef(false),generation=useRef(0);
- async function load(){if(!enabled)return;const current=++generation.current;setLoading(true);setError('');try{const response=await api<VocabularyResponse>('vocabulary');if(current===generation.current)setWords(response.words);}catch{if(current===generation.current)setError('Could not load saved words.');}finally{if(current===generation.current)setLoading(false);}}
- useEffect(()=>{if(enabled)void load();return()=>{generation.current++;};},[enabled]);
+ const [words,setWords]=useState<SavedWord[]>([]),[loading,setLoading]=useState(true),[pending,setPending]=useState(false),[error,setError]=useState(''),[reloadVersion,setReloadVersion]=useState(0);
+ const saving=useRef(false);
+ useEffect(()=>{
+  if(!enabled)return;
+  let active=true;
+  void api<VocabularyResponse>('vocabulary').then(response=>{if(active)setWords(response.words);}).catch(()=>{if(active)setError('Could not load saved words.');}).finally(()=>{if(active)setLoading(false);});
+  return()=>{active=false;};
+ },[api,enabled,reloadVersion]);
+ function reload(){setLoading(true);setError('');setReloadVersion(version=>version+1);}
  async function toggle(word:WordIdentity,saved:boolean){
   if(saving.current||loading)return;saving.current=true;setPending(true);setError('');
   try{const response=await api<VocabularyResponse>('vocabulary',{lessonId:word.lessonId,version:word.version,word:word.word,saved});setWords(response.words);}catch{setError('Could not save this word. Try again.');}finally{saving.current=false;setPending(false);}
  }
- return <VocabularyContext value={{words,loading,pending,error,reload:()=>{void load();},toggle}}>{children}</VocabularyContext>;
+ return <VocabularyContext value={{words,loading,pending,error,reload,toggle}}>{children}</VocabularyContext>;
 }
 export function Pronunciation({word}:{word:string}){
  const ipa=pronunciations[word];if(!ipa)return null;

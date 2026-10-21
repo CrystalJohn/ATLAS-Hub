@@ -9,7 +9,8 @@ export function supabasePublicConfig() {
   if (!url || !key) throw new SupabaseConfigurationError();
   try {
     const parsed = new URL(url);
-    if (parsed.protocol !== 'https:' && parsed.hostname !== '127.0.0.1' && parsed.hostname !== 'localhost') throw new Error();
+    const loopback=['127.0.0.1','localhost','[::1]'].includes(parsed.hostname);
+    if(parsed.username||parsed.password||!(parsed.protocol==='https:'||(parsed.protocol==='http:'&&loopback)))throw new Error();
   } catch { throw new SupabaseConfigurationError(); }
   return { url, key };
 }

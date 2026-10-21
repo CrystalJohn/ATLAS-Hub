@@ -2,6 +2,7 @@ import type { SupabaseClient, User } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { profilePatch, type PlayerProfile } from './profile.ts';
 import {interestIds} from '../../content/interests.ts';
+import {ensurePlayer} from './player.ts';
 
 function avatarFor(user: User): string | null {
   const raw = user.user_metadata?.avatar_url;
@@ -32,6 +33,7 @@ export async function handlePlayerProfile(request: Request, client: SupabaseClie
         updated_at: new Date().toISOString(),
       }, { onConflict: 'player_id', defaultToNull: false }).select('*').single();
     } else {
+      await ensurePlayer(client,user.id);
       // Reading old rows remains compatible before the additive interests migration.
       query = client.from('atlas_profiles').select('*').eq('player_id', user.id).maybeSingle();
     }

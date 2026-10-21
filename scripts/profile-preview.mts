@@ -42,7 +42,9 @@ const fixture = createServer(async (req, res) => {
   if (req.method === 'POST') {
     const id = body.player_id;
     if (isProfile) {
+      if(req.headers.prefer?.includes('resolution=ignore-duplicates')&&table.has(id)){res.writeHead(201);return res.end();}
       table.set(id, { display_name: null, vietnamese_support: true, reading_band: 'A2', interests: [], ...table.get(id), ...body });
+      if(req.headers.prefer?.includes('resolution=ignore-duplicates')){res.writeHead(201);return res.end();}
       return json(table.get(id));
     }
     if (!table.has(id)) table.set(id, body);

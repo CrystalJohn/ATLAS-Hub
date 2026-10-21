@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "runtime": "Next production without VERCEL switch",
+  "postgres": "PostgreSQL 17.10 on x86_64-windows, compiled by msvc-19.44.35226, 64-bit",
+  "postgrest": "12.2.3",
+  "migrations": [
+    "20261020090000_atlas_expeditions.sql",
+    "20261020110000_atlas_profiles.sql",
+    "20261020130000_atlas_profile_interests.sql",
+    "20261021090000_auth02_expedition_integrity.sql"
+  ],
+  "checks": [
+    "12 concurrent first session requests create one profile",
+    "Missing/invalid cookies and spoofed identity rejected",
+    "HttpOnly cookie verified through actual SDK auth.getUser",
+    "Tokyo reward/stamp committed through real Next routes",
+    "Checkpoint reload and fresh session recover exact step",
+    "POST logout clears cookies and revoked fixture session is rejected",
+    "Account B profile/progress/checkpoint isolated",
+    "Foreign attempt/reward and player selector rejected",
+    "Supabase service key not rendered in page HTML"
+  ],
+  "limitations": [
+    "Auth verifier fixture, not GoTrue or Google OAuth",
+    "No hosted staging/production gameplay tests"
+  ]
+}

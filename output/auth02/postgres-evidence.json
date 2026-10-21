@@ -1,0 +1,184 @@
+{
+  "classification": "PROVISIONAL",
+  "postgres": "PostgreSQL 17.10 on x86_64-windows, compiled by msvc-19.44.35226, 64-bit",
+  "postgrest": "12.2.3",
+  "migrations": [
+    "20261020090000_atlas_expeditions.sql",
+    "20261020110000_atlas_profiles.sql",
+    "20261020130000_atlas_profile_interests.sql",
+    "20261021090000_auth02_expedition_integrity.sql"
+  ],
+  "elapsedMs": 9236,
+  "checks": [
+    {
+      "scenario": "Migration preserves pre-existing expedition bytes/revision",
+      "status": "PASS",
+      "details": {
+        "revision": 5
+      }
+    },
+    {
+      "scenario": "Invalid/expired/CSRF sessions reject without player writes",
+      "status": "PASS",
+      "details": {}
+    },
+    {
+      "scenario": "Concurrent identity initialization and returning profile",
+      "status": "PASS",
+      "details": {
+        "requests": 24,
+        "profiles": 1,
+        "expeditions": 1,
+        "existingMetadataPreserved": true
+      }
+    },
+    {
+      "scenario": "API account isolation and reward/identity injection",
+      "status": "PASS",
+      "details": {
+        "foreignAttempts": 404,
+        "foreignCheckpoint": 400,
+        "selectors": 400,
+        "otherPlayerUnchanged": true
+      }
+    },
+    {
+      "scenario": "Checkpoint references and prerequisites",
+      "status": "PASS",
+      "details": {
+        "unobservedEnglishPhase": 400,
+        "lockedTravelStop": 403
+      }
+    },
+    {
+      "scenario": "Real PostgreSQL concurrent Forest first-clear",
+      "status": "PASS",
+      "details": {
+        "requests": 32,
+        "totalAwardedXp": 30,
+        "ledgerEntries": 1,
+        "alreadyProcessed": 31
+      }
+    },
+    {
+      "scenario": "Durable checkpoint, reload/re-login and stale revision",
+      "status": "PASS",
+      "details": {
+        "step": 1,
+        "stepId": "ask-staff",
+        "sameProfile": true,
+        "staleUpdate": 409
+      }
+    },
+    {
+      "scenario": "Real PostgreSQL concurrent Tokyo first-clear",
+      "status": "PASS",
+      "details": {
+        "requests": 32,
+        "totalAwardedXp": 30,
+        "stampCount": 1
+      }
+    },
+    {
+      "scenario": "Full Tokyo pilot and Forest regression",
+      "status": "PASS",
+      "details": {
+        "tokyoXp": 160,
+        "forestXp": 210,
+        "totalXp": 370,
+        "level": 3,
+        "stamps": 5,
+        "ledgerEntries": 7,
+        "replayAward": 0
+      }
+    },
+    {
+      "scenario": "Profile edits and concurrent returning logins preserve progression",
+      "status": "PASS",
+      "details": {
+        "requests": 12,
+        "xp": 370,
+        "documentAndRevision": "unchanged",
+        "nameAndPreferences": "preserved"
+      }
+    },
+    {
+      "scenario": "Commit-time transaction failure is atomic and retry-safe",
+      "status": "PASS",
+      "details": {
+        "failedResponse": 503,
+        "unchangedRevisionAndDocument": true,
+        "retryXp": 30,
+        "repeatXp": 0
+      }
+    },
+    {
+      "scenario": "Lost-response retry keeps one authoritative reward",
+      "status": "PASS",
+      "details": {
+        "injectedLossResponse": 503,
+        "xp": 30,
+        "ledgerEntries": 1,
+        "duplicateStatus": "ALREADY_PROCESSED"
+      }
+    },
+    {
+      "scenario": "Checkpoint concurrency and latest unfinished adventure",
+      "status": "PASS",
+      "details": {
+        "concurrentSelection": "one commit, one 409",
+        "completedAdventure": "falls back to newest unfinished by server revision",
+        "delayedDuplicate": "does not overwrite checkpoint"
+      }
+    },
+    {
+      "scenario": "PostgreSQL reward/revision/ownership/FK constraints",
+      "status": "PASS",
+      "details": {
+        "rejected": "XP without ledger; duplicate ledger key; ledger edit/removal; completion/stamp removal; revision jump; owner change; orphan profile"
+      }
+    },
+    {
+      "scenario": "Real PostgREST grants and PostgreSQL RLS",
+      "status": "PASS",
+      "details": {
+        "anonAndAuthenticatedReadsAndWrites": "denied",
+        "rlsWithTemporarySelectGrant": "zero rows",
+        "serviceBoundary": "server verified UUID only"
+      }
+    },
+    {
+      "scenario": "Legacy/invalid/deleted/versioned checkpoint recovery",
+      "status": "PASS",
+      "details": {
+        "legacyStep": 1,
+        "invalid": "safe owned fallback",
+        "contentChanged": "no auto-resume, progress preserved"
+      }
+    },
+    {
+      "scenario": "Authoritative database oracle matches API",
+      "status": "PASS",
+      "details": {
+        "xp": 370,
+        "ledger": 7,
+        "stamps": 5,
+        "completedMissions": 3
+      }
+    },
+    {
+      "scenario": "Migration preflight abort and explicit recovery preserve data",
+      "status": "PASS",
+      "details": {
+        "incompatibleLedger": "migration transaction rejected, row unchanged",
+        "rollback": "no row loss",
+        "reapply": "PASS"
+      }
+    }
+  ],
+  "limitations": [
+    "Synthetic Auth verifier/users, not Google OAuth or GoTrue",
+    "Local PostgreSQL/PostgREST, not a hosted Supabase staging project",
+    "No production writes or destructive tests"
+  ]
+}

@@ -5,7 +5,6 @@ import { requestOrigin } from '../../../lib/atlas/origin';
 export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   const origin = requestOrigin(request);
-  if (process.env.VERCEL !== '1') return NextResponse.redirect(new URL('/signin-with-chatgpt?return_to=%2F', origin));
   try {
     const { url, key } = supabasePublicConfig();
     const settings = await fetch(`${url}/auth/v1/settings`, { headers: { apikey: key }, cache: 'no-store', signal: AbortSignal.timeout(10000) });

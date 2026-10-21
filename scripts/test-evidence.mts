@@ -7,6 +7,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {lakeEvidence,lakeMeasurements} from '../content/evidence/lake.ts';
 import {validateEvidence} from '../content/evidence/validate.ts';
 import {learningFields} from '../content/evidence/coverage.ts';
+import type {MissionEvidence} from '../content/evidence/types.ts';
 import {missionById,publicMission} from '../content/missions/index.ts';
 import {lessonForMission,readingBands} from '../content/english/chapter.ts';
 const advanced=JSON.parse(await readFile('content/learning/lake-advanced.json','utf8'));
@@ -15,15 +16,15 @@ const mission=missionById('disappearing-lake'),fields=learningFields(mission,les
 const check=(e=lakeEvidence,f=fields)=>validateEvidence(e,f,'2026-10-18');
 assert.deepEqual(check(),[]);
 for(const mutation of [
- (e:any)=>e.claims[0].citations=[],
- (e:any)=>e.claims[0].citations[0].sourceId='missing',
- (e:any)=>e.claims[0].explanation.A1.vi='',
- (e:any)=>e.claims.find((c:any)=>c.id==='case-measurements').classification='real-measurement',
- (e:any)=>e.visuals[0].attribution.license='',
- (e:any)=>e.visuals[0].claimIds=['missing'],
- (e:any)=>e.sources[0].lastVerifiedAt='2099-01-01',
- (e:any)=>e.coverage=[],
- (e:any)=>e.coverage.find((c:any)=>c.classification==='verified-fact').claimIds=[],
+ (e:MissionEvidence)=>e.claims[0].citations=[],
+ (e:MissionEvidence)=>e.claims[0].citations[0].sourceId='missing',
+ (e:MissionEvidence)=>e.claims[0].explanation.A1.vi='',
+ (e:MissionEvidence)=>e.claims.find(c=>c.id==='case-measurements')!.classification='real-measurement',
+ (e:MissionEvidence)=>e.visuals[0].attribution.license='',
+ (e:MissionEvidence)=>e.visuals[0].claimIds=['missing'],
+ (e:MissionEvidence)=>e.sources[0].lastVerifiedAt='2099-01-01',
+ (e:MissionEvidence)=>e.coverage=[],
+ (e:MissionEvidence)=>e.coverage.find(c=>c.classification==='verified-fact')!.claimIds=[],
 ]){const e=structuredClone(lakeEvidence);mutation(e);assert.ok(check(e).length,'Invalid evidence must block publication');}
 assert.ok(check(lakeEvidence,[...fields,{path:'mission.newFactualStatement',text:'An unsupported claim'}]).length);
 assert.ok(check(lakeEvidence,fields.map((f,i)=>i===0?{...f,text:'Changed without an audit'}:f)).length);

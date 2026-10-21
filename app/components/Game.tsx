@@ -27,7 +27,7 @@ const accents=['purple','blue','mint'] as const;
 const icons=[TreePine,Waves,Leaf];
 const badgeNames=['Forest Scout','Lake Investigator','Habitat Guardian'];
 const chapterDescriptions=['Follow the clues. Find what changed.','Compare the evidence. Read between the lines.','Make a plan. Bring balance back.'];
-export default function Game({initialState=null,authProvider='chatgpt'}:{initialState?:AtlasState|null;authProvider?:'google'|'chatgpt'}){
+export default function Game({initialState=null}:{initialState?:AtlasState|null}){
  const [state,setState]=useState<AtlasState|null>(initialState),[view,setView]=useState<View>('journey'),[selected,setSelected]=useState<MissionId>('silent-forest'),[attempt,setAttempt]=useState<Attempt|null>(null),[phase,setPhase]=useState<Phase>('brief'),[clueIndex,setClueIndex]=useState(0);
  const {t}=useInterfaceLanguage();
  const [mapRealm,setMapRealm]=useState<'travel'|'nature'>('travel');
@@ -35,37 +35,30 @@ export default function Game({initialState=null,authProvider='chatgpt'}:{initial
  const [authRequired,setAuthRequired]=useState(false);
  const [sessionIssue,setSessionIssue]=useState<{code?:string}|null>(null),[sessionRetry,setSessionRetry]=useState(0),[connecting,setConnecting]=useState(true);
  const applyProfile=useCallback((profile:PlayerProfile)=>{setBand(profile.readingBand);setVi(profile.vietnameseSupport);},[]);
- const account=useAccountProfile(authProvider==='google'&&state!==null&&!authRequired,applyProfile);
+ const account=useAccountProfile(state!==null&&!authRequired,applyProfile);
  const busy=activityBusy||account.saving;
  const [answer,setAnswer]=useState(''),[evidence,setEvidence]=useState<string[]>([]),[sequence,setSequence]=useState<string[]>([]),[transfer,setTransfer]=useState(''),[subjectStep,setSubjectStep]=useState<'answer'|'evidence'|'plan'|'transfer'>('answer'),[result,setResult]=useState<SubjectResult|null>(null),[reviewItems,setReviewItems]=useState<('read'|'word')[]|undefined>(),[round,setRound]=useState(0);
- const sessionRequest=useRef<{provider:string;retry:number;request:Promise<AtlasState>}|null>(null);
+ const sessionRequest=useRef<{retry:number;request:Promise<AtlasState>}|null>(null);
  const screenRef=useRef<HTMLElement>(null),feedbackRef=useRef<HTMLDivElement>(null);
  useEffect(()=>{const signIn=()=>{setState(null);setAuthRequired(true);setSessionIssue(null);setConnecting(false);setError('');};window.addEventListener('atlas:sign-in-required',signIn);return()=>window.removeEventListener('atlas:sign-in-required',signIn);},[]);
  useEffect(()=>{
   let active=true;
-  if(!sessionRequest.current||sessionRequest.current.provider!==authProvider||sessionRequest.current.retry!==sessionRetry)
-   sessionRequest.current={provider:authProvider,retry:sessionRetry,request:atlasApi('session',{})};
+  if(!sessionRequest.current||sessionRequest.current.retry!==sessionRetry)
+   sessionRequest.current={retry:sessionRetry,request:atlasApi('session',{})};
   sessionRequest.current.request.then(next=>{
    if(!active)return;
    setState(next);setAuthRequired(false);setSessionIssue(null);
-   if(authProvider==='chatgpt'){
-    try{
-     const p=JSON.parse(window.localStorage.getItem('atlas-language-support-v1')??'null');
-     if(readingBands.includes(p?.band))setBand(p.band);
-     if(typeof p?.vi==='boolean')setVi(p.vi);
-    }catch{/* Optional legacy preference storage. */}
-   }
   }).catch(e=>{
    if(!active)return;
    if(e instanceof AtlasApiError&&e.status===401)setAuthRequired(true);
    else setSessionIssue({code:e instanceof AtlasApiError?e.code:undefined});
   }).finally(()=>{if(active)setConnecting(false);});
   return()=>{active=false;};
- },[authProvider,sessionRetry]);
+ },[sessionRetry]);
  function retrySession(){if(connecting)return;setConnecting(true);setSessionRetry(value=>value+1);}
  useEffect(()=>{screenRef.current?.focus({preventScroll:true});screenRef.current?.scrollIntoView({behavior:'auto',block:'start'});},[view,phase,selected,subjectStep,clueIndex,authRequired]);
  useEffect(()=>{if(result)feedbackRef.current?.focus();},[result]);
- function preferences(nextBand:ReadingBand,nextVi:boolean){if(authProvider==='google'){void account.save({readingBand:nextBand,vietnameseSupport:nextVi});return;}setBand(nextBand);setVi(nextVi);try{window.localStorage.setItem('atlas-language-support-v1',JSON.stringify({band:nextBand,vi:nextVi}));}catch{/* In-memory preferences remain usable. */}}
+ function preferences(nextBand:ReadingBand,nextVi:boolean){void account.save({readingBand:nextBand,vietnameseSupport:nextVi});}
  const mission=state?.missions.find(m=>m.id===selected),lesson=lessonForMission(selected)!,missionIndex=state?.missions.findIndex(m=>m.id===selected)??0;
  const englishCount=(missionId?:string)=>state?.englishEvidence.filter(e=>e.band===band&&(!missionId||e.missionId===missionId)&&chapterLessons.some(l=>l.id===e.lessonId&&l.version===e.version)).length??0;
  const completed=state?.completed.length??0,englishTotal=englishCount(),nextMission=state?.missions.find(m=>!state.completed.includes(m.id));
@@ -77,16 +70,19 @@ export default function Game({initialState=null,authProvider='chatgpt'}:{initial
  function startEnglish(items?:('read'|'word')[]){setReviewItems(items);setRound(n=>n+1);setPhase('english');}
  function englishNext(){setPhase(state?.completed.includes(selected)?'debrief':'subject');}
  function resetAnswers(type:string){setAnswer('');setEvidence([]);setSequence([]);setTransfer('');setResult(null);setSubjectStep(type==='PUZZLE'?'plan':'answer');}
- function openMission(id:MissionId,english=false,items?:('read'|'word')[]){if(!state||busy)return;
+ function openMission(id:MissionId,english=false,items?:('read'|'word')[],resumePhase?:Phase){if(!state||busy)return;
   if(!state.unlocked.includes(id)){setError('Complete the previous mission to open this trail.');return;}
   run(async()=>{
-   const m=state.missions.find(m=>m.id===id)!;let a=state.attempts?.filter(a=>a.missionId===id&&a.status==='COMPLETED').at(-1);
-   if(!state.completed.includes(id)||!a)a=await atlasApi<Attempt>('attempts',{missionId:id});
+   const m=state.missions.find(m=>m.id===id)!;
+   const resumeTarget=state.resume?.target;
+   let a=resumePhase&&resumeTarget?.kind==='nature'?state.attempts.find(a=>a.id===resumeTarget.attemptId):state.attempts?.filter(a=>a.missionId===id&&a.status==='COMPLETED').at(-1);
+   if(!a||(!resumePhase&&!state.completed.includes(id)))a=await atlasApi<Attempt>('attempts',{missionId:id});
    const active=a!;setSelected(id);setAttempt(active);setState(current=>current?{...current,attempts:[...(current.attempts??[]).filter(a=>a.id!==active.id),active]}:current);resetAnswers(m.type);setClueIndex(m.type==='PUZZLE'?0:Math.max(0,m.challenge.observations.findIndex(c=>!active.observed.includes(c.id))));setView('mission');setReviewItems(items);setRound(n=>n+1);
    const ready=m.type==='PUZZLE'||m.challenge.observations.every(c=>active.observed.includes(c.id));
-   setPhase(english&&ready&&(id!=='disappearing-lake'||state.completed.includes(id))?'english':state.completed.includes(id)?'debrief':english&&ready&&id==='disappearing-lake'?'subject':english?'explore':'brief');
+   setPhase(resumePhase??(english&&ready&&(id!=='disappearing-lake'||state.completed.includes(id))?'english':state.completed.includes(id)?'debrief':english&&ready&&id==='disappearing-lake'?'subject':english?'explore':'brief'));
   });
  }
+ function resumeAdventure(){const target=state?.resume?.target;if(!target||busy)return;if(target.kind==='nature')openMission(target.missionId as MissionId,false,undefined,target.phase);else{setMapRealm('travel');navigate('map');}}
  function inspect(){if(!attempt||!clue)return;run(async()=>{const r=await atlasApi<{observed:string[]}>(`attempts/${attempt.id}/observe`,{clueId:clue.id});const a={...attempt,observed:r.observed};setAttempt(a);setState(current=>current?{...current,attempts:current.attempts.map(x=>x.id===a.id?a:x)}:current);});}
  function recordLakeClues(ids:string[]){if(!attempt)return;run(async()=>{let current=attempt;for(const clueId of ids){if(current.observed.includes(clueId))continue;const r=await atlasApi<{observed:string[]}>(`attempts/${current.id}/observe`,{clueId});current={...current,observed:r.observed};setAttempt(current);const saved=current;setState(state=>state?{...state,attempts:state.attempts.map(a=>a.id===saved.id?saved:a)}:state);}});}
  function nextClue(){const index=observations.findIndex(c=>!observed.includes(c.id));setClueIndex(index<0?0:index);}
@@ -95,17 +91,18 @@ export default function Game({initialState=null,authProvider='chatgpt'}:{initial
   const outcome=await atlasApi<SubjectResult>(`attempts/${attempt.id}/submit`,payload);setState(outcome.state);setResult(outcome);if(outcome.correct){setAttempt({...attempt,status:'COMPLETED'});if(mission.id==='disappearing-lake')startEnglish();else setPhase('debrief');}
  });}
  const support=<label className="support-switch" lang="vi" title="Hiện bản hỗ trợ tiếng Việt kèm nội dung tiếng Anh"><input type="checkbox" checked={vi} disabled={busy} onChange={e=>preferences(band,e.target.checked)}/> Tiếng Việt</label>;
- const accountEntry=!state||(authProvider==='google'&&(!account.profile?.displayName||account.loading));
+ const accountEntry=!state||!account.profile?.displayName||account.loading;
  const nextAfterMission=state?.missions[(missionIndex+1)%3];
- return <VietnameseSupport value={vi}><SavedVocabularyProvider enabled={state!==null&&!authRequired&&(authProvider!=='google'||!!account.profile?.displayName)}><div className={`atlas-app${accountEntry?' account-entry':''}`}>
+ return <VietnameseSupport value={vi}><SavedVocabularyProvider enabled={state!==null&&!authRequired&&!!account.profile?.displayName}><div className={`atlas-app${accountEntry?' account-entry':''}`}>
  <a className="chapter-skip" href="#chapter-screen"><Bilingual text={"Skip to current activity"}/></a>
- <div className="atlas-chrome"><header className="atlas-header"><button className="atlas-brand" disabled={busy} onClick={()=>navigate('journey')} aria-label="ATLAS journey home"><span><Compass size={25}/></span><strong>ATLAS<small>LEARN A LITTLE. EXPLORE A LOT.</small></strong></button><div className="traveller-stats"><LanguageToggle/><span className="level-token"><Flame size={19}/> Lv. {state?.level??'—'}</span><span className="xp-token"><Star size={17}/><b data-testid="xp">{state?.xp??'—'}</b> XP</span>{authProvider==='google'&&state&&<AccountMenu account={account} busy={busy}/>}</div></header>
+ <div className="atlas-chrome"><header className="atlas-header"><button className="atlas-brand" disabled={busy} onClick={()=>navigate('journey')} aria-label="ATLAS journey home"><span><Compass size={25}/></span><strong>ATLAS<small>LEARN A LITTLE. EXPLORE A LOT.</small></strong></button><div className="traveller-stats"><LanguageToggle/><span className="level-token"><Flame size={19}/> Lv. {state?.level??'—'}</span><span className="xp-token"><Star size={17}/><b data-testid="xp">{state?.xp??'—'}</b> XP</span>{state&&<AccountMenu account={account} busy={busy}/>}</div></header>
  <nav className="atlas-navigation" aria-label="Main navigation">{([{id:'journey',label:'Journey',Icon:Compass},{id:'map',label:'World map',Icon:Map},{id:'journal',label:'My journal',Icon:BookOpen},{id:'help',label:'How to play',Icon:HelpCircle}] as const).map(t=><button key={t.id} disabled={busy} aria-current={view===t.id?'page':undefined} onClick={()=>navigate(t.id)}><t.Icon size={19}/><span><Bilingual text={t.label}/></span></button>)}</nav>
  </div><main id="chapter-screen" ref={screenRef} tabIndex={-1} className={`atlas-content view-${view}`}>
- {state&&authProvider==='google'&&account.profile?.displayName&&account.error&&<div className="error-card" role="alert"><p>{account.error}</p><p>{t('Your previous settings are still in use. Please try again.','Tùy chọn trước đó vẫn được giữ. Vui lòng thử lại.')}</p></div>}
+ {state&&account.profile?.displayName&&account.error&&<div className="error-card" role="alert"><p>{account.error}</p><p>{t('Your previous settings are still in use. Please try again.','Tùy chọn trước đó vẫn được giữ. Vui lòng thử lại.')}</p></div>}
  {state&&error&&<div className="error-card" role="alert"><strong><Bilingual text={"Let’s try that again."}/></strong><p>{error}</p><button className="quiet-button" onClick={()=>setError('')}><Bilingual text={"Dismiss"}/></button></div>}
- {!state?(authRequired?<AuthGate provider={authProvider} vietnamese={vi}/>:sessionIssue?<AdventureRecovery code={sessionIssue.code} retrying={connecting} onRetry={retrySession}/>:<div className="welcome-loading" aria-live="polite"><Compass size={50}/><h1><Bilingual text={error?"Your adventure needs a moment.":"Your trail is getting ready."}/></h1><p><Bilingual text={error?"Please try again shortly.":"Connecting to your saved expedition…"}/></p>{error&&<button className="play-button purple" onClick={()=>window.location.reload()}>{t('Try again','Thử lại')}</button>}</div>):authProvider==='google'&&(!account.profile?.displayName||account.loading)?<AccountSetup account={account}/>:<>
+ {!state?(authRequired?<AuthGate/>:sessionIssue?<AdventureRecovery code={sessionIssue.code} retrying={connecting} onRetry={retrySession}/>:<div className="welcome-loading" aria-live="polite"><Compass size={50}/><h1><Bilingual text={error?"Your adventure needs a moment.":"Your trail is getting ready."}/></h1><p><Bilingual text={error?"Please try again shortly.":"Connecting to your saved expedition…"}/></p>{error&&<button className="play-button purple" onClick={()=>window.location.reload()}>{t('Try again','Thử lại')}</button>}</div>):(!account.profile?.displayName||account.loading)?<AccountSetup account={account}/>:<>
  {view==='journey'&&<><section className="chapter-hero"><div><span className="pill light"><Leaf size={14}/> <Bilingual text={"NATURE REALM · CHAPTER 01"}/></span><h1><Bilingual text={"A little English."}/><br/><em><Bilingual text={"A big adventure."}/></em></h1><p><UiText en="Follow Elara into the Forest of Origins. Read the clues, solve the mystery, and help a lake recover." vi="Khám phá khu rừng cùng Elara, đọc manh mối và tìm cách đưa sự sống trở lại hồ."/></p><button className="play-button white" disabled={busy} onClick={()=>nextMission?openMission(nextMission.id):navigate('summary')}><Bilingual text={completed===0?'Begin my adventure':nextMission?'Continue my adventure':'See my expedition recap'}/><ArrowRight size={18}/></button></div><div className="hero-emblem" aria-hidden="true"><div className="hero-leaf"><TreePine size={95} strokeWidth={1.5}/><span><Sparkles size={30}/></span></div><span className="floating-star">✦</span><span className="floating-star second">✦</span></div></section>
+ {state.resume?.target&&<button type="button" className="play-button purple resume-adventure" disabled={busy} onClick={resumeAdventure}><RotateCcw size={17}/><UiText en="Resume adventure" vi="Tiếp tục chuyến phiêu lưu"/></button>}
  <InterestSuggestions interests={account.profile?.interests??[]} state={state} busy={busy} onNature={openMission} onTravel={()=>{setMapRealm('travel');navigate('map');}}/>
  <div className="chapter-toolbar"><div><p className="overline"><Bilingual text={"YOUR LEARNING TRAIL"}/></p><h2><Bilingual text={"Forest of Origins"}/></h2></div><div className="target-picker"><label htmlFor="reading-band"><Bilingual text={"Reading target"}/></label><select id="reading-band" disabled={busy} value={band} onChange={e=>preferences(e.target.value as ReadingBand,vi)}>{readingBands.map(b=><option key={b}>{b}</option>)}</select>{support}</div></div>
  <p className="micro-copy"><Bilingual text={"Choose the text difficulty you want to practise. It does not assign your English proficiency."}/></p>
@@ -138,6 +135,6 @@ export default function Game({initialState=null,authProvider='chatgpt'}:{initial
  {view==='summary'&&<section className="expedition-summary"><div className="celebration-stars" aria-hidden="true">✦ ✧ ✦</div><TrailBadge tone="gold" earned={state.restored} size={125}/><span className="pill gold"><Bilingual text={state.restored?'EXPEDITION COMPLETE':'YOUR EXPEDITION SO FAR'}/></span><h1><Bilingual text={state.restored?'You brought hope back to the lake.':'Your next discovery is waiting.'}/></h1><p><Bilingual text={state.restored?'You followed clues, tested an explanation, and planned a careful recovery. The Observation Station is open.':'Continue your learning trail to see the forest change.'}/></p><div className="summary-numbers"><div><strong>{state.xp}</strong><span><Bilingual text={"lifetime XP"}/></span></div><div><strong>{completed}/3</strong><span><Bilingual text={"field missions"}/></span></div><div><strong>{englishTotal}/6</strong><span><Bilingual text={`English items · ${band}`}/></span></div></div><div className="badge-row">{state.missions.map((m,i)=><div key={m.id}><TrailBadge tone={i===0?'purple':i===1?'mint':'gold'} earned={state.completed.includes(m.id)}/><small><Bilingual text={badgeNames[i]}/></small></div>)}</div><div className="gentle-card"><h2><Bilingual text={"Keep your English growing."}/></h2><p><Bilingual text={englishTotal<6?'There are still field notes to practise at your chosen target. Your progress is saved, so you can return at your own pace.':'You’ve practised all six items at this target. Revisit tricky questions or read the notes again whenever you return.'}/></p><button className="play-button purple" onClick={()=>navigate('journal')}><Bilingual text={"Open my English journal"}/> <ArrowRight size={18}/></button></div><button className="play-button mint" onClick={()=>navigate('map')}><Bilingual text={"See the living forest"}/> <Leaf size={18}/></button><button className="quiet-button" onClick={()=>navigate('journey')}><Bilingual text={"Back to my learning trail"}/></button><p className="micro-copy"><Bilingual text={"Chapter complete describes the field missions. It does not certify English proficiency."}/></p></section>}
  {view==='help'&&<section className="help-page"><span className="pill mint"><HelpCircle size={15}/> <Bilingual text={"YOUR ADVENTURE GUIDE"}/></span><h1><Bilingual text={"Small steps."}/><br/><Bilingual text={"Big discoveries."}/></h1><div className="help-card"><span>1</span><div><h2><Bilingual text={"Enter a mission"}/></h2><p><UiText en="Start with the first open card on your Journey. Elara will tell you what to investigate." vi="Chọn thẻ nhiệm vụ đầu tiên đang mở. Elara sẽ hướng dẫn bạn điều tra."/></p></div></div><div className="help-card"><span>2</span><div><h2><Bilingual text={"Discover & read"}/></h2><p><UiText en="Inspect each clue. Then read a short English note and answer one question at a time. Tap underlined words for help." vi="Ghi nhận manh mối. Đọc ghi chú tiếng Anh rồi trả lời từng câu. Chạm từ được gạch chân để xem giải nghĩa."/></p></div></div><div className="help-card"><span>3</span><div><h2><Bilingual text={"Decide, learn, continue"}/></h2><p><UiText en="Use your clues to solve the field mission. Wrong answers give explanations and another try. Finish to open the next trail." vi="Giải quyết nhiệm vụ từ manh mối. Nếu sai, đọc giải thích rồi thử lại. Hoàn thành để mở chặng tiếp theo."/></p></div></div><div className="gentle-card"><h2><Bilingual text={"Your pace is the right pace."}/></h2><p><Bilingual text={"First-clear XP is awarded once by the server. Vietnamese help and skipped English practice do not reduce it. Trail badges mark mission completion, not language proficiency."}/></p>{support}</div><button className="play-button purple" onClick={()=>navigate('journey')}><Bilingual text={"Let’s explore"}/> <ArrowRight size={18}/></button></section>}
  </>}
- </main><footer className="atlas-footer">{state&&!authRequired&&(authProvider!=='google'||!!account.profile?.displayName)?<span><ShieldCheck size={14}/> <Bilingual text={"Progress saved to your account"}/></span>:<span><UiText en="A little English. A world to explore." vi="Một chút tiếng Anh. Cả thế giới để khám phá."/></span>}</footer>
+ </main><footer className="atlas-footer">{state&&!authRequired&&!!account.profile?.displayName?<span><ShieldCheck size={14}/> <Bilingual text={"Progress saved to your account"}/></span>:<span><UiText en="A little English. A world to explore." vi="Một chút tiếng Anh. Cả thế giới để khám phá."/></span>}</footer>
  </div></SavedVocabularyProvider></VietnameseSupport>;
 }

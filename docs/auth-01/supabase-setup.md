@@ -1,5 +1,7 @@
 # ATLAS Google authentication and Supabase persistence
 
+Historical AUTH-01 rollout notes. Current AUTH-02 uses Supabase PostgreSQL only on every host; no active Sites/D1 path. Three baseline migrations are already recorded remotely; AUTH-02 integrity is prepared and locally verified but not applied remotely. Use [current setup](../../README.md) and [production readiness](../auth-02/AUTH-02-production-readiness.md) for the next rollout.
+
 Status: implementation prepared for review; provider configuration and live database migration are still required.
 Updated: 2026-10-20. Target: existing Vercel `atlas-hub` and existing Supabase project `jyzeararymcahczbovei`.
 

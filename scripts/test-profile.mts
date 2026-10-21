@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { createClient, type User } from '@supabase/supabase-js';
 import { handleVercelAtlas } from '../lib/atlas/vercel-handler.ts';
 import { playerInitials } from '../lib/atlas/profile.ts';
+import type {ProfileTestBody} from './test-response-types.ts';
 
 const profiles = new Map<string, Record<string, unknown>>();
 let missing = false, missingInterests = false, writes = 0;
@@ -17,12 +18,14 @@ const client = createClient('https://fixture.supabase.co', 'fixture-service-key'
       return Response.json(profiles.has(id) ? [profiles.get(id)] : []);
     }
     assert.equal(request.method, 'POST');
-    assert.ok(request.headers.get('prefer')?.includes('resolution=merge-duplicates'));
-    assert.ok(request.headers.get('prefer')?.includes('missing=default'));
+    const initialize=request.headers.get('prefer')?.includes('resolution=ignore-duplicates');
+    if(!initialize){assert.ok(request.headers.get('prefer')?.includes('resolution=merge-duplicates'));assert.ok(request.headers.get('prefer')?.includes('missing=default'));}
     const row = await request.json() as Record<string, unknown>;
     if(missingInterests&&'interests' in row)return Response.json({code:'PGRST204'},{status:400});
     const id = String(row.player_id);
+    if(initialize&&profiles.has(id))return new Response(null,{status:201});
     profiles.set(id, { display_name: null, vietnamese_support: true, reading_band: 'A2', ...profiles.get(id), ...row }); writes++;
+    if(initialize)return new Response(null,{status:201});
     return Response.json(profiles.get(id));
   } },
 });
@@ -33,14 +36,14 @@ async function call(body?: unknown, id: string | null = alice, origin = 'https:/
     ...(body === undefined ? {} : { body: typeof body === 'string' ? body : JSON.stringify(body) }),
   }), { getAdmin: () => client, getUser: async () => id ? { id, aud: 'authenticated', app_metadata: {}, created_at: '2026-10-20T00:00:00Z', user_metadata: { avatar_url: avatar } } as User : null });
   assert.ok(response.headers.get('cache-control')?.includes('no-store'));
-  return { status: response.status, body: await response.json() as any };
+  return { status: response.status, body: await response.json() as ProfileTestBody };
 }
 assert.equal((await call(undefined, null)).status, 401);
 assert.equal((await call({ displayName: 'Nope' }, alice, 'https://evil.test')).status, 403);
 assert.equal(writes, 0);
 const fresh = (await call()).body.profile;
 assert.equal(fresh.playerId, alice); assert.equal(fresh.displayName, null); assert.equal(fresh.readingBand, 'A2');
-assert.equal(profiles.size, 0, 'Reading a new profile does not create or overwrite anything');
+assert.equal(profiles.size, 1, 'First verified profile load creates exactly one row');
 assert.deepEqual(fresh.interests,[]);
 assert.equal((await call({ displayName: '  Nguyễn An  ', readingBand: 'B1', vietnameseSupport: false })).body.profile.displayName, 'Nguyễn An');
 assert.equal((await call()).body.profile.vietnameseSupport, false);

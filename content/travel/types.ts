@@ -17,7 +17,7 @@ export type TravelStep=(StepBase&{kind:'inspect'|'target'})|(StepBase&{kind:'dia
 export interface TravelEncounter{id:string;version:1;destinationId:string;locationId:string;title:Copy;description:Copy;objectives:LearningObjective[];vocabulary:VocabularyEntry[];steps:TravelStep[];rewardXp:number;stamp:PassportStampDefinition;sourceIds:string[]}
 export interface PassportStampDefinition{id:string;name:Copy;icon:'plane'|'compass'|'bowl'|'gate'|'globe'}
 export interface PassportStamp extends PassportStampDefinition{countryId:string;destinationId:string;encounterId?:string;earnedAt:string}
-export interface EncounterProgress{step:number;routeIndex:number;position?:[number,number];seen:string[];completedAt?:string}
+export interface EncounterProgress{step:number;routeIndex:number;position?:[number,number];seen:string[];completedAt?:string;lastActivityRevision?:number}
 export interface PlayerTravelProgress{version:1;visitedCountries:string[];encounters:Record<string,EncounterProgress>;stamps:PassportStamp[]}
 export interface CountryPack{schemaVersion:1;category:'WORLD_TRAVEL';country:Country;destinations:Destination[];locations:Location[];encounters:TravelEncounter[];completionStamp:PassportStampDefinition;sources:TravelSource[]}
 export type TravelAction={kind:'inspect'|'target';target:string}|{kind:'say';choice:string}|{kind:'move';direction:'up'|'right'|'down'|'left';expectedMove:number}|{kind:'order';dish:string;preference:string}|{kind:'compose';tiles:string[]}|{kind:'restart'};

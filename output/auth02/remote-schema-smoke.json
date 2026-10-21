@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-21",
+  "readOnly": true,
+  "zeroRowQueries": true,
+  "probes": [
+    {
+      "table": "atlas_expeditions",
+      "serverSchemaStatus": 200,
+      "serverSchemaError": null,
+      "anonStatus": 401,
+      "anonError": "42501"
+    },
+    {
+      "table": "atlas_profiles",
+      "serverSchemaStatus": 200,
+      "serverSchemaError": null,
+      "anonStatus": 401,
+      "anonError": "42501"
+    }
+  ],
+  "scope": "Schema/grants metadata only. No production player rows read or written; no OAuth/gameplay verification."
+}

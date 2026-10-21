@@ -4,7 +4,7 @@
 
 ATLAS là ứng dụng học tiếng Anh qua khám phá và giải quyết tình huống. Người chơi đọc manh mối, trò chuyện với nhân vật, hoàn thành nhiệm vụ và lưu lại từ vựng trong hành trình của mình.
 
-Repository chứa giao diện React, nội dung học, bộ đánh giá nhiệm vụ và hai adapter lưu trữ: **Next.js + Supabase** cho luồng đăng nhập Google hiện tại, và **Vinext + Cloudflare D1** cho bản Sites trước đó.
+Runtime hiện tại là **Next.js + Supabase Auth (Google) + Supabase PostgreSQL**. Supabase là database hoạt động duy nhất ở cả local và production; không cần đặt `VERCEL=1`. Source/schema D1 và công cụ Sites cũ chỉ còn phục vụ lịch sử và kiểm thử hồi quy, không được route đang chạy sử dụng. Dữ liệu cũ không bị xóa hay tự ghép tài khoản qua email.
 
 ## Tính năng hiện có
 
@@ -12,6 +12,7 @@ Repository chứa giao diện React, nội dung học, bộ đánh giá nhiệm 
 - **World Travel:** bản đồ chọn quốc gia; Nhật Bản có bốn điểm chơi tại sân bay, Shibuya, quán mì và Asakusa. Các quốc gia khác có trạng thái xem trước hoặc sắp có theo catalog, chưa phải tất cả đều có nhiệm vụ.
 - **Luyện tiếng Anh:** bài đọc và từ vựng theo mục tiêu A1, A2, B1, B2; giải nghĩa từ, IPA, ví dụ và sổ từ đã lưu.
 - **Tiến trình:** XP, cấp nhân vật, mở khóa nhiệm vụ, huy hiệu và dấu hộ chiếu. Server chấm kết quả và ghi thưởng lần đầu; chơi lại không cộng thưởng trùng.
+- **Resume:** checkpoint theo tài khoản lưu trong cùng transaction tiến trình. Server trả chặng/bước hợp lệ mới nhất; refresh hoặc đăng nhập lại có thể tiếp tục bằng nút Resume adventure. Request chọn checkpoint/restart cũ bị từ chối theo revision.
 - **Tài khoản:** Google qua Supabase Auth; onboarding đặt tên, avatar hoặc chữ viết tắt, Profile, Settings và Sign out.
 - **Sở thích khám phá:** chọn nhiều chủ đề thiên nhiên, du lịch, ẩm thực, văn hóa hoặc bỏ qua; sửa trong Profile. Journey ưu tiên gợi ý từ nội dung hiện có và đã mở, không thay đổi XP hay thứ tự mở khóa. Chủ đề ở chặng sau được giới thiệu qua hành trình đang mở.
 - **Ngôn ngữ:** nút EN/VI đổi ngôn ngữ giao diện và nhớ trên trình duyệt. Hỗ trợ tiếng Việt trong bài học là tùy chọn riêng, lưu cùng reading target trong profile tài khoản.
@@ -69,6 +70,7 @@ Dry-run hiển thị SQL đang chờ; `db push` áp dụng và ghi lịch sử, 
 1. [`atlas_expeditions`](supabase/migrations/20261020090000_atlas_expeditions.sql): tiến trình, nhiệm vụ, thưởng và từ đã lưu.
 2. [`atlas_profiles`](supabase/migrations/20261020110000_atlas_profiles.sql): tên hiển thị, hỗ trợ tiếng Việt và reading target.
 3. [`atlas_profile_interests`](supabase/migrations/20261020130000_atlas_profile_interests.sql): thêm danh sách sở thích vào profile; chạy cả khi bảng profile đã có từ trước.
+4. [`AUTH-02 integrity`](supabase/migrations/20261021090000_auth02_expedition_integrity.sql): ràng buộc ledger duy nhất, XP/ledger cùng commit, lịch sử completion/stamp và revision. Migration này mới được áp dụng/kiểm thử trên PostgreSQL local, **chưa áp dụng production**. Review [production readiness](docs/auth-02/AUTH-02-production-readiness.md) trước khi chạy trên môi trường thật.
 
 Cả hai gắn với `auth.users.id`. Profile nằm ở bảng riêng, không cập nhật document XP/progression. Browser không có quyền ghi trực tiếp vào các bảng này; các thao tác đi qua API của ứng dụng.
 
@@ -108,19 +110,21 @@ Các link chuyển tới giao diện tại `http://127.0.0.1:3211`. Chế độ 
 | --- | --- |
 | `pnpm.cmd dev:supabase` | Native Next.js, Google/Supabase thật, cổng 3000 |
 | `pnpm.cmd preview:profile` | Next.js với provider mô phỏng; vào bằng link cổng 43219 |
-| `pnpm.cmd dev` | Adapter Sites/Vinext cũ; portable mặc định cổng 5173 |
-| `pnpm.cmd build` | Kiểm tra nội dung rồi build theo execution profile; có `VERCEL=1` sẽ build native Next |
-| `pnpm.cmd start` | Chạy Worker đã build qua Wrangler local; không phải lệnh chạy native Next |
-| `pnpm.cmd db:generate` | Sinh migration Drizzle cho D1; không áp dụng migration Supabase |
+| `pnpm.cmd dev` | Native Next.js + Supabase, mặc định cổng 3000 |
+| `pnpm.cmd build` | Kiểm tra nội dung rồi build native Next |
+| `pnpm.cmd start` | Chạy native Next production sau build |
+| `pnpm.cmd test:auth02` | PostgreSQL/PostgREST thật trên máy, user test riêng |
+| `pnpm.cmd test:auth02:http` | API/cookie của Next production qua PostgreSQL local; chạy sau build |
+| `pnpm.cmd preview:auth02` | Browser fixture PostgreSQL thật; Auth ký token mô phỏng, không phải Google |
+| `pnpm.cmd legacy:db:generate` | Công cụ D1 lịch sử, không dùng cho schema/runtime hiện tại |
 
 Build native Next trên PowerShell:
 
 ```powershell
-$env:VERCEL = '1'
 pnpm.cmd build
 ```
 
-Build không deploy và không tạo bảng Supabase. Bản Sites dùng danh tính Sites và D1 riêng; repository không tự liên kết hoặc chuyển tiến trình Sites sang tài khoản Google.
+Build không deploy và không tạo bảng Supabase. Repository không tự liên kết hoặc chuyển dữ liệu Sites/D1 lịch sử sang tài khoản Google.
 
 ## Kiến trúc
 
@@ -133,7 +137,7 @@ Build không deploy và không tạo bảng Supabase. Bản Sites dùng danh tí
 | Đánh giá bài luyện tiếng Anh | `packages/english-engine/src/` |
 | API chung, storage adapter, profile handler | `lib/atlas/` |
 | Supabase server clients và cấu hình | `lib/supabase/` |
-| Schema Supabase / schema D1 | `supabase/migrations/` / `drizzle/` |
+| Schema đang dùng / rollback có review | `supabase/migrations/` / `supabase/rollback/` |
 | Kiểm thử và công cụ chạy local | `scripts/` |
 
 API xác thực Supabase user trên server rồi dùng UUID đó để truy cập dữ liệu của tài khoản. Expedition dùng revision và compare-and-swap để giữ đồng bộ tiến trình, lượt làm và reward ledger khi có nhiều request đồng thời. Profile chỉ cập nhật tên, sở thích và tùy chọn học. Bộ chấm dùng nội dung/quy tắc định sẵn; không có lời gọi LLM để chấm đáp án trong luồng hiện tại.
@@ -154,11 +158,22 @@ node scripts/test-vocabulary.mts
 - `test-profile` và `test-supabase`: SDK/API với PostgREST fixture; danh tính, cô lập tài khoản, validation, lưu profile và bảo vệ thưởng.
 - `test-interests`: gợi ý theo chủ đề, giữ nguyên điều kiện mở khóa và không sửa tiến trình.
 - `test-chapter-ui`: render component, ngôn ngữ giao diện và hỗ trợ bài học; không phải kiểm thử tương tác trình duyệt.
-- Các bài kiểm thử D1 chạy bằng Miniflare local, bao gồm lưu tiến trình và concurrent/replay protection.
+- Các bài kiểm thử D1 là hồi quy lịch sử dùng Miniflare local, không xác minh PostgreSQL và không đưa D1 vào runtime.
 - Sau native Next build: `pnpm.cmd test:auth:http` kiểm tra các route HTTP với provider mô phỏng.
 - Khi `preview:profile` đang chạy: `node scripts/test-profile-http.mts` kiểm tra profile qua HTTP và xác nhận expedition không đổi sau cập nhật profile.
 
 Các fixture không xác minh Google OAuth hoặc quyền/schema PostgreSQL thật. Kết quả kiểm tra, giới hạn và phạm vi browser QA được ghi tại [báo cáo tài khoản](docs/account-profile-verification.md), [báo cáo đăng nhập](docs/auth-01/verification.md) và [báo cáo World Travel](docs/world-travel/verification.md).
+
+AUTH-02 bổ sung kiểm thử **PostgreSQL 17 + PostgREST thật**, tách khỏi các fixture trong bộ nhớ ở trên. Cài binary PostgREST cho Windows một lần, rồi chạy:
+
+```powershell
+node scripts/setup-auth02-tools.mjs
+pnpm.cmd test:auth02
+pnpm.cmd build
+pnpm.cmd test:auth02:http
+```
+
+Các test tự tạo database/user mô phỏng riêng trên loopback, không dùng `.env.local` để kết nối production. Browser fixture: `pnpm.cmd preview:auth02`, mở link `/login/alice` hoặc `/login/bob` được in ra terminal. Các link này **không phải Google OAuth**. Trên nền tảng khác, cung cấp `ATLAS_POSTGREST_BIN` trỏ tới executable PostgREST tương thích đã cài. Báo cáo: [implementation](docs/auth-02/AUTH-02-implementation-report.md), [test evidence](docs/auth-02/AUTH-02-test-evidence.md), [production readiness](docs/auth-02/AUTH-02-production-readiness.md).
 
 ## Chẩn đoán lỗi
 
@@ -172,6 +187,6 @@ Các fixture không xác minh Google OAuth hoặc quyền/schema PostgreSQL th�
 | `503 DATABASE_SETUP_REQUIRED` | Schema expedition chưa sẵn sàng. |
 | `/auth/error?reason=unavailable` | Google provider của backend đang dùng không bật; fixture cố ý tắt Google thật. |
 
-**`GET /api/health` hiện chỉ kiểm tra `atlas_expeditions`. HTTP 200 ở health không chứng minh bảng profile đã có.** Xem [trace `PROFILE_SETUP_REQUIRED`](docs/troubleshooting/PROFILE_SETUP_REQUIRED.md) để biết chuỗi lỗi và cách xử lý.
+`GET /api/health` kiểm tra schema expedition và profile (bao gồm `interests`); không thay thế kiểm thử OAuth/gameplay hay xác minh migration integrity đã được áp dụng. [Trace `PROFILE_SETUP_REQUIRED`](docs/troubleshooting/PROFILE_SETUP_REQUIRED.md) là chẩn đoán lịch sử trước AUTH-02.
 
-Hướng dẫn Windows chi tiết: [LOCAL-DEVELOPMENT.md](docs/LOCAL-DEVELOPMENT.md). Tài liệu adapter Sites trước đó: [ATLAS-SITES.md](ATLAS-SITES.md); một số phần là lịch sử triển khai, không thay thế hướng dẫn Supabase hiện tại ở trên.
+Hướng dẫn Windows chi tiết: [LOCAL-DEVELOPMENT.md](docs/LOCAL-DEVELOPMENT.md). Tài liệu adapter Sites trước đó: [ATLAS-SITES.md](docs/legacy/ATLAS-SITES.md); một số phần là lịch sử triển khai, không thay thế hướng dẫn Supabase hiện tại ở trên.

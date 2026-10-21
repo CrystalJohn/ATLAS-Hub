@@ -1,6 +1,10 @@
 // Fixed Vietnamese assistance for the private review pilot. Independent educator
 // review is pending. This presentation catalog does not import evaluation keys.
 export const vietnameseText:Record<string,string>={
+ 'Adventure has moved on. Reload the latest progress.':'Tiến trình đã thay đổi. Hãy tải lại bản mới nhất.',
+ 'This adventure checkpoint is no longer available.':'Điểm tiếp tục này không còn khả dụng. Hãy chọn một hành trình đang mở.',
+ 'This travel stop is not available.':'Điểm dừng này chưa khả dụng.',
+ 'Could not save. Please retry.':'Chưa lưu được. Vui lòng thử lại.',
  'Your interests could not be saved yet. Your choices are kept; please try again later.':'Chưa thể lưu sở thích lúc này. Lựa chọn của bạn vẫn được giữ; vui lòng thử lại sau.',
  'Choose each interest once.':'Mỗi sở thích chỉ được chọn một lần.',
  'Content awaits educator review. Reading targets are not a proficiency rating.':'Nội dung đang chờ thẩm định chuyên môn. Mức bài đọc không phải đánh giá trình độ.',
