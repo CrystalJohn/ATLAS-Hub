@@ -75,14 +75,30 @@ try {
       for (const [name, width, height] of [['mobile', 390, 844], ['desktop', 1440, 1000]] as const) {
         const page = await browser.newPage({ viewport: { width, height } });
         const errors: string[] = [];
+        const hydrationErrors: string[] = [];
         page.on('pageerror', (error: Error) => errors.push(error.message));
+        page.on('console', (message: {type(): string; text(): string}) => {
+          if (['error', 'warning'].includes(message.type()) && /hydrat|Minified React error #(?:418|425)/i.test(message.text()))
+            hydrationErrors.push(message.text());
+        });
         await page.goto(base);
         const signIn = page.getByRole('link', { name: /Continue with Google/ });
         await signIn.waitFor({ state: 'visible' });
         assert.equal(await signIn.getAttribute('href'), '/auth/google');
+        assert.ok(await page.getByRole('heading', { name: 'A little English. A world of adventure.' }).isVisible());
+        for (const [label, title] of [['Privacy', 'Your account & privacy'], ['Terms', 'About your adventure']]) {
+          await page.getByRole('button', { name: label, exact: true }).click();
+          assert.ok(await page.getByRole('dialog', { name: title }).isVisible());
+          await page.keyboard.press('Escape');
+          assert.equal(await page.getByRole('dialog').count(), 0);
+          assert.equal(await page.getByRole('button', { name: label, exact: true }).evaluate((element: Element) => element === document.activeElement), true);
+        }
         await page.getByRole('button', { name: 'Switch interface to Vietnamese' }).click();
         const localizedSignIn = page.getByRole('link', { name: /Đăng nhập bằng Google/ });
         assert.ok(await localizedSignIn.isVisible());
+        await page.reload();
+        await localizedSignIn.waitFor({ state: 'visible' });
+        assert.equal(await page.locator('html').getAttribute('lang'), 'vi');
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
         await localizedSignIn.focus();
         assert.equal(await localizedSignIn.evaluate((element: Element) => element === document.activeElement), true);
@@ -91,9 +107,10 @@ try {
         await page.waitForURL('**/auth/error?reason=unavailable');
         assert.ok(await page.getByRole('heading', { name: 'Tính năng đăng nhập sắp sẵn sàng.' }).isVisible());
         assert.deepEqual(errors, []);
+        assert.deepEqual(hydrationErrors, [], 'Initial load and saved-language reload must hydrate without warnings');
         await page.close();
       }
-      console.log('PASS browser fixtures: mobile/desktop sign-in CTA, Vietnamese support, no horizontal overflow, keyboard Enter, provider-unavailable recovery and no page errors. Screenshots saved.');
+      console.log('PASS browser fixtures: mobile/desktop sign-in CTA, Vietnamese support and saved-language reload, no hydration warnings or page errors, no horizontal overflow, keyboard Enter and provider-unavailable recovery. Screenshots saved.');
     } finally { await browser.close(); }
   }
   console.log('PASS native Next HTTP: home 200, unauthenticated/spoofed session 401, cross-origin 403, schema-specific health 503, callback/provider recovery redirects, bilingual error page, logout CSRF guard. Auth/database provider are fixtures, not live OAuth/Postgres.');

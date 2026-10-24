@@ -1,0 +1,13 @@
+{
+  "asset": "adventure-world.webp",
+  "createdAt": "2026-10-24",
+  "tool": "Built-in image_gen image editing",
+  "reference": "User-provided ATLAS_ A World of Adventure.png",
+  "purpose": "Decorative artwork for the unauthenticated welcome screen; all text and controls are rendered as accessible HTML.",
+  "processing": "Generated PNG encoded to WebP quality 87; no source screenshot embedded in the interface.",
+  "prompt": "Edit the supplied ATLAS website reference to create ONLY its hero illustration as a reusable web background, no interface. Preserve as closely as possible the exact beautiful stylized 3D adventure artwork on the LEFT TWO THIRDS: back-facing young female explorer with brown bun, mint jacket, purple backpack and small cream companion charm on stone path at bottom left; floating miniature world with pink cherry blossoms and Japanese pagodas and Mount Fuji, Paris Eiffel Tower and French architecture centrally, London red bus, Egyptian pyramids at right, blue Mediterranean river/waterfall and white Greek village, bright pastel sky clouds. Remove all overlaid text, ATLAS wordmark and logo, language controls, headings, Google button, feature icons and bottom footer. Remove the entire white UI panel on right; deliver the illustrated left landscape ONLY as a wide 4:3 image. Reconstruct the sky where logo was and clouds where caption was. Maintain composition, camera, lighting, colors and painterly toy-like 3D detail as faithfully as possible. No letters, logos, typography or watermark anywhere. Full bleed illustration.",
+  "supportingAssets": {
+    "google.svg": "https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg",
+    "Nunito-Variable.ttf": "https://github.com/google/fonts/tree/main/ofl/nunito; license in public/fonts/nunito/OFL.txt"
+  }
+}

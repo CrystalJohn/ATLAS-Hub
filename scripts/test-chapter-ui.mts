@@ -42,7 +42,10 @@ try{
  await compile('content/artwork/nature-realm.ts','nature-realm');
  await compile('app/components/LocationArtwork.tsx','LocationArtwork', {"'./EvidencePanel'":"'./EvidencePanel.mjs'"});
  await compile('app/components/LakeInvestigation.tsx','LakeInvestigation', {"'../../content/evidence/lake'":"'./lake.mjs'","'./EvidencePanel'":"'./EvidencePanel.mjs'","'./LocationArtwork'":"'./LocationArtwork.mjs'","'../../content/artwork/nature-realm'":"'./nature-realm.mjs'","'./LakeConversation'":"'./LakeConversation.mjs'"});
- await compile('app/components/AuthGate.tsx','AuthGate');
+ // Resolve Next's CommonJS entry points when this SSR harness runs outside the Next bundler.
+ await writeFile(`${dir}/next-image.mjs`, `import entry from 'next/image.js'; export default entry.default ?? entry;`);
+ await writeFile(`${dir}/next-link.mjs`, `import entry from 'next/link.js'; export default entry.default ?? entry;`);
+ await compile('app/components/AuthGate.tsx','AuthGate',{"'next/image'":"'./next-image.mjs'","'next/link'":"'./next-link.mjs'"});
  await compile('app/components/AdventureRecovery.tsx','AdventureRecovery');
  await compile('content/interests.ts','interests');
  await compile('lib/atlas/profile.ts','profile',{"'../../content/interests.ts'":"'./interests.mjs'"});
@@ -55,6 +58,11 @@ try{
  const {default:Game}=await import(pathToFileURL(`${process.cwd()}/${dir}/Game.mjs`).href);
  const {InterfaceLanguage}=await import(pathToFileURL(`${process.cwd()}/${dir}/Bilingual.mjs`).href);
  const inLocale=(locale:'en'|'vi',node:ReactNode)=>createElement(InterfaceLanguage,{value:{locale,setLocale:()=>{}}},node);
+ const welcome=renderToStaticMarkup(createElement(Game));
+ assert.ok(welcome.includes('welcome-page')&&welcome.includes('adventure-world.webp')&&welcome.includes('Continue with Google'));
+ assert.ok(welcome.includes('href="/auth/google"')&&welcome.includes('aria-disabled="true"'));
+ assert.equal((welcome.match(/<main\b/g)||[]).length,1);assert.ok(!welcome.includes('aria-label="Main navigation"'));
+ const welcomeVi=renderToStaticMarkup(inLocale('vi',createElement(Game)));assert.ok(welcomeVi.includes('Đăng nhập bằng Google')&&welcomeVi.includes('lang="vi"'));
  const fresh={...projection(emptyProgress()),missions:missions.map(publicMission),attempts:[],ledger:[],englishReview:[]};
  const html=renderToStaticMarkup(createElement(Game,{initialState:fresh}));
  assert.ok(html.includes('A little English.'));assert.ok(html.includes('Begin my adventure'));assert.ok(html.includes('TRAIL LOCKED'));assert.ok(html.includes('My journal'));assert.ok(html.includes('Reading target'));assert.ok(html.includes('aria-label="Main navigation"'));assert.ok(html.includes('0/6'));assert.ok(!html.includes('>Hành trình<'));assert.ok(!html.includes('>Sổ tay<'));assert.ok(html.includes('Switch interface to Vietnamese'));const viHtml=renderToStaticMarkup(inLocale('vi',createElement(Game,{initialState:fresh})));assert.ok(viHtml.includes('Hành trình'));assert.ok(viHtml.includes('Sổ tay'));assert.ok(viHtml.includes('Cách chơi'));assert.ok(!viHtml.includes('>Journey<'));assert.ok(!viHtml.includes('translation-copy'));assert.ok(!html.includes('Recorded as item-specific'));

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-24",
+  "scope": "Reference-driven welcome screen at localhost:3000; existing Google auth route reused; no database migration or live OAuth consent",
+  "design": {
+    "mode": "Welcome-screen redesign preserving existing authenticated gameplay",
+    "direction": "Bright illustrated exploration RPG with a split hero, purple brand, rounded typography and restrained motion",
+    "foundation": "Existing Next.js, native CSS, Lucide and Radix Dialog; self-hosted Nunito",
+    "designVariance": 5,
+    "motionIntensity": 2,
+    "visualDensity": 3,
+    "reason": "Follow the supplied reference closely; emphasize the illustration and one Google sign-in action"
+  },
+  "checks": {
+    "productionBuildAndTypescript": "PASS",
+    "lint": "PASS, 0 errors; 7 existing image warnings outside changed components",
+    "chapterSsrRegression": "PASS, including initial welcome versus authenticated journey",
+    "tokyoRegression": "PASS",
+    "nextHttpAndDesktopMobileBrowserFixtures": "PASS",
+    "englishVietnameseSwitchAndReload": "PASS",
+    "privacyTermsEscapeAndFocusRestoration": "PASS",
+    "googleCtaAndProviderUnavailableRecovery": "PASS with local provider fixture; not real Google OAuth",
+    "hydrationWarnings": "None in browser checks"
+  },
+  "viewportObservations": [
+    {"width":1586,"height":992,"pageHeight":992,"horizontalOverflow":false,"locale":"en"},
+    {"width":1366,"height":768,"pageHeight":768,"horizontalOverflow":false,"locale":"en"},
+    {"width":1366,"height":768,"pageHeight":768,"horizontalOverflow":false,"locale":"vi"},
+    {"width":390,"height":844,"pageHeight":844,"horizontalOverflow":false,"locale":"en"},
+    {"width":390,"height":844,"pageHeight":844,"horizontalOverflow":false,"locale":"vi"}
+  ],
+  "smallViewportBehavior": "Narrower or shorter screens may scroll to preserve readable text and accessible controls; no horizontal overflow was observed at 320px.",
+  "screenshots": ["welcome-desktop.png", "welcome-mobile.png", "welcome-laptop.png", "welcome-vi-1366.png", "welcome-vi-390.png"],
+  "artworkPromptAndProvenance": "../../public/assets/welcome/artwork-provenance.json"
+}
