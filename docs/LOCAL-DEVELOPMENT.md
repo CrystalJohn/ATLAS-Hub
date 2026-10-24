@@ -41,6 +41,7 @@ SUPABASE_SECRET_KEY=YOUR_SERVER_SECRET
 ```
 
 `.env.local` được Git bỏ qua. Giữ secret trên máy, không đưa vào chat hay mã nguồn. Không chạy lệnh sao chép đè lên `.env.local` đã cấu hình.
+Nếu chạy qua một domain HTTPS hoặc preview alias, thêm origin chính xác vào `ATLAS_AUTH_ALLOWED_ORIGINS` và thêm callback `/auth/callback` tương ứng trong Supabase Redirect URLs. Localhost/127.0.0.1 không cần biến này ở chế độ `dev`; với `build` + `start`, đặt `ATLAS_AUTH_ALLOWED_ORIGINS=http://localhost:3000` (hoặc đúng origin loopback đang dùng).
 
 2. Đảm bảo project Supabase đã có các migration theo thứ tự:
    - `supabase/migrations/20261020090000_atlas_expeditions.sql`

@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import { supabaseRouteClient } from '../../../lib/supabase/server';
-import { requestOrigin, sameOrigin } from '../../../lib/atlas/origin';
+import { trustedAuthOrigin, sameOrigin } from '../../../lib/atlas/origin';
 export const dynamic = 'force-dynamic';
 export async function POST(request: Request) {
-  const origin = requestOrigin(request);
+  let origin: string;
+  try { origin = trustedAuthOrigin(request); }
+  catch { return Response.json({ message: 'This sign-out address is unavailable.' }, { status: 400 }); }
   if (!sameOrigin(request)) return Response.json({ message: 'Cross-origin request rejected.' }, { status: 403 });
   try {
     const client = await supabaseRouteClient();

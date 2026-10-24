@@ -19,7 +19,7 @@ const address = fixture.address();
 assert.ok(address && typeof address === 'object');
 const base = 'http://127.0.0.1:3209';
 const child = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'start', '--hostname', '127.0.0.1', '--port', '3209'], {
-  env: { ...process.env, VERCEL: '1', NEXT_PUBLIC_SUPABASE_URL: `http://127.0.0.1:${address.port}`, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_http_fixture', SUPABASE_SECRET_KEY: 'sb_secret_http_fixture' },
+  env: { ...process.env, VERCEL: '1', ATLAS_AUTH_ALLOWED_ORIGINS: base, NEXT_PUBLIC_SUPABASE_URL: `http://127.0.0.1:${address.port}`, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_http_fixture', SUPABASE_SECRET_KEY: 'sb_secret_http_fixture' },
   stdio: ['ignore', 'pipe', 'pipe'],
 });
 let logs = '';
@@ -51,7 +51,14 @@ try {
     const response = await fetch(`${base}${path}`, { redirect: 'manual' });
     assert.equal(response.status, 307);
     assert.ok(response.headers.get('location')?.includes('/auth/error'));
+    const poisoned = await fetch(`${base}${path}`, { headers: { host: 'evil.example', 'x-forwarded-host': '127.0.0.1:3209' }, redirect: 'manual' });
+    assert.ok([307,400].includes(poisoned.status));
+    if (poisoned.status === 307) assert.equal(new URL(poisoned.headers.get('location')!).origin, base,
+      'Next may normalize Host, but the redirect must stay on the local origin');
+    else assert.equal(poisoned.headers.get('location'), null);
   }
+  const returnPoison = await fetch(`${base}/auth/callback?error=cancelled&returnTo=https://evil.example`, { redirect: 'manual' });
+  assert.equal(new URL(returnPoison.headers.get('location')!).origin, base);
   const errorPage = await fetch(`${base}/auth/error?reason=unavailable`);
   assert.equal(errorPage.status, 200);
   assert.ok((await errorPage.text()).includes('Google sign-in will be ready soon.'));
@@ -61,8 +68,9 @@ try {
     assert.ok(runtime, 'Browser QA requires the provided runtime Playwright install');
     const playwright = await import(pathToFileURL(`${runtime}/playwright/index.js`).href);
     const { chromium } = playwright.default ?? playwright;
-    const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
-    await mkdir('docs/auth-01/screenshots', { recursive: true });
+    const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'],
+      ...(process.env.ATLAS_BROWSER_EXECUTABLE ? { executablePath: process.env.ATLAS_BROWSER_EXECUTABLE } : {}) });
+    await mkdir('output/auth04/screenshots', { recursive: true });
     try {
       for (const [name, width, height] of [['mobile', 390, 844], ['desktop', 1440, 1000]] as const) {
         const page = await browser.newPage({ viewport: { width, height } });
@@ -72,14 +80,16 @@ try {
         const signIn = page.getByRole('link', { name: /Continue with Google/ });
         await signIn.waitFor({ state: 'visible' });
         assert.equal(await signIn.getAttribute('href'), '/auth/google');
-        assert.ok(await page.getByText('Đăng nhập bằng Google', { exact: true }).isVisible());
+        await page.getByRole('button', { name: 'Switch interface to Vietnamese' }).click();
+        const localizedSignIn = page.getByRole('link', { name: /Đăng nhập bằng Google/ });
+        assert.ok(await localizedSignIn.isVisible());
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
-        await signIn.focus();
-        assert.equal(await signIn.evaluate((element: Element) => element === document.activeElement), true);
-        await page.screenshot({ path: `docs/auth-01/screenshots/${name}.png`, fullPage: true });
-        await signIn.press('Enter');
+        await localizedSignIn.focus();
+        assert.equal(await localizedSignIn.evaluate((element: Element) => element === document.activeElement), true);
+        await page.screenshot({ path: `output/auth04/screenshots/${name}.png`, fullPage: true });
+        await localizedSignIn.press('Enter');
         await page.waitForURL('**/auth/error?reason=unavailable');
-        assert.ok(await page.getByRole('heading', { name: 'Google sign-in will be ready soon.' }).isVisible());
+        assert.ok(await page.getByRole('heading', { name: 'Tính năng đăng nhập sắp sẵn sàng.' }).isVisible());
         assert.deepEqual(errors, []);
         await page.close();
       }

@@ -2,13 +2,36 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createClient, type User } from '@supabase/supabase-js';
 import { handleVercelAtlas } from '../lib/atlas/vercel-handler.ts';
-import { sameOrigin, requestOrigin } from '../lib/atlas/origin.ts';
+import { sameOrigin, requestOrigin, trustedAuthOrigin } from '../lib/atlas/origin.ts';
 import type {AtlasTestBody} from './test-response-types.ts';
 
 const proxied = new Request('https://localhost:3000/api/session', { headers: { host: 'atlas.test', origin: 'https://atlas.test', 'x-forwarded-host': 'evil.test' } });
 assert.equal(requestOrigin(proxied), 'https://atlas.test');
 assert.equal(sameOrigin(proxied), true);
 assert.equal(sameOrigin(new Request('https://atlas.test/api/session', { headers: { host: 'atlas.test', origin: 'https://evil.test', 'x-forwarded-host': 'evil.test' } })), false);
+const priorAuthOrigins = process.env.ATLAS_AUTH_ALLOWED_ORIGINS;
+const priorNodeEnv = process.env.NODE_ENV;
+try {
+  delete process.env.ATLAS_AUTH_ALLOWED_ORIGINS;
+  assert.throws(() => trustedAuthOrigin(proxied));
+  process.env.ATLAS_AUTH_ALLOWED_ORIGINS = 'https://atlas.test,https://preview.atlas.test';
+  assert.equal(trustedAuthOrigin(proxied), 'https://atlas.test');
+  assert.equal(trustedAuthOrigin(new Request('https://preview.atlas.test/auth/google')), 'https://preview.atlas.test');
+  assert.throws(() => trustedAuthOrigin(new Request('https://atlas.test/auth/google', { headers: { host: 'evil.test', 'x-forwarded-host': 'atlas.test' } })));
+  assert.throws(() => trustedAuthOrigin(new Request('https://atlas.test/auth/google', { headers: { host: 'atlas.test.evil.test' } })));
+  assert.throws(() => trustedAuthOrigin(new Request('https://atlas.test/auth/google', { headers: { host: 'atlas.test@evil.test' } })));
+  assert.throws(() => trustedAuthOrigin(new Request('https://atlas.test/auth/google', { headers: { host: 'atlas.test/evil' } })));
+  assert.equal(trustedAuthOrigin(new Request('http://127.0.0.1:3000/auth/google')), 'http://127.0.0.1:3000');
+  Reflect.set(process.env, 'NODE_ENV', 'production');
+  assert.throws(() => trustedAuthOrigin(new Request('http://127.0.0.1:3000/auth/google')));
+  process.env.ATLAS_AUTH_ALLOWED_ORIGINS += ',http://127.0.0.1:3000';
+  assert.equal(trustedAuthOrigin(new Request('http://127.0.0.1:3000/auth/google')), 'http://127.0.0.1:3000');
+} finally {
+  if (priorAuthOrigins === undefined) delete process.env.ATLAS_AUTH_ALLOWED_ORIGINS;
+  else process.env.ATLAS_AUTH_ALLOWED_ORIGINS = priorAuthOrigins;
+  if (priorNodeEnv === undefined) Reflect.deleteProperty(process.env, 'NODE_ENV');
+  else Reflect.set(process.env, 'NODE_ENV', priorNodeEnv);
+}
 
 // Exercise the real Supabase SDK against a deterministic PostgREST fixture.
 // This checks request semantics + the mission engine, not a live Postgres schema.

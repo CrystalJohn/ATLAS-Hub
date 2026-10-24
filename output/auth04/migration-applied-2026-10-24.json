@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-24",
+  "projectRef": "jyzeararymcahczbovei",
+  "migrationVersion": "20261021090000",
+  "dryRunPendingVersions": ["20261021090000"],
+  "apply": "PASS",
+  "appliedMigrationsAfter": ["20261020090000", "20261020110000", "20261020130000", "20261021090000"],
+  "vaultUpdatesSkipped": true,
+  "existingExpeditionCountBefore": 1,
+  "existingExpeditionCountAfter": 1,
+  "existingExpeditionContentHashUnchanged": true,
+  "existingExpeditionContentHash": "e0f67de027d7569fc7a8392de2bf9aabd3621bceb9e08cc08fee862ecbd61978",
+  "existingProfileCountBefore": 0,
+  "recoveryCopy": "Two ATLAS public tables encrypted using Windows DPAPI CurrentUser outside Git; in-memory decryption verified. Not a full database backup.",
+  "postApplyGuardProbe": {
+    "validSyntheticDocument": true,
+    "invalidDuplicateLedgerDocument": false,
+    "anonymousInvocation": "HTTP 401 / PostgreSQL 42501"
+  },
+  "postApplyProductionHealth": "HTTP 200, persistence=supabase",
+  "productionPlayerWritePerformed": false,
+  "realGoogleOAuthE2E": "NOT RUN",
+  "productionApplicationDeployment": "NOT RUN"
+}

@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-23",
+  "scope": "AUTH-04.1 read-only hosted preflight and local regression; no hosted writes, migration, OAuth consent, or deployment",
+  "source": {
+    "branch": "codex/auth-02-player-ownership",
+    "head": "d03faabda3d6eefb249ecf3a20feba776d655c56",
+    "worktreeDirtyBeforeAuth041": true
+  },
+  "supabase": {
+    "projectInventory": {
+      "atlasProjectRef": "jyzeararymcahczbovei",
+      "atlasProjectLinked": true,
+      "atlasProjectStatus": "ACTIVE_HEALTHY",
+      "separateAtlasStagingFound": false
+    },
+    "googleEnabled": true,
+    "linkedMigrationHistory": {
+      "applied": ["20261020090000", "20261020110000", "20261020130000"],
+      "pending": ["20261021090000"]
+    },
+    "headCountOnly": {
+      "atlas_expeditions": { "status": 200, "count": 1 },
+      "atlas_profiles": { "status": 200, "count": 0 }
+    },
+    "existingRowCompatibility": "NOT VERIFIED; no player document was fetched",
+    "redirectAllowlist": "NOT VERIFIED"
+  },
+  "vercel": {
+    "authenticatedUserKnown": true,
+    "projectId": "prj_zjeQBcOL9hpHgTc9qpbqRFDIWPzh",
+    "teamId": "team_dvpNSCXxfd93YeDMu4OMRVcK",
+    "projectDetailStatus": 403,
+    "deploymentListStatus": 403,
+    "errorScope": "phuctptse183992-1459s-projects",
+    "teamAuthorizationRequired": true,
+    "cliInstalled": false,
+    "localProjectLinkPresent": false,
+    "deploymentVersion": "UNKNOWN"
+  },
+  "localChecks": {
+    "typescript": "PASS",
+    "lint": "PASS, 0 errors and 7 image warnings",
+    "productionBuild": "PASS on authorized retry after sandbox EPERM",
+    "authFixtures": "PASS",
+    "postgresScenarios": "PASS, 19 including 32-way reward races and rollback",
+    "nextPostgresHttp": "PASS",
+    "browserDesktopMobileFixtures": "PASS",
+    "tokyoTravelRegression": "PASS"
+  },
+  "realOAuthE2E": "BLOCKED; no isolated staging project or two authorized Google test accounts",
+  "hostedMutations": 0
+}

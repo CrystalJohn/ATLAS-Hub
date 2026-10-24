@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 import { supabaseRouteClient } from '../../../lib/supabase/server';
-import { requestOrigin } from '../../../lib/atlas/origin';
+import { trustedAuthOrigin } from '../../../lib/atlas/origin';
 export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const origin = requestOrigin(request);
+  let origin: string;
+  try { origin = trustedAuthOrigin(request); }
+  catch { return Response.json({ message: 'This sign-in address is unavailable.' }, { status: 400 }); }
   const code = url.searchParams.get('code');
   if (code && !url.searchParams.has('error')) {
     try {

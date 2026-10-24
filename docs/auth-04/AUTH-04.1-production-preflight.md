@@ -1,0 +1,34 @@
+# AUTH-04.1 production preflight
+
+**Later update (2026-10-24):** The owner authorized and the linked AUTH-02 guard migration was applied and checked. The observations below record the earlier preflight state. See [migration and branch release evidence](AUTH-04.1-migration-release-2026-10-24.md). Production application deployment and real Google OAuth E2E remain pending.
+
+Date: 2026-10-23. **Production: NO-GO; verification BLOCKED.** This is a checklist for a future approved release, not evidence of a production deployment. The existing [AUTH-04 deployment report](AUTH-04-deployment-readiness.md) and [read-only AUTH-04.1 evidence](../../output/auth04/auth04-1-evidence.json) remain the baseline.
+
+| Gate | Required proof before approval | Current state |
+| --- | --- | --- |
+| Release identity | Intended commit SHA, Vercel deployment ID, correct team/project and target environment | Local HEAD known, current deployment SHA/ID unknown (403); checkout dirty |
+| Exact production origin | Verify the actual HTTPS domain and set only that exact value in `ATLAS_AUTH_ALLOWED_ORIGINS` for Production | Historical alias known, active domain/config unknown |
+| Vercel variables | Production-scoped `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, server-only `SUPABASE_SECRET_KEY` marked Sensitive/Secret, and `ATLAS_AUTH_ALLOWED_ORIGINS`; verify target project ref without disclosing keys | Vercel project/env reads 403 |
+| Supabase callback | Exact `https://<verified-production-host>/auth/callback` present in Authentication → URL Configuration, with no permissive wildcard; Google provider/client configured for the intended project | Provider publicly reports enabled; redirect list/client config not verified |
+| Database migration | Confirm project designation, inspect schema/history and existing-row compatibility, establish tested backup/restore path, then separately approve production migration `20261021090000` | Linked `jyzeararymcahczbovei` has first three versions applied and AUTH-02 guard pending; one expedition exists; compatibility/backup unknown |
+| Security | Confirm no service key in client bundle, grants/RLS/trigger/FK effective on the deployed project, untrusted origins rejected, cross-account APIs denied, logs redacted | Local checks pass; hosted deployment and catalog unverified |
+| Staging release candidate | Waived by owner on 2026-10-24; substitute documented local PostgreSQL evidence plus a separately approved, low-impact Production smoke with two dedicated accounts | Local checks passed; Production smoke not approved or run |
+| Controlled production smoke | After explicit deployment approval, use dedicated low-risk accounts; compare UI/API with authoritative DB, check logout/expiry, rollback readiness; no destructive concurrency tests | Not run and not authorized |
+
+**Rollback/recovery:** Before deployment, retain the last known-good Vercel deployment ID/SHA and verify the project operator can promote or roll it back. The additive database guard should normally remain after an application rollback. If the guard itself requires removal, review [`supabase/rollback/20261021090000_auth02_expedition_integrity.sql`](../../supabase/rollback/20261021090000_auth02_expedition_integrity.sql), use an auditable forward recovery migration, and obtain separate production authorization after confirming a restorable backup. Never reset player tables or overwrite historical documents to make a migration pass.
+
+**Production smoke oracle (after approval):** one authorized account signs in through Google; the server resolves the same UUID/profile on return; a controlled existing encounter awards one first-clear reward; reload and a new session restore the same XP, ledger and checkpoint; retry adds no reward; logout and expired session deny protected APIs; a second account cannot see or modify the first account's data. Compare each result with authoritative database state using redacted evidence. Stop and roll back the application if an invariant fails; do not run high-concurrency or destructive tests on production.
+
+No production rollout or remote mutation was performed in AUTH-04.1. Passing local tests and future staging tests do not mark production verification complete.
+
+## Update — 2026-10-24
+
+Vercel read access now works. The current READY Production deployment is `dpl_AwEYhZ7RfL8Mjhw7PpLgQiTH9bKt` at SHA `ce79e5914a3f8337dbfb4736e07ac72768060599`; its aliases include `atlas-hub-beige.vercel.app`, `atlas-hub-git-main-phuctptse183992-1459s-projects.vercel.app`, and `atlas-hub-phuctptse183992-1459s-projects.vercel.app`. Confirm which alias is the intended canonical production origin before configuring `ATLAS_AUTH_ALLOWED_ORIGINS` and Supabase callbacks. Production lists the two public Supabase variables and a Sensitive `SUPABASE_SECRET_KEY`, but no `ATLAS_AUTH_ALLOWED_ORIGINS`. Preview and Production both point at Supabase ref `jyzeararymcahczbovei`; isolation is absent. The production NO-GO remains in effect. [Redacted read-only record](../../output/auth04/auth04-1-vercel-access-2026-10-24.json).
+
+The Vercel project-domain listing has one verified project domain, `atlas-hub-beige.vercel.app`, with no branch binding or redirect. This is the strongest current candidate for the canonical Production origin, but the owner should confirm it before OAuth allowlist changes. Deployment-generated aliases are separate from that project-domain record.
+
+## Direct-to-Production verification path — owner decision 2026-10-24
+
+The owner has waived a separate staging environment for this early-stage project. This changes the release plan, **not** the authorization boundary: no Production migration, configuration change, deployment or test write has been approved yet. Before requesting that approval, identify the canonical Production origin and exact Supabase callback; perform a read-only compatibility check for the one existing expedition document; verify a restorable backup/recovery route; review the versioned guard migration and committed release diff; and prepare dedicated test accounts and a low-impact test record cleanup plan. Obtain explicit approval for the precise Production migration/configuration/deployment and controlled smoke actions. Then verify real Google login, profile ownership, reload/session restoration, a single existing first-clear path, retry without duplicate reward, checkpoint restore, logout and a second account's isolation. Compare UI/API behavior with authoritative database state and preserve a rollback target. Do not run the 32-way races, fault injection or destructive migration cases against Production; their local PostgreSQL evidence remains the safety oracle.
+
+Until those checks occur, outcome remains **BLOCKED / NO-GO / PROVISIONAL**, with hosted OAuth and persistence marked NOT RUN. The older Production SHA and pending AUTH-02 migration cannot validate the current uncommitted AUTH-04 changes.

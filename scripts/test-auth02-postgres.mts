@@ -198,6 +198,18 @@ try{
  assert.deepEqual(await row(ids.alice),snapshot);
  pass('Real PostgREST grants and PostgreSQL RLS',{anonAndAuthenticatedReadsAndWrites:'denied',rlsWithTemporarySelectGrant:'zero rows',serviceBoundary:'server verified UUID only'});
 
+ const exposedViews=await stack.sql.query(`select c.relname from pg_class c join pg_namespace n on n.oid=c.relnamespace
+  where n.nspname='public' and c.relkind in ('v','m')`);
+ assert.equal(exposedViews.rowCount,0,'No public view or materialized view may expose player data');
+ const exposedFunctions=await stack.sql.query(`select p.proname,
+  has_function_privilege('anon',p.oid,'EXECUTE') as anon_execute,
+  has_function_privilege('authenticated',p.oid,'EXECUTE') as authenticated_execute
+  from pg_proc p join pg_namespace n on n.oid=p.pronamespace
+  where n.nspname='public' and p.proname like 'atlas_%'`);
+ assert.deepEqual(exposedFunctions.rows.map(r=>r.proname).sort(),['atlas_guard_expedition_update','atlas_valid_expedition']);
+ assert.ok(exposedFunctions.rows.every(r=>!r.anon_execute&&!r.authenticated_execute));
+ pass('Public view and RPC exposure',{views:0,functions:exposedFunctions.rows.map(r=>r.proname),anonAndAuthenticatedExecute:'denied'});
+
  const legacyToken=stack.token(ids.legacy),legacyResume=await ok('resume',undefined,legacyToken);
  assert.ok(legacyResume.target?.kind==='travel');assert.equal(legacyResume.target.step,1);assert.equal(legacyResume.reason,'LEGACY_RECOVERED');
  let legacyRow=await row(ids.legacy),legacyDoc=JSON.parse(legacyRow.document);

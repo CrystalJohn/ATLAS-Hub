@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-24",
+  "scope": "Local rerun plus read-only production and Supabase checks; no OAuth consent, profile/progress write, migration, Vercel environment change, commit, push or deployment",
+  "localSource": {
+    "branch": "codex/auth-02-player-ownership",
+    "head": "d03faabda3d6eefb249ecf3a20feba776d655c56",
+    "uncommittedAuth04ChangesPresent": true
+  },
+  "localTests": {
+    "typescript": "PASS",
+    "lint": "PASS, 0 errors and 7 image warnings",
+    "productionBuild": "PASS",
+    "authFixtures": "PASS",
+    "postgresAndPostgrest": "PASS, 19 scenarios including concurrent first-clear and rollback",
+    "nextPostgresHttp": "PASS",
+    "braveDesktopMobileAuthFixtures": "PASS",
+    "tokyoForestRegression": "PASS"
+  },
+  "productionReadOnly": {
+    "domain": "atlas-hub-beige.vercel.app",
+    "homepageHttpStatus": 200,
+    "healthHttpStatus": 200,
+    "healthPersistence": "supabase",
+    "unauthenticatedVocabularyHttpStatus": 401,
+    "googleStartHttpStatus": 307,
+    "googleProviderHost": "jyzeararymcahczbovei.supabase.co",
+    "oauthCallback": "https://atlas-hub-beige.vercel.app/auth/callback",
+    "googleEnabledInPublicGoTrueSettings": true,
+    "productionDeploymentId": "dpl_AwEYhZ7RfL8Mjhw7PpLgQiTH9bKt",
+    "productionDeploymentSha": "ce79e5914a3f8337dbfb4736e07ac72768060599"
+  },
+  "databaseReadOnly": {
+    "projectRef": "jyzeararymcahczbovei",
+    "appliedMigrations": ["20261020090000", "20261020110000", "20261020130000"],
+    "pendingMigration": "20261021090000",
+    "expeditionRowCount": 1,
+    "inspectedRows": 1,
+    "migrationDocumentShapePreflight": "PASS in memory for the one existing document; not database constraint validation",
+    "backupRestoreVerified": false
+  },
+  "environment": {
+    "previewAndProductionShareSupabaseProject": true,
+    "productionAtlasAuthAllowedOriginsPresent": false,
+    "previewServerSecretPresent": false
+  },
+  "notRun": ["Real Google consent and callback", "Real GoTrue refresh or expiry", "Live two-account isolation", "Live progress/reward/checkpoint write", "Production migration", "Production deployment of current checkout"],
+  "outcome": "PROVISIONAL; production release NO-GO for current checkout"
+}

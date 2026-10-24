@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-23",
+  "scope": "Read-only checks only; no player rows, production mutations, OAuth consent, or deployment",
+  "configuredSupabaseProjectRef": "jyzeararymcahczbovei",
+  "authSettings": { "googleEnabled": true },
+  "zeroRowPostgrest": {
+    "atlas_profiles": { "serverStatus": 200, "anonymousStatus": 401, "anonymousErrorCode": "42501" },
+    "atlas_expeditions": { "serverStatus": 200, "anonymousStatus": 401, "anonymousErrorCode": "42501" }
+  },
+  "linkedMigrationList": {
+    "command": "npx.cmd --yes supabase@2.121.0 migration list --linked",
+    "applied": ["20261020090000", "20261020110000", "20261020130000"],
+    "pending": ["20261021090000"]
+  },
+  "vercel": {
+    "projectName": "atlas-hub",
+    "projectId": "prj_zjeQBcOL9hpHgTc9qpbqRFDIWPzh",
+    "teamId": "team_dvpNSCXxfd93YeDMu4OMRVcK",
+    "projectDetailStatus": 403,
+    "deploymentListStatus": 403,
+    "historicalAliasRootStatus": 302,
+    "historicalAliasHealthStatus": 302,
+    "redirectOrigin": "https://vercel.com",
+    "redirectPath": "/sso-api"
+  },
+  "notVerified": ["Vercel environment values or current deployment SHA", "Supabase redirect allowlist", "Existing player-row compatibility with the pending migration", "Real Google OAuth or player data"]
+}

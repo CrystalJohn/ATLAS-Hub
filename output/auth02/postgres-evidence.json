@@ -8,7 +8,7 @@
     "20261020130000_atlas_profile_interests.sql",
     "20261021090000_auth02_expedition_integrity.sql"
   ],
-  "elapsedMs": 9236,
+  "elapsedMs": 13105,
   "checks": [
     {
       "scenario": "Migration preserves pre-existing expedition bytes/revision",
@@ -145,6 +145,18 @@
         "anonAndAuthenticatedReadsAndWrites": "denied",
         "rlsWithTemporarySelectGrant": "zero rows",
         "serviceBoundary": "server verified UUID only"
+      }
+    },
+    {
+      "scenario": "Public view and RPC exposure",
+      "status": "PASS",
+      "details": {
+        "views": 0,
+        "functions": [
+          "atlas_guard_expedition_update",
+          "atlas_valid_expedition"
+        ],
+        "anonAndAuthenticatedExecute": "denied"
       }
     },
     {

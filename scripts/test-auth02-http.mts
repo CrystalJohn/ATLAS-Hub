@@ -11,7 +11,7 @@ import type {ResumeState} from '../lib/atlas/checkpoint.ts';
 // Auth endpoint is the signed local fixture, not GoTrue/Google OAuth.
 const stack=await createLocalStack(),base=`http://127.0.0.1:${await freePort()}`;
 stack.setAppOrigin(base);
-const env:NodeJS.ProcessEnv={...process.env,NEXT_PUBLIC_SUPABASE_URL:stack.url,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:stack.publicKey,SUPABASE_SECRET_KEY:stack.serviceKey};
+const env:NodeJS.ProcessEnv={...process.env,ATLAS_AUTH_ALLOWED_ORIGINS:base,NEXT_PUBLIC_SUPABASE_URL:stack.url,NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:stack.publicKey,SUPABASE_SECRET_KEY:stack.serviceKey};
 delete env.VERCEL;delete env.ATLAS_PROFILE_PREVIEW;
 const child=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',new URL(base).port],{env,stdio:['ignore','pipe','pipe'],windowsHide:true});
 let logs='';child.stdout.on('data',chunk=>{logs+=String(chunk);});child.stderr.on('data',chunk=>{logs+=String(chunk);});

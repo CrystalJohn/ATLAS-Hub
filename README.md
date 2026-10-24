@@ -47,6 +47,7 @@ SUPABASE_SECRET_KEY=YOUR_SERVER_SECRET
 ```
 
 `.env.example` chỉ là mẫu; Next không nạp file này. `.env.local` được Git bỏ qua. Server secret chỉ dùng phía server và không được thêm tiền tố `NEXT_PUBLIC_`.
+Khi chạy trên domain HTTPS, đặt thêm `ATLAS_AUTH_ALLOWED_ORIGINS` thành danh sách origin chính xác, phân tách bằng dấu phẩy (ví dụ production và branch preview ổn định). Route đăng nhập/callback/đăng xuất từ chối host không có trong danh sách; localhost/127.0.0.1 dùng trực tiếp ở chế độ `dev`, còn `build` + `start` cần thêm origin local vào biến này. Cấu hình cùng các callback tương ứng trong Supabase Redirect URLs trước khi kiểm thử OAuth trên host mới.
 
 ### 3. Chuẩn bị schema Supabase
 

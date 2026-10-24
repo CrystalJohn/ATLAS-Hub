@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 import { supabaseRouteClient } from '../../../lib/supabase/server';
 import { supabasePublicConfig } from '../../../lib/supabase/config';
-import { requestOrigin } from '../../../lib/atlas/origin';
+import { trustedAuthOrigin } from '../../../lib/atlas/origin';
 export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
-  const origin = requestOrigin(request);
+  let origin: string;
+  try { origin = trustedAuthOrigin(request); }
+  catch { return Response.json({ message: 'This sign-in address is unavailable.' }, { status: 400 }); }
   try {
     const { url, key } = supabasePublicConfig();
     const settings = await fetch(`${url}/auth/v1/settings`, { headers: { apikey: key }, cache: 'no-store', signal: AbortSignal.timeout(10000) });

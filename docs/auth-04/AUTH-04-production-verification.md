@@ -1,0 +1,7 @@
+# AUTH-04 production verification
+
+Date: 2026-10-23. **Production OAuth/gameplay smoke: BLOCKED / NOT RUN.** No AUTH-04 production deployment or data mutation was authorized or performed. No dedicated production test accounts were supplied. Vercel project/deployment detail access returned 403; the documented public alias returned 302 to Vercel SSO, so no current deployment identifier or application health result could be obtained.
+
+The only hosted requests were read-only: Supabase Auth settings, zero-row PostgREST schema/grant probes, and HEAD/GET to the documented Vercel alias. They did not create a profile, authenticate a user, read player rows, award XP or modify configuration. The Supabase project ref observed from local config was `jyzeararymcahczbovei`; the actual Vercel production environment could not be compared with it.
+
+After the staging GO gate and **separate explicit approval** for deployment and any controlled data mutation, record the exact deployment ID/SHA and use dedicated account aliases A/B. Verify Google callback, player ID/profile, Tokyo progress/XP/stamp/checkpoint against authoritative rows, refresh/logout/re-login and denied protected access after logout. Keep concurrency/destructive tests outside production. Save redacted request IDs/status and before/after database state. A successful HTTP 200 alone is insufficient. If only read-only approval is given, perform only startup/health/config checks and leave gameplay persistence unverified.
