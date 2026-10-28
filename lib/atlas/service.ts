@@ -13,16 +13,14 @@ import type {SavedWord} from '../../content/english/vocabulary.ts';
 import {StorageUnavailable,type ExpeditionStore} from './storage.ts';
 import {sameOrigin} from './origin.ts';
 import {checkpointInput,resolveTarget,resumeFor,saveCheckpoint} from './checkpoint.ts';
+import {awardFirstClear} from './rewards.ts';
+import type {TowerNamespace} from './tower-state.ts';
 type Attempt={id:string;missionId:string;version:number;observed:string[];status:string;createdAt:string;lastActivityRevision?:number};
 type Ledger={id:string;missionId:string;contentVersion:number;amount:number;createdAt:string};
-export type Expedition={progress:Progress;attempts:Attempt[];ledger:Ledger[];submissions:unknown[];savedVocabulary?:SavedWord[];travel?:PlayerTravelProgress;checkpoint?:unknown};
+export type Expedition={progress:Progress;attempts:Attempt[];ledger:Ledger[];submissions:unknown[];savedVocabulary?:SavedWord[];travel?:PlayerTravelProgress;checkpoint?:unknown;tower?:TowerNamespace};
 class ApiError extends Error{status:number;code?:string;constructor(status:number,message:string,code?:string){super(message);this.status=status;this.code=code;}}
 const uid=()=>crypto.randomUUID();
 const fresh=():Expedition=>({progress:emptyProgress(),attempts:[],ledger:[],submissions:[]});
-function awardFirstClear(d:Expedition,missionId:string,version:number,amount:number){
- if(d.ledger.some(e=>e.missionId===missionId&&e.contentVersion===version))return 0;
- d.progress.xp+=amount;d.ledger.push({id:uid(),missionId,contentVersion:version,amount,createdAt:new Date().toISOString()});return amount;
-}
 function rewardFor(d:Expedition,id:string,version:number,awardedXp:number){
  const entry=d.ledger.find(e=>e.missionId===id&&e.contentVersion===version);
  return {key:`${id}:v${version}`,status:awardedXp?'AWARDED':entry?'ALREADY_PROCESSED':'NOT_ELIGIBLE',awardedXp,firstClearXp:entry?.amount??0};

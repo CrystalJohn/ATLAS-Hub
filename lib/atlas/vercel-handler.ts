@@ -6,8 +6,9 @@ import { sameOrigin } from './origin.ts';
 import { handlePlayerProfile } from './profile-handler.ts';
 import {ensurePlayer} from './player.ts';
 import {StorageUnavailable} from './storage.ts';
+import {handleTower,type TowerRuntime} from './tower-handlers.ts';
 
-type Dependencies = { getUser: () => Promise<User | null>; getAdmin: () => SupabaseClient };
+type Dependencies = { getUser: () => Promise<User | null>; getAdmin: () => SupabaseClient; towerTestRuntime?:TowerRuntime };
 const json = (body: object, status = 200) => Response.json(body, {
   status, headers: { 'Cache-Control': 'no-store, private', 'X-Content-Type-Options': 'nosniff' },
 });
@@ -33,7 +34,9 @@ export async function handleVercelAtlas(request: Request, deps: Dependencies): P
     if(url.pathname==='/api/session'&&request.method==='POST')await ensurePlayer(admin,user.id);
     const response = url.pathname === '/api/profile'
       ? await handlePlayerProfile(request, admin, user)
-      : await handleAtlasForPlayer(request, supabaseExpeditionStore(admin), user.id);
+      : url.pathname==='/api/tower'||url.pathname.startsWith('/api/tower/')
+       ? await handleTower(request,supabaseExpeditionStore(admin),user.id,deps.towerTestRuntime)
+       : await handleAtlasForPlayer(request, supabaseExpeditionStore(admin), user.id);
     response.headers.set('Cache-Control', 'no-store, private');
     response.headers.set('X-Content-Type-Options', 'nosniff');
     return response;
