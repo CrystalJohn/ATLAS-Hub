@@ -9,7 +9,7 @@ import {TowerNamespaceSchema,emptyTower,persistedRun,type TowerNamespace} from '
 import {awardFirstClear} from './rewards.ts';
 
 // The real route supplies no runtime until content publication is approved.
-// Only isolated test harnesses construct/inject the DRAFT runtime; no env flag loads drafts.
+// Isolated harnesses and the loopback-only development review inject the DRAFT runtime.
 export type TowerRuntime={definition:TowerDefinition;engine:ReturnType<typeof createTowerEngine>;
  testReward?:{audience:'isolated-test';amount:number;policyIdentity:'first-clear-lifetime'}};
 export function createIsolatedTowerRuntime(definition:TowerDefinition,keys:TowerAnswerKeys,testReward?:TowerRuntime['testReward']):TowerRuntime{

@@ -5,7 +5,7 @@ export class StorageUnavailable extends Error {
   constructor(code: string) { super('Your adventure could not be saved right now. Please try again shortly.'); this.code = code; }
 }
 export interface ExpeditionStore {
-  readonly provider: 'sites-d1' | 'supabase';
+  readonly provider: 'sites-d1' | 'supabase' | 'local-draft';
   initialize(playerId: string, document: string): Promise<void>;
   read(playerId: string): Promise<ExpeditionRow | null>;
   compareAndSwap(playerId: string, revision: number, document: string): Promise<boolean>;

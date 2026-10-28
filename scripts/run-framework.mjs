@@ -9,5 +9,10 @@ if(command==='build'){
 }
 // Supabase PostgreSQL is the sole active persistence provider on every host.
 const cli=new URL('../node_modules/next/dist/bin/next',import.meta.url);
+if(command==='dev'){
+ process.env.ATLAS_LOCAL_TOWER_REVIEW='1';
+ if(args.some(arg=>arg==='--hostname'||arg.startsWith('--hostname=')))throw new Error('Local Tower dev review requires loopback binding; do not override hostname.');
+ args.push('--hostname','127.0.0.1');
+}
 process.argv=[process.execPath,fileURLToPath(cli),command,...args];
 await import(cli.href);
