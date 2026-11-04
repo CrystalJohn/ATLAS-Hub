@@ -1,0 +1,2749 @@
+[
+  {
+    "path": "TKY-DAILY-001.retry.en",
+    "before": "You have collected your bag and now need the exit. A second practice board says EXIT: STRAIGHT; TRAINS: LEFT; BAGGAGE CLAIM: RIGHT. You ask, ‘Which exit should I use?’ The assistant says, ‘Go straight for the exit.’",
+    "after": "You have collected your bag and now need to leave the terminal. The practice board says EXIT: STRAIGHT; TRAINS: LEFT; BAGGAGE CLAIM: RIGHT. You ask, 'Which way is the exit?' The assistant says, 'Go straight for the exit.'"
+  },
+  {
+    "path": "TKY-DAILY-001.retry.vi",
+    "before": "Bạn đã nhận hành lý và cần tìm lối ra. Biển luyện tập thứ hai ghi: LỐI RA: THẲNG; TÀU: TRÁI; NHẬN HÀNH LÝ: PHẢI. Bạn hỏi nên dùng lối nào. Nhân viên bảo đi thẳng.",
+    "after": "Bạn đã nhận hành lý và muốn rời nhà ga. Biển luyện tập ghi LỐI RA: ĐI THẲNG; TÀU: TRÁI; NHẬN HÀNH LÝ: PHẢI. Bạn hỏi lối ra ở hướng nào. Nhân viên nói đi thẳng."
+  },
+  {
+    "path": "TKY-DAILY-001.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-001.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-001-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "867a73b4629f86a84f1b4c6a8cbf7aa5c47247f11e51cb70c16888c8ee4a945d",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-001-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "11a267aaced0a12eaf9186e973907e8a2df6ec501da9743a2085585ed4d29a7c",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-001-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "867a73b4629f86a84f1b4c6a8cbf7aa5c47247f11e51cb70c16888c8ee4a945d",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-001-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "fb2df81a7bb826d673f162f7af4e62ec76478d51f1e620fcf40c148f330fd743",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-001.playerInteractionPlan",
+    "before": [
+      {
+        "id": "001-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Read the practice board. Which place do you need?",
+        "promptVi": "Đọc biển luyện tập. Bạn cần đến khu vực nào?",
+        "playerAction": "Inspect the fictional sign and select the named destination.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled sign",
+          "optional VI after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "001-STEP-2",
+        "kind": "dialogue+target",
+        "promptEn": "Ask where baggage claim is, then mark its direction.",
+        "promptVi": "Hỏi khu nhận hành lý ở đâu, rồi đánh dấu hướng đi.",
+        "playerAction": "Choose or say a taught location request and tap the matching direction on the sign.",
+        "evidence": "CONTROLLED_APPLICATION",
+        "support": [
+          "replay assistant response"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "001-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Read the practice board. Which place do you need?",
+        "promptVi": "Đọc biển luyện tập. Bạn cần đến khu vực nào?",
+        "playerAction": "Inspect the fictional sign and select the named destination.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled sign",
+          "optional VI after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "001-STEP-2",
+        "kind": "dialogue+target",
+        "promptEn": "Ask where baggage claim is, then mark its direction.",
+        "promptVi": "Hỏi khu nhận hành lý ở đâu, rồi đánh dấu hướng đi.",
+        "playerAction": "Choose a taught location request and tap the matching direction on the sign.",
+        "evidence": "CONTROLLED_APPLICATION",
+        "support": [
+          "replay assistant response"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-001.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-001.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-001.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-002.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-002.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-002-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "0a6fd952ecb91034dc51503b6cfc6121ccd0c15e81e9e75b35d070385a5afa80",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-002-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "66d4d28ed6d9345e55cdef4bc2039b4825dfc14c2960b0785ae2ca578fdf46ed",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-002-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "0a6fd952ecb91034dc51503b6cfc6121ccd0c15e81e9e75b35d070385a5afa80",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-002-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "66d4d28ed6d9345e55cdef4bc2039b4825dfc14c2960b0785ae2ca578fdf46ed",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-002.playerInteractionPlan",
+    "before": [
+      {
+        "id": "002-STEP-1",
+        "kind": "inspect+compare",
+        "promptEn": "Read all three service options and note the time and whether a change is needed.",
+        "promptVi": "Đọc ba lựa chọn và chú ý giờ cùng việc có cần đổi chuyến hay không.",
+        "playerAction": "Inspect a fictional service board and compare two stated conditions.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "highlight requested cutoff and directness"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "002-STEP-2",
+        "kind": "decision",
+        "promptEn": "Choose a direct service that leaves before the stated time.",
+        "promptVi": "Chọn chuyến đi thẳng và khởi hành trước giờ đã nêu.",
+        "playerAction": "Select one service; no real-world timetable knowledge is needed.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "re-read board"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "002-STEP-1",
+        "kind": "inspect+compare",
+        "promptEn": "Read all three service options and note the time and whether a change is needed.",
+        "promptVi": "Đọc ba lựa chọn và chú ý giờ cùng việc có cần đổi chuyến hay không.",
+        "playerAction": "Inspect a fictional service board and compare two stated conditions.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "highlight requested cutoff and directness"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "002-STEP-2",
+        "kind": "decision",
+        "promptEn": "Choose a direct service that leaves before the stated time.",
+        "promptVi": "Chọn chuyến đi thẳng và khởi hành trước giờ đã nêu.",
+        "playerAction": "Select one service; no real-world timetable knowledge is needed.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "re-read board"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-002.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-002.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-002.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-003.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-003.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-003-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "df188edc9dfce9f896d71f433e175f133dc4260efdfc97f1691b159c64c417e4",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-003-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "8a3ceff82f5a5e9ad3ff5e7e14942c7c6efed65ac110b6830230b11622b73d0f",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-003-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "df188edc9dfce9f896d71f433e175f133dc4260efdfc97f1691b159c64c417e4",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-003-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "8a3ceff82f5a5e9ad3ff5e7e14942c7c6efed65ac110b6830230b11622b73d0f",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-003.playerInteractionPlan",
+    "before": [
+      {
+        "id": "003-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Trace which line reaches the transfer stop next.",
+        "promptVi": "Xác định tuyến nào sẽ đến ga chuyển tiếp tiếp theo.",
+        "playerAction": "Inspect the fictional two-line diagram.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled network"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "003-STEP-2",
+        "kind": "route",
+        "promptEn": "Put the transfer stop, new line and destination in travel order.",
+        "promptVi": "Sắp xếp ga đổi tuyến, tuyến mới và điểm đến theo thứ tự hành trình.",
+        "playerAction": "Arrange route nodes; the route sequence is taught in the linked lesson.",
+        "evidence": "APPLICATION",
+        "support": [
+          "replay instructions",
+          "optional sequence scaffold"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "003-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Trace which line reaches the transfer stop next.",
+        "promptVi": "Xác định tuyến nào sẽ đến ga chuyển tiếp tiếp theo.",
+        "playerAction": "Inspect the fictional two-line diagram.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled network"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "003-STEP-2",
+        "kind": "route",
+        "promptEn": "Put the transfer stop, new line and destination in travel order.",
+        "promptVi": "Sắp xếp ga đổi tuyến, tuyến mới và điểm đến theo thứ tự hành trình.",
+        "playerAction": "Arrange route nodes; the route sequence is taught in the linked lesson.",
+        "evidence": "APPLICATION",
+        "support": [
+          "replay instructions",
+          "optional sequence scaffold"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-003.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-003.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-003.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-004.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-004.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-004-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "c24ca98fd15028e909562b460970ac747c765df19f64e075132f4ddd87570024",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-004-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "9acdb217c76eae9f812a033e35078ef2ceda4bb0e16f0a3455b4363f0e04c33e",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-004-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "c24ca98fd15028e909562b460970ac747c765df19f64e075132f4ddd87570024",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-004-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "9acdb217c76eae9f812a033e35078ef2ceda4bb0e16f0a3455b4363f0e04c33e",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-004.playerInteractionPlan",
+    "before": [
+      {
+        "id": "004-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Find the row for your destination.",
+        "promptVi": "Tìm đúng hàng của điểm đến.",
+        "playerAction": "Highlight one destination row on the fictional board.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "destination highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "004-STEP-2",
+        "kind": "match",
+        "promptEn": "Match that destination with its platform and departure time.",
+        "promptVi": "Ghép điểm đến với sân ga và giờ khởi hành.",
+        "playerAction": "Match a complete row; do not combine details from two destinations.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "keep row together"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "004-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Find the row for your destination.",
+        "promptVi": "Tìm đúng hàng của điểm đến.",
+        "playerAction": "Highlight one destination row on the fictional board.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "destination highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "004-STEP-2",
+        "kind": "match",
+        "promptEn": "Match that destination with its platform and departure time.",
+        "promptVi": "Ghép điểm đến với sân ga và giờ khởi hành.",
+        "playerAction": "Match a complete row; do not combine details from two destinations.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "keep row together"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-004.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-004.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-004.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-005.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-005.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-005-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "26e4f46760a542511397e485d5c34a3027eb904ef93e7699d215457606d5fb74",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-005-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "f71900d573e23f59327e25b7bd4dcc80102aec19df2f5ba8216bab356af4c2c9",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-005-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "26e4f46760a542511397e485d5c34a3027eb904ef93e7699d215457606d5fb74",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-005-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "f71900d573e23f59327e25b7bd4dcc80102aec19df2f5ba8216bab356af4c2c9",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-005.playerInteractionPlan",
+    "before": [
+      {
+        "id": "005-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "Ask the shop assistant where tea is and how much it costs.",
+        "promptVi": "Hỏi nhân viên trà ở đâu và giá bao nhiêu.",
+        "playerAction": "Choose or compose a short functional request using the taught chunks.",
+        "evidence": "CONTROLLED_APPLICATION",
+        "support": [
+          "optional chunk bank"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "005-STEP-2",
+        "kind": "target",
+        "promptEn": "Tap the tea label, not a neighboring product.",
+        "promptVi": "Chọn nhãn trà, không chọn sản phẩm bên cạnh.",
+        "playerAction": "Select the product row and read its aisle/price pair.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "product highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "005-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "Ask the shop assistant where tea is and how much it costs.",
+        "promptVi": "Hỏi nhân viên trà ở đâu và giá bao nhiêu.",
+        "playerAction": "Choose or compose a short functional request using the taught chunks.",
+        "evidence": "CONTROLLED_APPLICATION",
+        "support": [
+          "optional chunk bank"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "005-STEP-2",
+        "kind": "target",
+        "promptEn": "Tap the tea label, not a neighboring product.",
+        "promptVi": "Chọn nhãn trà, không chọn sản phẩm bên cạnh.",
+        "playerAction": "Select the product row and read its aisle/price pair.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "product highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-005.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-005.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-005.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-006.retry.en",
+    "before": "This time you need a bag and want to pay in cash. After paying, you ask, ‘A bag, please. I will pay in cash. Can I have a receipt, please?’ The practice scene states no bag fee or general store payment rule.",
+    "after": "At checkout, you need a bag and want to pay in cash. You say, 'A bag, please. I'll pay in cash.' After paying, you ask, 'Can I have a receipt, please?' The scene states no bag fee or general store payment rule."
+  },
+  {
+    "path": "TKY-DAILY-006.retry.vi",
+    "before": "Lần này bạn cần túi và muốn trả tiền mặt. Sau khi trả tiền, bạn xin biên lai. Cảnh luyện tập không nêu phí túi hay quy định thanh toán chung của cửa hàng.",
+    "after": "Tại quầy thanh toán, bạn cần túi và muốn trả tiền mặt. Bạn nói: 'Cho tôi một chiếc túi. Tôi trả bằng tiền mặt.' Sau khi trả tiền, bạn xin biên lai. Cảnh không nêu phí túi hay quy định chung của cửa hàng."
+  },
+  {
+    "path": "TKY-DAILY-006.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-006.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-006-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "b8da76cbeb12c575f86ad19f47635da031161f6087023d1a92a08e32030f4671",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-006-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "7023fdb34f89733c49ef2605c3f27e342a2e8d91fc4b1329aadba78774bd8f09",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-006-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "b8da76cbeb12c575f86ad19f47635da031161f6087023d1a92a08e32030f4671",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-006-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "c4bb7d33690a22769955df86d1a7ad16e824a7e99f09c28b6711b65966597007",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-006.playerInteractionPlan",
+    "before": [
+      {
+        "id": "006-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "Listen to the cashier’s bag and payment questions.",
+        "promptVi": "Nghe câu hỏi của nhân viên về túi và cách thanh toán.",
+        "playerAction": "Identify which choices belong to the learner’s own preference.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "replay dialogue"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "006-STEP-2",
+        "kind": "compose",
+        "promptEn": "Tell the cashier whether you need a bag, choose card or cash, and ask for a receipt.",
+        "promptVi": "Nói rõ có cần túi hay không, chọn thẻ hoặc tiền mặt và xin biên lai.",
+        "playerAction": "Build a short three-part response from tokens; accept reviewed Can/Could variants.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "optional chunk bank",
+          "token ordering"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "006-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "Read the cashier's bag and payment questions.",
+        "promptVi": "Đọc câu hỏi của nhân viên về túi và cách thanh toán.",
+        "playerAction": "Identify which choices belong to the learner’s own preference.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "replay dialogue"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "006-STEP-2",
+        "kind": "compose",
+        "promptEn": "Tell the cashier whether you need a bag, choose card or cash, and ask for a receipt.",
+        "promptVi": "Nói rõ có cần túi hay không, chọn thẻ hoặc tiền mặt và xin biên lai.",
+        "playerAction": "Build a short three-part response from tokens; accept reviewed Can/Could variants.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "optional chunk bank",
+          "token ordering"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-006.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-006.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-006.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-007.base.en",
+    "before": "You ask, ‘What is in the vegetable noodles?’ The server says, ‘Noodles, vegetable broth and mushrooms. An egg is optional.’ You prefer no egg. The menu also lists chicken noodles. You order, ‘I'll have the vegetable noodles without egg, please.’ This is preference practice, not an allergy check.",
+    "after": "You ask, ‘What is in the vegetable noodles?’ The server says, ‘Noodles, vegetable broth and mushrooms. An egg is optional.’ You want vegetable noodles and prefer no egg. The menu also lists chicken noodles. You order, ‘I'll have the vegetable noodles without egg, please.’ This is preference practice, not an allergy check."
+  },
+  {
+    "path": "TKY-DAILY-007.base.vi",
+    "before": "Bạn hỏi mì rau có gì. Nhân viên nói gồm mì, nước dùng rau và nấm; trứng là phần thêm tùy chọn. Bạn không muốn trứng và gọi mì rau không thêm trứng. Bài luyện sở thích này không kiểm tra dị ứng.",
+    "after": "Bạn hỏi mì rau có gì. Nhân viên nói gồm mì, nước dùng rau và nấm; trứng là phần thêm tùy chọn. Bạn muốn gọi mì rau và không muốn trứng và gọi mì rau không thêm trứng. Bài luyện sở thích này không kiểm tra dị ứng."
+  },
+  {
+    "path": "TKY-DAILY-007.retry.en",
+    "before": "Chicken noodles in the same fictional shop include chicken broth. Spring onions are optional. You prefer no spring onions and say, ‘Chicken noodles without spring onions, please.’ The menu also lists vegetable noodles. No allergen or cross-contact guarantee is made.",
+    "after": "Chicken noodles in the same fictional shop include chicken broth. Spring onions are optional. You want chicken noodles and prefer no spring onions and say, ‘Chicken noodles without spring onions, please.’ The menu also lists vegetable noodles. No allergen or cross-contact guarantee is made."
+  },
+  {
+    "path": "TKY-DAILY-007.retry.vi",
+    "before": "Mì gà ở quán hư cấu có nước dùng gà; hành lá là phần tùy chọn. Bạn không muốn hành lá nên gọi mì gà không thêm hành. Không có bảo đảm về dị ứng hay lây nhiễm chéo.",
+    "after": "Mì gà ở quán hư cấu có nước dùng gà; hành lá là phần tùy chọn. Bạn muốn gọi mì gà và không muốn hành lá nên gọi mì gà không thêm hành. Không có bảo đảm về dị ứng hay lây nhiễm chéo."
+  },
+  {
+    "path": "TKY-DAILY-007.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-007.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-007-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "8cb4f8e088aabde09cdcead91edbf8eaceaecece4cd91b7010242eeae69cd40b",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-007-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "9798cd003d8673d71bdd7e7d09b7895ce84133b32f43db568ee46221f3e58c87",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-007-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "3ce2a8c0ab57ed657564e40a25f77b57a717756ab16315ec2ba004c6dbe4defe",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-007-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "29d105302b7dda724a4939cefd425f85e8952149af264da4e14455c7e18e767a",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-007.playerInteractionPlan",
+    "before": [
+      {
+        "id": "007-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Check the fictional menu for the dish and optional ingredient.",
+        "promptVi": "Xem món ăn và thành phần thêm tùy chọn trên thực đơn hư cấu.",
+        "playerAction": "Inspect menu details; this is not an allergy-safety task.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "menu reread"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "007-STEP-2",
+        "kind": "order",
+        "promptEn": "Order the selected dish with your stated preference.",
+        "promptVi": "Gọi đúng món và nêu sở thích đã chọn.",
+        "playerAction": "Select the dish, then compose a request excluding the optional item.",
+        "evidence": "APPLICATION",
+        "support": [
+          "ingredient hint"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "007-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Check the fictional menu for the dish and optional ingredient.",
+        "promptVi": "Xem món ăn và thành phần thêm tùy chọn trên thực đơn hư cấu.",
+        "playerAction": "Inspect menu details; this is not an allergy-safety task.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "menu reread"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "007-STEP-2",
+        "kind": "order",
+        "promptEn": "Order the selected dish with your stated preference.",
+        "promptVi": "Gọi đúng món và nêu sở thích đã chọn.",
+        "playerAction": "Select the dish, then compose a request excluding the optional item.",
+        "evidence": "APPLICATION",
+        "support": [
+          "ingredient hint"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-007.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-007.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-007.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-008.feedback.en",
+    "before": "Name the dish you intended without blaming the server. Then ask for payment when ready. Bill and check must not be treated as opposing answers in this context.",
+    "after": "Name the dish you ordered so the server can check the mismatch. When you are ready to pay, ask for the bill or check. Both terms are acceptable in this restaurant context; a receipt records payment."
+  },
+  {
+    "path": "TKY-DAILY-008.feedback.vi",
+    "before": "Nêu món mình định gọi mà không đổ lỗi cho nhân viên. Khi cần thanh toán thì xin hóa đơn. Trong ngữ cảnh này không đánh bill và check thành hai đáp án đối lập.",
+    "after": "Nêu món bạn đã gọi để nhân viên kiểm tra nhầm lẫn. Khi sẵn sàng thanh toán, xin bill hoặc check. Cả hai từ đều chỉ hóa đơn tính tiền trong bối cảnh nhà hàng này; receipt là biên lai thanh toán."
+  },
+  {
+    "path": "TKY-DAILY-008.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-008.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-008-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "96ea13b4828d1b03b9573cdfb480008f30f9ca1d454dce39939b9ef9808c9a79",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-008-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "51ad3ae65c41faba5089e0bf12404db96d67691627cba84b59492128c65962c0",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-008-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "96ea13b4828d1b03b9573cdfb480008f30f9ca1d454dce39939b9ef9808c9a79",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-008-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "51ad3ae65c41faba5089e0bf12404db96d67691627cba84b59492128c65962c0",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-008.playerInteractionPlan",
+    "before": [
+      {
+        "id": "008-STEP-1",
+        "kind": "dialogue+compose",
+        "promptEn": "The server brought a different dish. Explain calmly what you ordered.",
+        "promptVi": "Nhân viên mang nhầm món. Hãy bình tĩnh nói rõ món bạn đã gọi.",
+        "playerAction": "Compose a clear repair naming the intended dish; accept equivalent reviewed forms.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "re-read the order",
+          "phrase hint after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "008-STEP-2",
+        "kind": "dialogue",
+        "promptEn": "When you are ready to pay, ask for the restaurant bill.",
+        "promptVi": "Khi sẵn sàng thanh toán, hãy xin hóa đơn nhà hàng.",
+        "playerAction": "Choose a natural request; review bill/check variation by target variety.",
+        "evidence": "APPLICATION",
+        "support": [
+          "optional chunk bank"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "008-STEP-1",
+        "kind": "dialogue+compose",
+        "promptEn": "The server brought a different dish. Explain calmly what you ordered.",
+        "promptVi": "Nhân viên mang nhầm món. Hãy bình tĩnh nói rõ món bạn đã gọi.",
+        "playerAction": "Compose a clear repair naming the intended dish; accept equivalent reviewed forms.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "re-read the order",
+          "phrase hint after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "008-STEP-2",
+        "kind": "dialogue",
+        "promptEn": "When you are ready to pay, ask for the restaurant bill.",
+        "promptVi": "Khi sẵn sàng thanh toán, hãy xin hóa đơn nhà hàng.",
+        "playerAction": "Choose a natural request; review bill/check variation by target variety.",
+        "evidence": "APPLICATION",
+        "support": [
+          "optional chunk bank"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-008.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-008.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-008.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-009.skills",
+    "before": [
+      "listening",
+      "directions"
+    ],
+    "after": [
+      "reading (audio pending)",
+      "directions"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-009.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-009.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-009-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "466802ad644891c667041de8d634eb8a5cf1f93f8670e5acbe1e2cf977402bc9",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-009-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "2d1a74173373fd83be6f3b407f8e0b76d402c48e2c82464ec02d1e6cfe135462",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-009-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "466802ad644891c667041de8d634eb8a5cf1f93f8670e5acbe1e2cf977402bc9",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-009-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "2d1a74173373fd83be6f3b407f8e0b76d402c48e2c82464ec02d1e6cfe135462",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-009.playerInteractionPlan",
+    "before": [
+      {
+        "id": "009-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Study the starting point and landmarks on the practice map.",
+        "promptVi": "Xem điểm xuất phát và các mốc trên bản đồ luyện tập.",
+        "playerAction": "Inspect the labeled fictional route map.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled map"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "009-STEP-2",
+        "kind": "route+recall",
+        "promptEn": "Give the directions in order from the starting corner to the destination.",
+        "promptVi": "Sắp xếp chỉ dẫn theo thứ tự từ góc xuất phát đến điểm đến.",
+        "playerAction": "Sequence pass-landmark, turn and final location clue.",
+        "evidence": "APPLICATION",
+        "support": [
+          "replay directions",
+          "optional map labels"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "009-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Study the starting point and landmarks on the practice map.",
+        "promptVi": "Xem điểm xuất phát và các mốc trên bản đồ luyện tập.",
+        "playerAction": "Inspect the labeled fictional route map.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled map"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "009-STEP-2",
+        "kind": "route+recall",
+        "promptEn": "Give the directions in order from the starting corner to the destination.",
+        "promptVi": "Sắp xếp chỉ dẫn theo thứ tự từ góc xuất phát đến điểm đến.",
+        "playerAction": "Sequence pass-landmark, turn and final location clue.",
+        "evidence": "APPLICATION",
+        "support": [
+          "replay directions",
+          "optional map labels"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-009.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-009.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-009.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-010.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-010.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-010-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "7d1e200fbab599db77a5c588a8cd1e58177be81f624d3247d851915cd2d58505",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-010-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "e31b553020a9033a33e7d1d304a153b02fe402a89210495108c5975740951f5d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-010-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "7d1e200fbab599db77a5c588a8cd1e58177be81f624d3247d851915cd2d58505",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-010-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "e31b553020a9033a33e7d1d304a153b02fe402a89210495108c5975740951f5d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-010.playerInteractionPlan",
+    "before": [
+      {
+        "id": "010-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Read the exit map and locate your destination.",
+        "promptVi": "Đọc sơ đồ lối ra và tìm điểm đến.",
+        "playerAction": "Inspect the fictional station map; exit labels apply only to this map.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "destination highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "010-STEP-2",
+        "kind": "target",
+        "promptEn": "Select the exit marked beside your destination.",
+        "promptVi": "Chọn lối ra được đánh dấu cạnh điểm đến.",
+        "playerAction": "Tap the corresponding exit label.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "re-read map"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "010-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Read the exit map and locate your destination.",
+        "promptVi": "Đọc sơ đồ lối ra và tìm điểm đến.",
+        "playerAction": "Inspect the fictional station map; exit labels apply only to this map.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "destination highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "010-STEP-2",
+        "kind": "target",
+        "promptEn": "Select the exit marked beside your destination.",
+        "promptVi": "Chọn lối ra được đánh dấu cạnh điểm đến.",
+        "playerAction": "Tap the corresponding exit label.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "re-read map"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-010.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-010.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-010.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-011.skills",
+    "before": [
+      "listening",
+      "pragmatics"
+    ],
+    "after": [
+      "reading (audio pending)",
+      "pragmatics"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-011.base.vi",
+    "before": "Nhân viên nói tàu thường khởi hành lúc 3:15 nhưng bạn không nghe rõ phút. Bạn xin lỗi, nói mình chưa nghe được giờ và nhờ nhắc lại; nhân viên nói lại ‘three fifteen’.",
+    "after": "Nhân viên nói tàu dừng ở các ga dọc tuyến khởi hành lúc 3:15 nhưng bạn không nghe rõ phút. Bạn xin lỗi, nói mình chưa nghe được giờ và nhờ nhắc lại; nhân viên nói lại ‘three fifteen’."
+  },
+  {
+    "path": "TKY-DAILY-011.difficulty.demand",
+    "before": "RECALL",
+    "after": "RECOGNITION"
+  },
+  {
+    "path": "TKY-DAILY-011.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-011.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-011-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "f53891a49608d005db2246767754222d453d3cc73bcf17276b4b2513a22f2441",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-011-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "4fda8fdfc8ac897bfd95829e4cfd0f1ba7c8bc2bd6ee94ebb9402c6396448d2d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-011-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "d50e8fdbfbac6d950dfaaa967131bf1608cf61f7cf819680415c13d5c3fb4b30",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-011-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "4fda8fdfc8ac897bfd95829e4cfd0f1ba7c8bc2bd6ee94ebb9402c6396448d2d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-011.playerInteractionPlan",
+    "before": [
+      {
+        "id": "011-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "Listen for the time; one detail is deliberately missed on the first pass.",
+        "promptVi": "Nghe giờ tàu; lượt đầu cố ý bỏ lỡ một chi tiết.",
+        "playerAction": "Use a taught repetition request rather than guessing; accept natural equivalent requests.",
+        "evidence": "RECALL",
+        "support": [
+          "one replay",
+          "optional phrase bank after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "011-STEP-2",
+        "kind": "recall",
+        "promptEn": "After the speaker repeats the time, report the time you heard.",
+        "promptVi": "Sau khi người nói nhắc lại, cho biết giờ bạn nghe được.",
+        "playerAction": "Recall the repeated time; numeric or spoken format can be accepted.",
+        "evidence": "RECALL",
+        "support": [
+          "transcript after attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "011-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "In this practice situation, you missed the time. Select a request that asks the staff member to repeat it.",
+        "promptVi": "Trong tình huống luyện tập, bạn không nghe rõ giờ. Chọn lời nhờ nhân viên nhắc lại.",
+        "playerAction": "Use a taught repetition request rather than guessing; accept natural equivalent requests.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "one replay",
+          "optional phrase bank after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "011-STEP-2",
+        "kind": "recall",
+        "promptEn": "After reading the repeated time, report it with the text hidden.",
+        "promptVi": "Sau khi đọc giờ được nhắc lại, hãy nêu lại giờ khi văn bản đã ẩn.",
+        "playerAction": "Recall the repeated time; numeric or spoken format can be accepted.",
+        "evidence": "RECALL",
+        "support": [
+          "transcript after attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-011.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-011.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-011.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TKY-DAILY-012.goal",
+    "before": "Correct a misunderstood room number and confirm the repair",
+    "after": "Check a possibly misheard detail and confirm the corrected information"
+  },
+  {
+    "path": "TKY-DAILY-012.skills",
+    "before": [
+      "listening",
+      "pragmatics",
+      "specific information"
+    ],
+    "after": [
+      "reading (audio pending)",
+      "pragmatics",
+      "specific information"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.vocabulary",
+    "before": [
+      "mean",
+      "room",
+      "confirm"
+    ],
+    "after": [
+      "room",
+      "confirm"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.chunks",
+    "before": [
+      "did-you-mean",
+      "i-meant",
+      "so-thats"
+    ],
+    "after": [
+      "did-you-say",
+      "so-thats"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.base.en",
+    "before": "The staff member says, ‘Your meeting is in Room 14.’ You heard Room 40 and want to confirm before walking away. You ask, ‘Sorry, did you say Room 14?’ The staff member confirms, ‘Yes, Room 14.’ You reply, ‘So that’s Room 14, right?’",
+    "after": "The staff member says, 'Your meeting is in Room 14.' You think you heard Room 40. You ask, 'Sorry, did you say Room 40?' The staff member replies, 'No, Room 14.' You confirm, 'Room 14, right?' The staff member says, 'That's right.'"
+  },
+  {
+    "path": "TKY-DAILY-012.base.vi",
+    "before": "Nhân viên nói cuộc hẹn ở phòng 14. Bạn nghe thành phòng 40 và muốn xác nhận trước khi đi. Bạn hỏi lại có phải phòng 14 không; nhân viên xác nhận, bạn nhắc lại ‘Vậy là phòng 14, đúng không?’",
+    "after": "Nhân viên nói cuộc hẹn ở phòng 14. Bạn nghĩ mình nghe được phòng 40 nên hỏi: 'Xin lỗi, có phải phòng 40 không?' Nhân viên sửa: 'Không, phòng 14.' Bạn hỏi lại: 'Phòng 14, đúng không?' Nhân viên xác nhận: 'Đúng rồi.'"
+  },
+  {
+    "path": "TKY-DAILY-012.retry.en",
+    "before": "A receptionist says the appointment is at 2:30, but you heard 3:20. You ask, ‘Sorry, did you say 2:30?’ After the receptionist confirms, you say, ‘So that’s 2:30, right?’ The numbers differ, but the repair pattern is the same.",
+    "after": "A receptionist says the appointment is at 2:30. You think you heard 3:20. You ask, 'Sorry, did you say 3:20?' The receptionist replies, 'No, 2:30.' You confirm, 'So that's 2:30, right?' The receptionist says, 'Yes.'"
+  },
+  {
+    "path": "TKY-DAILY-012.retry.vi",
+    "before": "Lễ tân nói cuộc hẹn lúc 2:30 nhưng bạn nghe thành 3:20. Bạn hỏi lại ‘Có phải 2:30 không?’ Sau khi lễ tân xác nhận, bạn nhắc lại 2:30 để kiểm tra.",
+    "after": "Lễ tân nói cuộc hẹn lúc 2:30. Bạn nghĩ mình nghe được 3:20 nên hỏi: 'Xin lỗi, có phải 3:20 không?' Lễ tân sửa: 'Không, 2:30.' Bạn hỏi lại: 'Vậy là 2:30, đúng không?' Lễ tân xác nhận."
+  },
+  {
+    "path": "TKY-DAILY-012.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TKY-DAILY-012.sourceLessonRefs",
+    "before": [
+      {
+        "lessonId": "TKY-DAILY-012-L1",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "309f3b209962b2a8f8158a375fee5dca59f7aca09459e8e48ba2925d78aea765",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-012-L2",
+        "revision": "TOKYO-DAILY-r1",
+        "sha256": "d6d80826810a04f93b59af0e9946aaabe0e214ebd9d043e4384bbec43613bdd2",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "after": [
+      {
+        "lessonId": "TKY-DAILY-012-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "219c952d3b2baa22787a885af91015772e458d7a0a1cbcb60554251552984456",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-012-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "d17e508e71eabd6661736a155369112acf8b19f7bf3434f797de8dec64702e7d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.vocabularyIds",
+    "before": [
+      "VS-mean-intended",
+      "VS-room-number",
+      "VS-confirm"
+    ],
+    "after": [
+      "VS-room-number",
+      "VS-confirm"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.chunkIds",
+    "before": [
+      "CH-confirm-heard-detail",
+      "CH-correct-heard-detail",
+      "CH-confirm-understanding"
+    ],
+    "after": [
+      "CH-confirm-heard-detail",
+      "CH-confirm-understanding"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.targetLanguage",
+    "before": [
+      "Did you say Room 14?",
+      "I meant...",
+      "So that is..., right?"
+    ],
+    "after": [
+      "Sorry, did you say Room 40?",
+      "No, Room 14.",
+      "Room 14, right?"
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.playerInteractionPlan",
+    "before": [
+      {
+        "id": "012-STEP-1",
+        "kind": "dialogue+decision",
+        "promptEn": "You heard a different room number. State what you heard and ask the staff member to confirm.",
+        "promptVi": "Bạn nghe một số phòng khác. Nêu số bạn nghe được và nhờ nhân viên xác nhận.",
+        "playerAction": "Ask a confirmation question that names the suspected number.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "replay",
+          "confirmation scaffold"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      },
+      {
+        "id": "012-STEP-2",
+        "kind": "compose",
+        "promptEn": "After the staff member confirms, repeat the correct detail to check shared understanding.",
+        "promptVi": "Sau khi nhân viên xác nhận, nhắc lại chi tiết đúng để kiểm tra hai bên hiểu giống nhau.",
+        "playerAction": "Compose a concise confirmation; equivalent natural phrasing needs review.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "phrase hint"
+        ],
+        "scoringStatus": "DESIGN_PENDING"
+      }
+    ],
+    "after": [
+      {
+        "id": "012-STEP-1",
+        "kind": "dialogue+decision",
+        "promptEn": "You heard a different room number. State what you heard and ask the staff member to confirm.",
+        "promptVi": "Bạn nghe một số phòng khác. Nêu số bạn nghe được và nhờ nhân viên xác nhận.",
+        "playerAction": "Ask a confirmation question that names the suspected number.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "replay",
+          "confirmation scaffold"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "012-STEP-2",
+        "kind": "compose",
+        "promptEn": "After the staff member confirms, repeat the correct detail to check shared understanding.",
+        "promptVi": "Sau khi nhân viên xác nhận, nhắc lại chi tiết đúng để kiểm tra hai bên hiểu giống nhau.",
+        "playerAction": "Compose a concise confirmation; equivalent natural phrasing needs review.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "phrase hint"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ]
+  },
+  {
+    "path": "TKY-DAILY-012.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TKY-DAILY-012.aiReview",
+    "before": null,
+    "after": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    }
+  },
+  {
+    "path": "TKY-DAILY-012.evidencePolicy",
+    "before": null,
+    "after": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "path": "TWR-TKY-001.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-001.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-001-V1",
+        "sourceLessonId": "TKY-DAILY-001-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "867a73b4629f86a84f1b4c6a8cbf7aa5c47247f11e51cb70c16888c8ee4a945d",
+        "stemEn": "The board says baggage claim is left, the exit is right, and trains are straight. Where should you go to collect your checked bag?",
+        "stemViCandidate": "Biển ghi khu nhận hành lý ở bên trái, lối ra bên phải và tàu đi thẳng. Bạn nên đi hướng nào để nhận hành lý ký gửi?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Turn left for baggage claim."
+          },
+          {
+            "id": "B",
+            "text": "Go right for the exit."
+          },
+          {
+            "id": "C",
+            "text": "Go straight for the trains."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-001-V2",
+        "sourceLessonId": "TKY-DAILY-001-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "11a267aaced0a12eaf9186e973907e8a2df6ec501da9743a2085585ed4d29a7c",
+        "stemEn": "You have your bag and need to leave. The second board says exit is straight, trains are left, baggage claim is right. Which direction is the exit?",
+        "stemViCandidate": "Bạn đã lấy hành lý và cần rời đi. Biển thứ hai ghi lối ra đi thẳng, tàu bên trái, khu nhận hành lý bên phải. Lối ra ở hướng nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Right, toward baggage claim."
+          },
+          {
+            "id": "B",
+            "text": "Straight, toward the exit."
+          },
+          {
+            "id": "C",
+            "text": "Left, toward the trains."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-001-V1",
+        "sourceLessonId": "TKY-DAILY-001-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "867a73b4629f86a84f1b4c6a8cbf7aa5c47247f11e51cb70c16888c8ee4a945d",
+        "stemEn": "The board says baggage claim is left, the exit is right, and trains are straight. Where should you go to collect your checked bag?",
+        "stemViCandidate": "Biển ghi khu nhận hành lý ở bên trái, lối ra bên phải và tàu đi thẳng. Bạn nên đi hướng nào để nhận hành lý ký gửi?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Turn left for baggage claim."
+          },
+          {
+            "id": "B",
+            "text": "Go right for the exit."
+          },
+          {
+            "id": "C",
+            "text": "Go straight for the trains."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-001-V2",
+        "sourceLessonId": "TKY-DAILY-001-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "fb2df81a7bb826d673f162f7af4e62ec76478d51f1e620fcf40c148f330fd743",
+        "stemEn": "You have your bag and need to leave. The second board says exit is straight, trains are left, baggage claim is right. Which direction is the exit?",
+        "stemViCandidate": "Bạn đã lấy hành lý và cần rời đi. Biển thứ hai ghi lối ra đi thẳng, tàu bên trái, khu nhận hành lý bên phải. Lối ra ở hướng nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Right, toward baggage claim."
+          },
+          {
+            "id": "B",
+            "text": "Straight, toward the exit."
+          },
+          {
+            "id": "C",
+            "text": "Left, toward the trains."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-001.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-002.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-002.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-002-V1",
+        "sourceLessonId": "TKY-DAILY-002-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "0a6fd952ecb91034dc51503b6cfc6121ccd0c15e81e9e75b35d070385a5afa80",
+        "stemEn": "You need a direct service before 11:30. Which option meets both conditions?",
+        "stemViCandidate": "Bạn cần chuyến đi thẳng trước 11:30. Lựa chọn nào đáp ứng cả hai điều kiện?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The shuttle at 11:10; it requires a change."
+          },
+          {
+            "id": "B",
+            "text": "The direct bus at 11:20."
+          },
+          {
+            "id": "C",
+            "text": "The train delayed until 11:40."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-002-V2",
+        "sourceLessonId": "TKY-DAILY-002-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "66d4d28ed6d9345e55cdef4bc2039b4825dfc14c2960b0785ae2ca578fdf46ed",
+        "stemEn": "You need a direct service before 12:20. Which option fits?",
+        "stemViCandidate": "Bạn cần chuyến đi thẳng trước 12:20. Lựa chọn nào phù hợp?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The direct bus delayed until 12:35."
+          },
+          {
+            "id": "B",
+            "text": "The shuttle at 12:05; it needs a change."
+          },
+          {
+            "id": "C",
+            "text": "The direct train at 12:10."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-002-V1",
+        "sourceLessonId": "TKY-DAILY-002-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "0a6fd952ecb91034dc51503b6cfc6121ccd0c15e81e9e75b35d070385a5afa80",
+        "stemEn": "You need a direct service before 11:30. Which option meets both conditions?",
+        "stemViCandidate": "Bạn cần chuyến đi thẳng trước 11:30. Lựa chọn nào đáp ứng cả hai điều kiện?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The shuttle at 11:10; it requires a change."
+          },
+          {
+            "id": "B",
+            "text": "The direct bus at 11:20."
+          },
+          {
+            "id": "C",
+            "text": "The train delayed until 11:40."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-002-V2",
+        "sourceLessonId": "TKY-DAILY-002-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "66d4d28ed6d9345e55cdef4bc2039b4825dfc14c2960b0785ae2ca578fdf46ed",
+        "stemEn": "You need a direct service before 12:20. Which option fits?",
+        "stemViCandidate": "Bạn cần chuyến đi thẳng trước 12:20. Lựa chọn nào phù hợp?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The direct bus delayed until 12:35."
+          },
+          {
+            "id": "B",
+            "text": "The shuttle at 12:05; it needs a change."
+          },
+          {
+            "id": "C",
+            "text": "The direct train at 12:10."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-002.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-003.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-003.evidenceType",
+    "before": "APPLICATION",
+    "after": "CONTEXTUAL_RECOGNITION"
+  },
+  {
+    "path": "TWR-TKY-003.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-003-V1",
+        "sourceLessonId": "TKY-DAILY-003-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "df188edc9dfce9f896d71f433e175f133dc4260efdfc97f1691b159c64c417e4",
+        "stemEn": "You are on Red. Pine is the next stop; Green connects Pine to Lake. What should you do?",
+        "stemViCandidate": "Bạn đang đi tuyến Red. Pine là ga kế tiếp; tuyến Green nối Pine với Lake. Bạn cần làm gì?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Get off at Pine, change to Green, then get off at Lake."
+          },
+          {
+            "id": "B",
+            "text": "Stay on Red until Lake, then look for Green."
+          },
+          {
+            "id": "C",
+            "text": "Get off at Pine and stay on Red."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-003-V2",
+        "sourceLessonId": "TKY-DAILY-003-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "8a3ceff82f5a5e9ad3ff5e7e14942c7c6efed65ac110b6830230b11622b73d0f",
+        "stemEn": "You are on the current line approaching Hill. Blue connects Hill to Garden. What is the taught route?",
+        "stemViCandidate": "Bạn đang đến gần ga Hill; tuyến Blue nối Hill với Garden. Đâu là lộ trình đã học?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Change to Blue at Garden, then return to Hill."
+          },
+          {
+            "id": "B",
+            "text": "Get off at Hill, change to Blue, then get off at Garden."
+          },
+          {
+            "id": "C",
+            "text": "Stay on the current train past Hill and Garden."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-003-V1",
+        "sourceLessonId": "TKY-DAILY-003-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "df188edc9dfce9f896d71f433e175f133dc4260efdfc97f1691b159c64c417e4",
+        "stemEn": "You are on Red. Pine is the next stop; Green connects Pine to Lake. What should you do?",
+        "stemViCandidate": "Bạn đang đi tuyến Red. Pine là ga kế tiếp; tuyến Green nối Pine với Lake. Bạn cần làm gì?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Get off at Pine, change to Green, then get off at Lake."
+          },
+          {
+            "id": "B",
+            "text": "Stay on Red until Lake, then look for Green."
+          },
+          {
+            "id": "C",
+            "text": "Change to Green at Lake, then get off at Pine."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-003-V2",
+        "sourceLessonId": "TKY-DAILY-003-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "8a3ceff82f5a5e9ad3ff5e7e14942c7c6efed65ac110b6830230b11622b73d0f",
+        "stemEn": "You are on the current line approaching Hill. Blue connects Hill to Garden. What is the taught route?",
+        "stemViCandidate": "Bạn đang đến gần ga Hill; tuyến Blue nối Hill với Garden. Đâu là lộ trình đã học?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Change to Blue at Garden, then return to Hill."
+          },
+          {
+            "id": "B",
+            "text": "Get off at Hill, change to Blue, then get off at Garden."
+          },
+          {
+            "id": "C",
+            "text": "Stay on the current train past Hill and Garden."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-003.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-004.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-004.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-004-V1",
+        "sourceLessonId": "TKY-DAILY-004-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "c24ca98fd15028e909562b460970ac747c765df19f64e075132f4ddd87570024",
+        "stemEn": "You are going to the museum. Which platform and time belong to that destination?",
+        "stemViCandidate": "Bạn đi bảo tàng. Sân ga và giờ nào thuộc điểm đến này?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Platform 2 at 09:20."
+          },
+          {
+            "id": "B",
+            "text": "Platform 3 at 09:35."
+          },
+          {
+            "id": "C",
+            "text": "Platform 2 at 09:35."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-004-V2",
+        "sourceLessonId": "TKY-DAILY-004-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "9acdb217c76eae9f812a033e35078ef2ceda4bb0e16f0a3455b4363f0e04c33e",
+        "stemEn": "You are going to the park. Which platform and time belong to it?",
+        "stemViCandidate": "Bạn đi công viên. Sân ga và giờ nào thuộc điểm đến này?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Platform 4 at 10:15."
+          },
+          {
+            "id": "B",
+            "text": "Platform 1 at 10:45."
+          },
+          {
+            "id": "C",
+            "text": "Platform 1 at 10:15."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-004-V1",
+        "sourceLessonId": "TKY-DAILY-004-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "c24ca98fd15028e909562b460970ac747c765df19f64e075132f4ddd87570024",
+        "stemEn": "You are going to the museum. Which platform and time belong to that destination?",
+        "stemViCandidate": "Bạn đi bảo tàng. Sân ga và giờ nào thuộc điểm đến này?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Platform 2 at 09:20."
+          },
+          {
+            "id": "B",
+            "text": "Platform 3 at 09:35."
+          },
+          {
+            "id": "C",
+            "text": "Platform 2 at 09:35."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-004-V2",
+        "sourceLessonId": "TKY-DAILY-004-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "9acdb217c76eae9f812a033e35078ef2ceda4bb0e16f0a3455b4363f0e04c33e",
+        "stemEn": "You are going to the park. Which platform and time belong to it?",
+        "stemViCandidate": "Bạn đi công viên. Sân ga và giờ nào thuộc điểm đến này?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Platform 4 at 10:15."
+          },
+          {
+            "id": "B",
+            "text": "Platform 1 at 10:45."
+          },
+          {
+            "id": "C",
+            "text": "Platform 1 at 10:15."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-004.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-005.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-005.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-005-V1",
+        "sourceLessonId": "TKY-DAILY-005-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "26e4f46760a542511397e485d5c34a3027eb904ef93e7699d215457606d5fb74",
+        "stemEn": "You want tea. Which shelf label gives the tea's aisle and price?",
+        "stemViCandidate": "Bạn muốn mua trà. Nhãn nào ghi đúng lối đi và giá của trà?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Aisle 2, 150 yen."
+          },
+          {
+            "id": "B",
+            "text": "Aisle 1, 110 yen."
+          },
+          {
+            "id": "C",
+            "text": "Aisle 3, 170 yen."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-005-V2",
+        "sourceLessonId": "TKY-DAILY-005-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "f71900d573e23f59327e25b7bd4dcc80102aec19df2f5ba8216bab356af4c2c9",
+        "stemEn": "You want tea. Which shelf label gives its price and aisle?",
+        "stemViCandidate": "Bạn muốn mua trà. Nhãn nào ghi đúng giá và lối đi của trà?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Aisle 2, 170 yen."
+          },
+          {
+            "id": "B",
+            "text": "Aisle 1, 110 yen."
+          },
+          {
+            "id": "C",
+            "text": "Aisle 3, 140 yen."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-005-V1",
+        "sourceLessonId": "TKY-DAILY-005-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "26e4f46760a542511397e485d5c34a3027eb904ef93e7699d215457606d5fb74",
+        "stemEn": "You want tea. Which shelf label gives the tea's aisle and price?",
+        "stemViCandidate": "Bạn muốn mua trà. Nhãn nào ghi đúng lối đi và giá của trà?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Aisle 2, 150 yen."
+          },
+          {
+            "id": "B",
+            "text": "Aisle 1, 110 yen."
+          },
+          {
+            "id": "C",
+            "text": "Aisle 3, 170 yen."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-005-V2",
+        "sourceLessonId": "TKY-DAILY-005-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "f71900d573e23f59327e25b7bd4dcc80102aec19df2f5ba8216bab356af4c2c9",
+        "stemEn": "You want tea. Which shelf label gives its price and aisle?",
+        "stemViCandidate": "Bạn muốn mua trà. Nhãn nào ghi đúng giá và lối đi của trà?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Aisle 2, 170 yen."
+          },
+          {
+            "id": "B",
+            "text": "Aisle 1, 110 yen."
+          },
+          {
+            "id": "C",
+            "text": "Aisle 3, 140 yen."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-005.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-006.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-006.evidenceType",
+    "before": "CONTROLLED_APPLICATION",
+    "after": "MULTI_CONSTRAINT_RECOGNITION"
+  },
+  {
+    "path": "TWR-TKY-006.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-006-V1",
+        "sourceLessonId": "TKY-DAILY-006-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "b8da76cbeb12c575f86ad19f47635da031161f6087023d1a92a08e32030f4671",
+        "stemEn": "You already have a bag, want to pay by card, and need proof of purchase. Which response communicates all three choices?",
+        "stemViCandidate": "Bạn đã có túi, muốn trả bằng thẻ và cần chứng từ mua hàng. Câu trả lời nào diễn đạt đủ cả ba lựa chọn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "No bag, thanks. By card, please. Could I have a receipt, please?"
+          },
+          {
+            "id": "B",
+            "text": "A bag, please. I will pay in cash. Could I have a receipt?"
+          },
+          {
+            "id": "C",
+            "text": "No bag, thanks. By card, please."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-006-V2",
+        "sourceLessonId": "TKY-DAILY-006-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "7023fdb34f89733c49ef2605c3f27e342a2e8d91fc4b1329aadba78774bd8f09",
+        "stemEn": "You need a bag, want to pay in cash, and want proof of purchase. Which response includes all three?",
+        "stemViCandidate": "Bạn cần túi, muốn trả tiền mặt và muốn có chứng từ mua hàng. Câu trả lời nào gồm đủ cả ba?",
+        "options": [
+          {
+            "id": "A",
+            "text": "No bag, thanks. By card, please. Can I have a receipt?"
+          },
+          {
+            "id": "B",
+            "text": "A bag, please. I will pay in cash. Can I have a receipt, please?"
+          },
+          {
+            "id": "C",
+            "text": "A bag, please. I will pay in cash."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-006-V1",
+        "sourceLessonId": "TKY-DAILY-006-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "b8da76cbeb12c575f86ad19f47635da031161f6087023d1a92a08e32030f4671",
+        "stemEn": "You already have a bag, want to pay by card, and need proof of purchase. Which response communicates all three choices?",
+        "stemViCandidate": "Bạn đã có túi, muốn trả bằng thẻ và cần chứng từ mua hàng. Câu trả lời nào diễn đạt đủ cả ba lựa chọn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "No bag, thanks. By card, please. Could I have a receipt, please?"
+          },
+          {
+            "id": "B",
+            "text": "A bag, please. I will pay in cash. Could I have a receipt?"
+          },
+          {
+            "id": "C",
+            "text": "No bag, thanks. By card, please."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-006-V2",
+        "sourceLessonId": "TKY-DAILY-006-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "c4bb7d33690a22769955df86d1a7ad16e824a7e99f09c28b6711b65966597007",
+        "stemEn": "You need a bag, want to pay in cash, and want proof of purchase. Which response includes all three?",
+        "stemViCandidate": "Bạn cần túi, muốn trả tiền mặt và muốn có chứng từ mua hàng. Câu trả lời nào gồm đủ cả ba?",
+        "options": [
+          {
+            "id": "A",
+            "text": "No bag, thanks. By card, please. Can I have a receipt?"
+          },
+          {
+            "id": "B",
+            "text": "A bag, please. I will pay in cash. Can I have a receipt, please?"
+          },
+          {
+            "id": "C",
+            "text": "A bag, please. I will pay in cash."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-006.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-007.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-007.evidenceType",
+    "before": "APPLICATION",
+    "after": "CONTEXTUAL_RECOGNITION"
+  },
+  {
+    "path": "TWR-TKY-007.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-007-V1",
+        "sourceLessonId": "TKY-DAILY-007-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "8cb4f8e088aabde09cdcead91edbf8eaceaecece4cd91b7010242eeae69cd40b",
+        "stemEn": "You prefer no egg. Which order matches the menu choice and your preference?",
+        "stemViCandidate": "Bạn không muốn ăn trứng. Cách gọi món nào đúng với món trên thực đơn và sở thích của bạn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "I'll have the vegetable noodles without egg, please."
+          },
+          {
+            "id": "B",
+            "text": "Chicken noodles without an egg, please."
+          },
+          {
+            "id": "C",
+            "text": "Vegetable noodles with an egg, please."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-007-V2",
+        "sourceLessonId": "TKY-DAILY-007-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "9798cd003d8673d71bdd7e7d09b7895ce84133b32f43db568ee46221f3e58c87",
+        "stemEn": "You prefer no spring onions. Which order matches that preference?",
+        "stemViCandidate": "Bạn không muốn hành lá. Cách gọi nào đúng với sở thích của bạn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Vegetable noodles without spring onions, please."
+          },
+          {
+            "id": "B",
+            "text": "Chicken noodles without spring onions, please."
+          },
+          {
+            "id": "C",
+            "text": "Chicken noodles with spring onions, please."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-007-V1",
+        "sourceLessonId": "TKY-DAILY-007-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "3ce2a8c0ab57ed657564e40a25f77b57a717756ab16315ec2ba004c6dbe4defe",
+        "stemEn": "You want vegetable noodles with no egg. Which order states both choices?",
+        "stemViCandidate": "Bạn muốn mì rau và không muốn trứng. Cách gọi nào nêu đúng cả hai lựa chọn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "I'll have the vegetable noodles without egg, please."
+          },
+          {
+            "id": "B",
+            "text": "Chicken noodles without an egg, please."
+          },
+          {
+            "id": "C",
+            "text": "Vegetable noodles with an egg, please."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-007-V2",
+        "sourceLessonId": "TKY-DAILY-007-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "29d105302b7dda724a4939cefd425f85e8952149af264da4e14455c7e18e767a",
+        "stemEn": "You want chicken noodles with no spring onions. Which order states both choices?",
+        "stemViCandidate": "Bạn muốn mì gà và không muốn hành lá. Cách gọi nào nêu đúng cả hai lựa chọn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Vegetable noodles without spring onions, please."
+          },
+          {
+            "id": "B",
+            "text": "Chicken noodles without spring onions, please."
+          },
+          {
+            "id": "C",
+            "text": "Chicken noodles with spring onions, please."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-007.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-008.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-008.evidenceType",
+    "before": "APPLICATION",
+    "after": "CONTEXTUAL_RECOGNITION"
+  },
+  {
+    "path": "TWR-TKY-008.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-008-V1",
+        "sourceLessonId": "TKY-DAILY-008-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "96ea13b4828d1b03b9573cdfb480008f30f9ca1d454dce39939b9ef9808c9a79",
+        "stemEn": "You ordered vegetable soup but received chicken soup. What is a clear, non-accusatory repair?",
+        "stemViCandidate": "Bạn gọi súp rau nhưng được mang súp gà. Cách sửa hiểu lầm nào rõ ràng và không trách móc?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, I ordered the vegetable soup."
+          },
+          {
+            "id": "B",
+            "text": "Could we have the bill, please?"
+          },
+          {
+            "id": "C",
+            "text": "I prefer chicken soup."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-008-V2",
+        "sourceLessonId": "TKY-DAILY-008-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "51ad3ae65c41faba5089e0bf12404db96d67691627cba84b59492128c65962c0",
+        "stemEn": "You ordered chicken noodles but received vegetable noodles. Which response names your intended order?",
+        "stemViCandidate": "Bạn gọi mì gà nhưng được mang mì rau. Câu nào nêu đúng món bạn đã gọi?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Can we have the check, please?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, I ordered the chicken noodles."
+          },
+          {
+            "id": "C",
+            "text": "Vegetable noodles are very good."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-008-V1",
+        "sourceLessonId": "TKY-DAILY-008-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "96ea13b4828d1b03b9573cdfb480008f30f9ca1d454dce39939b9ef9808c9a79",
+        "stemEn": "You ordered vegetable soup but received chicken soup. What is a clear, non-accusatory repair?",
+        "stemViCandidate": "Bạn gọi súp rau nhưng được mang súp gà. Cách sửa hiểu lầm nào rõ ràng và không trách móc?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, I ordered the vegetable soup."
+          },
+          {
+            "id": "B",
+            "text": "Could we have the bill, please?"
+          },
+          {
+            "id": "C",
+            "text": "I prefer chicken soup."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-008-V2",
+        "sourceLessonId": "TKY-DAILY-008-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "51ad3ae65c41faba5089e0bf12404db96d67691627cba84b59492128c65962c0",
+        "stemEn": "You ordered chicken noodles but received vegetable noodles. Which response names your intended order?",
+        "stemViCandidate": "Bạn gọi mì gà nhưng được mang mì rau. Câu nào nêu đúng món bạn đã gọi?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Can we have the check, please?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, I ordered the chicken noodles."
+          },
+          {
+            "id": "C",
+            "text": "Vegetable noodles are very good."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-008.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-009.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-009.evidenceType",
+    "before": "APPLICATION",
+    "after": "CONTEXTUAL_RECOGNITION"
+  },
+  {
+    "path": "TWR-TKY-009.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-009-V1",
+        "sourceLessonId": "TKY-DAILY-009-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "466802ad644891c667041de8d634eb8a5cf1f93f8670e5acbe1e2cf977402bc9",
+        "stemEn": "Starting at Cedar Corner, how do you reach the station on the practice map?",
+        "stemViCandidate": "Từ Cedar Corner, bạn đi đến ga theo sơ đồ luyện tập như thế nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Go straight past the bank, turn left at the library; the station is next to the post office."
+          },
+          {
+            "id": "B",
+            "text": "Turn left at the bank, then go straight past the library to the post office."
+          },
+          {
+            "id": "C",
+            "text": "Go straight past the bank, turn right at the library; the station is next to the post office."
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-009-V2",
+        "sourceLessonId": "TKY-DAILY-009-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "2d1a74173373fd83be6f3b407f8e0b76d402c48e2c82464ec02d1e6cfe135462",
+        "stemEn": "Starting at River Corner, how do you reach the museum?",
+        "stemViCandidate": "Từ River Corner, bạn đi đến bảo tàng như thế nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Go straight past the cafe, turn right at the park; the museum is next to the hotel."
+          },
+          {
+            "id": "B",
+            "text": "Turn right at the cafe, then go straight to the park; the museum is next to the hotel."
+          },
+          {
+            "id": "C",
+            "text": "Go straight past the cafe, turn left at the park; the museum is next to the hotel."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-009-V1",
+        "sourceLessonId": "TKY-DAILY-009-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "466802ad644891c667041de8d634eb8a5cf1f93f8670e5acbe1e2cf977402bc9",
+        "stemEn": "Starting at Cedar Corner, how do you reach the station on the practice map?",
+        "stemViCandidate": "Từ Cedar Corner, bạn đi đến ga theo sơ đồ luyện tập như thế nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Go straight past the bank, turn left at the library; the station is next to the post office."
+          },
+          {
+            "id": "B",
+            "text": "Turn left at the bank, then go straight past the library to the post office."
+          },
+          {
+            "id": "C",
+            "text": "Go straight past the bank, turn right at the library; the station is next to the post office."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-009-V2",
+        "sourceLessonId": "TKY-DAILY-009-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "2d1a74173373fd83be6f3b407f8e0b76d402c48e2c82464ec02d1e6cfe135462",
+        "stemEn": "Starting at River Corner, how do you reach the museum?",
+        "stemViCandidate": "Từ River Corner, bạn đi đến bảo tàng như thế nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Go straight past the cafe, turn right at the park; the museum is next to the hotel."
+          },
+          {
+            "id": "B",
+            "text": "Turn right at the cafe, then go straight to the park; the museum is next to the hotel."
+          },
+          {
+            "id": "C",
+            "text": "Go straight past the cafe, turn left at the park; the museum is next to the hotel."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-009.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  },
+  {
+    "path": "TWR-TKY-010.contentRevision",
+    "before": "TOKYO-DAILY-r1",
+    "after": "TOKYO-DAILY-r2"
+  },
+  {
+    "path": "TWR-TKY-010.evidenceType",
+    "before": "RECALL",
+    "after": "RECOGNITION"
+  },
+  {
+    "path": "TWR-TKY-010.variants",
+    "before": [
+      {
+        "id": "TWR-TKY-010-V1",
+        "sourceLessonId": "TKY-DAILY-011-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "f53891a49608d005db2246767754222d453d3cc73bcf17276b4b2513a22f2441",
+        "stemEn": "You did not hear the minutes in the train time. Which response politely asks the staff member to repeat them?",
+        "stemViCandidate": "Bạn không nghe rõ phút trong giờ tàu chạy. Câu nào lịch sự nhờ nhân viên nhắc lại?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, I didn’t catch the time. Could you say that again, please?"
+          },
+          {
+            "id": "B",
+            "text": "I know the time; thank you."
+          },
+          {
+            "id": "C",
+            "text": "Could you tell me which platform it is?"
+          }
+        ]
+      },
+      {
+        "id": "TWR-TKY-010-V2",
+        "sourceLessonId": "TKY-DAILY-011-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r1",
+        "sourceLessonSha256": "4fda8fdfc8ac897bfd95829e4cfd0f1ba7c8bc2bd6ee94ebb9402c6396448d2d",
+        "stemEn": "You missed a table number. Which response clearly asks the speaker to repeat it?",
+        "stemViCandidate": "Bạn không nghe rõ số bàn. Câu nào yêu cầu người nói nhắc lại?",
+        "options": [
+          {
+            "id": "A",
+            "text": "I didn’t catch the number. Where is the cafe?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, could you repeat that?"
+          },
+          {
+            "id": "C",
+            "text": "The number is clear; thanks."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "id": "TWR-TKY-010-V1",
+        "sourceLessonId": "TKY-DAILY-011-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "d50e8fdbfbac6d950dfaaa967131bf1608cf61f7cf819680415c13d5c3fb4b30",
+        "stemEn": "You did not hear the minutes in the train time. Which response politely asks the staff member to repeat them?",
+        "stemViCandidate": "Bạn không nghe rõ phút trong giờ tàu chạy. Câu nào lịch sự nhờ nhân viên nhắc lại?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, I didn’t catch the time. Could you say that again, please?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, is that the departure time?"
+          },
+          {
+            "id": "C",
+            "text": "Sorry, which platform does it leave from?"
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-010-V2",
+        "sourceLessonId": "TKY-DAILY-011-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "4fda8fdfc8ac897bfd95829e4cfd0f1ba7c8bc2bd6ee94ebb9402c6396448d2d",
+        "stemEn": "You missed a table number. Which response clearly asks the speaker to repeat it?",
+        "stemViCandidate": "Bạn không nghe rõ số bàn. Câu nào yêu cầu người nói nhắc lại?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, where is that table?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, could you repeat that?"
+          },
+          {
+            "id": "C",
+            "text": "Sorry, is that my table number?"
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ]
+  },
+  {
+    "path": "TWR-TKY-010.parentRevision",
+    "before": null,
+    "after": "TOKYO-DAILY-r1"
+  }
+]

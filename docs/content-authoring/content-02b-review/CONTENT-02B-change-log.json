@@ -1,0 +1,92 @@
+[
+  {
+    "id": "TKY-DAILY-001-L2",
+    "field": "en",
+    "before": "You have collected your bag and now need the exit. A second practice board says EXIT: STRAIGHT; TRAINS: LEFT; BAGGAGE CLAIM: RIGHT. You ask, ‘Which exit should I use?’ The assistant says, ‘Go straight for the exit.’",
+    "after": "You have collected your bag and now need to leave the terminal. The practice board says EXIT: STRAIGHT; TRAINS: LEFT; BAGGAGE CLAIM: RIGHT. You ask, 'Which way is the exit?' The assistant says, 'Go straight for the exit.'"
+  },
+  {
+    "id": "TKY-DAILY-001-L2",
+    "field": "vi",
+    "before": "Bạn đã nhận hành lý và cần tìm lối ra. Biển luyện tập thứ hai ghi: LỐI RA: THẲNG; TÀU: TRÁI; NHẬN HÀNH LÝ: PHẢI. Bạn hỏi nên dùng lối nào. Nhân viên bảo đi thẳng.",
+    "after": "Bạn đã nhận hành lý và muốn rời nhà ga. Biển luyện tập ghi LỐI RA: ĐI THẲNG; TÀU: TRÁI; NHẬN HÀNH LÝ: PHẢI. Bạn hỏi lối ra ở hướng nào. Nhân viên nói đi thẳng."
+  },
+  {
+    "id": "TKY-DAILY-006-L2",
+    "field": "en",
+    "before": "This time you need a bag and want to pay in cash. After paying, you ask, ‘A bag, please. I will pay in cash. Can I have a receipt, please?’ The practice scene states no bag fee or general store payment rule.",
+    "after": "At checkout, you need a bag and want to pay in cash. You say, 'A bag, please. I'll pay in cash.' After paying, you ask, 'Can I have a receipt, please?' The scene states no bag fee or general store payment rule."
+  },
+  {
+    "id": "TKY-DAILY-006-L2",
+    "field": "vi",
+    "before": "Lần này bạn cần túi và muốn trả tiền mặt. Sau khi trả tiền, bạn xin biên lai. Cảnh luyện tập không nêu phí túi hay quy định thanh toán chung của cửa hàng.",
+    "after": "Tại quầy thanh toán, bạn cần túi và muốn trả tiền mặt. Bạn nói: 'Cho tôi một chiếc túi. Tôi trả bằng tiền mặt.' Sau khi trả tiền, bạn xin biên lai. Cảnh không nêu phí túi hay quy định chung của cửa hàng."
+  },
+  {
+    "id": "TKY-DAILY-007-L1",
+    "field": "en",
+    "before": "You ask, ‘What is in the vegetable noodles?’ The server says, ‘Noodles, vegetable broth and mushrooms. An egg is optional.’ You prefer no egg. The menu also lists chicken noodles. You order, ‘I'll have the vegetable noodles without egg, please.’ This is preference practice, not an allergy check.",
+    "after": "You ask, ‘What is in the vegetable noodles?’ The server says, ‘Noodles, vegetable broth and mushrooms. An egg is optional.’ You want vegetable noodles and prefer no egg. The menu also lists chicken noodles. You order, ‘I'll have the vegetable noodles without egg, please.’ This is preference practice, not an allergy check."
+  },
+  {
+    "id": "TKY-DAILY-007-L1",
+    "field": "vi",
+    "before": "Bạn hỏi mì rau có gì. Nhân viên nói gồm mì, nước dùng rau và nấm; trứng là phần thêm tùy chọn. Bạn không muốn trứng và gọi mì rau không thêm trứng. Bài luyện sở thích này không kiểm tra dị ứng.",
+    "after": "Bạn hỏi mì rau có gì. Nhân viên nói gồm mì, nước dùng rau và nấm; trứng là phần thêm tùy chọn. Bạn muốn gọi mì rau và không muốn trứng và gọi mì rau không thêm trứng. Bài luyện sở thích này không kiểm tra dị ứng."
+  },
+  {
+    "id": "TKY-DAILY-007-L2",
+    "field": "en",
+    "before": "Chicken noodles in the same fictional shop include chicken broth. Spring onions are optional. You prefer no spring onions and say, ‘Chicken noodles without spring onions, please.’ The menu also lists vegetable noodles. No allergen or cross-contact guarantee is made.",
+    "after": "Chicken noodles in the same fictional shop include chicken broth. Spring onions are optional. You want chicken noodles and prefer no spring onions and say, ‘Chicken noodles without spring onions, please.’ The menu also lists vegetable noodles. No allergen or cross-contact guarantee is made."
+  },
+  {
+    "id": "TKY-DAILY-007-L2",
+    "field": "vi",
+    "before": "Mì gà ở quán hư cấu có nước dùng gà; hành lá là phần tùy chọn. Bạn không muốn hành lá nên gọi mì gà không thêm hành. Không có bảo đảm về dị ứng hay lây nhiễm chéo.",
+    "after": "Mì gà ở quán hư cấu có nước dùng gà; hành lá là phần tùy chọn. Bạn muốn gọi mì gà và không muốn hành lá nên gọi mì gà không thêm hành. Không có bảo đảm về dị ứng hay lây nhiễm chéo."
+  },
+  {
+    "id": "TKY-DAILY-008",
+    "field": "en",
+    "before": "Name the dish you intended without blaming the server. Then ask for payment when ready. Bill and check must not be treated as opposing answers in this context.",
+    "after": "Name the dish you ordered so the server can check the mismatch. When you are ready to pay, ask for the bill or check. Both terms are acceptable in this restaurant context; a receipt records payment."
+  },
+  {
+    "id": "TKY-DAILY-008",
+    "field": "vi",
+    "before": "Nêu món mình định gọi mà không đổ lỗi cho nhân viên. Khi cần thanh toán thì xin hóa đơn. Trong ngữ cảnh này không đánh bill và check thành hai đáp án đối lập.",
+    "after": "Nêu món bạn đã gọi để nhân viên kiểm tra nhầm lẫn. Khi sẵn sàng thanh toán, xin bill hoặc check. Cả hai từ đều chỉ hóa đơn tính tiền trong bối cảnh nhà hàng này; receipt là biên lai thanh toán."
+  },
+  {
+    "id": "TKY-DAILY-011-L1",
+    "field": "vi",
+    "before": "Nhân viên nói tàu thường khởi hành lúc 3:15 nhưng bạn không nghe rõ phút. Bạn xin lỗi, nói mình chưa nghe được giờ và nhờ nhắc lại; nhân viên nói lại ‘three fifteen’.",
+    "after": "Nhân viên nói tàu dừng ở các ga dọc tuyến khởi hành lúc 3:15 nhưng bạn không nghe rõ phút. Bạn xin lỗi, nói mình chưa nghe được giờ và nhờ nhắc lại; nhân viên nói lại ‘three fifteen’."
+  },
+  {
+    "id": "TKY-DAILY-012-L1",
+    "field": "en",
+    "before": "The staff member says, ‘Your meeting is in Room 14.’ You heard Room 40 and want to confirm before walking away. You ask, ‘Sorry, did you say Room 14?’ The staff member confirms, ‘Yes, Room 14.’ You reply, ‘So that’s Room 14, right?’",
+    "after": "The staff member says, 'Your meeting is in Room 14.' You think you heard Room 40. You ask, 'Sorry, did you say Room 40?' The staff member replies, 'No, Room 14.' You confirm, 'Room 14, right?' The staff member says, 'That's right.'"
+  },
+  {
+    "id": "TKY-DAILY-012-L1",
+    "field": "vi",
+    "before": "Nhân viên nói cuộc hẹn ở phòng 14. Bạn nghe thành phòng 40 và muốn xác nhận trước khi đi. Bạn hỏi lại có phải phòng 14 không; nhân viên xác nhận, bạn nhắc lại ‘Vậy là phòng 14, đúng không?’",
+    "after": "Nhân viên nói cuộc hẹn ở phòng 14. Bạn nghĩ mình nghe được phòng 40 nên hỏi: 'Xin lỗi, có phải phòng 40 không?' Nhân viên sửa: 'Không, phòng 14.' Bạn hỏi lại: 'Phòng 14, đúng không?' Nhân viên xác nhận: 'Đúng rồi.'"
+  },
+  {
+    "id": "TKY-DAILY-012-L2",
+    "field": "en",
+    "before": "A receptionist says the appointment is at 2:30, but you heard 3:20. You ask, ‘Sorry, did you say 2:30?’ After the receptionist confirms, you say, ‘So that’s 2:30, right?’ The numbers differ, but the repair pattern is the same.",
+    "after": "A receptionist says the appointment is at 2:30. You think you heard 3:20. You ask, 'Sorry, did you say 3:20?' The receptionist replies, 'No, 2:30.' You confirm, 'So that's 2:30, right?' The receptionist says, 'Yes.'"
+  },
+  {
+    "id": "TKY-DAILY-012-L2",
+    "field": "vi",
+    "before": "Lễ tân nói cuộc hẹn lúc 2:30 nhưng bạn nghe thành 3:20. Bạn hỏi lại ‘Có phải 2:30 không?’ Sau khi lễ tân xác nhận, bạn nhắc lại 2:30 để kiểm tra.",
+    "after": "Lễ tân nói cuộc hẹn lúc 2:30. Bạn nghĩ mình nghe được 3:20 nên hỏi: 'Xin lỗi, có phải 3:20 không?' Lễ tân sửa: 'Không, 2:30.' Bạn hỏi lại: 'Vậy là 2:30, đúng không?' Lễ tân xác nhận."
+  }
+]

@@ -1,0 +1,741 @@
+[
+  {
+    "id": "TWR-TKY-001",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-001",
+    "objectiveId": "O-LOCATE",
+    "communicationIntent": "ASK_LOCATION",
+    "vocabularyIds": [
+      "VS-baggage-claim",
+      "VS-exit"
+    ],
+    "chunkIds": [
+      "CH-ask-location",
+      "CH-which-exit"
+    ],
+    "evidenceType": "RECOGNITION",
+    "retryFamilyId": "RF-TKY-DAILY-001",
+    "variants": [
+      {
+        "id": "TWR-TKY-001-V1",
+        "sourceLessonId": "TKY-DAILY-001-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "867a73b4629f86a84f1b4c6a8cbf7aa5c47247f11e51cb70c16888c8ee4a945d",
+        "stemEn": "The board says baggage claim is left, the exit is right, and trains are straight. Where should you go to collect your checked bag?",
+        "stemViCandidate": "Biển ghi khu nhận hành lý ở bên trái, lối ra bên phải và tàu đi thẳng. Bạn nên đi hướng nào để nhận hành lý ký gửi?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Turn left for baggage claim."
+          },
+          {
+            "id": "B",
+            "text": "Go right for the exit."
+          },
+          {
+            "id": "C",
+            "text": "Go straight for the trains."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-001-V2",
+        "sourceLessonId": "TKY-DAILY-001-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "fb2df81a7bb826d673f162f7af4e62ec76478d51f1e620fcf40c148f330fd743",
+        "stemEn": "You have your bag and need to leave. The second board says exit is straight, trains are left, baggage claim is right. Which direction is the exit?",
+        "stemViCandidate": "Bạn đã lấy hành lý và cần rời đi. Biển thứ hai ghi lối ra đi thẳng, tàu bên trái, khu nhận hành lý bên phải. Lối ra ở hướng nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Right, toward baggage claim."
+          },
+          {
+            "id": "B",
+            "text": "Straight, toward the exit."
+          },
+          {
+            "id": "C",
+            "text": "Left, toward the trains."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-002",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-002",
+    "objectiveId": "O-INFO",
+    "communicationIntent": "COMPARE_TRAVEL_INFORMATION",
+    "vocabularyIds": [
+      "VS-delay-service",
+      "VS-direct-rail",
+      "VS-depart-rail"
+    ],
+    "chunkIds": [
+      "CH-confirm-direct-service",
+      "CH-ask-departure-time"
+    ],
+    "evidenceType": "INTERPRETATION",
+    "retryFamilyId": "RF-TKY-DAILY-002",
+    "variants": [
+      {
+        "id": "TWR-TKY-002-V1",
+        "sourceLessonId": "TKY-DAILY-002-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "0a6fd952ecb91034dc51503b6cfc6121ccd0c15e81e9e75b35d070385a5afa80",
+        "stemEn": "You need a direct service before 11:30. Which option meets both conditions?",
+        "stemViCandidate": "Bạn cần chuyến đi thẳng trước 11:30. Lựa chọn nào đáp ứng cả hai điều kiện?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The shuttle at 11:10; it requires a change."
+          },
+          {
+            "id": "B",
+            "text": "The direct bus at 11:20."
+          },
+          {
+            "id": "C",
+            "text": "The train delayed until 11:40."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-002-V2",
+        "sourceLessonId": "TKY-DAILY-002-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "66d4d28ed6d9345e55cdef4bc2039b4825dfc14c2960b0785ae2ca578fdf46ed",
+        "stemEn": "You need a direct service before 12:20. Which option fits?",
+        "stemViCandidate": "Bạn cần chuyến đi thẳng trước 12:20. Lựa chọn nào phù hợp?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The direct bus delayed until 12:35."
+          },
+          {
+            "id": "B",
+            "text": "The shuttle at 12:05; it needs a change."
+          },
+          {
+            "id": "C",
+            "text": "The direct train at 12:10."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-003",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-003",
+    "objectiveId": "O-ROUTE",
+    "communicationIntent": "FOLLOW_DIRECTIONS",
+    "vocabularyIds": [
+      "VS-change-rail",
+      "VS-stop-rail",
+      "VS-get-off"
+    ],
+    "chunkIds": [
+      "CH-change-lines-at",
+      "CH-get-off-at"
+    ],
+    "evidenceType": "CONTEXTUAL_RECOGNITION",
+    "retryFamilyId": "RF-TKY-DAILY-003",
+    "variants": [
+      {
+        "id": "TWR-TKY-003-V1",
+        "sourceLessonId": "TKY-DAILY-003-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "df188edc9dfce9f896d71f433e175f133dc4260efdfc97f1691b159c64c417e4",
+        "stemEn": "You are on Red. Pine is the next stop; Green connects Pine to Lake. What should you do?",
+        "stemViCandidate": "Bạn đang đi tuyến Red. Pine là ga kế tiếp; tuyến Green nối Pine với Lake. Bạn cần làm gì?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Get off at Pine, change to Green, then get off at Lake."
+          },
+          {
+            "id": "B",
+            "text": "Stay on Red until Lake, then look for Green."
+          },
+          {
+            "id": "C",
+            "text": "Change to Green at Lake, then get off at Pine."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-003-V2",
+        "sourceLessonId": "TKY-DAILY-003-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "8a3ceff82f5a5e9ad3ff5e7e14942c7c6efed65ac110b6830230b11622b73d0f",
+        "stemEn": "You are on the current line approaching Hill. Blue connects Hill to Garden. What is the taught route?",
+        "stemViCandidate": "Bạn đang đến gần ga Hill; tuyến Blue nối Hill với Garden. Đâu là lộ trình đã học?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Change to Blue at Garden, then return to Hill."
+          },
+          {
+            "id": "B",
+            "text": "Get off at Hill, change to Blue, then get off at Garden."
+          },
+          {
+            "id": "C",
+            "text": "Stay on the current train past Hill and Garden."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-004",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-004",
+    "objectiveId": "O-INFO",
+    "communicationIntent": "COMPARE_TRAVEL_INFORMATION",
+    "vocabularyIds": [
+      "VS-platform-rail",
+      "VS-depart-rail"
+    ],
+    "chunkIds": [
+      "CH-which-platform",
+      "CH-ask-departure-time"
+    ],
+    "evidenceType": "INTERPRETATION",
+    "retryFamilyId": "RF-TKY-DAILY-004",
+    "variants": [
+      {
+        "id": "TWR-TKY-004-V1",
+        "sourceLessonId": "TKY-DAILY-004-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "c24ca98fd15028e909562b460970ac747c765df19f64e075132f4ddd87570024",
+        "stemEn": "You are going to the museum. Which platform and time belong to that destination?",
+        "stemViCandidate": "Bạn đi bảo tàng. Sân ga và giờ nào thuộc điểm đến này?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Platform 2 at 09:20."
+          },
+          {
+            "id": "B",
+            "text": "Platform 3 at 09:35."
+          },
+          {
+            "id": "C",
+            "text": "Platform 2 at 09:35."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-004-V2",
+        "sourceLessonId": "TKY-DAILY-004-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "9acdb217c76eae9f812a033e35078ef2ceda4bb0e16f0a3455b4363f0e04c33e",
+        "stemEn": "You are going to the park. Which platform and time belong to it?",
+        "stemViCandidate": "Bạn đi công viên. Sân ga và giờ nào thuộc điểm đến này?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Platform 4 at 10:15."
+          },
+          {
+            "id": "B",
+            "text": "Platform 1 at 10:45."
+          },
+          {
+            "id": "C",
+            "text": "Platform 1 at 10:15."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-005",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-005",
+    "objectiveId": "O-SHOP",
+    "communicationIntent": "ASK_ITEM_LOCATION_AND_PRICE",
+    "vocabularyIds": [
+      "VS-aisle-shop",
+      "VS-price-shop",
+      "VS-tea-drink"
+    ],
+    "chunkIds": [
+      "CH-ask-location",
+      "CH-ask-price"
+    ],
+    "evidenceType": "INTERPRETATION",
+    "retryFamilyId": "RF-TKY-DAILY-005",
+    "variants": [
+      {
+        "id": "TWR-TKY-005-V1",
+        "sourceLessonId": "TKY-DAILY-005-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "26e4f46760a542511397e485d5c34a3027eb904ef93e7699d215457606d5fb74",
+        "stemEn": "You want tea. Which shelf label gives the tea's aisle and price?",
+        "stemViCandidate": "Bạn muốn mua trà. Nhãn nào ghi đúng lối đi và giá của trà?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Aisle 2, 150 yen."
+          },
+          {
+            "id": "B",
+            "text": "Aisle 1, 110 yen."
+          },
+          {
+            "id": "C",
+            "text": "Aisle 3, 170 yen."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-005-V2",
+        "sourceLessonId": "TKY-DAILY-005-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "f71900d573e23f59327e25b7bd4dcc80102aec19df2f5ba8216bab356af4c2c9",
+        "stemEn": "You want tea. Which shelf label gives its price and aisle?",
+        "stemViCandidate": "Bạn muốn mua trà. Nhãn nào ghi đúng giá và lối đi của trà?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Aisle 2, 170 yen."
+          },
+          {
+            "id": "B",
+            "text": "Aisle 1, 110 yen."
+          },
+          {
+            "id": "C",
+            "text": "Aisle 3, 140 yen."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-006",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-006",
+    "objectiveId": "O-SHOP",
+    "communicationIntent": "REQUEST_TRANSACTION",
+    "vocabularyIds": [
+      "VS-bag-store",
+      "VS-cash-payment",
+      "VS-card-payment",
+      "VS-receipt"
+    ],
+    "chunkIds": [
+      "CH-request-receipt",
+      "CH-state-bag-choice"
+    ],
+    "evidenceType": "MULTI_CONSTRAINT_RECOGNITION",
+    "retryFamilyId": "RF-TKY-DAILY-006",
+    "variants": [
+      {
+        "id": "TWR-TKY-006-V1",
+        "sourceLessonId": "TKY-DAILY-006-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "b8da76cbeb12c575f86ad19f47635da031161f6087023d1a92a08e32030f4671",
+        "stemEn": "You already have a bag, want to pay by card, and need proof of purchase. Which response communicates all three choices?",
+        "stemViCandidate": "Bạn đã có túi, muốn trả bằng thẻ và cần chứng từ mua hàng. Câu trả lời nào diễn đạt đủ cả ba lựa chọn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "No bag, thanks. By card, please. Could I have a receipt, please?"
+          },
+          {
+            "id": "B",
+            "text": "A bag, please. I will pay in cash. Could I have a receipt?"
+          },
+          {
+            "id": "C",
+            "text": "No bag, thanks. By card, please."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-006-V2",
+        "sourceLessonId": "TKY-DAILY-006-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "c4bb7d33690a22769955df86d1a7ad16e824a7e99f09c28b6711b65966597007",
+        "stemEn": "You need a bag, want to pay in cash, and want proof of purchase. Which response includes all three?",
+        "stemViCandidate": "Bạn cần túi, muốn trả tiền mặt và muốn có chứng từ mua hàng. Câu trả lời nào gồm đủ cả ba?",
+        "options": [
+          {
+            "id": "A",
+            "text": "No bag, thanks. By card, please. Can I have a receipt?"
+          },
+          {
+            "id": "B",
+            "text": "A bag, please. I will pay in cash. Can I have a receipt, please?"
+          },
+          {
+            "id": "C",
+            "text": "A bag, please. I will pay in cash."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-007",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-007",
+    "objectiveId": "O-FOOD",
+    "communicationIntent": "CLARIFY_FOOD_ORDER",
+    "vocabularyIds": [
+      "VS-ingredient",
+      "VS-without",
+      "VS-order-food"
+    ],
+    "chunkIds": [
+      "CH-ask-ingredients",
+      "CH-exclude-ingredient"
+    ],
+    "evidenceType": "CONTEXTUAL_RECOGNITION",
+    "retryFamilyId": "RF-TKY-DAILY-007",
+    "variants": [
+      {
+        "id": "TWR-TKY-007-V1",
+        "sourceLessonId": "TKY-DAILY-007-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "3ce2a8c0ab57ed657564e40a25f77b57a717756ab16315ec2ba004c6dbe4defe",
+        "stemEn": "You want vegetable noodles with no egg. Which order states both choices?",
+        "stemViCandidate": "Bạn muốn mì rau và không muốn trứng. Cách gọi nào nêu đúng cả hai lựa chọn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "I'll have the vegetable noodles without egg, please."
+          },
+          {
+            "id": "B",
+            "text": "Chicken noodles without an egg, please."
+          },
+          {
+            "id": "C",
+            "text": "Vegetable noodles with an egg, please."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-007-V2",
+        "sourceLessonId": "TKY-DAILY-007-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "29d105302b7dda724a4939cefd425f85e8952149af264da4e14455c7e18e767a",
+        "stemEn": "You want chicken noodles with no spring onions. Which order states both choices?",
+        "stemViCandidate": "Bạn muốn mì gà và không muốn hành lá. Cách gọi nào nêu đúng cả hai lựa chọn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Vegetable noodles without spring onions, please."
+          },
+          {
+            "id": "B",
+            "text": "Chicken noodles without spring onions, please."
+          },
+          {
+            "id": "C",
+            "text": "Chicken noodles with spring onions, please."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-008",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-008",
+    "objectiveId": "O-REPAIR",
+    "communicationIntent": "REPAIR_UNDERSTANDING",
+    "vocabularyIds": [
+      "VS-order-food",
+      "VS-bill-restaurant",
+      "VS-receipt"
+    ],
+    "chunkIds": [
+      "CH-request-bill",
+      "CH-repair-order"
+    ],
+    "evidenceType": "CONTEXTUAL_RECOGNITION",
+    "retryFamilyId": "RF-TKY-DAILY-008",
+    "variants": [
+      {
+        "id": "TWR-TKY-008-V1",
+        "sourceLessonId": "TKY-DAILY-008-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "96ea13b4828d1b03b9573cdfb480008f30f9ca1d454dce39939b9ef9808c9a79",
+        "stemEn": "You ordered vegetable soup but received chicken soup. What is a clear, non-accusatory repair?",
+        "stemViCandidate": "Bạn gọi súp rau nhưng được mang súp gà. Cách sửa hiểu lầm nào rõ ràng và không trách móc?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, I ordered the vegetable soup."
+          },
+          {
+            "id": "B",
+            "text": "Could we have the bill, please?"
+          },
+          {
+            "id": "C",
+            "text": "I prefer chicken soup."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-008-V2",
+        "sourceLessonId": "TKY-DAILY-008-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "51ad3ae65c41faba5089e0bf12404db96d67691627cba84b59492128c65962c0",
+        "stemEn": "You ordered chicken noodles but received vegetable noodles. Which response names your intended order?",
+        "stemViCandidate": "Bạn gọi mì gà nhưng được mang mì rau. Câu nào nêu đúng món bạn đã gọi?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Can we have the check, please?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, I ordered the chicken noodles."
+          },
+          {
+            "id": "C",
+            "text": "Vegetable noodles are very good."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-009",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-009",
+    "objectiveId": "O-ROUTE",
+    "communicationIntent": "ASK_FOR_DIRECTIONS",
+    "vocabularyIds": [
+      "VS-straight-route",
+      "VS-turn-direction",
+      "VS-next-to"
+    ],
+    "chunkIds": [
+      "CH-ask-directions",
+      "CH-go-past-landmark"
+    ],
+    "evidenceType": "CONTEXTUAL_RECOGNITION",
+    "retryFamilyId": "RF-TKY-DAILY-009",
+    "variants": [
+      {
+        "id": "TWR-TKY-009-V1",
+        "sourceLessonId": "TKY-DAILY-009-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "466802ad644891c667041de8d634eb8a5cf1f93f8670e5acbe1e2cf977402bc9",
+        "stemEn": "Starting at Cedar Corner, how do you reach the station on the practice map?",
+        "stemViCandidate": "Từ Cedar Corner, bạn đi đến ga theo sơ đồ luyện tập như thế nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Go straight past the bank, turn left at the library; the station is next to the post office."
+          },
+          {
+            "id": "B",
+            "text": "Turn left at the bank, then go straight past the library to the post office."
+          },
+          {
+            "id": "C",
+            "text": "Go straight past the bank, turn right at the library; the station is next to the post office."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-009-V2",
+        "sourceLessonId": "TKY-DAILY-009-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "2d1a74173373fd83be6f3b407f8e0b76d402c48e2c82464ec02d1e6cfe135462",
+        "stemEn": "Starting at River Corner, how do you reach the museum?",
+        "stemViCandidate": "Từ River Corner, bạn đi đến bảo tàng như thế nào?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Go straight past the cafe, turn right at the park; the museum is next to the hotel."
+          },
+          {
+            "id": "B",
+            "text": "Turn right at the cafe, then go straight to the park; the museum is next to the hotel."
+          },
+          {
+            "id": "C",
+            "text": "Go straight past the cafe, turn left at the park; the museum is next to the hotel."
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  },
+  {
+    "id": "TWR-TKY-010",
+    "status": "DRAFT",
+    "contentRevision": "TOKYO-DAILY-r2",
+    "scenarioId": "TKY-DAILY-011",
+    "objectiveId": "O-REPAIR",
+    "communicationIntent": "REQUEST_REPETITION",
+    "vocabularyIds": [
+      "VS-repeat",
+      "VS-again",
+      "VS-catch-hear"
+    ],
+    "chunkIds": [
+      "CH-ask-repeat",
+      "CH-signal-missed-info"
+    ],
+    "evidenceType": "RECOGNITION",
+    "retryFamilyId": "RF-TKY-DAILY-011",
+    "variants": [
+      {
+        "id": "TWR-TKY-010-V1",
+        "sourceLessonId": "TKY-DAILY-011-L1",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "d50e8fdbfbac6d950dfaaa967131bf1608cf61f7cf819680415c13d5c3fb4b30",
+        "stemEn": "You did not hear the minutes in the train time. Which response politely asks the staff member to repeat them?",
+        "stemViCandidate": "Bạn không nghe rõ phút trong giờ tàu chạy. Câu nào lịch sự nhờ nhân viên nhắc lại?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, I didn’t catch the time. Could you say that again, please?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, is that the departure time?"
+          },
+          {
+            "id": "C",
+            "text": "Sorry, which platform does it leave from?"
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      },
+      {
+        "id": "TWR-TKY-010-V2",
+        "sourceLessonId": "TKY-DAILY-011-L2",
+        "sourceLessonRevision": "TOKYO-DAILY-r2",
+        "sourceLessonSha256": "4fda8fdfc8ac897bfd95829e4cfd0f1ba7c8bc2bd6ee94ebb9402c6396448d2d",
+        "stemEn": "You missed a table number. Which response clearly asks the speaker to repeat it?",
+        "stemViCandidate": "Bạn không nghe rõ số bàn. Câu nào yêu cầu người nói nhắc lại?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Sorry, where is that table?"
+          },
+          {
+            "id": "B",
+            "text": "Sorry, could you repeat that?"
+          },
+          {
+            "id": "C",
+            "text": "Sorry, is that my table number?"
+          }
+        ],
+        "deliveryRequirement": "READ_SOURCE_STIMULUS_WITHOUT_MODELED_ANSWER_THEN_CONFIRM_ONE_CHOICE"
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "distractor": "PENDING",
+      "educator": "PENDING"
+    },
+    "parentRevision": "TOKYO-DAILY-r1"
+  }
+]

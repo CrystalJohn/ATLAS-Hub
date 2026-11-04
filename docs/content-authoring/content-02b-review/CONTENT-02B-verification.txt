@@ -1,0 +1,4 @@
+PASS — 12 scenarios, 24 hashed source lessons, 10 Tower candidate families, 20 question variants, 20 private keys.
+PASS — IDs, objective/source/vocabulary/chunk links, retries, hashes, private-key separation, bilingual feedback, DRAFT gates and audio/asset boundaries.
+PASS 02B: 02A unchanged; 12 r2 scenarios / 24 lesson digests; 20 variant dependencies and private keys; 310 matrix units; 6 v2 role-sensitive script hashes; no human lock or audio.
+PASS negative oracles: edited script text and reordered role turns invalidate hash. Semantic validity/human approval NOT established.

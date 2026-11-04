@@ -1,0 +1,16 @@
+{
+  "CONTENT-02A-architecture-review.md": "bf2a1cff8c5cd2be5dcfe4cdc44a31dda6eacf1b65d241c3b8c8315df26092da",
+  "CONTENT-02A-final-report.md": "b1967b7e0e6a41622ba382e16373fc4172dbbdb232754a2667a19282f6dae3f7",
+  "TOKYO-assets.md": "ed315782b180347c3154c29c7f28a0b9996dc4a3e478d8522f98b3998a1eb220",
+  "TOKYO-editorial-matrix.md": "96dfab20c46e7b2d1050cd87fdb8007930c977bf53d5a13447baa35230f25d42",
+  "TOKYO-learning-objectives.md": "96f6866f687b6524e617bb5958813acfaac7fbb2bed7c93d5a68d17d31f0150c",
+  "TOKYO-listening-scripts.md": "873fc3a53503471dc08e7203ae42f915e1d9a54a37e4266f4c082e8015066d2a",
+  "TOKYO-scenarios.json": "59fb95a24b4d4eda1b6c343aa869d8271224b46ddaa7f4125d3759e58be2d49e",
+  "TOKYO-scenarios.md": "4aa1b8ee04c975bef0bcf0ba2f637f66a074c634148929bbb09d2fb02661c3a6",
+  "TOKYO-source-register.md": "ab357aebc25b7c0b1d77819c2ef6d7d6568a45774a223faf73decb1f11fade62",
+  "TOKYO-tower-candidates.json": "1b24f3a01f25fe41640721558c2c3221f86ba50ee0ff9c2002b62ba339f0bb7a",
+  "TOKYO-tower-candidates.md": "fae8356cbbaf8247d8d5d4f8f0171eed89de4ab56b517783db7f903d4d02184f",
+  "TOKYO-tower-keys.private.json": "ab98905ef8fdf0f6e3de8712121afaaca4398fd5b015ba6cd875cb8cbefd064b",
+  "TOKYO-vocabulary-and-chunks.md": "ebc5a559f9e81cb3afb3d9503424cb1a425efbe99bacf22746433230f7d52ada",
+  "verify_content_02a.mjs": "2de38f01966dcd3105a3cd9892b471e3bdbdf9431ac7f3001f0352accb6bf76e"
+}
