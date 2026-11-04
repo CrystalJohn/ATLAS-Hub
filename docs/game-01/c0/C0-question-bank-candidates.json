@@ -1,0 +1,1087 @@
+{
+  "schema": "C0-editorial-draft-only-v1",
+  "towerId": "tower:narita-airport-survival",
+  "bankId": "g01-c0-jp-arrival-candidates",
+  "bankRevision": 1,
+  "status": "DRAFT",
+  "sourceCommit": "e1d07867e799e36bec6c550dca9e4f1dcf258dfe",
+  "date": "2026-10-26",
+  "floorCount": 5,
+  "bossFloor": 5,
+  "records": [
+    {
+      "id": "g01-c0-air-001",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 1,
+      "familyId": "f1-airport-lexical-senses",
+      "conceptTags": [
+        "AIR-LEX"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2 audience; foundation may be A1",
+      "bandRationale": "Place/vehicle/document distinction; no evidence of B1 reading.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "At the airport: “Where is the train station?”",
+        "vi": "Tại sân bay: “Ga tàu ở đâu?”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "In this question, what does “station” name?",
+            "vi": "Trong câu hỏi này, “station” chỉ gì?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "The place to go for the train.",
+                "vi": "Nơi đến để đi tàu."
+              },
+              "rationale": {
+                "en": "Correct: station names the place; the lesson specifies a train station.",
+                "vi": "Đúng: station chỉ địa điểm; bài học nói rõ đây là ga tàu."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "The train you travel on.",
+                "vi": "Con tàu bạn đi."
+              },
+              "rationale": {
+                "en": "Train names the vehicle, not the station.",
+                "vi": "Train chỉ phương tiện, không phải nhà ga."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "The ticket for the journey.",
+                "vi": "Vé cho chuyến đi."
+              },
+              "rationale": {
+                "en": "Ticket names the travel ticket, not the place.",
+                "vi": "Ticket chỉ vé đi lại, không phải địa điểm."
+              }
+            }
+          ],
+          "answerId": "c1",
+          "sourceRefs": [
+            "P01",
+            "P02",
+            "P04"
+          ],
+          "objectiveIds": [
+            "AIR-LEX"
+          ],
+          "remediationId": "R-VOC"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-002",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 1,
+      "familyId": "f1-airport-lexical-senses",
+      "conceptTags": [
+        "AIR-LEX"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2 audience; foundation may be A1",
+      "bandRationale": "Identifies ticket in a taught sentence, without testing purchase/price/quantity.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "“I need a train ticket.”",
+        "vi": "“Tôi cần một vé tàu.”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "What does this person say they need?",
+            "vi": "Người này nói họ cần gì?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "station",
+                "vi": "station — ga tàu"
+              },
+              "rationale": {
+                "en": "Station is the place, not the ticket.",
+                "vi": "Station là địa điểm, không phải vé."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "ticket",
+                "vi": "ticket — vé"
+              },
+              "rationale": {
+                "en": "Correct: ticket is the item needed for travel in the taught example.",
+                "vi": "Đúng: ticket là vé cần dùng để đi lại trong ví dụ đã học."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "train",
+                "vi": "train — tàu hỏa"
+              },
+              "rationale": {
+                "en": "Train is the vehicle, not its ticket.",
+                "vi": "Train là phương tiện, không phải vé đi tàu."
+              }
+            }
+          ],
+          "answerId": "c2",
+          "sourceRefs": [
+            "P02",
+            "P01",
+            "P04"
+          ],
+          "objectiveIds": [
+            "AIR-LEX"
+          ],
+          "remediationId": "R-VOC"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-003",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 1,
+      "familyId": "f1-airport-lexical-senses",
+      "conceptTags": [
+        "AIR-LEX"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2 audience; foundation may be A1",
+      "bandRationale": "Recognizes the taught travel intention; does not infer a ticket transaction.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "“I would like to take the train.”",
+        "vi": "“Tôi muốn đi tàu.”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "What does the person want to do?",
+            "vi": "Người này muốn làm gì?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "Ask where the station is.",
+                "vi": "Hỏi ga tàu ở đâu."
+              },
+              "rationale": {
+                "en": "This sentence states a travel choice; it does not ask for a location.",
+                "vi": "Câu này nêu lựa chọn đi lại; không hỏi vị trí."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "Ask for a train ticket.",
+                "vi": "Đề nghị lấy một vé tàu."
+              },
+              "rationale": {
+                "en": "A ticket may be needed later, but this sentence does not ask for one.",
+                "vi": "Sau đó có thể cần vé, nhưng câu này không đề nghị lấy vé."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "Travel by train.",
+                "vi": "Đi bằng tàu hỏa."
+              },
+              "rationale": {
+                "en": "Correct: take the train expresses travel by train in this example.",
+                "vi": "Đúng: take the train diễn đạt việc đi bằng tàu trong ví dụ này."
+              }
+            }
+          ],
+          "answerId": "c3",
+          "sourceRefs": [
+            "P04",
+            "P01",
+            "P02"
+          ],
+          "objectiveIds": [
+            "AIR-LEX"
+          ],
+          "remediationId": "R-VOC"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-004",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 1,
+      "familyId": "f1-airport-lexical-senses",
+      "conceptTags": [
+        "AIR-LEX"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2 audience; foundation may be A1",
+      "bandRationale": "Recognizes the taught function of please; no ranking of can versus could.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "“Could you help me, please?”",
+        "vi": "“Bạn giúp tôi được không?”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "What does “please” do in this airport request?",
+            "vi": "“Please” có tác dụng gì trong lời nhờ giúp đỡ ở sân bay này?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "Makes the request polite.",
+                "vi": "Làm lời đề nghị lịch sự hơn."
+              },
+              "rationale": {
+                "en": "Correct: the vocabulary note teaches please as a polite request marker.",
+                "vi": "Đúng: mục từ vựng dạy please dùng trong lời đề nghị lịch sự."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "Names the transport the person wants.",
+                "vi": "Nêu phương tiện người nói muốn đi."
+              },
+              "rationale": {
+                "en": "Please does not name transport; train does that in the lesson.",
+                "vi": "Please không chỉ phương tiện; train mới chỉ phương tiện trong bài."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "Shows the direction to the station.",
+                "vi": "Chỉ hướng đi tới ga tàu."
+              },
+              "rationale": {
+                "en": "Please gives no direction; the sign and Mika’s reply provide that.",
+                "vi": "Please không chỉ hướng; biển và lời đáp của Mika mới cung cấp hướng đi."
+              }
+            }
+          ],
+          "answerId": "c1",
+          "sourceRefs": [
+            "P03",
+            "P04",
+            "P06"
+          ],
+          "objectiveIds": [
+            "AIR-LEX"
+          ],
+          "remediationId": "R-VOC"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-005",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 2,
+      "familyId": "f2-original-sign",
+      "conceptTags": [
+        "AIR-SIGN"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2 audience; simple sign recognition",
+      "bandRationale": "Matches a taught label to an arrow; not real Narita navigation.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "Fictional terminal: TRAINS → · BUSES ← · EXIT ↑. These are the original practice signs.",
+        "vi": "Nhà ga hư cấu: TRAINS → · BUSES ← · EXIT ↑. Đây là các biển luyện tập trong bài gốc."
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "You want the train station. Which way does its sign point?",
+            "vi": "Bạn muốn tới ga tàu. Biển tương ứng chỉ hướng nào?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "Left (←).",
+                "vi": "Sang trái (←)."
+              },
+              "rationale": {
+                "en": "Left is the BUSES arrow, not the train direction in this scene.",
+                "vi": "Mũi tên sang trái thuộc BUSES, không phải hướng tàu trong cảnh này."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "Right (→).",
+                "vi": "Sang phải (→)."
+              },
+              "rationale": {
+                "en": "Correct: the TRAINS arrow points right in this fictional terminal.",
+                "vi": "Đúng: mũi tên TRAINS chỉ sang phải trong nhà ga hư cấu này."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "Forward (↑).",
+                "vi": "Đi thẳng về phía trước (↑)."
+              },
+              "rationale": {
+                "en": "The upward arrow belongs to EXIT, not TRAINS.",
+                "vi": "Mũi tên hướng lên thuộc EXIT, không phải TRAINS."
+              }
+            }
+          ],
+          "answerId": "c2",
+          "sourceRefs": [
+            "P05",
+            "P06"
+          ],
+          "objectiveIds": [
+            "AIR-SIGN"
+          ],
+          "remediationId": "R-SIGN"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-006",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 2,
+      "familyId": "f2-original-sign",
+      "conceptTags": [
+        "AIR-SIGN"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2 audience; simple sign recognition",
+      "bandRationale": "Alternate task: selects the destination label rather than naming a direction; same concept family.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "“I would like to take the train.” Use the original terminal signs: TRAINS → · BUSES ← · EXIT ↑.",
+        "vi": "“Tôi muốn đi tàu.” Dùng biển gốc trong nhà ga: TRAINS → · BUSES ← · EXIT ↑."
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "Which sign matches this travel goal?",
+            "vi": "Biển nào phù hợp mục tiêu đi lại này?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "TRAINS →",
+                "vi": "TRAINS → — TÀU sang phải"
+              },
+              "rationale": {
+                "en": "Correct: TRAINS matches the train station goal in the original scene.",
+                "vi": "Đúng: TRAINS phù hợp mục tiêu tới ga tàu trong cảnh gốc."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "BUSES ←",
+                "vi": "BUSES ← — XE BUÝT sang trái"
+              },
+              "rationale": {
+                "en": "This is the bus sign; your goal is the train station.",
+                "vi": "Đây là biển xe buýt; mục tiêu là tới ga tàu."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "EXIT ↑",
+                "vi": "EXIT ↑ — LỐI RA phía trước"
+              },
+              "rationale": {
+                "en": "This is the exit sign; it does not match the train station goal.",
+                "vi": "Đây là biển lối ra; không phù hợp mục tiêu tới ga tàu."
+              }
+            }
+          ],
+          "answerId": "c1",
+          "sourceRefs": [
+            "P04",
+            "P05",
+            "P08"
+          ],
+          "objectiveIds": [
+            "AIR-SIGN"
+          ],
+          "remediationId": "R-SIGN"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-007",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 3,
+      "familyId": "f3-station-request",
+      "conceptTags": [
+        "AIR-REQUEST"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2-oriented pragmatic recognition",
+      "bandRationale": "Selects a taught request by explicit destination; all choices are grammatical and polite.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "Mika: “Welcome! Can I help you?” You need directions to the train station.",
+        "vi": "Mika: “Chào bạn! Tôi giúp gì được?” Bạn cần được chỉ đường tới ga tàu."
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "Choose the request that asks for your destination.",
+            "vi": "Chọn lời hỏi đường tới đúng nơi bạn cần đến."
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "Excuse me, how can I get to the train station?",
+                "vi": "Xin lỗi, tôi đến ga tàu bằng cách nào?"
+              },
+              "rationale": {
+                "en": "Correct: this asks how to reach the train station, the stated goal.",
+                "vi": "Đúng: câu này hỏi cách tới ga tàu, đúng mục tiêu đã nêu."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "Excuse me, how can I get to the buses?",
+                "vi": "Xin lỗi, tôi đến chỗ xe buýt bằng cách nào?"
+              },
+              "rationale": {
+                "en": "This is a polite directions question, but it asks about buses rather than trains.",
+                "vi": "Đây là câu hỏi đường lịch sự, nhưng hỏi chỗ xe buýt thay vì tàu."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "Excuse me, how can I get to the exit?",
+                "vi": "Xin lỗi, tôi đến lối ra bằng cách nào?"
+              },
+              "rationale": {
+                "en": "This is a polite directions question for the exit, not the train station.",
+                "vi": "Đây là câu hỏi đường lịch sự tới lối ra, không phải ga tàu."
+              }
+            }
+          ],
+          "answerId": "c1",
+          "sourceRefs": [
+            "P06",
+            "P05"
+          ],
+          "objectiveIds": [
+            "AIR-REQUEST"
+          ],
+          "remediationId": "R-ASK"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-008",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 3,
+      "familyId": "f3-station-request",
+      "conceptTags": [
+        "AIR-REQUEST"
+      ],
+      "format": "single-select",
+      "intendedBand": "B1-form exposure; A2/B1 recognition hypothesis",
+      "bandRationale": "Longer taught indirect question; recognizing it does not establish productive B1 ability.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "“Excuse me, could you tell me how to get to the train station?”",
+        "vi": "“Xin lỗi, bạn có thể chỉ tôi cách đến ga tàu được không?”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "What is the traveller asking Mika to help with?",
+            "vi": "Người đi đường đang nhờ Mika giúp việc gì?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "To ask for a train ticket.",
+                "vi": "Đề nghị lấy vé tàu."
+              },
+              "rationale": {
+                "en": "The sentence asks how to reach a place; it does not request a ticket.",
+                "vi": "Câu này hỏi cách tới một nơi; không đề nghị lấy vé."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "To ask how to reach the train station.",
+                "vi": "Hỏi cách tới ga tàu."
+              },
+              "rationale": {
+                "en": "Correct: how to get to the train station asks for directions to that place.",
+                "vi": "Đúng: how to get to the train station hỏi đường tới ga tàu."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "To ask how to reach the exit.",
+                "vi": "Hỏi cách tới lối ra."
+              },
+              "rationale": {
+                "en": "The destination named is the train station, not the exit.",
+                "vi": "Nơi được nhắc tới là ga tàu, không phải lối ra."
+              }
+            }
+          ],
+          "answerId": "c2",
+          "sourceRefs": [
+            "P07",
+            "P02",
+            "P05"
+          ],
+          "objectiveIds": [
+            "AIR-REQUEST"
+          ],
+          "remediationId": "R-ASK"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-009",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 4,
+      "familyId": "f4-mika-instruction",
+      "conceptTags": [
+        "AIR-FOLLOW"
+      ],
+      "format": "single-select",
+      "intendedBand": "A2 audience; short written instruction",
+      "bandRationale": "Follows a taught textual instruction to a destination; no listening assessment.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "Mika: “Follow the TRAINS sign to the right.”",
+        "vi": "Mika: “Đi theo biển TRAINS sang phải.”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "Which destination should you follow the sign to?",
+            "vi": "Bạn cần đi theo biển để tới nơi nào?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "The bus area.",
+                "vi": "Khu xe buýt."
+              },
+              "rationale": {
+                "en": "BUSES is a different destination on the original signboard.",
+                "vi": "BUSES là điểm đến khác trên biển gốc."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "The exit.",
+                "vi": "Lối ra."
+              },
+              "rationale": {
+                "en": "EXIT is not the destination named by Mika.",
+                "vi": "EXIT không phải điểm đến Mika nhắc tới."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "The train station entrance.",
+                "vi": "Lối vào ga tàu."
+              },
+              "rationale": {
+                "en": "Correct: TRAINS leads to the station entrance in the taught task.",
+                "vi": "Đúng: TRAINS dẫn tới lối vào ga tàu trong nhiệm vụ đã học."
+              }
+            }
+          ],
+          "answerId": "c3",
+          "sourceRefs": [
+            "P06",
+            "P08",
+            "P05"
+          ],
+          "objectiveIds": [
+            "AIR-FOLLOW"
+          ],
+          "remediationId": "R-FOLLOW"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-010",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 4,
+      "familyId": "f4-mika-instruction",
+      "conceptTags": [
+        "AIR-FOLLOW"
+      ],
+      "format": "single-select",
+      "intendedBand": "B1-form exposure; short instruction recognition",
+      "bandRationale": "Reads two connected sentences and binds label/direction; not calibrated B1 complexity.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "Mika: “Follow the sign to your right. It says TRAINS.”",
+        "vi": "Mika: “Đi theo biển bên phải bạn. Biển ghi TRAINS.”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "Which sign and direction match Mika’s instruction?",
+            "vi": "Biển và hướng nào khớp chỉ dẫn của Mika?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "TRAINS — right (→).",
+                "vi": "TRAINS — sang phải (→)."
+              },
+              "rationale": {
+                "en": "Correct: Mika names TRAINS and places the sign to your right.",
+                "vi": "Đúng: Mika nói biển ghi TRAINS và ở bên phải bạn."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "BUSES — right (→).",
+                "vi": "BUSES — sang phải (→)."
+              },
+              "rationale": {
+                "en": "The direction is right, but Mika names TRAINS, not BUSES.",
+                "vi": "Hướng phải đúng, nhưng Mika nói TRAINS, không phải BUSES."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "TRAINS — left (←).",
+                "vi": "TRAINS — sang trái (←)."
+              },
+              "rationale": {
+                "en": "The label is right, but left reverses Mika’s direction.",
+                "vi": "Nhãn biển đúng, nhưng hướng trái ngược với chỉ dẫn của Mika."
+              }
+            }
+          ],
+          "answerId": "c1",
+          "sourceRefs": [
+            "P07",
+            "P05"
+          ],
+          "objectiveIds": [
+            "AIR-FOLLOW"
+          ],
+          "remediationId": "R-FOLLOW"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-011",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 5,
+      "familyId": "f5-request-navigation-boss",
+      "conceptTags": [
+        "AIR-REQUEST",
+        "AIR-SIGN",
+        "AIR-FOLLOW"
+      ],
+      "format": "two-part-single-select",
+      "intendedBand": "A2-oriented integrated recognition",
+      "bandRationale": "Two decisions combine taught request intent and original sign direction. Floor 5 is the boss.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "Airport boss. You need the train station. Mika offers help. Original signs: TRAINS → · BUSES ← · EXIT ↑.",
+        "vi": "Boss sân bay. Bạn cần tới ga tàu. Mika đề nghị giúp. Biển gốc: TRAINS → · BUSES ← · EXIT ↑."
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "1. Ask Mika how to reach the train station.",
+            "vi": "1. Hỏi Mika cách tới ga tàu."
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "Excuse me, how can I get to the train station?",
+                "vi": "Xin lỗi, tôi đến ga tàu bằng cách nào?"
+              },
+              "rationale": {
+                "en": "Correct: this asks how to reach the train station, the stated goal.",
+                "vi": "Đúng: câu này hỏi cách tới ga tàu, đúng mục tiêu đã nêu."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "Excuse me, how can I get to the buses?",
+                "vi": "Xin lỗi, tôi đến chỗ xe buýt bằng cách nào?"
+              },
+              "rationale": {
+                "en": "This is a polite directions question, but it asks about buses rather than trains.",
+                "vi": "Đây là câu hỏi đường lịch sự, nhưng hỏi chỗ xe buýt thay vì tàu."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "Excuse me, how can I get to the exit?",
+                "vi": "Xin lỗi, tôi đến lối ra bằng cách nào?"
+              },
+              "rationale": {
+                "en": "This is a polite directions question for the exit, not the train station.",
+                "vi": "Đây là câu hỏi đường lịch sự tới lối ra, không phải ga tàu."
+              }
+            }
+          ],
+          "answerId": "c1",
+          "sourceRefs": [
+            "P06",
+            "P05"
+          ],
+          "objectiveIds": [
+            "AIR-REQUEST"
+          ],
+          "remediationId": "R-ASK"
+        },
+        {
+          "id": "p2",
+          "stem": {
+            "en": "2. Which direction does the original train sign show?",
+            "vi": "2. Biển tàu trong bài gốc chỉ hướng nào?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "Left (←).",
+                "vi": "Sang trái (←)."
+              },
+              "rationale": {
+                "en": "Left is the BUSES arrow, not the train direction in this scene.",
+                "vi": "Mũi tên sang trái thuộc BUSES, không phải hướng tàu trong cảnh này."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "Right (→).",
+                "vi": "Sang phải (→)."
+              },
+              "rationale": {
+                "en": "Correct: the TRAINS arrow points right in this fictional terminal.",
+                "vi": "Đúng: mũi tên TRAINS chỉ sang phải trong nhà ga hư cấu này."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "Forward (↑).",
+                "vi": "Đi thẳng về phía trước (↑)."
+              },
+              "rationale": {
+                "en": "The upward arrow belongs to EXIT, not TRAINS.",
+                "vi": "Mũi tên hướng lên thuộc EXIT, không phải TRAINS."
+              }
+            }
+          ],
+          "answerId": "c2",
+          "sourceRefs": [
+            "P05",
+            "P06"
+          ],
+          "objectiveIds": [
+            "AIR-SIGN",
+            "AIR-FOLLOW"
+          ],
+          "remediationId": "R-SIGN"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    },
+    {
+      "id": "g01-c0-air-012",
+      "revision": 1,
+      "status": "DRAFT",
+      "floor": 5,
+      "familyId": "f5-request-navigation-boss",
+      "conceptTags": [
+        "AIR-REQUEST",
+        "AIR-SIGN",
+        "AIR-FOLLOW"
+      ],
+      "format": "two-part-single-select",
+      "intendedBand": "B1-form exposure; integrated recognition hypothesis",
+      "bandRationale": "Equivalent intent + navigation blueprint; reverses cue direction, not merely answer order.",
+      "evidenceKind": "cued-recognition",
+      "fictionClassification": "fictional-scenario",
+      "stimulus": {
+        "en": "Airport boss. A traveller asks: “Excuse me, could you tell me how to get to the train station?” Mika replies: “Follow the sign to your right. It says TRAINS.”",
+        "vi": "Boss sân bay. Người đi đường hỏi: “Xin lỗi, bạn có thể chỉ tôi cách đến ga tàu được không?” Mika đáp: “Đi theo biển bên phải bạn. Biển ghi TRAINS.”"
+      },
+      "parts": [
+        {
+          "id": "p1",
+          "stem": {
+            "en": "1. What help does the traveller ask for?",
+            "vi": "1. Người đi đường nhờ giúp việc gì?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "To ask for a train ticket.",
+                "vi": "Đề nghị lấy vé tàu."
+              },
+              "rationale": {
+                "en": "The sentence asks how to reach a place; it does not request a ticket.",
+                "vi": "Câu này hỏi cách tới một nơi; không đề nghị lấy vé."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "To ask how to reach the train station.",
+                "vi": "Hỏi cách tới ga tàu."
+              },
+              "rationale": {
+                "en": "Correct: how to get to the train station asks for directions to that place.",
+                "vi": "Đúng: how to get to the train station hỏi đường tới ga tàu."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "To ask how to reach the exit.",
+                "vi": "Hỏi cách tới lối ra."
+              },
+              "rationale": {
+                "en": "The destination named is the train station, not the exit.",
+                "vi": "Nơi được nhắc tới là ga tàu, không phải lối ra."
+              }
+            }
+          ],
+          "answerId": "c2",
+          "sourceRefs": [
+            "P07",
+            "P02",
+            "P05"
+          ],
+          "objectiveIds": [
+            "AIR-REQUEST"
+          ],
+          "remediationId": "R-ASK"
+        },
+        {
+          "id": "p2",
+          "stem": {
+            "en": "2. Which sign and direction should the traveller follow?",
+            "vi": "2. Người đi đường cần theo biển nào, về hướng nào?"
+          },
+          "options": [
+            {
+              "id": "c1",
+              "text": {
+                "en": "TRAINS — right (→).",
+                "vi": "TRAINS — sang phải (→)."
+              },
+              "rationale": {
+                "en": "Correct: Mika names TRAINS and places the sign to your right.",
+                "vi": "Đúng: Mika nói biển ghi TRAINS và ở bên phải bạn."
+              }
+            },
+            {
+              "id": "c2",
+              "text": {
+                "en": "BUSES — right (→).",
+                "vi": "BUSES — sang phải (→)."
+              },
+              "rationale": {
+                "en": "The direction is right, but Mika names TRAINS, not BUSES.",
+                "vi": "Hướng phải đúng, nhưng Mika nói TRAINS, không phải BUSES."
+              }
+            },
+            {
+              "id": "c3",
+              "text": {
+                "en": "TRAINS — left (←).",
+                "vi": "TRAINS — sang trái (←)."
+              },
+              "rationale": {
+                "en": "The label is right, but left reverses Mika’s direction.",
+                "vi": "Nhãn biển đúng, nhưng hướng trái ngược với chỉ dẫn của Mika."
+              }
+            }
+          ],
+          "answerId": "c1",
+          "sourceRefs": [
+            "P07",
+            "P05",
+            "P08"
+          ],
+          "objectiveIds": [
+            "AIR-SIGN",
+            "AIR-FOLLOW"
+          ],
+          "remediationId": "R-FOLLOW"
+        }
+      ],
+      "review": {
+        "assistantSemanticCheck": "completed 2026-10-26; author self-check only",
+        "viStatus": "reviewed-candidate by assistant; independent bilingual educator PENDING",
+        "educatorSignoff": null,
+        "independentAdversarialSignoff": null,
+        "ownerPublicationApproval": null
+      }
+    }
+  ],
+  "publicationEligible": false,
+  "notes": [
+    "Documentation authoring payload only; not a runtime bank or approved schema.",
+    "Twelve records, fourteen atomic decisions, six atomic decisions per successful run.",
+    "VI is an assistant-checked candidate; no independent educator has reviewed this bank.",
+    "Challenge exposes EN stimuli/options; VI fields are review, Practice and post-answer support.",
+    "No new correct-answer fact outside original jp-arrival; distractors are newly authored same-terminal alternatives.",
+    "Repeated concepts across floors are deliberate rehearsal and can cue the boss; do not count them as independent mastery evidence."
+  ]
+}

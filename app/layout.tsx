@@ -3,6 +3,7 @@ import {InterfaceLanguageProvider} from './components/Bilingual';
 import './globals.css';
 import './chapter.css';
 import './travel.css';
+import './tower.css';
 import './auth.css';
 import './account.css';
 import './welcome.css';
