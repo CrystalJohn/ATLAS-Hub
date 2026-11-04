@@ -1,0 +1,60 @@
+/* Navigation V2: one world context, one section nav, utilities in the header. */
+.navigation-v2{--nav-ink:#302956;--nav-purple:#7445d5;--nav-sage:#517b59;padding-bottom:0}
+.navigation-v2 .atlas-chrome{grid-template-columns:190px minmax(0,1fr) auto}
+.nav-v2-utilities{display:flex;align-items:center;justify-content:center;gap:8px;grid-column:2;grid-row:1}
+.nav-v2-utilities a,.nav-v2-context a,.nav-v2-journal-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 12px;border-radius:10px;color:#716582;text-decoration:none;font-size:12px;font-weight:800;line-height:1.35;transition:background-color .15s,color .15s;min-width:0}
+.nav-v2-utilities a:hover,.nav-v2-utilities a[aria-current=page]{color:#6841a8;background:#f1eafa}
+.nav-v2-context{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid #ded6e7;margin:0 0 24px;padding:0 0 12px;color:var(--nav-ink)}
+.nav-v2-worlds{display:flex;gap:4px;padding:4px;border:1px solid #dfd2bc;background:#fff8ec;border-radius:13px;flex-shrink:0}
+.nav-v2-worlds a{font-size:13px;color:#76677b;padding:10px 14px}
+.nav-v2-worlds a[aria-current=page]{background:#7445d5;color:white;box-shadow:0 2px 0 #58349f}
+.world-nature .nav-v2-worlds a[aria-current=page]{background:#537f60;box-shadow:0 2px 0 #3a5e44}
+.nav-v2-sections{display:flex;gap:7px;align-items:center}
+.nav-v2-sections a{position:relative;border-radius:4px;color:#82728a}
+.nav-v2-sections a[aria-current=page]{color:#6841a8;background:#f0e8fa}
+.nav-v2-sections a[aria-current=page]:after{content:'';position:absolute;height:3px;bottom:-13px;left:12px;right:12px;border-radius:3px;background:#7445d5}
+.world-nature .nav-v2-sections a[aria-current=page]{color:#3f6f4c;background:#e9f1e7}
+.world-nature .nav-v2-sections a[aria-current=page]:after{background:#608c68}
+.nav-v2-context a:hover{background:#f0eafa;color:#5a358c}.world-nature .nav-v2-context a:hover{background:#e9f1e7;color:#3f6f4c}
+.nav-v2-context a:focus-visible,.nav-v2-utilities a:focus-visible,.nav-v2-journal-link:focus-visible,.nav-v2-recovery a:focus-visible{outline:3px solid #9774cc;outline-offset:3px}
+.navigation-v2 a[aria-disabled=true]{opacity:.55;cursor:wait}
+.navigation-v2 .travel-toolbar{justify-content:flex-end}
+.nav-v2-journal-link{background:#efe8f8;color:#6841a8;margin-top:18px}
+.nav-v2-recovery{padding:24px;border:1px solid #dfd2bc;border-radius:14px;background:#fff8ec;line-height:1.6}
+.nav-v2-recovery a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;color:#6841a8;font-weight:800}
+.nav-v2-resume{margin-bottom:18px}
+.navigation-v2 .chapter-toolbar .target-picker{display:none}
+@media(max-width:999px){
+ .navigation-v2 .atlas-chrome{display:block;position:relative;background:#fffdf9;border-bottom:1px solid #e4dfe8;padding:0;backdrop-filter:none}
+ .navigation-v2 .atlas-header{display:flex;flex-wrap:wrap;min-height:68px;padding:12px 20px;gap:12px}
+ .nav-v2-utilities{justify-content:flex-end;padding:0 16px 8px;gap:6px}
+ .nav-v2-context{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:20px}
+ .nav-v2-worlds{align-self:flex-start}
+ .nav-v2-sections{justify-content:flex-start;gap:8px}
+ .nav-v2-sections a[aria-current=page]:after{bottom:-12px}
+}
+@media(max-width:540px){
+ .navigation-v2 .atlas-header{padding:12px 15px;gap:10px}
+ .navigation-v2 .atlas-header .traveller-stats{justify-content:flex-end;gap:6px;flex-wrap:wrap}
+ .navigation-v2 .atlas-brand small{font-size:6px}
+ .nav-v2-utilities{padding:0 12px 8px;justify-content:flex-end}
+ .nav-v2-utilities a{font-size:11px;padding:8px 10px}
+ .nav-v2-worlds{align-self:stretch;display:grid;grid-template-columns:1fr 1fr}
+ .nav-v2-worlds a{font-size:12px;padding:8px 6px;justify-content:center}
+ .nav-v2-sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+ .nav-v2-sections a{font-size:11px;gap:5px;padding:8px 4px;justify-content:center;text-align:center;flex-direction:column}
+ .nav-v2-sections a span{overflow-wrap:anywhere}
+ .navigation-v2 .atlas-content{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.nav-v2-context a,.nav-v2-utilities a{transition:none}}
+
+.navigation-v2 .interface-language-toggle,.navigation-v2 .account-trigger{min-height:44px}
+
+@media(max-width:540px){
+ .navigation-v2 .atlas-header .traveller-stats{width:100%;flex-wrap:nowrap;justify-content:space-between;margin-left:0}
+ .navigation-v2 .traveller-stats .level-token{margin-right:0}
+ .navigation-v2 .account-trigger{max-width:120px;gap:4px;padding-inline:6px}
+ .navigation-v2 .account-player-name{max-width:52px}
+ .navigation-v2 .account-avatar{width:29px;height:29px}
+ .navigation-v2 .interface-language-toggle{min-width:44px}
+}

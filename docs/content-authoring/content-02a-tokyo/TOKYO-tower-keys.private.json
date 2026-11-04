@@ -1,0 +1,202 @@
+[
+  {
+    "variantId": "TWR-TKY-001-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "The target is baggage claim, and the board labels it left.",
+    "correctRationaleVi": "Mục tiêu là khu nhận hành lý, và biển chỉ vị trí bên trái.",
+    "distractorRationale": {
+      "B": "Right is the exit, not baggage collection.",
+      "C": "Straight is the train direction, not baggage collection."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-001-V2",
+    "correctOptionId": "B",
+    "correctRationaleEn": "The retry scene says the exit is straight.",
+    "correctRationaleVi": "Cảnh biến thể ghi lối ra ở hướng thẳng.",
+    "distractorRationale": {
+      "A": "Right points to baggage claim, which you have already used.",
+      "C": "Left points to the trains."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-002-V1",
+    "correctOptionId": "B",
+    "correctRationaleEn": "The bus is direct and leaves before 11:30.",
+    "correctRationaleVi": "Xe buýt đi thẳng và khởi hành trước 11:30.",
+    "distractorRationale": {
+      "A": "The shuttle is earlier but requires a change, so it is not direct.",
+      "C": "The delayed train is after the requested cutoff."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-002-V2",
+    "correctOptionId": "C",
+    "correctRationaleEn": "The train is direct and departs at 12:10, before 12:20.",
+    "correctRationaleVi": "Tàu đi thẳng lúc 12:10, trước 12:20.",
+    "distractorRationale": {
+      "A": "The direct bus is delayed until after the cutoff.",
+      "B": "The shuttle requires a change."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-003-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "The taught sequence is Pine as the transfer stop, then Green to Lake.",
+    "correctRationaleVi": "Thứ tự đã học là đổi tuyến tại Pine rồi đi Green đến Lake.",
+    "distractorRationale": {
+      "B": "It stays on Red beyond the stated transfer stop.",
+      "C": "It reaches Pine but never changes to the line that connects to Lake."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-003-V2",
+    "correctOptionId": "B",
+    "correctRationaleEn": "Hill is the transfer stop; Blue connects it to Garden.",
+    "correctRationaleVi": "Hill là ga đổi tuyến; Blue nối Hill với Garden.",
+    "distractorRationale": {
+      "A": "It changes at Garden, after the transfer point.",
+      "C": "It misses the required change at Hill."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-004-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "Both details come from the museum row.",
+    "correctRationaleVi": "Cả hai chi tiết đều thuộc hàng bảo tàng.",
+    "distractorRationale": {
+      "B": "Both details belong to the park row.",
+      "C": "It combines the museum platform with the park departure time."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-004-V2",
+    "correctOptionId": "B",
+    "correctRationaleEn": "Both details come from the park row.",
+    "correctRationaleVi": "Cả hai chi tiết đều thuộc hàng công viên.",
+    "distractorRationale": {
+      "A": "Both details belong to the museum row.",
+      "C": "It combines the park platform with the museum time."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-005-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "The tea label says aisle 2 and 150 yen.",
+    "correctRationaleVi": "Nhãn trà ghi lối 2 và giá 150 yên.",
+    "distractorRationale": {
+      "B": "Those details belong to water.",
+      "C": "Those details belong to juice."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-005-V2",
+    "correctOptionId": "C",
+    "correctRationaleEn": "The new tea label says aisle 3 and 140 yen.",
+    "correctRationaleVi": "Nhãn trà mới ghi lối 3 và giá 140 yên.",
+    "distractorRationale": {
+      "A": "It combines the juice aisle and juice price, not tea.",
+      "B": "Those details belong to water."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-006-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "It declines a bag, chooses card and requests a receipt.",
+    "correctRationaleVi": "Câu này từ chối túi, chọn trả bằng thẻ và xin biên lai.",
+    "distractorRationale": {
+      "B": "It requests a bag and cash, the opposite of the stated preferences.",
+      "C": "It omits the receipt request."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-006-V2",
+    "correctOptionId": "B",
+    "correctRationaleEn": "It requests a bag, chooses cash and asks for a receipt.",
+    "correctRationaleVi": "Câu này xin túi, chọn tiền mặt và xin biên lai.",
+    "distractorRationale": {
+      "A": "It reverses the stated bag and payment choices.",
+      "C": "It omits the receipt request."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-007-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "It keeps the vegetable dish and excludes the optional egg.",
+    "correctRationaleVi": "Câu này giữ món mì rau và bỏ phần trứng tùy chọn.",
+    "distractorRationale": {
+      "B": "It changes the selected dish to chicken noodles.",
+      "C": "It includes the ingredient the learner wants to leave out."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-007-V2",
+    "correctOptionId": "B",
+    "correctRationaleEn": "It keeps chicken noodles and excludes spring onions.",
+    "correctRationaleVi": "Câu này giữ mì gà và bỏ hành lá.",
+    "distractorRationale": {
+      "A": "It changes the selected dish to vegetable noodles.",
+      "C": "It includes the ingredient the learner wants to leave out."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-008-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "It politely names the dish the learner ordered so the staff can check the mismatch.",
+    "correctRationaleVi": "Câu này lịch sự nêu món đã gọi để nhân viên kiểm tra nhầm lẫn.",
+    "distractorRationale": {
+      "B": "It asks to pay and does not identify the incorrect dish.",
+      "C": "It states a preference for the dish received instead of correcting the order."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-008-V2",
+    "correctOptionId": "B",
+    "correctRationaleEn": "It identifies chicken noodles as the intended order.",
+    "correctRationaleVi": "Câu này nêu mì gà là món đã gọi.",
+    "distractorRationale": {
+      "A": "It asks for the check, which concerns payment rather than the dish mismatch.",
+      "C": "It comments on the received dish but does not repair the order."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-009-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "It preserves the taught sequence and final location clue.",
+    "correctRationaleVi": "Câu này giữ đúng thứ tự chỉ đường và manh mối vị trí cuối.",
+    "distractorRationale": {
+      "B": "It turns at the bank and changes the instructed order.",
+      "C": "It turns right where the lesson says to turn left."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-009-V2",
+    "correctOptionId": "A",
+    "correctRationaleEn": "It goes past the cafe, turns right at the park and uses the hotel as the final clue.",
+    "correctRationaleVi": "Câu này đi qua quán cà phê, rẽ phải ở công viên và dùng khách sạn làm mốc cuối.",
+    "distractorRationale": {
+      "B": "It turns at the cafe instead of going past it.",
+      "C": "It turns left where the lesson says right."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-010-V1",
+    "correctOptionId": "A",
+    "correctRationaleEn": "It identifies the missing information and clearly asks for repetition politely.",
+    "correctRationaleVi": "Câu này nêu thông tin chưa nghe rõ và lịch sự xin nhắc lại.",
+    "distractorRationale": {
+      "B": "It claims the time is understood and requests no repair.",
+      "C": "It asks about platform, while the missing detail is the time."
+    }
+  },
+  {
+    "variantId": "TWR-TKY-010-V2",
+    "correctOptionId": "B",
+    "correctRationaleEn": "It is one natural taught form that clearly requests repetition.",
+    "correctRationaleVi": "Đây là một cách diễn đạt tự nhiên đã học để xin nhắc lại.",
+    "distractorRationale": {
+      "A": "It asks about the cafe and does not request the table number again.",
+      "C": "It claims the number is understood."
+    }
+  }
+]

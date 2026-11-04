@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "TKY-DAILY-001",
+    "domain": "Airport recovery",
+    "location": "fictional Tokyo-trip terminal",
+    "npcRole": "information assistant",
+    "goal": "Find baggage claim before leaving",
+    "objectiveIds": [
+      "O-LOCATE"
+    ],
+    "intent": "ASK_LOCATION",
+    "skills": [
+      "reading",
+      "functional English"
+    ],
+    "targetLanguage": [
+      "Where can I find...?",
+      "Turn left/right",
+      "exit",
+      "baggage claim"
+    ],
+    "vocabulary": [
+      "baggage-claim",
+      "exit"
+    ],
+    "chunks": [
+      "where-can-i-find",
+      "which-exit"
+    ],
+    "base": {
+      "id": "TKY-DAILY-001-L1",
+      "en": "You have checked a bag and need to collect it before leaving. A practice board says BAGGAGE CLAIM: LEFT; EXIT: RIGHT; TRAINS: STRAIGHT. You ask, ‘Where can I find baggage claim?’ The assistant answers, ‘Turn left for baggage claim. The exit is on your right.’",
+      "vi": "Bạn ký gửi hành lý và cần nhận trước khi rời đi. Biển luyện tập ghi: NHẬN HÀNH LÝ: TRÁI; LỐI RA: PHẢI; TÀU: THẲNG. Bạn hỏi khu nhận hành lý ở đâu. Nhân viên chỉ sang trái; lối ra ở bên phải."
+    },
+    "retry": {
+      "id": "TKY-DAILY-001-L2",
+      "en": "You have collected your bag and now need to leave the terminal. The practice board says EXIT: STRAIGHT; TRAINS: LEFT; BAGGAGE CLAIM: RIGHT. You ask, 'Which way is the exit?' The assistant says, 'Go straight for the exit.'",
+      "vi": "Bạn đã nhận hành lý và muốn rời nhà ga. Biển luyện tập ghi LỐI RA: ĐI THẲNG; TÀU: TRÁI; NHẬN HÀNH LÝ: PHẢI. Bạn hỏi lối ra ở hướng nào. Nhân viên nói đi thẳng."
+    },
+    "feedback": {
+      "en": "Baggage claim is where checked bags are collected; exit is a way out. Match the requested place before following its direction.",
+      "vi": "Baggage claim là nơi nhận hành lý ký gửi; exit là lối ra. Xác định đúng nơi cần đến rồi mới theo hướng dẫn."
+    },
+    "misunderstanding": "Confuse the exit with baggage collection.",
+    "transfer": "A cloakroom or information desk after its location labels are taught.",
+    "interaction": [
+      "inspect",
+      "dialogue",
+      "target"
+    ],
+    "difficulty": {
+      "lexical": "LOW",
+      "sentence": "LOW",
+      "information": 2,
+      "inference": "NONE",
+      "distractorSimilarity": "MEDIUM",
+      "demand": "RECOGNITION",
+      "support": [
+        "optional Vietnamese",
+        "re-read board",
+        "vocabulary hint"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-NARITA"
+    ],
+    "backlogRefs": [
+      "DE-003"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-001",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-001-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "867a73b4629f86a84f1b4c6a8cbf7aa5c47247f11e51cb70c16888c8ee4a945d",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-001-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "fb2df81a7bb826d673f162f7af4e62ec76478d51f1e620fcf40c148f330fd743",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-baggage-claim",
+      "VS-exit"
+    ],
+    "chunkIds": [
+      "CH-ask-location",
+      "CH-which-exit"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "001-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Read the practice board. Which place do you need?",
+        "promptVi": "Đọc biển luyện tập. Bạn cần đến khu vực nào?",
+        "playerAction": "Inspect the fictional sign and select the named destination.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled sign",
+          "optional VI after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "001-STEP-2",
+        "kind": "dialogue+target",
+        "promptEn": "Ask where baggage claim is, then mark its direction.",
+        "promptVi": "Hỏi khu nhận hành lý ở đâu, rồi đánh dấu hướng đi.",
+        "playerAction": "Choose a taught location request and tap the matching direction on the sign.",
+        "evidence": "CONTROLLED_APPLICATION",
+        "support": [
+          "replay assistant response"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-002",
+    "domain": "Airport recovery",
+    "location": "fictional airport transport desk",
+    "npcRole": "transport assistant",
+    "goal": "Choose a direct service before a stated time",
+    "objectiveIds": [
+      "O-INFO"
+    ],
+    "intent": "COMPARE_TRAVEL_INFORMATION",
+    "skills": [
+      "reading",
+      "reasoning"
+    ],
+    "targetLanguage": [
+      "direct",
+      "delayed until",
+      "depart at",
+      "before"
+    ],
+    "vocabulary": [
+      "delay",
+      "direct",
+      "depart"
+    ],
+    "chunks": [
+      "is-it-direct",
+      "what-time-leave"
+    ],
+    "base": {
+      "id": "TKY-DAILY-002-L1",
+      "en": "At this practice desk, the train is delayed until 11:40. A direct bus departs at 11:20. A shuttle departs at 11:10 but requires a change. You need a direct service before 11:30. You ask, ‘Is the bus direct?’ The assistant says, ‘Yes. No change is needed.’",
+      "vi": "Ở quầy luyện tập, tàu bị chậm đến 11:40. Xe buýt đi thẳng khởi hành 11:20. Xe trung chuyển đi 11:10 nhưng cần đổi chuyến. Bạn cần chuyến đi thẳng trước 11:30. Nhân viên xác nhận xe buýt không cần đổi."
+    },
+    "retry": {
+      "id": "TKY-DAILY-002-L2",
+      "en": "On a new practice board, the direct train departs at 12:10, the direct bus is delayed until 12:35, and a shuttle leaves at 12:05 but needs a change. You need a direct service before 12:20. The assistant says, ‘The train is direct and leaves at 12:10.’",
+      "vi": "Bảng luyện tập mới ghi tàu đi thẳng lúc 12:10, xe buýt đi thẳng bị chậm đến 12:35, xe trung chuyển đi 12:05 nhưng phải đổi chuyến. Bạn cần chuyến đi thẳng trước 12:20. Nhân viên xác nhận tàu phù hợp."
+    },
+    "feedback": {
+      "en": "Direct means no change in this lesson. Compare the requested time and route condition; the earliest departure may not meet both.",
+      "vi": "Trong bài này, direct nghĩa là không phải đổi chuyến. So sánh cả giờ và điều kiện hành trình; chuyến sớm nhất có thể không đáp ứng cả hai."
+    },
+    "misunderstanding": "Pick the earliest service but overlook the change or cutoff time.",
+    "transfer": "A coach desk in another city with separately authored options.",
+    "interaction": [
+      "inspect",
+      "dialogue",
+      "compare",
+      "decision"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "MEDIUM",
+      "information": 4,
+      "inference": "LOW",
+      "distractorSimilarity": "HIGH",
+      "demand": "INTERPRETATION",
+      "support": [
+        "optional Vietnamese",
+        "re-read board",
+        "highlight two conditions"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-NARITA"
+    ],
+    "backlogRefs": [
+      "DE-054",
+      "DE-049"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-002",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-002-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "0a6fd952ecb91034dc51503b6cfc6121ccd0c15e81e9e75b35d070385a5afa80",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-002-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "66d4d28ed6d9345e55cdef4bc2039b4825dfc14c2960b0785ae2ca578fdf46ed",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-delay-service",
+      "VS-direct-rail",
+      "VS-depart-rail"
+    ],
+    "chunkIds": [
+      "CH-confirm-direct-service",
+      "CH-ask-departure-time"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "002-STEP-1",
+        "kind": "inspect+compare",
+        "promptEn": "Read all three service options and note the time and whether a change is needed.",
+        "promptVi": "Đọc ba lựa chọn và chú ý giờ cùng việc có cần đổi chuyến hay không.",
+        "playerAction": "Inspect a fictional service board and compare two stated conditions.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "highlight requested cutoff and directness"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "002-STEP-2",
+        "kind": "decision",
+        "promptEn": "Choose a direct service that leaves before the stated time.",
+        "promptVi": "Chọn chuyến đi thẳng và khởi hành trước giờ đã nêu.",
+        "playerAction": "Select one service; no real-world timetable knowledge is needed.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "re-read board"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-003",
+    "domain": "Train and metro",
+    "location": "fictional two-line practice network",
+    "npcRole": "station attendant",
+    "goal": "Recover after missing a stop",
+    "objectiveIds": [
+      "O-ROUTE"
+    ],
+    "intent": "FOLLOW_DIRECTIONS",
+    "skills": [
+      "reading",
+      "directions"
+    ],
+    "targetLanguage": [
+      "get off at",
+      "change to the ... line",
+      "then"
+    ],
+    "vocabulary": [
+      "change-rail",
+      "stop",
+      "get-off"
+    ],
+    "chunks": [
+      "change-lines-at",
+      "get-off-at"
+    ],
+    "base": {
+      "id": "TKY-DAILY-003-L1",
+      "en": "You missed your stop in a practice network. The attendant says, ‘Get off at Pine Stop. Change to the Green Line there. Get off at Lake Stop.’ A labeled diagram shows your Red Line reaches Pine next and Green connects Pine to Lake. It gives no fares or walking directions.",
+      "vi": "Bạn đi quá ga trong mạng lưới luyện tập. Nhân viên nói: ‘Xuống tại Pine. Đổi sang tuyến Green ở đó. Xuống tại Lake.’ Sơ đồ có nhãn cho thấy Red sắp đến Pine và Green nối Pine với Lake. Không có giá vé hay hướng đi bộ."
+    },
+    "retry": {
+      "id": "TKY-DAILY-003-L2",
+      "en": "In a second practice network, get off at Hill Stop, change to the Blue Line there, then get off at Garden Stop. Your current train reaches Hill next; Blue connects Hill to Garden.",
+      "vi": "Trong mạng lưới luyện tập thứ hai, xuống tại Hill, đổi sang tuyến Blue ở đó rồi xuống Garden. Tàu hiện tại đến Hill tiếp theo; Blue nối Hill với Garden."
+    },
+    "feedback": {
+      "en": "Change lines means continue on another line. Get off means leave the train at the named stop. Follow the order: transfer stop, new line, destination.",
+      "vi": "Change lines nghĩa là chuyển sang tuyến khác. Get off là xuống tàu tại ga đã nêu. Theo thứ tự: ga đổi tuyến, tuyến mới, điểm đến."
+    },
+    "misunderstanding": "Change at the destination, or stay on the first line.",
+    "transfer": "A separately sourced Singapore MRT interchange scene.",
+    "interaction": [
+      "inspect",
+      "dialogue",
+      "route"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "MEDIUM",
+      "information": 3,
+      "inference": "LOW",
+      "distractorSimilarity": "MEDIUM",
+      "demand": "APPLICATION",
+      "support": [
+        "optional Vietnamese",
+        "labeled diagram",
+        "re-read instructions"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-METRO"
+    ],
+    "backlogRefs": [
+      "DE-007",
+      "DE-050"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-003",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-003-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "df188edc9dfce9f896d71f433e175f133dc4260efdfc97f1691b159c64c417e4",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-003-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "8a3ceff82f5a5e9ad3ff5e7e14942c7c6efed65ac110b6830230b11622b73d0f",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-change-rail",
+      "VS-stop-rail",
+      "VS-get-off"
+    ],
+    "chunkIds": [
+      "CH-change-lines-at",
+      "CH-get-off-at"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "003-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Trace which line reaches the transfer stop next.",
+        "promptVi": "Xác định tuyến nào sẽ đến ga chuyển tiếp tiếp theo.",
+        "playerAction": "Inspect the fictional two-line diagram.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled network"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "003-STEP-2",
+        "kind": "route",
+        "promptEn": "Put the transfer stop, new line and destination in travel order.",
+        "promptVi": "Sắp xếp ga đổi tuyến, tuyến mới và điểm đến theo thứ tự hành trình.",
+        "playerAction": "Arrange route nodes; the route sequence is taught in the linked lesson.",
+        "evidence": "APPLICATION",
+        "support": [
+          "replay instructions",
+          "optional sequence scaffold"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-004",
+    "domain": "Train and metro",
+    "location": "fictional station practice board",
+    "npcRole": "station attendant",
+    "goal": "Match a destination with its platform and departure time",
+    "objectiveIds": [
+      "O-INFO"
+    ],
+    "intent": "COMPARE_TRAVEL_INFORMATION",
+    "skills": [
+      "reading",
+      "specific information"
+    ],
+    "targetLanguage": [
+      "Which platform does it leave from?",
+      "Platform two",
+      "at nine twenty"
+    ],
+    "vocabulary": [
+      "platform",
+      "depart"
+    ],
+    "chunks": [
+      "which-platform",
+      "what-time-leave"
+    ],
+    "base": {
+      "id": "TKY-DAILY-004-L1",
+      "en": "The practice board lists MUSEUM: PLATFORM 2, DEPARTS 09:20 and PARK: PLATFORM 3, DEPARTS 09:35. You are going to the museum. You ask, ‘Which platform does it leave from?’ The attendant answers, ‘Platform two. It leaves at nine twenty.’",
+      "vi": "Bảng luyện tập ghi BẢO TÀNG: SÂN GA 2, KHỞI HÀNH 09:20; CÔNG VIÊN: SÂN GA 3, KHỞI HÀNH 09:35. Bạn đi bảo tàng. Nhân viên xác nhận sân ga 2, lúc 09:20."
+    },
+    "retry": {
+      "id": "TKY-DAILY-004-L2",
+      "en": "A new practice board lists PARK: PLATFORM 1, DEPARTS 10:45 and MUSEUM: PLATFORM 4, DEPARTS 10:15. You are going to the park. The attendant says, ‘Platform one. It leaves at ten forty-five.’",
+      "vi": "Bảng mới ghi CÔNG VIÊN: SÂN GA 1, KHỞI HÀNH 10:45; BẢO TÀNG: SÂN GA 4, KHỞI HÀNH 10:15. Bạn đi công viên. Nhân viên xác nhận sân ga 1, lúc 10:45."
+    },
+    "feedback": {
+      "en": "Keep all details from the same destination row. A platform and time for another destination do not answer this question.",
+      "vi": "Giữ các chi tiết cùng một hàng điểm đến. Sân ga và giờ của nơi khác không trả lời câu hỏi này."
+    },
+    "misunderstanding": "Take the right time from the wrong destination row.",
+    "transfer": "An original bus terminal board with destination, bay and departure time.",
+    "interaction": [
+      "inspect",
+      "match",
+      "compare"
+    ],
+    "difficulty": {
+      "lexical": "LOW",
+      "sentence": "LOW",
+      "information": 4,
+      "inference": "LOW",
+      "distractorSimilarity": "HIGH",
+      "demand": "INTERPRETATION",
+      "support": [
+        "optional Vietnamese",
+        "highlight destination row",
+        "re-read board"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-METRO"
+    ],
+    "backlogRefs": [
+      "DE-004",
+      "DE-006"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-004",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-004-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "c24ca98fd15028e909562b460970ac747c765df19f64e075132f4ddd87570024",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-004-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "9acdb217c76eae9f812a033e35078ef2ceda4bb0e16f0a3455b4363f0e04c33e",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-platform-rail",
+      "VS-depart-rail"
+    ],
+    "chunkIds": [
+      "CH-which-platform",
+      "CH-ask-departure-time"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "004-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Find the row for your destination.",
+        "promptVi": "Tìm đúng hàng của điểm đến.",
+        "playerAction": "Highlight one destination row on the fictional board.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "destination highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "004-STEP-2",
+        "kind": "match",
+        "promptEn": "Match that destination with its platform and departure time.",
+        "promptVi": "Ghép điểm đến với sân ga và giờ khởi hành.",
+        "playerAction": "Match a complete row; do not combine details from two destinations.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "keep row together"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-005",
+    "domain": "Convenience store",
+    "location": "fictional convenience shop aisle",
+    "npcRole": "shop assistant",
+    "goal": "Find a requested drink and match its price to the item",
+    "objectiveIds": [
+      "O-SHOP"
+    ],
+    "intent": "ASK_ITEM_LOCATION_AND_PRICE",
+    "skills": [
+      "reading",
+      "specific information"
+    ],
+    "targetLanguage": [
+      "Where can I find...?",
+      "How much is...?",
+      "aisle"
+    ],
+    "vocabulary": [
+      "aisle",
+      "price",
+      "tea"
+    ],
+    "chunks": [
+      "where-can-i-find",
+      "how-much-is"
+    ],
+    "base": {
+      "id": "TKY-DAILY-005-L1",
+      "en": "You want tea. The practice shelf labels say TEA—AISLE 2, 150 YEN; WATER—AISLE 1, 110 YEN; JUICE—AISLE 3, 170 YEN. You ask, ‘Where can I find the tea, and how much is it?’ The assistant says, ‘Aisle two. It is 150 yen.’",
+      "vi": "Bạn muốn mua trà. Nhãn kệ luyện tập ghi TRÀ—LỐI 2, 150 YÊN; NƯỚC—LỐI 1, 110 YÊN; NƯỚC ÉP—LỐI 3, 170 YÊN. Bạn hỏi trà ở đâu và giá bao nhiêu; nhân viên trả lời lối hai, giá 150 yên."
+    },
+    "retry": {
+      "id": "TKY-DAILY-005-L2",
+      "en": "You want tea again, but a new practice shelf has TEA—AISLE 3, 140 YEN; WATER—AISLE 1, 110 YEN; JUICE—AISLE 2, 170 YEN. You ask, ‘How much is the tea?’ The assistant replies, ‘It is 140 yen, in aisle three.’",
+      "vi": "Bạn muốn trà. Nhãn luyện tập mới: TRÀ—LỐI 3, 140 YÊN; NƯỚC—LỐI 1, 110 YÊN; NƯỚC ÉP—LỐI 2, 170 YÊN. Bạn hỏi giá trà. Nhân viên xác nhận giá 140 yên, ở lối ba."
+    },
+    "feedback": {
+      "en": "An aisle is the passage between shelves. Price is the amount for an item. Match both details to the same product.",
+      "vi": "Aisle là lối đi giữa các kệ; price là giá món hàng. Ghép cả hai chi tiết với đúng sản phẩm."
+    },
+    "misunderstanding": "Use a nearby item’s price or aisle.",
+    "transfer": "A different shop with new item names and labels taught first.",
+    "interaction": [
+      "dialogue",
+      "inspect",
+      "target"
+    ],
+    "difficulty": {
+      "lexical": "LOW",
+      "sentence": "LOW",
+      "information": 3,
+      "inference": "LOW",
+      "distractorSimilarity": "HIGH",
+      "demand": "INTERPRETATION",
+      "support": [
+        "optional Vietnamese",
+        "product highlight",
+        "re-read shelf"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION"
+    ],
+    "backlogRefs": [
+      "DE-018"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-005",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-005-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "26e4f46760a542511397e485d5c34a3027eb904ef93e7699d215457606d5fb74",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-005-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "f71900d573e23f59327e25b7bd4dcc80102aec19df2f5ba8216bab356af4c2c9",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-aisle-shop",
+      "VS-price-shop",
+      "VS-tea-drink"
+    ],
+    "chunkIds": [
+      "CH-ask-location",
+      "CH-ask-price"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "005-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "Ask the shop assistant where tea is and how much it costs.",
+        "promptVi": "Hỏi nhân viên trà ở đâu và giá bao nhiêu.",
+        "playerAction": "Choose or compose a short functional request using the taught chunks.",
+        "evidence": "CONTROLLED_APPLICATION",
+        "support": [
+          "optional chunk bank"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "005-STEP-2",
+        "kind": "target",
+        "promptEn": "Tap the tea label, not a neighboring product.",
+        "promptVi": "Chọn nhãn trà, không chọn sản phẩm bên cạnh.",
+        "playerAction": "Select the product row and read its aisle/price pair.",
+        "evidence": "INTERPRETATION",
+        "support": [
+          "product highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-006",
+    "domain": "Convenience store",
+    "location": "fictional shop checkout",
+    "npcRole": "cashier",
+    "goal": "Decline a bag, choose payment and request a receipt",
+    "objectiveIds": [
+      "O-SHOP"
+    ],
+    "intent": "REQUEST_TRANSACTION",
+    "skills": [
+      "functional English",
+      "controlled composition"
+    ],
+    "targetLanguage": [
+      "No bag, thanks",
+      "By card/cash, please",
+      "Could I have a receipt, please?"
+    ],
+    "vocabulary": [
+      "bag",
+      "cash",
+      "card",
+      "receipt"
+    ],
+    "chunks": [
+      "receipt",
+      "bag"
+    ],
+    "base": {
+      "id": "TKY-DAILY-006-L1",
+      "en": "At checkout the cashier asks, ‘A bag? Cash or card?’ You already have a bag and want to pay by card. After payment, you need proof of purchase. You say, ‘No bag, thanks. By card, please. Could I have a receipt, please?’",
+      "vi": "Ở quầy thu ngân, nhân viên hỏi bạn có cần túi và trả tiền mặt hay thẻ. Bạn đã có túi, muốn trả bằng thẻ rồi xin chứng từ mua hàng. Bạn từ chối túi, chọn thẻ và xin biên lai."
+    },
+    "retry": {
+      "id": "TKY-DAILY-006-L2",
+      "en": "At checkout, you need a bag and want to pay in cash. You say, 'A bag, please. I'll pay in cash.' After paying, you ask, 'Can I have a receipt, please?' The scene states no bag fee or general store payment rule.",
+      "vi": "Tại quầy thanh toán, bạn cần túi và muốn trả tiền mặt. Bạn nói: 'Cho tôi một chiếc túi. Tôi trả bằng tiền mặt.' Sau khi trả tiền, bạn xin biên lai. Cảnh không nêu phí túi hay quy định chung của cửa hàng."
+    },
+    "feedback": {
+      "en": "A receipt records payment; a bag carries the purchase. Can I and Could I are both acceptable here. Payment and bag choices belong to this customer’s preference.",
+      "vi": "Receipt ghi nhận khoản đã trả; bag đựng món mua. Can I và Could I đều phù hợp ở đây. Cách trả tiền và nhu cầu túi tùy khách trong tình huống này."
+    },
+    "misunderstanding": "Confuse receipt with recipe, or keep one requested detail while changing another.",
+    "transfer": "A cafe receipt, after its payment interaction is taught.",
+    "interaction": [
+      "dialogue",
+      "compose"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "MEDIUM",
+      "information": 3,
+      "inference": "LOW",
+      "distractorSimilarity": "MEDIUM",
+      "demand": "CONTROLLED",
+      "support": [
+        "optional Vietnamese",
+        "vocabulary hint",
+        "token ordering"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-RECEIPT"
+    ],
+    "backlogRefs": [
+      "DE-021"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-006",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-006-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "b8da76cbeb12c575f86ad19f47635da031161f6087023d1a92a08e32030f4671",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-006-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "c4bb7d33690a22769955df86d1a7ad16e824a7e99f09c28b6711b65966597007",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-bag-store",
+      "VS-cash-payment",
+      "VS-card-payment",
+      "VS-receipt"
+    ],
+    "chunkIds": [
+      "CH-request-receipt",
+      "CH-state-bag-choice"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "006-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "Read the cashier's bag and payment questions.",
+        "promptVi": "Đọc câu hỏi của nhân viên về túi và cách thanh toán.",
+        "playerAction": "Identify which choices belong to the learner’s own preference.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "replay dialogue"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "006-STEP-2",
+        "kind": "compose",
+        "promptEn": "Tell the cashier whether you need a bag, choose card or cash, and ask for a receipt.",
+        "promptVi": "Nói rõ có cần túi hay không, chọn thẻ hoặc tiền mặt và xin biên lai.",
+        "playerAction": "Build a short three-part response from tokens; accept reviewed Can/Could variants.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "optional chunk bank",
+          "token ordering"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-007",
+    "domain": "Restaurant and food",
+    "location": "fictional noodle shop",
+    "npcRole": "server",
+    "goal": "Ask about ingredients and order a dish without an optional ingredient",
+    "objectiveIds": [
+      "O-FOOD"
+    ],
+    "intent": "CLARIFY_FOOD_ORDER",
+    "skills": [
+      "reading",
+      "functional English"
+    ],
+    "targetLanguage": [
+      "What is in...?",
+      "without egg",
+      "please"
+    ],
+    "vocabulary": [
+      "ingredient",
+      "without",
+      "order"
+    ],
+    "chunks": [
+      "ingredients",
+      "without"
+    ],
+    "base": {
+      "id": "TKY-DAILY-007-L1",
+      "en": "You ask, ‘What is in the vegetable noodles?’ The server says, ‘Noodles, vegetable broth and mushrooms. An egg is optional.’ You want vegetable noodles and prefer no egg. The menu also lists chicken noodles. You order, ‘I'll have the vegetable noodles without egg, please.’ This is preference practice, not an allergy check.",
+      "vi": "Bạn hỏi mì rau có gì. Nhân viên nói gồm mì, nước dùng rau và nấm; trứng là phần thêm tùy chọn. Bạn muốn gọi mì rau và không muốn trứng và gọi mì rau không thêm trứng. Bài luyện sở thích này không kiểm tra dị ứng."
+    },
+    "retry": {
+      "id": "TKY-DAILY-007-L2",
+      "en": "Chicken noodles in the same fictional shop include chicken broth. Spring onions are optional. You want chicken noodles and prefer no spring onions and say, ‘Chicken noodles without spring onions, please.’ The menu also lists vegetable noodles. No allergen or cross-contact guarantee is made.",
+      "vi": "Mì gà ở quán hư cấu có nước dùng gà; hành lá là phần tùy chọn. Bạn muốn gọi mì gà và không muốn hành lá nên gọi mì gà không thêm hành. Không có bảo đảm về dị ứng hay lây nhiễm chéo."
+    },
+    "feedback": {
+      "en": "Ingredients are foods used in a dish. Without excludes the named item from this order. Asking about ingredients does not establish medical safety; never infer that a vegetable dish is allergy-safe.",
+      "vi": "Ingredients là nguyên liệu của món. Without yêu cầu bỏ phần được nêu. Hỏi nguyên liệu không xác nhận an toàn y tế; không suy ra món rau an toàn dị ứng."
+    },
+    "misunderstanding": "Choose the right dish but add the ingredient the learner meant to exclude.",
+    "transfer": "A London cafe order after its menu vocabulary is explicitly taught.",
+    "interaction": [
+      "inspect",
+      "dialogue",
+      "order"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "MEDIUM",
+      "information": 2,
+      "inference": "LOW",
+      "distractorSimilarity": "HIGH",
+      "demand": "APPLICATION",
+      "support": [
+        "optional Vietnamese",
+        "menu reread",
+        "ingredient hint"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-BC"
+    ],
+    "backlogRefs": [
+      "DE-014",
+      "DE-015"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-007",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-007-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "3ce2a8c0ab57ed657564e40a25f77b57a717756ab16315ec2ba004c6dbe4defe",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-007-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "29d105302b7dda724a4939cefd425f85e8952149af264da4e14455c7e18e767a",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-ingredient",
+      "VS-without",
+      "VS-order-food"
+    ],
+    "chunkIds": [
+      "CH-ask-ingredients",
+      "CH-exclude-ingredient"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "007-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Check the fictional menu for the dish and optional ingredient.",
+        "promptVi": "Xem món ăn và thành phần thêm tùy chọn trên thực đơn hư cấu.",
+        "playerAction": "Inspect menu details; this is not an allergy-safety task.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "menu reread"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "007-STEP-2",
+        "kind": "order",
+        "promptEn": "Order the selected dish with your stated preference.",
+        "promptVi": "Gọi đúng món và nêu sở thích đã chọn.",
+        "playerAction": "Select the dish, then compose a request excluding the optional item.",
+        "evidence": "APPLICATION",
+        "support": [
+          "ingredient hint"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-008",
+    "domain": "Restaurant and food",
+    "location": "fictional cafe table",
+    "npcRole": "server",
+    "goal": "Correct a dish and request the bill",
+    "objectiveIds": [
+      "O-FOOD",
+      "O-REPAIR"
+    ],
+    "intent": "REPAIR_UNDERSTANDING",
+    "skills": [
+      "pragmatics",
+      "reading"
+    ],
+    "targetLanguage": [
+      "Sorry, I ordered...",
+      "Could we have the bill, please?",
+      "check"
+    ],
+    "vocabulary": [
+      "order",
+      "bill",
+      "receipt"
+    ],
+    "chunks": [
+      "bill",
+      "meant"
+    ],
+    "base": {
+      "id": "TKY-DAILY-008-L1",
+      "en": "You ordered vegetable soup, but the server brings chicken soup. You say, ‘Sorry, I ordered the vegetable soup.’ The server checks and replaces it. After the meal, you ask, ‘Could we have the bill, please?’ In this scene bill is the amount to pay; a receipt follows payment.",
+      "vi": "Bạn gọi súp rau nhưng được mang súp gà. Bạn xin lỗi và nói rõ mình đã gọi súp rau; nhân viên kiểm tra rồi đổi món. Sau bữa ăn, bạn xin hóa đơn tính tiền. Bill là khoản cần thanh toán; receipt là biên lai sau khi trả."
+    },
+    "retry": {
+      "id": "TKY-DAILY-008-L2",
+      "en": "You ordered chicken noodles but receive vegetable noodles. You say, ‘Sorry, I ordered the chicken noodles.’ After the corrected meal, ‘Can we have the check, please?’ also asks for the restaurant bill. Bill and check are both acceptable here.",
+      "vi": "Bạn gọi mì gà nhưng được mang mì rau. Bạn nói rõ đã gọi mì gà. Sau khi món được đổi, bạn có thể xin check; trong bối cảnh nhà hàng, từ này cũng chỉ hóa đơn tính tiền. Bill và check đều được."
+    },
+    "feedback": {
+      "en": "Name the dish you ordered so the server can check the mismatch. When you are ready to pay, ask for the bill or check. Both terms are acceptable in this restaurant context; a receipt records payment.",
+      "vi": "Nêu món bạn đã gọi để nhân viên kiểm tra nhầm lẫn. Khi sẵn sàng thanh toán, xin bill hoặc check. Cả hai từ đều chỉ hóa đơn tính tiền trong bối cảnh nhà hàng này; receipt là biên lai thanh toán."
+    },
+    "misunderstanding": "Request the bill but fail to identify the dish that needs correction.",
+    "transfer": "Correcting a cafe drink after the relevant drink names are taught.",
+    "interaction": [
+      "dialogue",
+      "compose"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "MEDIUM",
+      "information": 2,
+      "inference": "LOW",
+      "distractorSimilarity": "MEDIUM",
+      "demand": "APPLICATION",
+      "support": [
+        "optional Vietnamese",
+        "reread order",
+        "phrase hint"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-BC"
+    ],
+    "backlogRefs": [
+      "DE-016",
+      "DE-055"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-008",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-008-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "96ea13b4828d1b03b9573cdfb480008f30f9ca1d454dce39939b9ef9808c9a79",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-008-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "51ad3ae65c41faba5089e0bf12404db96d67691627cba84b59492128c65962c0",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-order-food",
+      "VS-bill-restaurant",
+      "VS-receipt"
+    ],
+    "chunkIds": [
+      "CH-request-bill",
+      "CH-repair-order"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "008-STEP-1",
+        "kind": "dialogue+compose",
+        "promptEn": "The server brought a different dish. Explain calmly what you ordered.",
+        "promptVi": "Nhân viên mang nhầm món. Hãy bình tĩnh nói rõ món bạn đã gọi.",
+        "playerAction": "Compose a clear repair naming the intended dish; accept equivalent reviewed forms.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "re-read the order",
+          "phrase hint after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "008-STEP-2",
+        "kind": "dialogue",
+        "promptEn": "When you are ready to pay, ask for the restaurant bill.",
+        "promptVi": "Khi sẵn sàng thanh toán, hãy xin hóa đơn nhà hàng.",
+        "playerAction": "Choose a natural request; review bill/check variation by target variety.",
+        "evidence": "APPLICATION",
+        "support": [
+          "optional chunk bank"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-009",
+    "domain": "Street and city navigation",
+    "location": "fictional station-to-library street",
+    "npcRole": "pedestrian",
+    "goal": "Reach a destination using two landmarks and a turn",
+    "objectiveIds": [
+      "O-ROUTE"
+    ],
+    "intent": "ASK_FOR_DIRECTIONS",
+    "skills": [
+      "reading (audio pending)",
+      "directions"
+    ],
+    "vocabulary": [
+      "straight",
+      "turn-left",
+      "next-to"
+    ],
+    "chunks": [
+      "how-do-i-get-to",
+      "go-past"
+    ],
+    "base": {
+      "id": "TKY-DAILY-009-L1",
+      "en": "You are at Cedar Corner and want to reach the station. The pedestrian says, ‘Go straight past the bank. Turn left at the library. The station is next to the post office.’ A simple labeled map shows those places in that order.",
+      "vi": "Bạn đang ở Cedar Corner và muốn đến ga. Người đi đường chỉ: đi thẳng qua ngân hàng, rẽ trái ở thư viện; ga nằm cạnh bưu điện. Sơ đồ có nhãn thể hiện đúng thứ tự đó."
+    },
+    "retry": {
+      "id": "TKY-DAILY-009-L2",
+      "en": "You are at River Corner and want the museum. A local says, ‘Go straight past the cafe. Turn right at the park. The museum is next to the hotel.’ The practice map confirms each landmark.",
+      "vi": "Bạn đang ở River Corner và muốn đến bảo tàng. Người địa phương chỉ đi thẳng qua quán cà phê, rẽ phải ở công viên; bảo tàng nằm cạnh khách sạn. Sơ đồ luyện tập xác nhận thứ tự."
+    },
+    "feedback": {
+      "en": "Keep the route order: continue past the first landmark, turn at the named place, then use the final location clue. Left and right are relative to the traveler facing forward on this map.",
+      "vi": "Giữ đúng thứ tự: đi qua mốc đầu, rẽ tại địa điểm được nêu rồi dùng manh mối vị trí cuối. Trái/phải tính theo hướng người đi đang nhìn trên sơ đồ."
+    },
+    "misunderstanding": "Turn at the first landmark or reverse left and right.",
+    "transfer": "A separately authored London street map with its own landmarks.",
+    "interaction": [
+      "inspect",
+      "dialogue",
+      "route",
+      "recall"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "MEDIUM",
+      "information": 4,
+      "inference": "LOW",
+      "distractorSimilarity": "HIGH",
+      "demand": "APPLICATION",
+      "support": [
+        "optional Vietnamese",
+        "labeled map",
+        "replay directions"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-METRO"
+    ],
+    "backlogRefs": [
+      "DE-026",
+      "DE-027"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-009",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-009-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "466802ad644891c667041de8d634eb8a5cf1f93f8670e5acbe1e2cf977402bc9",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-009-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "2d1a74173373fd83be6f3b407f8e0b76d402c48e2c82464ec02d1e6cfe135462",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-straight-route",
+      "VS-turn-direction",
+      "VS-next-to"
+    ],
+    "chunkIds": [
+      "CH-ask-directions",
+      "CH-go-past-landmark"
+    ],
+    "targetLanguage": [
+      "How do I get to...?",
+      "Go straight past...",
+      "Turn left/right at...",
+      "next to"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "009-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Study the starting point and landmarks on the practice map.",
+        "promptVi": "Xem điểm xuất phát và các mốc trên bản đồ luyện tập.",
+        "playerAction": "Inspect the labeled fictional route map.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "labeled map"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "009-STEP-2",
+        "kind": "route+recall",
+        "promptEn": "Give the directions in order from the starting corner to the destination.",
+        "promptVi": "Sắp xếp chỉ dẫn theo thứ tự từ góc xuất phát đến điểm đến.",
+        "playerAction": "Sequence pass-landmark, turn and final location clue.",
+        "evidence": "APPLICATION",
+        "support": [
+          "replay directions",
+          "optional map labels"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-010",
+    "domain": "Street and city navigation",
+    "location": "fictional station exit map",
+    "npcRole": "station assistant",
+    "goal": "Confirm the exit nearest a named destination",
+    "objectiveIds": [
+      "O-LOCATE"
+    ],
+    "intent": "CONFIRM_DESTINATION",
+    "skills": [
+      "reading",
+      "specific information"
+    ],
+    "vocabulary": [
+      "exit",
+      "nearest"
+    ],
+    "chunks": [
+      "which-exit"
+    ],
+    "base": {
+      "id": "TKY-DAILY-010-L1",
+      "en": "A practice station map marks the museum beside Exit C, the park beside Exit A, and the river beside Exit B. You are going to the museum. You ask, ‘Which exit is nearest the museum?’ The assistant answers, ‘Exit C.’",
+      "vi": "Sơ đồ ga luyện tập đánh dấu bảo tàng cạnh lối C, công viên cạnh lối A, sông cạnh lối B. Bạn đến bảo tàng và hỏi lối ra nào gần nhất; nhân viên trả lời lối C."
+    },
+    "retry": {
+      "id": "TKY-DAILY-010-L2",
+      "en": "A different practice map places the library beside Exit B, the hotel beside Exit D, and the market beside Exit A. You are going to the library. The assistant confirms, ‘Exit B is nearest.’",
+      "vi": "Sơ đồ luyện tập khác đặt thư viện cạnh lối B, khách sạn cạnh lối D, chợ cạnh lối A. Bạn đến thư viện; nhân viên xác nhận lối B gần nhất."
+    },
+    "feedback": {
+      "en": "Match the destination to its own map label. An exit number or letter is meaningful only within that displayed map; it is not a real Tokyo station instruction.",
+      "vi": "Ghép điểm đến với nhãn trên đúng sơ đồ. Chữ lối ra chỉ có nghĩa trong bản đồ đang hiển thị; đây không phải chỉ dẫn cho ga Tokyo có thật."
+    },
+    "misunderstanding": "Choose the nearest-looking exit from a different destination row.",
+    "transfer": "An airport departure-hall exit map created and taught for that venue.",
+    "interaction": [
+      "inspect",
+      "target",
+      "match"
+    ],
+    "difficulty": {
+      "lexical": "LOW",
+      "sentence": "LOW",
+      "information": 3,
+      "inference": "NONE",
+      "distractorSimilarity": "MEDIUM",
+      "demand": "RECOGNITION",
+      "support": [
+        "optional Vietnamese",
+        "map labels",
+        "destination highlight"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-METRO"
+    ],
+    "backlogRefs": [
+      "DE-002"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-010",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-010-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "7d1e200fbab599db77a5c588a8cd1e58177be81f624d3247d851915cd2d58505",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-010-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "e31b553020a9033a33e7d1d304a153b02fe402a89210495108c5975740951f5d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-exit",
+      "VS-nearest"
+    ],
+    "chunkIds": [
+      "CH-which-exit"
+    ],
+    "targetLanguage": [
+      "Which exit is nearest the museum?",
+      "Exit C",
+      "nearest"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "010-STEP-1",
+        "kind": "inspect",
+        "promptEn": "Read the exit map and locate your destination.",
+        "promptVi": "Đọc sơ đồ lối ra và tìm điểm đến.",
+        "playerAction": "Inspect the fictional station map; exit labels apply only to this map.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "destination highlight"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "010-STEP-2",
+        "kind": "target",
+        "promptEn": "Select the exit marked beside your destination.",
+        "promptVi": "Chọn lối ra được đánh dấu cạnh điểm đến.",
+        "playerAction": "Tap the corresponding exit label.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "re-read map"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-011",
+    "domain": "Social repair",
+    "location": "fictional station information counter",
+    "npcRole": "station staff member",
+    "goal": "Ask a speaker to repeat a time that was not heard",
+    "objectiveIds": [
+      "O-REPAIR"
+    ],
+    "intent": "REQUEST_REPETITION",
+    "skills": [
+      "reading (audio pending)",
+      "pragmatics"
+    ],
+    "vocabulary": [
+      "repeat",
+      "again",
+      "did-not-catch"
+    ],
+    "chunks": [
+      "could-you-say-that-again",
+      "didnt-catch"
+    ],
+    "base": {
+      "id": "TKY-DAILY-011-L1",
+      "en": "A staff member says, ‘The local train leaves at 3:15.’ You did not hear the minutes. You say, ‘Sorry, I didn’t catch the time. Could you say that again, please?’ The staff member repeats, ‘Three fifteen.’",
+      "vi": "Nhân viên nói tàu dừng ở các ga dọc tuyến khởi hành lúc 3:15 nhưng bạn không nghe rõ phút. Bạn xin lỗi, nói mình chưa nghe được giờ và nhờ nhắc lại; nhân viên nói lại ‘three fifteen’."
+    },
+    "retry": {
+      "id": "TKY-DAILY-011-L2",
+      "en": "A cafe worker tells you a table number, but you miss it. You can say, ‘Sorry, could you repeat that?’ or ‘Sorry, I didn’t catch that.’ Both ask the speaker to say the information again.",
+      "vi": "Nhân viên quán cà phê nói số bàn nhưng bạn không nghe rõ. Bạn có thể nói ‘Sorry, could you repeat that?’ hoặc ‘Sorry, I didn’t catch that.’ Cả hai đều xin người nói nhắc lại thông tin."
+    },
+    "feedback": {
+      "en": "These are natural requests for repetition. They do not accuse the speaker or change the information. Accept more than one polite realization when the task goal is the same.",
+      "vi": "Đây là các cách tự nhiên để xin nhắc lại. Chúng không trách người nói và không thay đổi thông tin. Chấp nhận nhiều cách diễn đạt lịch sự khi cùng đạt mục tiêu."
+    },
+    "misunderstanding": "Guess the missing detail instead of asking, or apologize without making a clear request.",
+    "transfer": "A workplace conversation with relationship-appropriate register reviewed separately.",
+    "interaction": [
+      "dialogue",
+      "recall",
+      "compose"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "LOW",
+      "information": 1,
+      "inference": "NONE",
+      "distractorSimilarity": "MEDIUM",
+      "demand": "RECOGNITION",
+      "support": [
+        "optional Vietnamese",
+        "replay once",
+        "phrase bank after first attempt"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-BC"
+    ],
+    "backlogRefs": [
+      "DE-032"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-011",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-011-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "d50e8fdbfbac6d950dfaaa967131bf1608cf61f7cf819680415c13d5c3fb4b30",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-011-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "4fda8fdfc8ac897bfd95829e4cfd0f1ba7c8bc2bd6ee94ebb9402c6396448d2d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-repeat",
+      "VS-again",
+      "VS-catch-hear"
+    ],
+    "chunkIds": [
+      "CH-ask-repeat",
+      "CH-signal-missed-info"
+    ],
+    "targetLanguage": [
+      "Could you say that again, please?",
+      "Could you repeat that?",
+      "I did not catch..."
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "011-STEP-1",
+        "kind": "dialogue",
+        "promptEn": "In this practice situation, you missed the time. Select a request that asks the staff member to repeat it.",
+        "promptVi": "Trong tình huống luyện tập, bạn không nghe rõ giờ. Chọn lời nhờ nhân viên nhắc lại.",
+        "playerAction": "Use a taught repetition request rather than guessing; accept natural equivalent requests.",
+        "evidence": "RECOGNITION",
+        "support": [
+          "one replay",
+          "optional phrase bank after first attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "011-STEP-2",
+        "kind": "recall",
+        "promptEn": "After reading the repeated time, report it with the text hidden.",
+        "promptVi": "Sau khi đọc giờ được nhắc lại, hãy nêu lại giờ khi văn bản đã ẩn.",
+        "playerAction": "Recall the repeated time; numeric or spoken format can be accepted.",
+        "evidence": "RECALL",
+        "support": [
+          "transcript after attempt"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  },
+  {
+    "id": "TKY-DAILY-012",
+    "domain": "Social repair",
+    "location": "fictional journey-planning counter",
+    "npcRole": "help-desk staff member",
+    "goal": "Check a possibly misheard detail and confirm the corrected information",
+    "objectiveIds": [
+      "O-REPAIR",
+      "O-INFO"
+    ],
+    "intent": "CLARIFY_AND_CONFIRM",
+    "skills": [
+      "reading (audio pending)",
+      "pragmatics",
+      "specific information"
+    ],
+    "vocabulary": [
+      "room",
+      "confirm"
+    ],
+    "chunks": [
+      "did-you-say",
+      "so-thats"
+    ],
+    "base": {
+      "id": "TKY-DAILY-012-L1",
+      "en": "The staff member says, 'Your meeting is in Room 14.' You think you heard Room 40. You ask, 'Sorry, did you say Room 40?' The staff member replies, 'No, Room 14.' You confirm, 'Room 14, right?' The staff member says, 'That's right.'",
+      "vi": "Nhân viên nói cuộc hẹn ở phòng 14. Bạn nghĩ mình nghe được phòng 40 nên hỏi: 'Xin lỗi, có phải phòng 40 không?' Nhân viên sửa: 'Không, phòng 14.' Bạn hỏi lại: 'Phòng 14, đúng không?' Nhân viên xác nhận: 'Đúng rồi.'"
+    },
+    "retry": {
+      "id": "TKY-DAILY-012-L2",
+      "en": "A receptionist says the appointment is at 2:30. You think you heard 3:20. You ask, 'Sorry, did you say 3:20?' The receptionist replies, 'No, 2:30.' You confirm, 'So that's 2:30, right?' The receptionist says, 'Yes.'",
+      "vi": "Lễ tân nói cuộc hẹn lúc 2:30. Bạn nghĩ mình nghe được 3:20 nên hỏi: 'Xin lỗi, có phải 3:20 không?' Lễ tân sửa: 'Không, 2:30.' Bạn hỏi lại: 'Vậy là 2:30, đúng không?' Lễ tân xác nhận."
+    },
+    "feedback": {
+      "en": "State the detail you think you heard, invite confirmation, then repeat the confirmed detail. A correction or check is appropriate; silently choosing one number risks following the wrong information.",
+      "vi": "Nêu chi tiết bạn nghĩ mình đã nghe, mời người kia xác nhận rồi nhắc lại chi tiết đã được xác nhận. Hỏi lại giúp tránh làm theo nhầm số."
+    },
+    "misunderstanding": "Repeat the mistaken detail as if it were confirmed, or skip the confirmation turn.",
+    "transfer": "Confirming a platform or appointment time after the relevant venue data is taught.",
+    "interaction": [
+      "dialogue",
+      "decision",
+      "compose",
+      "recall"
+    ],
+    "difficulty": {
+      "lexical": "MEDIUM",
+      "sentence": "MEDIUM",
+      "information": 2,
+      "inference": "LOW",
+      "distractorSimilarity": "HIGH",
+      "demand": "CONTROLLED",
+      "support": [
+        "optional Vietnamese",
+        "replay",
+        "confirmation sequence scaffold"
+      ]
+    },
+    "sourceIds": [
+      "S-FICTION",
+      "S-BC"
+    ],
+    "backlogRefs": [
+      "DE-039",
+      "DE-055"
+    ],
+    "contentRevision": "TOKYO-DAILY-r2",
+    "status": "DRAFT",
+    "retryFamilyId": "RF-TKY-DAILY-012",
+    "sourceLessonRefs": [
+      {
+        "lessonId": "TKY-DAILY-012-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "219c952d3b2baa22787a885af91015772e458d7a0a1cbcb60554251552984456",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      {
+        "lessonId": "TKY-DAILY-012-L2",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "d17e508e71eabd6661736a155369112acf8b19f7bf3434f797de8dec64702e7d",
+        "mustBeTaughtBeforeAssessment": true
+      }
+    ],
+    "reviewStatus": {
+      "en": "PENDING",
+      "vi": "PENDING",
+      "cultural": "PENDING",
+      "assessment": "PENDING",
+      "educator": "PENDING"
+    },
+    "culturalScope": "Fictional practice context; no live venue rule, route, fare, schedule, allergy assurance or Tokyo-wide cultural claim is made.",
+    "vocabularyIds": [
+      "VS-room-number",
+      "VS-confirm"
+    ],
+    "chunkIds": [
+      "CH-confirm-heard-detail",
+      "CH-confirm-understanding"
+    ],
+    "targetLanguage": [
+      "Sorry, did you say Room 40?",
+      "No, Room 14.",
+      "Room 14, right?"
+    ],
+    "playerInteractionPlan": [
+      {
+        "id": "012-STEP-1",
+        "kind": "dialogue+decision",
+        "promptEn": "You heard a different room number. State what you heard and ask the staff member to confirm.",
+        "promptVi": "Bạn nghe một số phòng khác. Nêu số bạn nghe được và nhờ nhân viên xác nhận.",
+        "playerAction": "Ask a confirmation question that names the suspected number.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "replay",
+          "confirmation scaffold"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      },
+      {
+        "id": "012-STEP-2",
+        "kind": "compose",
+        "promptEn": "After the staff member confirms, repeat the correct detail to check shared understanding.",
+        "promptVi": "Sau khi nhân viên xác nhận, nhắc lại chi tiết đúng để kiểm tra hai bên hiểu giống nhau.",
+        "playerAction": "Compose a concise confirmation; equivalent natural phrasing needs review.",
+        "evidence": "CONTROLLED",
+        "support": [
+          "phrase hint"
+        ],
+        "scoringStatus": "DESIGN_PENDING",
+        "modality": "TEXT_ONLY",
+        "audioProductionPending": true
+      }
+    ],
+    "interactionScoringStatus": "DESIGN_PENDING",
+    "parentRevision": "TOKYO-DAILY-r1",
+    "aiReview": {
+      "date": "2026-11-04",
+      "status": "AI_ADVERSARIAL_REVIEW",
+      "independentHumanSignoff": null
+    },
+    "evidencePolicy": {
+      "currentModality": "TEXT_ONLY",
+      "listeningEligible": false,
+      "spokenProductionAssessed": false,
+      "viBeforeAnswer": "SUPPORTED_ENGLISH_EVIDENCE",
+      "sourceExposure": "MUST_BE_TAUGHT_BEFORE_REVIEW",
+      "masteryClaim": false
+    }
+  }
+]

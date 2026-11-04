@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "checks": [
+    "Header shows authoritative 2-day streak; modal displays current/best/total",
+    "Past October 3 study day and detail visible via month picker",
+    "Escape closes native dialog and restores trigger focus",
+    "Vietnamese interface preserves date and activity meaning",
+    "320/390/768/1440 layouts fit viewport; day targets at least 44px high",
+    "Account switch shows no prior player dates",
+    "Actual lesson interaction immediately refreshes badge from 0 to 1 without reload",
+    "Mismatched account response is rejected instead of exposing another calendar"
+  ],
+  "fixtureOnly": true
+}

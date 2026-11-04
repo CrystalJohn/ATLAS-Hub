@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "postgres": "PostgreSQL 17.10 on x86_64-windows, compiled by msvc-19.44.35226, 64-bit",
+  "checks": [
+    "32 concurrent saves commit exactly one date in PostgreSQL, with 0 XP and unchanged empty ledger",
+    "Fresh store object resumes persisted date and streak",
+    "Second verified account has independent empty history",
+    "Retry after lost clue response leaves date and authoritative revision unchanged",
+    "Storage failure rolls back both clue and study day",
+    "Second local day accumulates a 2-day streak",
+    "Unauthenticated calendar read denied"
+  ],
+  "sql": {
+    "revision": 3,
+    "studyHistory": {
+      "version": 1,
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "days": [
+        "2026-10-03",
+        "2026-10-04"
+      ]
+    },
+    "xp": 0,
+    "ledger": []
+  }
+}

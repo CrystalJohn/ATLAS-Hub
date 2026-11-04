@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFileSync,readdirSync} from 'node:fs';
 import {join} from 'node:path';
+import {towerImportViolations,localDraftRouteGate} from './tower-import-guard.mts';
 
 import {adaptC0Fixture,C0FixtureSchema} from '../content/tower/c0-fixture-adapter.ts';
 import {createTowerEngine} from '../packages/tower-engine/src/index.ts';
@@ -284,10 +285,57 @@ test('no player/XP side effects and no runtime application import of DRAFT fixtu
   function walk(dir:string){for(const e of readdirSync(dir,{withFileTypes:true})){
     const file=join(dir,e.name);if(e.isDirectory())walk(file);else if(/\.[cm]?[jt]sx?$/.test(e.name)){
       const source=readFileSync(file,'utf8');
-      assert.doesNotMatch(source,/(?:from\s*|import\s*\()['"][^'"]*(?:c0-fixture-adapter|C0-question-bank)/,file);
-      if(!file.replaceAll('\\','/').startsWith('lib/atlas/'))assert.doesNotMatch(source,/(?:from\s*|import\s*\()['"][^'"]*(?:tower-engine|content\/tower)/,file);
+      assert.deepEqual(towerImportViolations(source,file),[],file);
     }
   }}
   walk('app');walk('lib');walk('packages/mission-engine');walk('packages/domain');
   assert.deepEqual(C0FixtureSchema.parse(JSON.parse(readFileSync(new URL('../docs/game-01/c0/C0-question-bank-candidates.json',import.meta.url),'utf8'))),authoring);
+});
+
+test('import boundary accepts erased DTO types but rejects runtime, key and fixture imports',()=>{
+ const ui='app/components/travel/Example.tsx';
+ for(const code of [
+  "import type {TowerPresentation} from '../../../content/tower/types';",
+  "import {type TowerPresentation} from '../../../content/tower/types.ts';",
+  "export type {TowerPresentation} from '../../../content/tower/types';",
+  "export {type TowerPresentation} from '../../../content/tower/types';",
+  "// import {createTowerEngine} from '../../../packages/tower-engine/src/index.ts';",
+ ])assert.deepEqual(towerImportViolations(code,ui),[],code);
+ for(const code of [
+  "import {IdSchema} from '../../../content/tower/types';",
+  "import {type TowerPresentation,IdSchema} from '../../../content/tower/types';",
+  "import '../../../content/tower/types';",
+  "export * from '../../../content/tower/types';",
+  "export {createTowerEngine} from '../../../packages/tower-engine/src/index.ts';",
+  "const engine=import('../../../packages/tower-engine/src/index.ts');",
+  "const engine=require('../../../packages/tower-engine/src/index.ts');",
+  "import engine = require('../../../packages/tower-engine/src/index.ts');",
+  "const bank=import('../../../docs/game-01/c0/C0-question-bank-candidates.json');",
+  "import {adaptC0Fixture} from '../../../content/tower/c0-fixture-adapter.ts';",
+  "import type {C0Fixture} from '../../../content/tower/c0-fixture-adapter.ts';",
+  "const runtime=import('../../../lib/atlas/tower-local-draft');",
+ ])assert.ok(towerImportViolations(code,ui).length>0,code);
+ const fixture="import bank from '../../docs/game-01/c0/C0-question-bank-candidates.json';";
+ assert.deepEqual(towerImportViolations(fixture,'lib/atlas/tower-local-draft.ts'),[]);
+ assert.ok(towerImportViolations(fixture,'lib/atlas/other.ts').length);
+ assert.ok(towerImportViolations(fixture,'app/components/travel/tower-local-draft.ts').length);
+ const dynamic="const runtime=import('../../../lib/atlas/tower-local-draft');";
+ assert.deepEqual(towerImportViolations(dynamic,'app/api/[...path]/route.ts'),[]);
+ assert.ok(towerImportViolations(dynamic,'lib/atlas/other.ts').length);
+ assert.ok(towerImportViolations("import runtime from '../../../lib/atlas/tower-local-draft';",'app/api/[...path]/route.ts').length);
+});
+
+test('local DRAFT evaluator stays behind development, opt-in, loopback and Tower-route gates',()=>{
+ const source=readFileSync(new URL('../app/api/[...path]/route.ts',import.meta.url),'utf8');
+ const enabled=localDraftRouteGate(source);
+ for(const host of ['localhost','127.0.0.1','[::1]'])assert.equal(enabled({NODE_ENV:'development',ATLAS_LOCAL_TOWER_REVIEW:'1'},host,true),true);
+ for(const env of [
+  {NODE_ENV:'production',ATLAS_LOCAL_TOWER_REVIEW:'1'},
+  {NODE_ENV:'test',ATLAS_LOCAL_TOWER_REVIEW:'1'},
+  {NODE_ENV:'development',ATLAS_LOCAL_TOWER_REVIEW:'0'},
+  {NODE_ENV:'development',ATLAS_LOCAL_TOWER_REVIEW:undefined},
+ ])assert.equal(enabled(env,'127.0.0.1',true),false,JSON.stringify(env));
+ for(const host of ['atlas.example','localhost.example','192.168.1.2'])assert.equal(enabled({NODE_ENV:'development',ATLAS_LOCAL_TOWER_REVIEW:'1'},host,true),false,host);
+ assert.equal(enabled({NODE_ENV:'development',ATLAS_LOCAL_TOWER_REVIEW:'1'},'localhost',false),false);
+ assert.throws(()=>localDraftRouteGate("const runtime=import('../../../lib/atlas/tower-local-draft');"),/guarded/);
 });

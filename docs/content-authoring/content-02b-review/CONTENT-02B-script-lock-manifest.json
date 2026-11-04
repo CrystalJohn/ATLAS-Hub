@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-11-04",
+  "reviewerStatus": "AI_REVIEW_ONLY_NOT_INDEPENDENT_HUMAN",
+  "humanReviewer": null,
+  "hashContract": "SHA-256 of UTF-8 JSON.stringify({scriptId,version,turns}); no BOM; turn order and role labels included",
+  "scripts": [
+    {
+      "audioId": "AUD-TKY-001",
+      "scriptId": "SCRIPT-TKY-001",
+      "version": 2,
+      "status": "READY_FOR_HUMAN_SCRIPT_LOCK",
+      "scriptLock": false,
+      "reviewDate": "2026-11-04",
+      "reviewerStatus": "AI_REVIEW_ONLY",
+      "independentHumanReview": null,
+      "speakerRoles": [
+        "Traveler",
+        "Information assistant"
+      ],
+      "targetLocale": "en-GB (proposed; human selection pending)",
+      "accent": "Clear contemporary English; no claim of Japanese representativeness",
+      "scenarioId": "TKY-DAILY-001",
+      "objectiveId": "O-LOCATE",
+      "sourceLessonRef": {
+        "lessonId": "TKY-DAILY-001-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "867a73b4629f86a84f1b4c6a8cbf7aa5c47247f11e51cb70c16888c8ee4a945d",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      "turns": [
+        {
+          "speakerRole": "Traveler",
+          "text": "Excuse me, where can I find baggage claim?"
+        },
+        {
+          "speakerRole": "Information assistant",
+          "text": "Turn left for baggage claim. The exit is on your right."
+        }
+      ],
+      "transcript": "Traveler: Excuse me, where can I find baggage claim?\nInformation assistant: Turn left for baggage claim. The exit is on your right.",
+      "hash": "82dcf50ad977cd23032b3c0a4b16630a1e49a5c8923269f4ba983593727d0248",
+      "questions": [
+        {
+          "promptEn": "Which way is baggage claim?",
+          "acceptedAnswers": [
+            "left",
+            "turn left"
+          ]
+        },
+        {
+          "promptEn": "Where is the exit?",
+          "acceptedAnswers": [
+            "right",
+            "on your right"
+          ]
+        }
+      ],
+      "notes": "Remove untested trains clause to reduce load. Two directions only.",
+      "wordCount": 19,
+      "approxDurationSeconds": 10,
+      "provider": null,
+      "voiceId": null,
+      "generatedAsset": null
+    },
+    {
+      "audioId": "AUD-TKY-002",
+      "scriptId": "SCRIPT-TKY-002",
+      "version": 2,
+      "status": "READY_FOR_HUMAN_SCRIPT_LOCK",
+      "scriptLock": false,
+      "reviewDate": "2026-11-04",
+      "reviewerStatus": "AI_REVIEW_ONLY",
+      "independentHumanReview": null,
+      "speakerRoles": [
+        "Transport assistant"
+      ],
+      "targetLocale": "en-GB (proposed; human selection pending)",
+      "accent": "Clear contemporary English; no claim of Japanese representativeness",
+      "scenarioId": "TKY-DAILY-002",
+      "objectiveId": "O-INFO",
+      "sourceLessonRef": {
+        "lessonId": "TKY-DAILY-002-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "0a6fd952ecb91034dc51503b6cfc6121ccd0c15e81e9e75b35d070385a5afa80",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      "turns": [
+        {
+          "speakerRole": "Transport assistant",
+          "text": "The train is delayed until eleven forty. The direct bus leaves at eleven twenty. The shuttle leaves at eleven ten, but you need to change."
+        }
+      ],
+      "transcript": "Transport assistant: The train is delayed until eleven forty. The direct bus leaves at eleven twenty. The shuttle leaves at eleven ten, but you need to change.",
+      "hash": "509998e0e26c6585cb5abffa78873956b2341b43af8682a1c43e6f06d15e8348",
+      "questions": [
+        {
+          "promptEn": "You need a direct service before eleven thirty. Which service fits?",
+          "acceptedAnswers": [
+            "the bus",
+            "the direct bus",
+            "the bus at 11:20"
+          ]
+        },
+        {
+          "promptEn": "Why does the shuttle not fit?",
+          "acceptedAnswers": [
+            "you need to change",
+            "it requires a change"
+          ]
+        }
+      ],
+      "notes": "Keep cutoff as pre-audio task instruction; 3 services/2 constraints is B1 workload hypothesis. No hidden cutoff.",
+      "wordCount": 25,
+      "approxDurationSeconds": 13,
+      "provider": null,
+      "voiceId": null,
+      "generatedAsset": null
+    },
+    {
+      "audioId": "AUD-TKY-003",
+      "scriptId": "SCRIPT-TKY-003",
+      "version": 2,
+      "status": "READY_FOR_HUMAN_SCRIPT_LOCK",
+      "scriptLock": false,
+      "reviewDate": "2026-11-04",
+      "reviewerStatus": "AI_REVIEW_ONLY",
+      "independentHumanReview": null,
+      "speakerRoles": [
+        "Station attendant"
+      ],
+      "targetLocale": "en-GB (proposed; human selection pending)",
+      "accent": "Clear contemporary English; no claim of Japanese representativeness",
+      "scenarioId": "TKY-DAILY-003",
+      "objectiveId": "O-ROUTE",
+      "sourceLessonRef": {
+        "lessonId": "TKY-DAILY-003-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "df188edc9dfce9f896d71f433e175f133dc4260efdfc97f1691b159c64c417e4",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      "turns": [
+        {
+          "speakerRole": "Station attendant",
+          "text": "Your Red Line train reaches Pine Stop next. Get off there and change to the Green Line. Then get off at Lake Stop."
+        }
+      ],
+      "transcript": "Station attendant: Your Red Line train reaches Pine Stop next. Get off there and change to the Green Line. Then get off at Lake Stop.",
+      "hash": "c0c2363c84f6a8e339849a5ec3f070ef5f9eafb526d1d120a8a55bc018b6a041",
+      "questions": [
+        {
+          "promptEn": "Where do you change?",
+          "acceptedAnswers": [
+            "Pine",
+            "Pine Stop"
+          ]
+        },
+        {
+          "promptEn": "Which line do you take next?",
+          "acceptedAnswers": [
+            "Green",
+            "Green Line"
+          ]
+        },
+        {
+          "promptEn": "Where do you finish?",
+          "acceptedAnswers": [
+            "Lake",
+            "Lake Stop"
+          ]
+        }
+      ],
+      "notes": "Move current-line context before action. Text-only Qs cannot prove actual map navigation.",
+      "wordCount": 23,
+      "approxDurationSeconds": 12,
+      "provider": null,
+      "voiceId": null,
+      "generatedAsset": null
+    },
+    {
+      "audioId": "AUD-TKY-004",
+      "scriptId": "SCRIPT-TKY-004",
+      "version": 2,
+      "status": "READY_FOR_HUMAN_SCRIPT_LOCK",
+      "scriptLock": false,
+      "reviewDate": "2026-11-04",
+      "reviewerStatus": "AI_REVIEW_ONLY",
+      "independentHumanReview": null,
+      "speakerRoles": [
+        "Station attendant"
+      ],
+      "targetLocale": "en-GB (proposed; human selection pending)",
+      "accent": "Clear contemporary English; no claim of Japanese representativeness",
+      "scenarioId": "TKY-DAILY-004",
+      "objectiveId": "O-INFO",
+      "sourceLessonRef": {
+        "lessonId": "TKY-DAILY-004-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "c24ca98fd15028e909562b460970ac747c765df19f64e075132f4ddd87570024",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      "turns": [
+        {
+          "speakerRole": "Station attendant",
+          "text": "The museum train leaves from platform two at nine twenty. The park train leaves from platform three at nine thirty-five."
+        }
+      ],
+      "transcript": "Station attendant: The museum train leaves from platform two at nine twenty. The park train leaves from platform three at nine thirty-five.",
+      "hash": "ba09ac0fd4a2a4bd36d3cfb2ee9b793fba7ef862982e95b85612ee93c8a5e97a",
+      "questions": [
+        {
+          "promptEn": "Which platform and departure time are for the museum?",
+          "acceptedAnswers": [
+            "platform 2 at 09:20",
+            "platform two at nine twenty"
+          ]
+        }
+      ],
+      "notes": "One question requests two linked facts. Accept numeric or spoken formats; accent does not determine correctness.",
+      "wordCount": 20,
+      "approxDurationSeconds": 10,
+      "provider": null,
+      "voiceId": null,
+      "generatedAsset": null
+    },
+    {
+      "audioId": "AUD-TKY-005",
+      "scriptId": "SCRIPT-TKY-005",
+      "version": 2,
+      "status": "READY_FOR_HUMAN_SCRIPT_LOCK",
+      "scriptLock": false,
+      "reviewDate": "2026-11-04",
+      "reviewerStatus": "AI_REVIEW_ONLY",
+      "independentHumanReview": null,
+      "speakerRoles": [
+        "Cashier",
+        "Customer"
+      ],
+      "targetLocale": "en-GB (proposed; human selection pending)",
+      "accent": "Clear contemporary English; no claim of Japanese representativeness",
+      "scenarioId": "TKY-DAILY-006",
+      "objectiveId": "O-SHOP",
+      "sourceLessonRef": {
+        "lessonId": "TKY-DAILY-006-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "b8da76cbeb12c575f86ad19f47635da031161f6087023d1a92a08e32030f4671",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      "turns": [
+        {
+          "speakerRole": "Cashier",
+          "text": "Would you like a bag?"
+        },
+        {
+          "speakerRole": "Customer",
+          "text": "No bag, thanks."
+        },
+        {
+          "speakerRole": "Cashier",
+          "text": "Cash or card?"
+        },
+        {
+          "speakerRole": "Customer",
+          "text": "By card, please."
+        },
+        {
+          "speakerRole": "Customer",
+          "text": "Could I have a receipt, please?"
+        }
+      ],
+      "transcript": "Cashier: Would you like a bag?\nCustomer: No bag, thanks.\nCashier: Cash or card?\nCustomer: By card, please.\nCustomer: Could I have a receipt, please?",
+      "hash": "fc70cb1a4718fcbe49e8db34e693f20e4bbad50485c6a006a69881ed762e16a9",
+      "questions": [
+        {
+          "promptEn": "Does the customer want a bag?",
+          "acceptedAnswers": [
+            "no",
+            "no bag"
+          ]
+        },
+        {
+          "promptEn": "How will the customer pay?",
+          "acceptedAnswers": [
+            "by card",
+            "card"
+          ]
+        },
+        {
+          "promptEn": "What do they request?",
+          "acceptedAnswers": [
+            "a receipt",
+            "receipt"
+          ]
+        }
+      ],
+      "notes": "Expand compressed cashier prompt into natural turns. Last customer line occurs after payment (nonspoken production cue). Source supports choices; not spontaneous production.",
+      "wordCount": 20,
+      "approxDurationSeconds": 12,
+      "provider": null,
+      "voiceId": null,
+      "generatedAsset": null
+    },
+    {
+      "audioId": "AUD-TKY-006",
+      "scriptId": "SCRIPT-TKY-006",
+      "version": 2,
+      "status": "READY_FOR_HUMAN_SCRIPT_LOCK",
+      "scriptLock": false,
+      "reviewDate": "2026-11-04",
+      "reviewerStatus": "AI_REVIEW_ONLY",
+      "independentHumanReview": null,
+      "speakerRoles": [
+        "Staff",
+        "Traveler"
+      ],
+      "targetLocale": "en-GB (proposed; human selection pending)",
+      "accent": "Clear contemporary English; no claim of Japanese representativeness",
+      "scenarioId": "TKY-DAILY-011",
+      "objectiveId": "O-REPAIR",
+      "sourceLessonRef": {
+        "lessonId": "TKY-DAILY-011-L1",
+        "revision": "TOKYO-DAILY-r2",
+        "sha256": "d50e8fdbfbac6d950dfaaa967131bf1608cf61f7cf819680415c13d5c3fb4b30",
+        "mustBeTaughtBeforeAssessment": true
+      },
+      "turns": [
+        {
+          "speakerRole": "Staff",
+          "text": "The local train leaves at three fifteen."
+        },
+        {
+          "speakerRole": "Traveler",
+          "text": "Sorry, I didn't catch the time. Could you say that again, please?"
+        },
+        {
+          "speakerRole": "Staff",
+          "text": "Three fifteen."
+        }
+      ],
+      "transcript": "Staff: The local train leaves at three fifteen.\nTraveler: Sorry, I didn't catch the time. Could you say that again, please?\nStaff: Three fifteen.",
+      "hash": "b3c579c59bb32b46ee0993e88719f7397592a5aa47abc73d1431488af90de84c",
+      "questions": [
+        {
+          "promptEn": "What time does the train leave?",
+          "acceptedAnswers": [
+            "3:15",
+            "three fifteen"
+          ]
+        },
+        {
+          "promptEn": "What does the traveler ask the staff member to do?",
+          "acceptedAnswers": [
+            "repeat the time",
+            "say the time again"
+          ]
+        }
+      ],
+      "notes": "Repetition is already in script: measures supported retrieval, not independent repair production. Do not remove words to manufacture hearing failure.",
+      "wordCount": 21,
+      "approxDurationSeconds": 12,
+      "provider": null,
+      "voiceId": null,
+      "generatedAsset": null
+    }
+  ]
+}
