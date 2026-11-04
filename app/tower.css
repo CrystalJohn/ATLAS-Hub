@@ -61,3 +61,73 @@
 .tower-tracker-step.is-complete .tower-tracker-icon{animation:tower-checkpoint .28s ease-out both}
 @keyframes tower-checkpoint{from{transform:scale(.8);opacity:.4}to{transform:scale(1);opacity:1}}
 @media(prefers-reduced-motion:reduce){.tower-tracker-step.is-complete .tower-tracker-icon{animation:none}}
+/* Spatial airport adventure map, replacing both previous progress layouts. */
+.tower-map-stats{display:flex;gap:12px;margin-bottom:12px}.tower-map-stats>div{flex:1;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #d8c29e;padding:7px 0}.tower-map-stats span{font-size:11px;color:#776079;font-weight:750}.tower-map-stats strong{font-size:19px;line-height:1.3}.tower-map-stats small{font-size:13px;color:#7d6880}
+.tower-landscape{position:relative;height:290px;background:#fff7e8;background-image:radial-gradient(#ba9d7333 1px,transparent 1px);background-size:12px 12px;border:1px solid #dfc7a3;border-radius:14px;box-shadow:inset 0 0 30px #e7c99440;isolation:isolate}.tower-map-scribble{position:absolute;bottom:12px;left:14px;font:italic 12px Georgia,serif;color:#8a7256}.tower-route{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.tower-route path{fill:none;stroke:#c5b49e;stroke-width:3px;stroke-dasharray:5 6;stroke-linecap:round;vector-effect:non-scaling-stroke}.tower-route path.route-complete{stroke:#71966e;stroke-dasharray:none;stroke-width:4px}.tower-route path.route-current{stroke:#7445d5;stroke-dasharray:none;stroke-width:4px}.route-mobile{display:none}
+.tower-destinations{list-style:none;margin:0;padding:0;position:absolute;inset:0}.tower-shell .tower-destination{background:transparent;border:0;box-shadow:none;list-style:none;color:#302956;display:flex;align-items:center;flex-direction:column;gap:4px;text-align:center}.tower-destinations>.tower-destination{position:absolute;width:92px;transform:translate(-50%,-27px)}.tower-destinations>.stage-1{left:12%;top:67%}.tower-destinations>.stage-2{left:30%;top:39%}.tower-destinations>.stage-3{left:50%;top:18%}.tower-destinations>.stage-4{left:70%;top:39%}.tower-destinations>.stage-5{left:88%;top:67%}.tower-location{position:relative;display:grid;place-items:center;width:49px;height:49px;background:#eee5d7;border:2px solid #b6a99b;border-radius:15px;color:#897c72;box-shadow:0 4px 0 #cbbda9}.tower-destination strong{font-size:12px;line-height:1.2;background:#fff7e8;padding:3px 5px;border-radius:4px;white-space:nowrap}.tower-destination small{font-size:8px;font-weight:900;letter-spacing:.04em;color:#786d68;white-space:nowrap}.tower-destination.is-current .tower-location{background:#7445d5;color:white;border-color:#6238bb;box-shadow:0 0 0 5px #e4d7f8,0 5px 0 #57359a;transform:scale(1.1)}.tower-destination.is-current small{color:#693ab5}.tower-you-pin{position:absolute;top:-18px;right:-8px;color:#7445d5;fill:#fff7e8}.tower-destination.is-complete .tower-location{background:#e2eddd;color:#557a50;border-color:#71966e;box-shadow:0 4px 0 #a9be9c}.tower-destination.is-complete small{color:#52744c;border:1px solid #71966e;padding:2px 5px;transform:rotate(-6deg)}.tower-destination.is-failed .tower-location{background:#ffead8;color:#a25339;border-color:#c88668}.tower-destination.is-gate .tower-location{width:59px;height:59px;border-radius:19px 19px 27px 27px;border:3px double #d4a34f;color:#98702d;background:#f9eccf;box-shadow:0 5px 0 #d4b77f}.tower-destination.is-gate.is-current .tower-location{background:#7445d5;color:white;border-color:#e3bf70}.tower-destination.is-gate.is-complete .tower-location{background:#e2eddd;color:#557a50;border-color:#71966e}.tower-gate-rule{font-size:9px;line-height:1.3;width:100px;color:#74614f}.tower-destination.is-gate strong{font-size:10px}.tower-destination.is-gate small{color:#9b732d}
+.tower-mini-route{display:grid;grid-template-columns:repeat(5,1fr);list-style:none;padding:0;margin:12px 0;position:relative}.tower-mini-route:before{content:'';position:absolute;left:10%;right:10%;top:20px;border-top:2px dashed #c5b49e}.tower-mini-route .tower-location{width:38px;height:38px;border-radius:12px;box-shadow:none}.tower-mini-route .tower-destination strong{font-size:11px}.tower-mini-route .tower-destination.is-gate .tower-location{width:38px;height:38px;box-shadow:none}.tower-mini-route .tower-destination.is-current .tower-location{transform:none}
+.tower-rule-summary{padding:0;list-style:none;font-size:13px;line-height:1.8}.tower-rule-summary li:before{content:'✓';color:#71966e;font-weight:900;margin-right:8px}.tower-rule-summary li:nth-child(2):before{content:'×';color:#ab6343}.tower-rule-summary li:nth-child(3):before{content:'★';color:#a97b32}.tower-rule-details summary{min-height:44px;display:flex;align-items:center;text-decoration:underline;cursor:pointer;font-size:13px;color:#6b469f}.tower-rule-details p{font-size:13px}.tower-entry h2{font-size:13px;letter-spacing:.08em}
+@media(max-width:600px){.tower-landscape{height:500px}.route-desktop{display:none}.route-mobile{display:block}.tower-destinations>.stage-1{left:23%;top:84%}.tower-destinations>.stage-2{left:65%;top:66%}.tower-destinations>.stage-3{left:27%;top:46%}.tower-destinations>.stage-4{left:66%;top:27%}.tower-destinations>.stage-5{left:40%;top:9%}.tower-map-scribble{font-size:11px;bottom:9px}.tower-destination strong{font-size:13px}.tower-destination small{font-size:9px}}
+.tower-map-scribble{display:none}
+@media(min-width:601px){.tower-landscape{height:320px}}
+body:has(.tower-shell) .travel-language label:first-child{display:none}
+/* Motion polish: three deliberate compositions using matching SVG geometry. */
+.tower-landscape{height:260px;border:0;border-radius:0;box-shadow:none;background-color:transparent;overflow:visible}
+.tower-route.route-tablet{display:none}
+.tower-route path.route-base{stroke:#c4b49d;stroke-width:3;stroke-dasharray:3 7}
+.tower-route path.route-progress{stroke:#71966e;stroke-width:4;stroke-dasharray:1;stroke-dashoffset:0;animation:tower-route-reveal .75s ease-out both}
+.tower-route path.route-current{stroke:#7445d5}
+.tower-route path.route-gold{stroke:#c39745}
+.tower-traveler{pointer-events:none;filter:drop-shadow(0 2px 2px #5b3d8044)}
+.tower-traveler circle{fill:#fff7e8;stroke:#7445d5;stroke-width:4}
+.tower-traveler path{fill:#7445d5!important;stroke:none!important}
+.tower-destinations>.stage-1{left:8%;top:60%}.tower-destinations>.stage-2{left:29%;top:52%}.tower-destinations>.stage-3{left:51%;top:23%}.tower-destinations>.stage-4{left:72%;top:48%}.tower-destinations>.stage-5{left:92%;top:57%}
+.tower-destination .tower-location{transition:box-shadow .2s,transform .2s,background-color .2s}
+.tower-node-lock{position:absolute;right:-4px;bottom:-4px;padding:2px;box-sizing:content-box;border-radius:50%;background:#fff7e8;color:#827464;border:1px solid #cbb89b}
+.tower-destination.is-locked .tower-location{background:#eae3d8;color:#958777;filter:saturate(.35)}
+.tower-destination.is-gate .tower-location{width:70px;height:70px;border-radius:22px 22px 30px 30px}
+.tower-destinations>.tower-destination.is-gate{transform:translate(-50%,-35px)}
+.tower-destination.is-current .tower-location{animation:tower-node-activate .7s ease-out both}
+.tower-destination.is-gate.is-current .tower-location{animation:tower-gate-reveal .8s ease-out both}
+.tower-destination.is-failed .tower-location{animation:tower-error-shake .3s ease-out}
+.tower-progress[data-run-status=FAILED] .route-progress{opacity:.35}
+.tower-destination:focus-visible{outline:2px solid #7445d5;outline-offset:5px;border-radius:8px}
+.tower-destination.is-current:hover .tower-location,.tower-destination.is-complete:hover .tower-location,.tower-destination.is-current:focus .tower-location,.tower-destination.is-complete:focus .tower-location{transform:translateY(-3px) scale(1.06);box-shadow:0 4px 0 #ac98ca,0 0 0 4px #e8dcf7}
+.tower-destination.is-gate:hover .tower-location,.tower-destination.is-gate:focus .tower-location{outline:2px solid #d4a34f;outline-offset:3px}
+.tower-destinations>.tower-destination{animation:tower-destination-enter .3s ease-out both;animation-delay:calc((var(--stage-order,0)) * .1s)}
+.tower-destinations>.stage-2{--stage-order:1}.tower-destinations>.stage-3{--stage-order:2}.tower-destinations>.stage-4{--stage-order:3}.tower-destinations>.stage-5{--stage-order:4}
+.tower-map-stats{animation:tower-header-enter .18s ease-out both}
+@keyframes tower-route-reveal{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes tower-destination-enter{from{opacity:0}to{opacity:1}}
+@keyframes tower-header-enter{from{opacity:0;translate:0 3px}to{opacity:1;translate:0 0}}
+@keyframes tower-node-activate{50%{box-shadow:0 0 0 8px #d9c6f6}}
+@keyframes tower-gate-reveal{50%{box-shadow:0 0 0 7px #efd394,0 0 18px #d4a34f66}}
+@keyframes tower-error-shake{25%{translate:-3px 0}75%{translate:3px 0}}
+@media(min-width:601px) and (max-width:999px){.tower-landscape{height:380px}.route-desktop,.route-mobile{display:none}.tower-route.route-tablet{display:block}.tower-destinations>.stage-1{left:12%;top:18%}.tower-destinations>.stage-2{left:35%;top:23%}.tower-destinations>.stage-3{left:62%;top:44%}.tower-destinations>.stage-4{left:40%;top:68%}.tower-destinations>.stage-5{left:82%;top:76%}}
+@media(max-width:600px){.tower-landscape{height:540px}.route-desktop,.tower-route.route-tablet{display:none}.route-mobile{display:block}.tower-destinations>.stage-1{left:35%;top:86%}.tower-destinations>.stage-2{left:62%;top:67%}.tower-destinations>.stage-3{left:38%;top:47%}.tower-destinations>.stage-4{left:62%;top:27%}.tower-destinations>.stage-5{left:42%;top:9%}}
+@media(prefers-reduced-motion:reduce){.tower-adventure *,.tower-destinations>.tower-destination{animation:none!important;transition:none!important}.tower-route path{stroke-dashoffset:0!important}}
+.tower-route path.route-base{stroke-dasharray:1;stroke-dashoffset:0;animation:tower-route-reveal .7s ease-out both}
+.tower-mini-landscape{position:relative;min-height:74px}.tower-mini-landscape .tower-route{height:74px;z-index:2}.tower-mini-route{padding-top:0}.tower-mini-route:before{display:none}.tower-mini-landscape .tower-route path{stroke-width:2px}.tower-mini-landscape .tower-traveler circle{r:17}
+@media(prefers-reduced-motion:reduce){.tower-route path.route-base{animation:none}}
+/* Normalize stroke drawing in SVG units; non-scaling strokes distort pathLength reveal in Chromium. */
+.tower-route path{vector-effect:none;stroke-width:7px}
+.tower-route path.route-base{stroke-width:6px}
+.tower-route path.route-progress{stroke-width:9px}
+.tower-mini-landscape .tower-route path{stroke-width:8px}
+.tower-landscape .tower-route{z-index:2}
+.tower-landscape .tower-destinations{background:transparent;pointer-events:none}
+.tower-landscape .tower-destination{z-index:3;pointer-events:auto}
+@keyframes tower-route-reveal{0%{stroke-dasharray:1;stroke-dashoffset:1}99%{stroke-dasharray:1;stroke-dashoffset:0}100%{stroke-dasharray:none;stroke-dashoffset:0}}
+.tower-route path.route-base,.tower-route path.route-progress{animation:none;stroke-dasharray:none;stroke-dashoffset:0}
+.tower-mini-landscape .tower-traveler circle{cy:-360}
+.tower-mini-landscape .tower-traveler path{transform:translateY(-360px)}
+
+/* Tracker has an isolated route, checkpoint, and fixed-size traveler layer. */
+.tower-mini-landscape{isolation:isolate;min-height:86px}
+.tower-mini-landscape .tower-route{z-index:0}
+.tower-mini-route{margin:0;padding-top:12px;z-index:1}
+.tower-mini-route .tower-destination{position:relative}
+.tower-traveler-pin{position:absolute;width:20px;height:20px;display:grid;place-items:center;transform:translate(-50%,-100%);margin-top:-26px;z-index:4;pointer-events:none;color:#7445d5;background:#fff7e8;border-radius:50%;filter:drop-shadow(0 1px 2px #5c3c8a33)}
+.pin-tablet,.pin-mobile{display:none}
+@media(min-width:601px) and (max-width:999px){.pin-desktop{display:none}.pin-tablet{display:grid}}
+@media(max-width:600px){.pin-desktop{display:none}.pin-mobile{display:grid}}

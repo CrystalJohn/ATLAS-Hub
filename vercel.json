@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "deploymentEnabled": {
-      "codex/game-01-t3-dungeon-ui": false
+      "codex/game-01-t3-dungeon-ui": false,
+      "codex/atlas-progress-checkpoint-2026-11-04": false
     }
   }
 }

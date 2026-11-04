@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "single world selector and no old global map buttons",
+    "travel map -> country -> chapter",
+    "authoritative travel checkpoint resume",
+    "passport available with no difficulty selector",
+    "switch worlds performs no progression writes",
+    "nature map -> journey -> available mission",
+    "nature mission URL reload restores authorized attempt",
+    "browser back and forward use URL-derived sections",
+    "global saved words and real nature field notes remain discoverable",
+    "help remains accessible as utility",
+    "320/390/768/1024/1440 both worlds without horizontal overflow, 44px nav",
+    "keyboard navigation, accessible active section and reduced motion",
+    "invalid encounter link has safe recovery",
+    "navigation does not award XP or complete missions",
+    "direct travel encounter URL survives refresh",
+    "second synthetic account has its own progression and usable empty journey",
+    "expired session removes authenticated world navigation",
+    "original account checkpoint survives account and session changes"
+  ],
+  "pass": true
+}
