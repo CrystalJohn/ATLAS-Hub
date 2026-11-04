@@ -1,8 +1,8 @@
 import {z} from 'zod';
 import {encounterFor,copy} from '../../../content/travel/japan.ts';
-import {emptyTravel,type EncounterProgress,type PlayerTravelProgress,type TravelAction,type Copy} from '../../../content/travel/types.ts';
+import {emptyTravel,type EncounterProgress,type PlayerTravelProgress,type Copy} from '../../../content/travel/types.ts';
 import {travelRules} from '../../../lib/atlas/travel-rules.ts';
-export const TravelSubmission=z.object({encounterId:z.string().max(80),version:z.literal(1),stepId:z.string().max(80),band:z.enum(['A1','A2','B1','B2']),support:z.object({vietnamese:z.boolean(),glossary:z.boolean()}).strict(),action:z.discriminatedUnion('kind',[
+export const TravelSubmission=z.object({encounterId:z.string().max(80),version:z.literal(1),stepId:z.string().max(80),expectedRevision:z.number().int().min(0).max(Number.MAX_SAFE_INTEGER-1).optional(),band:z.enum(['A1','A2','B1','B2']),support:z.object({vietnamese:z.boolean(),glossary:z.boolean()}).strict(),action:z.discriminatedUnion('kind',[
  z.object({kind:z.enum(['inspect','target']),target:z.string().max(80)}).strict(),
  z.object({kind:z.literal('say'),choice:z.string().max(80)}).strict(),
  z.object({kind:z.literal('move'),direction:z.enum(['up','right','down','left']),expectedMove:z.number().int().min(0).max(20)}).strict(),

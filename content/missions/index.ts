@@ -33,4 +33,4 @@ export const missions:Mission[] = [
 ].map(m=>MissionSchema.parse(m));
 export function missionById(id:string,version=1):Mission { const m=missions.find(m=>m.id===id&&m.version===version);if(!m)throw new Error('Unknown mission version');return m; }
 // Public projections omit evaluation rules. Evaluators remain on the server.
-export function publicMission(m:Mission) { const {evaluation:_evaluation,...publicData}=m; return publicData; }
+export function publicMission(m:Mission) { const {evaluation,...publicData}=m; void evaluation; return publicData; }

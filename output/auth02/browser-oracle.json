@@ -1,0 +1,95 @@
+{
+  "alice": {
+    "revision": 7,
+    "xp": 30,
+    "completed": [],
+    "ledger": [
+      {
+        "missionId": "travel:jp-arrival",
+        "amount": 30
+      }
+    ],
+    "checkpoint": {
+      "schemaVersion": 1,
+      "savedRevision": 7,
+      "updatedAt": "2026-10-21T06:17:14.071Z",
+      "contentVersion": 1,
+      "target": {
+        "kind": "travel",
+        "encounterId": "jp-directions"
+      }
+    },
+    "travel": {
+      "version": 1,
+      "visitedCountries": [
+        "JP"
+      ],
+      "encounters": {
+        "jp-arrival": {
+          "step": 3,
+          "routeIndex": 0,
+          "seen": [
+            "signs"
+          ],
+          "completedAt": "2026-10-21T06:17:04.831Z"
+        },
+        "jp-directions": {
+          "step": 1,
+          "routeIndex": 0,
+          "seen": [
+            "map"
+          ]
+        }
+      },
+      "stamps": [
+        {
+          "id": "jp-arrival",
+          "name": {
+            "en": "Hello, Tokyo!",
+            "vi": "Xin chào Tokyo!"
+          },
+          "icon": "plane",
+          "countryId": "JP",
+          "destinationId": "tokyo",
+          "encounterId": "jp-arrival",
+          "earnedAt": "2026-10-21T06:17:04.831Z"
+        }
+      ]
+    }
+  },
+  "bob": {
+    "revision": 0,
+    "xp": 0,
+    "completed": [],
+    "ledger": []
+  },
+  "legacy": {
+    "revision": 5,
+    "xp": 30,
+    "completed": [
+      "silent-forest"
+    ],
+    "ledger": [
+      {
+        "missionId": "silent-forest",
+        "amount": 30
+      }
+    ],
+    "travel": {
+      "version": 1,
+      "visitedCountries": [
+        "JP"
+      ],
+      "encounters": {
+        "jp-arrival": {
+          "step": 1,
+          "routeIndex": 0,
+          "seen": [
+            "signs"
+          ]
+        }
+      },
+      "stamps": []
+    }
+  }
+}

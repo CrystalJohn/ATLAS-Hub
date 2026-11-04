@@ -26,7 +26,8 @@ try{
  await compile('app/components/mission-guidance.ts','mission-guidance.mjs');
  await compile('app/components/MissionGuide.tsx','MissionGuide.mjs',{"'./mission-guidance'":"'./mission-guidance.mjs'"});
  await compile('content/english/forest.ts','forest.mjs');
- await compile('app/components/EnglishLearning.tsx','EnglishLearning.mjs',{"'../../content/english/forest.js'":"'./forest.mjs'"});
+ await compile('app/components/useLocalPreference.ts','useLocalPreference.mjs');
+ await compile('app/components/EnglishLearning.tsx','EnglishLearning.mjs',{"'../../content/english/forest.js'":"'./forest.mjs'","'./useLocalPreference'":"'./useLocalPreference.mjs'"});
  const {MissionGuide}=await import(pathToFileURL(`${process.cwd()}/${dir}/MissionGuide.mjs`).href);
  const props={progress:base,vietnamese:true,busy:false,onVietnamese:()=>{},onAction:()=>{},onHelp:()=>{}};
  const html=renderToStaticMarkup(createElement(MissionGuide,props));

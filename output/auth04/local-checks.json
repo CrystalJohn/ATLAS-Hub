@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-23",
+  "baseCommit": "d03faabda3d6eefb249ecf3a20feba776d655c56",
+  "checks": [
+    { "command": "pnpm.cmd --config.manage-package-manager-versions=false exec tsc --noEmit", "status": "PASS" },
+    { "command": "pnpm.cmd --config.manage-package-manager-versions=false lint", "status": "PASS", "warnings": 7, "errors": 0 },
+    { "command": "pnpm.cmd --config.manage-package-manager-versions=false test:auth", "status": "PASS", "provider": "fixture" },
+    { "command": "pnpm.cmd --config.manage-package-manager-versions=false test:auth:http", "status": "PASS", "browser": "Brave mobile and desktop fixture" },
+    { "command": "pnpm.cmd --config.manage-package-manager-versions=false test:auth02", "status": "PASS", "database": "disposable PostgreSQL 17.10", "scenarios": 19 },
+    { "command": "pnpm.cmd --config.manage-package-manager-versions=false test:auth02:http", "status": "PASS", "database": "disposable PostgreSQL 17.10" },
+    { "command": "node scripts/test-travel.mts", "status": "PASS", "provider": "fixture" },
+    { "command": "node scripts/test-chapter.mts", "status": "PASS", "provider": "fixture" },
+    { "command": "pnpm.cmd --config.manage-package-manager-versions=false build", "status": "PASS", "runtime": "Next Webpack" }
+  ],
+  "clientStaticSecretScan": { "files": 30, "matches": 0 },
+  "limitations": ["No real Google OAuth", "No hosted staging database", "No production gameplay verification"]
+}

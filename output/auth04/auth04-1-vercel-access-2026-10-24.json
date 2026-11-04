@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-24",
+  "scope": "Read-only Vercel project, deployment, alias, and environment metadata; Supabase URL values reduced to project refs; no secrets or hosted writes",
+  "vercelProject": "atlas-hub",
+  "verifiedProjectDomains": ["atlas-hub-beige.vercel.app"],
+  "teamId": "team_dvpNSCXxfd93YeDMu4OMRVcK",
+  "access": {
+    "projectRead": "PASS",
+    "deploymentList": "PASS",
+    "previous403Resolved": true
+  },
+  "deployments": {
+    "latestPreview": {
+      "id": "dpl_9NQ2H4yCnepZp2V4Pqs5SQWYQwg3",
+      "state": "READY",
+      "sha": "d03faabda3d6eefb249ecf3a20feba776d655c56",
+      "alias": "atlas-hub-git-codex-auth-3f723a-phuctptse183992-1459s-projects.vercel.app"
+    },
+    "production": {
+      "id": "dpl_AwEYhZ7RfL8Mjhw7PpLgQiTH9bKt",
+      "state": "READY",
+      "sha": "ce79e5914a3f8337dbfb4736e07ac72768060599",
+      "aliases": [
+        "atlas-hub-beige.vercel.app",
+        "atlas-hub-git-main-phuctptse183992-1459s-projects.vercel.app",
+        "atlas-hub-phuctptse183992-1459s-projects.vercel.app"
+      ]
+    }
+  },
+  "environmentNamesAndTargets": {
+    "preview": ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"],
+    "production": ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", "SUPABASE_SECRET_KEY"],
+    "atlasAuthAllowedOriginsPresent": false
+  },
+  "supabaseProjectRefsFromPublicUrlVariables": {
+    "preview": "jyzeararymcahczbovei",
+    "production": "jyzeararymcahczbovei",
+    "isolated": false
+  },
+  "notVerified": ["Supabase OAuth redirect allowlist", "Real Google OAuth E2E", "Migration application on staging or production", "Protected deployment HTTP behavior"]
+}

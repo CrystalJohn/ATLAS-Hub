@@ -1,0 +1,8 @@
+{
+  "files": 181,
+  "errors": 0,
+  "warnings": 7,
+  "warningRules": {
+    "@next/next/no-img-element": 7
+  }
+}

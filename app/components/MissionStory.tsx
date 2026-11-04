@@ -1,5 +1,5 @@
 'use client';
-import {useEffect,useState} from 'react';
+import {useLocalPreference} from './useLocalPreference';
 import {ArrowRight,BookOpen,CheckCircle2,Languages,Leaf,TreePine,Waves} from 'lucide-react';
 import {Bilingual} from './Bilingual';
 import {translateVietnamese} from '../../content/localization/vi';
@@ -7,14 +7,14 @@ import type {Mission} from './chapter-types';
 import type {EnglishLesson,ReadingBand} from '../../content/english/chapter';
 type TranslationMode='on-demand'|'parallel';
 const preferenceKey='atlas-story-translation-mode-v1';
+function isTranslationMode(value:string):value is TranslationMode{return value==='on-demand'||value==='parallel';}
 function StoryCopy({text,vietnamese,mode}:{text:string;vietnamese:boolean;mode:TranslationMode}){
  const translation=vietnamese?translateVietnamese(text):undefined;
  return <div className="story-copy"><p lang="en">{text}</p>{translation&&(mode==='parallel'?<p className="story-copy-vi" lang="vi">{translation}</p>:<details className="story-translation"><summary lang="vi"><Languages size={13}/> Xem tiếng Việt</summary><p lang="vi">{translation}</p></details>)}</div>;
 }
 export function MissionStory({mission,lesson,band,missionIndex,accent,completed,vietnamese:vi,onStart}:{mission:Mission;lesson:EnglishLesson;band:ReadingBand;missionIndex:number;accent:string;completed:boolean;vietnamese:boolean;onStart:()=>void}){
- const [mode,setMode]=useState<TranslationMode>('on-demand');
- useEffect(()=>{try{const saved=window.localStorage.getItem(preferenceKey);if(saved==='on-demand'||saved==='parallel')setMode(saved);}catch{/* Optional presentation preference. */}},[]);
- function chooseMode(value:TranslationMode){setMode(value);try{window.localStorage.setItem(preferenceKey,value);}catch{/* Keep the current choice in memory. */}}
+ const [mode,setMode]=useLocalPreference(preferenceKey,'on-demand',isTranslationMode);
+ function chooseMode(value:TranslationMode){setMode(value);}
  return <section className="story-card" data-translation-mode={mode}>
 
  <div className="story-layout"><div className="story-overview">
