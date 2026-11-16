@@ -4,7 +4,7 @@
 
 ATLAS là ứng dụng học tiếng Anh qua khám phá và giải quyết tình huống. Người chơi đọc manh mối, trò chuyện với nhân vật, hoàn thành nhiệm vụ và lưu lại từ vựng trong hành trình của mình.
 
-Runtime hiện tại là **Next.js + Supabase Auth (Google) + Supabase PostgreSQL**. Supabase là database hoạt động duy nhất ở cả local và production; không cần đặt `VERCEL=1`. Source/schema D1 và công cụ Sites cũ chỉ còn phục vụ lịch sử và kiểm thử hồi quy, không được route đang chạy sử dụng. Dữ liệu cũ không bị xóa hay tự ghép tài khoản qua email.
+Runtime hiện tại là **Next.js + Supabase Auth (Google) + Supabase PostgreSQL**. Supabase là database hoạt động duy nhất ở cả local và production; không cần đặt `VERCEL=1`. Mã nguồn và cấu hình D1/Sites/Vite cũ đã được xóa khỏi working tree; tài liệu lịch sử vẫn nằm trong `docs/legacy/`. Dữ liệu cũ không bị xóa hay tự ghép tài khoản qua email.
 
 ## Tính năng hiện có
 
@@ -71,7 +71,7 @@ Dry-run hiển thị SQL đang chờ; `db push` áp dụng và ghi lịch sử, 
 1. [`atlas_expeditions`](supabase/migrations/20261020090000_atlas_expeditions.sql): tiến trình, nhiệm vụ, thưởng và từ đã lưu.
 2. [`atlas_profiles`](supabase/migrations/20261020110000_atlas_profiles.sql): tên hiển thị, hỗ trợ tiếng Việt và reading target.
 3. [`atlas_profile_interests`](supabase/migrations/20261020130000_atlas_profile_interests.sql): thêm danh sách sở thích vào profile; chạy cả khi bảng profile đã có từ trước.
-4. [`AUTH-02 integrity`](supabase/migrations/20261021090000_auth02_expedition_integrity.sql): ràng buộc ledger duy nhất, XP/ledger cùng commit, lịch sử completion/stamp và revision. Migration này mới được áp dụng/kiểm thử trên PostgreSQL local, **chưa áp dụng production**. Review [production readiness](docs/auth-02/AUTH-02-production-readiness.md) trước khi chạy trên môi trường thật.
+4. [`AUTH-02 integrity`](supabase/migrations/20261021090000_auth02_expedition_integrity.sql): ràng buộc ledger duy nhất, XP/ledger cùng commit, lịch sử completion/stamp và revision. Migration đã được áp dụng lên project Supabase linked; xem [biên bản áp dụng](docs/auth-04/AUTH-04.1-migration-release-2026-10-24.md). Real OAuth E2E và xác minh production vẫn là các cổng riêng.
 
 Cả hai gắn với `auth.users.id`. Profile nằm ở bảng riêng, không cập nhật document XP/progression. Browser không có quyền ghi trực tiếp vào các bảng này; các thao tác đi qua API của ứng dụng.
 
@@ -117,7 +117,7 @@ Các link chuyển tới giao diện tại `http://127.0.0.1:3211`. Chế độ 
 | `pnpm.cmd test:auth02` | PostgreSQL/PostgREST thật trên máy, user test riêng |
 | `pnpm.cmd test:auth02:http` | API/cookie của Next production qua PostgreSQL local; chạy sau build |
 | `pnpm.cmd preview:auth02` | Browser fixture PostgreSQL thật; Auth ký token mô phỏng, không phải Google |
-| `pnpm.cmd legacy:db:generate` | Công cụ D1 lịch sử, không dùng cho schema/runtime hiện tại |
+| `pnpm.cmd install:ci` | Cài dependency theo lockfile bằng pnpm |
 
 Build native Next trên PowerShell:
 
@@ -125,7 +125,7 @@ Build native Next trên PowerShell:
 pnpm.cmd build
 ```
 
-Build không deploy và không tạo bảng Supabase. Repository không tự liên kết hoặc chuyển dữ liệu Sites/D1 lịch sử sang tài khoản Google.
+Build không deploy và không tạo bảng Supabase. Repository không tự liên kết hoặc chuyển dữ liệu lịch sử sang tài khoản Google.
 
 ## Kiến trúc
 
@@ -150,7 +150,6 @@ node scripts/test-profile.mts
 node scripts/test-interests.mts
 node scripts/test-supabase.mts
 node scripts/test-chapter-ui.mts
-node scripts/test-atlas.mts
 node scripts/test-travel.mts
 node scripts/test-chapter.mts
 node scripts/test-vocabulary.mts
@@ -159,7 +158,8 @@ node scripts/test-vocabulary.mts
 - `test-profile` và `test-supabase`: SDK/API với PostgREST fixture; danh tính, cô lập tài khoản, validation, lưu profile và bảo vệ thưởng.
 - `test-interests`: gợi ý theo chủ đề, giữ nguyên điều kiện mở khóa và không sửa tiến trình.
 - `test-chapter-ui`: render component, ngôn ngữ giao diện và hỗ trợ bài học; không phải kiểm thử tương tác trình duyệt.
-- Các bài kiểm thử D1 là hồi quy lịch sử dùng Miniflare local, không xác minh PostgreSQL và không đưa D1 vào runtime.
+- `test-travel`, `test-chapter`, `test-vocabulary`: kiểm tra hợp đồng nội dung, đáp án, IPA và lộ trình; không cần Miniflare/D1.
+- Các bài kiểm thử D1/Miniflare cũ đã được xóa cùng runtime lịch sử; kiểm thử PostgreSQL/PostgREST thật nằm trong `test:auth02`.
 - Sau native Next build: `pnpm.cmd test:auth:http` kiểm tra các route HTTP với provider mô phỏng.
 - Khi `preview:profile` đang chạy: `node scripts/test-profile-http.mts` kiểm tra profile qua HTTP và xác nhận expedition không đổi sau cập nhật profile.
 
@@ -190,4 +190,4 @@ Các test tự tạo database/user mô phỏng riêng trên loopback, không dù
 
 `GET /api/health` kiểm tra schema expedition và profile (bao gồm `interests`); không thay thế kiểm thử OAuth/gameplay hay xác minh migration integrity đã được áp dụng. [Trace `PROFILE_SETUP_REQUIRED`](docs/troubleshooting/PROFILE_SETUP_REQUIRED.md) là chẩn đoán lịch sử trước AUTH-02.
 
-Hướng dẫn Windows chi tiết: [LOCAL-DEVELOPMENT.md](docs/LOCAL-DEVELOPMENT.md). Tài liệu adapter Sites trước đó: [ATLAS-SITES.md](docs/legacy/ATLAS-SITES.md); một số phần là lịch sử triển khai, không thay thế hướng dẫn Supabase hiện tại ở trên.
+Hướng dẫn Windows chi tiết: [LOCAL-DEVELOPMENT.md](docs/LOCAL-DEVELOPMENT.md). Tài liệu adapter Sites trước đó vẫn được giữ tại [ATLAS-SITES.md](docs/legacy/ATLAS-SITES.md) để tham khảo lịch sử; mã nguồn/cấu hình tương ứng đã được xóa khỏi repo.

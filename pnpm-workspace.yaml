@@ -1,4 +1,4 @@
-# Copied Sites are standalone projects and cannot inherit the monorepo policy.
+# ATLAS is a standalone project; keep dependency resolution policy pinned here.
 minimumReleaseAge: 10080
 minimumReleaseAgeIgnoreMissingTime: false
 trustLockfile: false
@@ -13,7 +13,7 @@ allowBuilds:
   fsevents: true
   sharp: true
   unrs-resolver: true
-  workerd: true
+  workerd: set this to true or false
 storeDir: ${SITES_PNPM_SHARED_STORE:-.sites-runtime/pnpm-store}
 cacheDir: ${SITES_PNPM_SHARED_STORE:-.sites-runtime/pnpm-store}/policy-cache
 enableGlobalVirtualStore: false
@@ -22,5 +22,3 @@ packageImportMethod: auto
 # The explicit installer owns dependency setup, including restored workspaces.
 verifyDepsBeforeRun: false
 optimisticRepeatInstall: false
-overrides:
-  miniflare>sharp: 0.35.4
