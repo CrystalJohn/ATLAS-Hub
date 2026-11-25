@@ -1,7 +1,8 @@
 import {z} from 'zod';
 import {emptyTravel,type PlayerTravelProgress} from '../../content/travel/types.ts';
 import {packFor,travelVocabularyLessons,encounterFor} from '../../content/travel/japan.ts';
-import {TravelSubmission,evaluateTravel,travelUnlocked} from '../../packages/mission-engine/src/travel.ts';
+import {TravelSubmission,evaluateTravel} from '../../packages/mission-engine/src/travel.ts';
+import {travelUnlocked} from '../../packages/domain/src/travel.ts';
 import {lessonById} from '../../content/english/chapter.ts';
 import {EnglishItemSchema,evaluateEnglishItem} from '../../packages/english-engine/src/chapter.ts';
 import {emptyProgress,isUnlocked,projection,type Progress,type EnglishEvidence} from '../../packages/domain/src/index.ts';
@@ -68,7 +69,8 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
     const input=checkpointInput.parse(body);
     if(input.expectedRevision!==row.revision)throw new ApiError(409,'Adventure has moved on. Reload the latest progress.','STALE_REVISION');
     if(input.target.kind==='travel'){
-     if(!encounterFor(input.target.encounterId)||!travelUnlocked(input.target.encounterId,d.travel??emptyTravel()))throw new ApiError(403,'This travel stop is not available.');
+     const found=encounterFor(input.target.encounterId);
+     if(!travelUnlocked(found?.pack,input.target.encounterId,d.travel?.encounters))throw new ApiError(403,'This travel stop is not available.');
      d.travel??=emptyTravel();d.travel.encounters[input.target.encounterId]??={step:0,routeIndex:0,seen:[]};
     }
     if(!resolveTarget(d,input.target)||!saveCheckpoint(d,input.target,row.revision+1))throw new ApiError(400,'This adventure checkpoint is no longer available.','INVALID_CHECKPOINT');
@@ -80,9 +82,10 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
    }else if(route==='travel/action'&&request.method==='POST'){
     const input=TravelSubmission.parse(body);d.travel??=emptyTravel();
     if(input.action.kind==='restart'&&input.expectedRevision!==row.revision)throw new ApiError(409,'Adventure has moved on. Reload the latest progress.','STALE_REVISION');
-    if(!encounterFor(input.encounterId))throw new ApiError(400,'Unknown travel encounter');
-    if(!travelUnlocked(input.encounterId,d.travel))throw new ApiError(403,'Finish the previous travel stop first.');
-    let outcome;try{outcome=evaluateTravel(input,d.travel);}catch{throw new ApiError(400,'Invalid travel action for this scene.');}const {pack,encounter}=outcome.found;
+    const found=encounterFor(input.encounterId);
+    if(!found)throw new ApiError(400,'Unknown travel encounter');
+    if(!travelUnlocked(found.pack,input.encounterId,d.travel.encounters))throw new ApiError(403,'Finish the previous travel stop first.');
+    let outcome;try{outcome=evaluateTravel(input,d.travel);}catch{throw new ApiError(400,'Invalid travel action for this scene.');}const {pack,encounter}=found;
     const previous=d.travel.encounters[encounter.id];
     const step=encounter.steps[previous?.step??0],action=input.action;
     const matchingKind=step&&(action.kind===step.kind||(step.kind==='dialogue'&&action.kind==='say')||(step.kind==='route'&&action.kind==='move'));
@@ -110,7 +113,7 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
     const input=z.object({lessonId:z.string().max(100),version:z.literal(1),word:z.string().max(80),saved:z.boolean()}).strict().parse(body);
     let lesson:{missionId:string;glossary:readonly {word:string}[]}|undefined=travelVocabularyLessons.find(l=>l.id===input.lessonId);if(!lesson){try{lesson=lessonById(input.lessonId,input.version);}catch{throw new ApiError(400,'Unknown vocabulary lesson');}}
     if(!lesson.glossary.some(entry=>entry.word===input.word))throw new ApiError(400,'Unknown vocabulary word');
-    if(input.saved&&!(input.lessonId.startsWith('travel:')?travelUnlocked(lesson.missionId,d.travel??emptyTravel()):isUnlocked(lesson.missionId,d.progress)))throw new ApiError(403,'This trail is locked.');
+    if(input.saved&&!(input.lessonId.startsWith('travel:')?travelUnlocked(encounterFor(lesson.missionId)?.pack,lesson.missionId,d.travel?.encounters):isUnlocked(lesson.missionId,d.progress)))throw new ApiError(403,'This trail is locked.');
     const words=d.savedVocabulary??[],matches=(word:SavedWord)=>word.lessonId===input.lessonId&&word.version===input.version&&word.word===input.word;
     d.savedVocabulary=input.saved?(words.some(matches)?words:[{lessonId:input.lessonId,version:input.version,word:input.word,savedAt:activityTime.toISOString()},...words]):words.filter(word=>!matches(word));
     result={words:d.savedVocabulary};

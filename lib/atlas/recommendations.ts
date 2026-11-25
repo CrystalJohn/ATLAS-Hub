@@ -1,6 +1,7 @@
 import type {ExplorationInterest} from '../../content/interests.ts';
 import {travelPacks} from '../../content/travel/japan.ts';
-import type {AtlasState} from '../../app/components/chapter-types';
+import {travelUnlocked} from '../../packages/domain/src/travel.ts';
+import type {AtlasState} from './contracts/expedition.ts';
 
 type SuggestionState=Pick<AtlasState,'missions'|'completed'|'unlocked'|'travel'>;
 export type InterestSuggestion={kind:'nature';missionId:string;title:string;review:boolean;matches:ExplorationInterest[]}|{kind:'travel';title:{en:string;vi:string};stop:{en:string;vi:string};matches:ExplorationInterest[];nextEncounterId:string;laterInterest:boolean};
@@ -16,7 +17,7 @@ export function suggestionsFor(interests:readonly ExplorationInterest[],state:Su
  const pack=travelPacks[0];
  if(matches.length&&pack){
   const progress=state.travel?.encounters??{};
-  const available=pack.encounters.filter((_,i)=>i===0||!!progress[pack.encounters[i-1].id]?.completedAt);
+  const available=pack.encounters.filter(encounter=>travelUnlocked(pack,encounter.id,progress));
   const next=available.find(e=>!progress[e.id]?.completedAt)??available[0];
   if(next){
    const tags:Record<string,readonly ExplorationInterest[]>={

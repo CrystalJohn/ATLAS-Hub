@@ -1,6 +1,6 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { atlasApi, AtlasApiError } from './chapter-types';
+import { atlasApi, AtlasApiError } from '../../lib/atlas/api-client';
 import type { PlayerProfile, ProfilePatch } from '../../lib/atlas/profile';
 
 export function useAccountProfile(enabled: boolean, onPreferences: (profile: PlayerProfile) => void) {

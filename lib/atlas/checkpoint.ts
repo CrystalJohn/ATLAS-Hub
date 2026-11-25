@@ -3,14 +3,10 @@ import {encounterFor,travelPacks} from '../../content/travel/japan.ts';
 import {emptyTravel,type PlayerTravelProgress} from '../../content/travel/types.ts';
 import {missionById} from '../../content/missions/index.ts';
 import {isUnlocked,type Progress} from '../../packages/domain/src/index.ts';
-import {travelUnlocked} from '../../packages/mission-engine/src/travel.ts';
+import {travelUnlocked} from '../../packages/domain/src/travel.ts';
+import type {ResumeState, ResumeTarget} from './contracts/expedition.ts';
 import {travelRules} from './travel-rules.ts';
 
-export type AdventurePhase='brief'|'explore'|'english'|'subject';
-export type ResumeTarget=
- | {kind:'travel';countryId:string;destinationId:string;encounterId:string;contentVersion:number;step:number;stepId:string;routeIndex:number;replay:boolean}
- | {kind:'nature';missionId:string;attemptId:string;contentVersion:number;phase:AdventurePhase;observed:string[];replay:boolean};
-export type ResumeState={schemaVersion:1;revision:number;target:ResumeTarget|null;recovered:boolean;reason:'SAVED'|'LEGACY_RECOVERED'|'INVALID_CHECKPOINT'|'CONTENT_CHANGED'|'NONE'};
 type AttemptRef={id:string;missionId:string;version:number;observed:string[];status:string;createdAt:string;lastActivityRevision?:number};
 export type CheckpointDocument={progress:Progress;attempts:AttemptRef[];travel?:PlayerTravelProgress;checkpoint?:unknown};
 const targetInput=z.discriminatedUnion('kind',[
@@ -25,7 +21,7 @@ export type CheckpointTarget=z.infer<typeof targetInput>;
 export function resolveTarget(d:CheckpointDocument,target:CheckpointTarget):ResumeTarget|null{
  if(target.kind==='travel'){
   const found=encounterFor(target.encounterId),travel=d.travel??emptyTravel();
-  if(!found||found.pack.country.availability!=='PLAYABLE'||!travelUnlocked(target.encounterId,travel))return null;
+  if(!found||found.pack.country.availability!=='PLAYABLE'||!travelUnlocked(found.pack,target.encounterId,travel.encounters))return null;
   const p=travel.encounters[target.encounterId];
   if(!p||!Number.isInteger(p.step)||p.step<0||p.step>=found.encounter.steps.length||!Number.isInteger(p.routeIndex)||p.routeIndex<0)return null;
   const step=found.encounter.steps[p.step];

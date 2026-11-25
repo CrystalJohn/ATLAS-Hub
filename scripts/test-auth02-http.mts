@@ -3,9 +3,8 @@ import {spawn} from 'node:child_process';
 import {once} from 'node:events';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {createLocalStack,freePort,untilReady,ids} from './auth02/local-stack.mts';
-import type {AtlasState} from '../app/components/chapter-types.ts';
+import type {AtlasState,ResumeState} from '../lib/atlas/contracts/expedition.ts';
 import type {PlayerProfile} from '../lib/atlas/profile.ts';
-import type {ResumeState} from '../lib/atlas/checkpoint.ts';
 
 // Real built Next route handlers/cookies + Supabase SDK + PostgREST + PostgreSQL.
 // Auth endpoint is the signed local fixture, not GoTrue/Google OAuth.

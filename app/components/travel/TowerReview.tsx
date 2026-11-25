@@ -5,7 +5,7 @@ import {ArrowRight,BookOpen,Compass,Lock,ShieldCheck} from 'lucide-react';
 import type {TowerPresentation,Receipt} from '../../../content/tower/types';
 import {encounterFor} from '../../../content/travel/japan';
 import {useInterfaceLanguage} from '../Bilingual';
-import {AtlasApiError} from '../chapter-types';
+import {AtlasApiError} from '../../../lib/atlas/api-client';
 import type {TravelApi} from './WorldTravel';
 import {TowerProgress} from './TowerProgress';
 

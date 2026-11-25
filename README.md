@@ -129,6 +129,8 @@ Build không deploy và không tạo bảng Supabase. Repository không tự li�
 
 ## Kiến trúc
 
+Xem [thiết kế kiến trúc hệ thống](docs/ARCHITECTURE.md) và [quy tắc phát triển](AGENTS.md).
+
 | Thành phần | Vị trí |
 | --- | --- |
 | Giao diện, tài khoản, bài học và bản đồ | `app/`, `app/components/` |

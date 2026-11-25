@@ -3,7 +3,7 @@ import {useLocalPreference} from './useLocalPreference';
 import {ArrowRight,BookOpen,CheckCircle2,Languages,Leaf,TreePine,Waves} from 'lucide-react';
 import {Bilingual} from './Bilingual';
 import {translateVietnamese} from '../../content/localization/vi';
-import type {Mission} from './chapter-types';
+import type {Mission} from '../../lib/atlas/contracts/expedition';
 import type {EnglishLesson,ReadingBand} from '../../content/english/chapter';
 type TranslationMode='on-demand'|'parallel';
 const preferenceKey='atlas-story-translation-mode-v1';

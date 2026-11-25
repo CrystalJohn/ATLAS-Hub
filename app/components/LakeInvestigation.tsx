@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {ArrowRight,CheckCircle2,Search} from 'lucide-react';
 import {lakeEvidence,lakeMeasurements} from '../../content/evidence/lake';
 import {EvidenceCopy,EvidenceFigure,EvidenceTag} from './EvidencePanel';
-import type {Mission} from './chapter-types';
+import type {Mission} from '../../lib/atlas/contracts/expedition';
 import type {ReadingBand} from '../../content/english/chapter';
 import {environmentArtwork} from '../../content/artwork/nature-realm';
 import {LocationArtwork} from './LocationArtwork';

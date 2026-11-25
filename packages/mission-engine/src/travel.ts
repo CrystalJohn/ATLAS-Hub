@@ -1,6 +1,7 @@
 import {z} from 'zod';
 import {encounterFor,copy} from '../../../content/travel/japan.ts';
-import {emptyTravel,type EncounterProgress,type PlayerTravelProgress,type Copy} from '../../../content/travel/types.ts';
+import {type EncounterProgress,type PlayerTravelProgress,type Copy} from '../../../content/travel/types.ts';
+import {travelUnlocked} from '../../domain/src/travel.ts';
 import {travelRules} from '../../../lib/atlas/travel-rules.ts';
 export const TravelSubmission=z.object({encounterId:z.string().max(80),version:z.literal(1),stepId:z.string().max(80),expectedRevision:z.number().int().min(0).max(Number.MAX_SAFE_INTEGER-1).optional(),band:z.enum(['A1','A2','B1','B2']),support:z.object({vietnamese:z.boolean(),glossary:z.boolean()}).strict(),action:z.discriminatedUnion('kind',[
  z.object({kind:z.enum(['inspect','target']),target:z.string().max(80)}).strict(),
@@ -11,14 +12,9 @@ export const TravelSubmission=z.object({encounterId:z.string().max(80),version:z
  z.object({kind:z.literal('restart')}).strict(),
 ])}).strict();
 export const initialEncounter=():EncounterProgress=>({step:0,routeIndex:0,seen:[]});
-export function travelUnlocked(id:string,travel:PlayerTravelProgress=emptyTravel()){
- const found=encounterFor(id);if(!found)return false;
- const index=found.pack.encounters.findIndex(e=>e.id===id);
- return index===0||!!travel.encounters[found.pack.encounters[index-1].id]?.completedAt;
-}
 export function evaluateTravel(input:z.infer<typeof TravelSubmission>,travel:PlayerTravelProgress){
  const found=encounterFor(input.encounterId);if(!found)throw new Error('Unknown travel encounter');
- if(!travelUnlocked(input.encounterId,travel))throw new Error('Finish the previous travel stop first');
+ if(!travelUnlocked(found.pack,input.encounterId,travel.encounters))throw new Error('Finish the previous travel stop first');
  const {pack,encounter}=found,p=travel.encounters[encounter.id]??initialEncounter();
  const next:EncounterProgress={...p,seen:[...p.seen]};
  if(input.action.kind==='restart')return {found,next:{...next,step:0,routeIndex:0,position:undefined},correct:true,advanced:false,complete:false,feedback:copy('A fresh look. First-clear rewards are never repeated.','Bắt đầu lại. Phần thưởng lần đầu không được nhận lại.')};

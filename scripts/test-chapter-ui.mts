@@ -6,6 +6,8 @@ import {createElement,type ReactNode} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {emptyProgress,projection} from '../packages/domain/src/index.ts';
 import {missions,publicMission} from '../content/missions/index.ts';
+import {japanPack} from '../content/travel/japan.ts';
+import {emptyTravel} from '../content/travel/types.ts';
 import {chapterLessons,readingBands,lessonForMission} from '../content/english/chapter.ts';
 import {translateVietnamese} from '../content/localization/vi.ts';
 import {evaluate} from '../packages/mission-engine/src/index.ts';
@@ -17,22 +19,24 @@ try{
  await compile('app/components/Bilingual.tsx','Bilingual', {"'../../content/localization/vi'":"'./vi.mjs'"});
  await compile('app/components/useLocalPreference.ts','useLocalPreference');
  await compile('app/components/MissionStory.tsx','MissionStory', {"'./Bilingual'":"'./Bilingual.mjs'","'../../content/localization/vi'":"'./vi.mjs'","'./useLocalPreference'":"'./useLocalPreference.mjs'"});
- await compile('app/components/chapter-types.ts','chapter-types');await compile('app/components/TrailBadge.tsx','TrailBadge');await compile('app/components/World.tsx','World');
+ await compile('lib/atlas/api-client.ts','api-client');
+ await compile('packages/domain/src/travel.ts','travel-access');
+await compile('app/components/TrailBadge.tsx','TrailBadge');await compile('app/components/World.tsx','World');
  await compile('content/english/vocabulary.ts','vocabulary');
  await compile('content/travel/japan.ts','travel-japan');
  await writeFile(`${dir}/world-map.json`,await readFile('content/travel/world-map.json'));await writeFile(`${dir}/region-codes.json`,await readFile('content/travel/region-codes.json'));
  await compile('content/travel/catalog.ts','travel-catalog',{"'./world-map.json'":"'./world-map.json'","'./region-codes.json'":"'./region-codes.json'","'./japan'":"'./travel-japan.mjs'"});
  await compile('content/travel/types.ts','travel-types');
  await compile('app/components/travel/TravelCopy.tsx','TravelCopy');
- await compile('app/components/travel/WorldSelector.tsx','WorldSelector',{"'../../../content/travel/catalog'":"'./travel-catalog.mjs'","'../../../content/travel/japan'":"'./travel-japan.mjs'","'./TravelCopy'":"'./TravelCopy.mjs'"});
- await compile('app/components/travel/TravelEncounterView.tsx','TravelEncounterView',{"'../../../content/travel/japan'":"'./travel-japan.mjs'","'./TravelCopy'":"'./TravelCopy.mjs'","'../SavedVocabulary'":"'./SavedVocabulary.mjs'"});
- await compile('app/components/travel/WorldTravel.tsx','WorldTravel',{"'../../../content/travel/japan'":"'./travel-japan.mjs'","'../../../content/travel/types'":"'./travel-types.mjs'","'../SavedVocabulary'":"'./SavedVocabulary.mjs'","'../chapter-types'":"'./chapter-types.mjs'","'./TravelCopy'":"'./TravelCopy.mjs'","'./WorldSelector'":"'./WorldSelector.mjs'","'./TravelEncounterView'":"'./TravelEncounterView.mjs'"});
+ await compile('app/components/travel/WorldSelector.tsx','WorldSelector',{"'../Bilingual'":"'./Bilingual.mjs'","'../../../content/travel/catalog'":"'./travel-catalog.mjs'","'../../../content/travel/japan'":"'./travel-japan.mjs'","'./TravelCopy'":"'./TravelCopy.mjs'"});
+ await compile('app/components/travel/TravelEncounterView.tsx','TravelEncounterView',{"'../Bilingual'":"'./Bilingual.mjs'","'../../../content/travel/japan'":"'./travel-japan.mjs'","'./TravelCopy'":"'./TravelCopy.mjs'","'../SavedVocabulary'":"'./SavedVocabulary.mjs'"});
+ await compile('app/components/travel/WorldTravel.tsx','WorldTravel',{"'../Bilingual'":"'./Bilingual.mjs'","'../../../packages/domain/src/travel'":"'./travel-access.mjs'","'./TowerReview'":"'./TowerReview.mjs'","'../atlas-navigation'":"'./atlas-navigation.mjs'","'../../../content/travel/japan'":"'./travel-japan.mjs'","'../../../content/travel/types'":"'./travel-types.mjs'","'../SavedVocabulary'":"'./SavedVocabulary.mjs'","'../../../lib/atlas/api-client'":"'./api-client.mjs'","'./TravelCopy'":"'./TravelCopy.mjs'","'./WorldSelector'":"'./WorldSelector.mjs'","'./TravelEncounterView'":"'./TravelEncounterView.mjs'"});
  await compile('content/english/pronunciation.ts','pronunciation',{"'../travel/japan.ts'":"'./travel-japan.mjs'"});
- await compile('app/components/SavedVocabulary.tsx','SavedVocabulary',{"'../../content/travel/japan'":"'./travel-japan.mjs'","'../../content/english/chapter'":"'./chapter.mjs'","'../../content/english/vocabulary'":"'./vocabulary.mjs'","'../../content/english/pronunciation'":"'./pronunciation.mjs'","'./chapter-types'":"'./chapter-types.mjs'","'./Bilingual'":"'./Bilingual.mjs'"});
+ await compile('app/components/SavedVocabulary.tsx','SavedVocabulary',{"'../../content/travel/japan'":"'./travel-japan.mjs'","'../../content/english/chapter'":"'./chapter.mjs'","'../../content/english/vocabulary'":"'./vocabulary.mjs'","'../../content/english/pronunciation'":"'./pronunciation.mjs'","'../../lib/atlas/api-client'":"'./api-client.mjs'","'./Bilingual'":"'./Bilingual.mjs'"});
  await compile('content/english/word-details.ts','word-details');
  await compile('app/components/VocabularyNotebook.tsx','VocabularyNotebook',{"'../../content/english/word-details'":"'./word-details.mjs'","'./Bilingual'":"'./Bilingual.mjs'","'./SavedVocabulary'":"'./SavedVocabulary.mjs'"});
  await compile('app/components/WordHelpPopover.tsx','WordHelpPopover',{"'./Bilingual'":"'./Bilingual.mjs'","'./SavedVocabulary'":"'./SavedVocabulary.mjs'"});
- await compile('app/components/ChapterEnglish.tsx','ChapterEnglish',{"'./chapter-types'":"'./chapter-types.mjs'","'./TrailBadge'":"'./TrailBadge.mjs'","'./Bilingual'":"'./Bilingual.mjs'","'./WordHelpPopover'":"'./WordHelpPopover.mjs'"});
+ await compile('app/components/ChapterEnglish.tsx','ChapterEnglish',{"'../../lib/atlas/api-client'":"'./api-client.mjs'","'./TrailBadge'":"'./TrailBadge.mjs'","'./Bilingual'":"'./Bilingual.mjs'","'./WordHelpPopover'":"'./WordHelpPopover.mjs'"});
  await compile('content/evidence/lake.ts','lake', {"'./lake-coverage.json'":"'./lake-coverage.json'"});
  await writeFile(`${dir}/lake-coverage.json`,await readFile('content/evidence/lake-coverage.json'));
  await writeFile(`${dir}/lake-advanced.json`,await readFile('content/learning/lake-advanced.json'));
@@ -49,12 +53,19 @@ try{
  await compile('app/components/AdventureRecovery.tsx','AdventureRecovery');
  await compile('content/interests.ts','interests');
  await compile('lib/atlas/profile.ts','profile',{"'../../content/interests.ts'":"'./interests.mjs'"});
- await compile('lib/atlas/recommendations.ts','recommendations',{"'../../content/travel/japan.ts'":"'./travel-japan.mjs'"});
+ await compile('lib/atlas/recommendations.ts','recommendations',{"'../../packages/domain/src/travel.ts'":"'./travel-access.mjs'","'../../content/travel/japan.ts'":"'./travel-japan.mjs'"});
  await compile('app/components/InterestSuggestions.tsx','InterestSuggestions',{"'../../content/interests'":"'./interests.mjs'","'../../lib/atlas/recommendations'":"'./recommendations.mjs'"});
  // SSR projection fixture only. Identity/authorization is tested against real PG separately.
  await writeFile(`${dir}/useAccountProfile.mjs`, `export function useAccountProfile(){return {profile:{playerId:'11111111-1111-4111-8111-111111111111',displayName:'SSR explorer',avatarUrl:null,readingBand:'A2',vietnameseSupport:true,interests:[]},loading:false,saving:false,error:'',save:async()=>true,reload:()=>{}};}`);
  await compile('app/components/AccountMenu.tsx','AccountMenu',{"'../../content/english/chapter'":"'./chapter.mjs'","'../../lib/atlas/profile'":"'./profile.mjs'","'../../content/interests'":"'./interests.mjs'"});
- await compile('app/components/Game.tsx','Game',{"'./AdventureRecovery'":"'./AdventureRecovery.mjs'","'./AuthGate'":"'./AuthGate.mjs'","'./AccountMenu'":"'./AccountMenu.mjs'","'./useAccountProfile'":"'./useAccountProfile.mjs'","'../../content/english/chapter'":"'./chapter.mjs'","'./chapter-types'":"'./chapter-types.mjs'","'./ChapterEnglish'":"'./ChapterEnglish.mjs'","'./TrailBadge'":"'./TrailBadge.mjs'","'./World'":"'./World.mjs'","'./Bilingual'":"'./Bilingual.mjs'","'./MissionStory'":"'./MissionStory.mjs'","'./EvidencePanel'":"'./EvidencePanel.mjs'","'./LakeInvestigation'":"'./LakeInvestigation.mjs'","'../../content/evidence/lake'":"'./lake.mjs'","'./SavedVocabulary'":"'./SavedVocabulary.mjs'","'./VocabularyNotebook'":"'./VocabularyNotebook.mjs'","'./travel/WorldTravel'":"'./WorldTravel.mjs'"});
+ await compile('app/components/atlas-navigation.ts','atlas-navigation');
+ await compile('app/components/WorldNavigation.tsx','WorldNavigation',{"'./atlas-navigation'":"'./atlas-navigation.mjs'","'./Bilingual'":"'./Bilingual.mjs'"});
+ await compile('app/components/StudyCalendar.tsx','StudyCalendar',{"'./Bilingual'":"'./Bilingual.mjs'","'../../lib/atlas/api-client'":"'./api-client.mjs'"});
+ await compile('app/components/travel/TowerProgress.tsx','TowerProgress',{"'../Bilingual'":"'./Bilingual.mjs'"});
+ await compile('app/components/travel/TowerReview.tsx','TowerReview',{"'next/image'":"'./next-image.mjs'","'../../../content/travel/japan'":"'./travel-japan.mjs'","'../Bilingual'":"'./Bilingual.mjs'","'../../../lib/atlas/api-client'":"'./api-client.mjs'","'./TowerProgress'":"'./TowerProgress.mjs'"});
+ // Render the Nature journey explicitly because the default route opens World Travel.
+ await writeFile(`${dir}/nature-navigation.mjs`, "import {goAtlas} from './atlas-navigation.mjs'; export function useAtlasNavigation(){return {location:{world:'nature',section:'journey'},go:goAtlas};}");
+ await compile('app/components/Game.tsx','Game',{"'./InterestSuggestions'":"'./InterestSuggestions.mjs'","'./StudyCalendar'":"'./StudyCalendar.mjs'","'./atlas-navigation'":"'./nature-navigation.mjs'","'./WorldNavigation'":"'./WorldNavigation.mjs'","'./AdventureRecovery'":"'./AdventureRecovery.mjs'","'./AuthGate'":"'./AuthGate.mjs'","'./AccountMenu'":"'./AccountMenu.mjs'","'./useAccountProfile'":"'./useAccountProfile.mjs'","'../../content/english/chapter'":"'./chapter.mjs'","'../../lib/atlas/api-client'":"'./api-client.mjs'","'./ChapterEnglish'":"'./ChapterEnglish.mjs'","'./TrailBadge'":"'./TrailBadge.mjs'","'./World'":"'./World.mjs'","'./Bilingual'":"'./Bilingual.mjs'","'./MissionStory'":"'./MissionStory.mjs'","'./EvidencePanel'":"'./EvidencePanel.mjs'","'./LakeInvestigation'":"'./LakeInvestigation.mjs'","'../../content/evidence/lake'":"'./lake.mjs'","'./SavedVocabulary'":"'./SavedVocabulary.mjs'","'./VocabularyNotebook'":"'./VocabularyNotebook.mjs'","'./travel/WorldTravel'":"'./WorldTravel.mjs'"});
  const {default:Game}=await import(pathToFileURL(`${process.cwd()}/${dir}/Game.mjs`).href);
  const {InterfaceLanguage}=await import(pathToFileURL(`${process.cwd()}/${dir}/Bilingual.mjs`).href);
  const inLocale=(locale:'en'|'vi',node:ReactNode)=>createElement(InterfaceLanguage,{value:{locale,setLocale:()=>{}}},node);
@@ -65,9 +76,21 @@ try{
  const welcomeVi=renderToStaticMarkup(inLocale('vi',createElement(Game)));assert.ok(welcomeVi.includes('Đăng nhập bằng Google')&&welcomeVi.includes('lang="vi"'));
  const fresh={...projection(emptyProgress()),missions:missions.map(publicMission),attempts:[],ledger:[],englishReview:[]};
  const html=renderToStaticMarkup(createElement(Game,{initialState:fresh}));
- assert.ok(html.includes('A little English.'));assert.ok(html.includes('Begin my adventure'));assert.ok(html.includes('TRAIL LOCKED'));assert.ok(html.includes('My journal'));assert.ok(html.includes('Reading target'));assert.ok(html.includes('aria-label="Main navigation"'));assert.ok(html.includes('0/6'));assert.ok(!html.includes('>Hành trình<'));assert.ok(!html.includes('>Sổ tay<'));assert.ok(html.includes('Switch interface to Vietnamese'));const viHtml=renderToStaticMarkup(inLocale('vi',createElement(Game,{initialState:fresh})));assert.ok(viHtml.includes('Hành trình'));assert.ok(viHtml.includes('Sổ tay'));assert.ok(viHtml.includes('Cách chơi'));assert.ok(!viHtml.includes('>Journey<'));assert.ok(!viHtml.includes('translation-copy'));assert.ok(!html.includes('Recorded as item-specific'));
+ assert.ok(html.includes('A little English.'));assert.ok(html.includes('Begin my adventure'));assert.ok(html.includes('TRAIL LOCKED'));assert.ok(html.includes('My Journal'));assert.ok(html.includes('Reading target'));assert.ok(html.includes('aria-label="Nature Realm navigation"'));assert.ok(html.includes('0/6'));assert.ok(!html.includes('>Hành trình<'));assert.ok(!html.includes('>Sổ tay<'));assert.ok(html.includes('Switch interface to Vietnamese'));const viHtml=renderToStaticMarkup(inLocale('vi',createElement(Game,{initialState:fresh})));assert.ok(viHtml.includes('Chuyến đi của tôi'));assert.ok(viHtml.includes('Sổ tay'));assert.ok(viHtml.includes('Cách chơi'));assert.ok(!viHtml.includes('>Journey<'));assert.ok(!viHtml.includes('translation-copy'));assert.ok(!html.includes('Recorded as item-specific'));
  const full={...fresh,...projection({xp:210,completed:missions.map(m=>m.id),evidence:['observation','causal-reasoning','recovery-transfer'],englishEvidence:chapterLessons.flatMap(l=>l.variants.A2.questions.map(q=>({key:`${l.id}:v1:A2:${q.id}`,missionId:l.missionId,lessonId:l.id,version:1,band:'A2' as const,skill:q.skill,itemId:q.id,attemptId:'done',support:{vietnamese:true,glossary:true},recordedAt:new Date().toISOString()})))})};
  const returning=renderToStaticMarkup(createElement(Game,{initialState:full}));assert.ok(returning.includes('See my expedition recap'));assert.ok(returning.includes('6/6'));assert.ok(!returning.includes('TRAIL LOCKED'));assert.ok(returning.includes('Review &amp; practise'));
+ const {WorldTravel}=await import(pathToFileURL(`${process.cwd()}/${dir}/WorldTravel.mjs`).href);
+ const [firstStop, secondStop]=japanPack.encounters;
+ const travelProps={
+  location:{world:'travel',section:'encounter',id:secondStop.id},
+  owner:'test-owner',vi:false,band:'A2',onState:()=>{},onBand:()=>{},onSupport:()=>{},
+ };
+ const travel=emptyTravel();
+ const lockedStop=renderToStaticMarkup(createElement(WorldTravel,{...travelProps,state:{...fresh,travel}}));
+ assert.ok(lockedStop.includes('This destination is not available'));
+ travel.encounters[firstStop.id]={step:0,routeIndex:0,seen:[],completedAt:'2026-10-19T00:00:00Z'};
+ const openStop=renderToStaticMarkup(createElement(WorldTravel,{...travelProps,state:{...fresh,travel}}));
+ assert.ok(!openStop.includes('This destination is not available'));
  const {ChapterEnglish}=await import(pathToFileURL(`${process.cwd()}/${dir}/ChapterEnglish.mjs`).href);
  for(const lesson of chapterLessons)for(const band of readingBands){const props={lesson,band,attemptId:'owned-attempt',vietnamese:true,onSupport:()=>{},onState:()=>{},onBusy:()=>{},onContinue:()=>{}};const read=renderToStaticMarkup(createElement(ChapterEnglish,props));assert.ok(read.includes('Start 2 questions'));assert.ok(read.includes('Giải thích tiếng Việt'));assert.ok(read.includes('<details class="translation"')&&!read.includes('translation-visible'));assert.ok(read.includes(lesson.variants[band].vi));assert.ok(read.includes(lesson.title));assert.ok(read.includes('Skip practice'));assert.ok(read.includes('EDUCATOR')||read.includes('educator'));const review=renderToStaticMarkup(createElement(ChapterEnglish,{...props,initialItems:['word'],vietnamese:false}));assert.ok(review.includes('Start 1 question'));assert.ok(!review.includes('translation-visible'));assert.ok(!review.includes('class="translation-copy"'));assert.ok(!review.includes(lesson.variants[band].vi));}
  const {MissionStory}=await import(pathToFileURL(`${process.cwd()}/${dir}/MissionStory.mjs`).href);

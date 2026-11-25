@@ -5,7 +5,7 @@ import {travelVocabularyLessons} from '../../content/travel/japan';
 import {chapterLessons} from '../../content/english/chapter';
 import {vocabularyKey,type SavedWord,type VocabularyResponse} from '../../content/english/vocabulary';
 import {pronunciations} from '../../content/english/pronunciation';
-import {atlasApi} from './chapter-types';
+import {atlasApi} from '../../lib/atlas/api-client';
 import {Bilingual} from './Bilingual';
 type WordIdentity=Pick<SavedWord,'lessonId'|'version'|'word'>;
 export type VocabularyStore={words:SavedWord[];loading:boolean;pending:boolean;error:string;reload:()=>void;toggle:(word:WordIdentity,saved:boolean)=>Promise<void>};

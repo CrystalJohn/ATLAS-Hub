@@ -2,7 +2,7 @@
 import {ArrowRight,Plane,TreePine} from 'lucide-react';
 import {explorationInterests,type ExplorationInterest} from '../../content/interests';
 import {suggestionsFor} from '../../lib/atlas/recommendations';
-import type {AtlasState} from './chapter-types';
+import type {AtlasState} from '../../lib/atlas/contracts/expedition';
 import type {MissionId} from '../../packages/domain/src/index';
 import {Bilingual,useInterfaceLanguage} from './Bilingual';
 

@@ -3,7 +3,7 @@ import {useCallback,useEffect,useRef,useState} from 'react';
 import {CalendarDays,Check,ChevronLeft,ChevronRight,Flame,Trophy,X} from 'lucide-react';
 import type {StudySummary} from '../../packages/domain/src/study';
 import {useInterfaceLanguage} from './Bilingual';
-import {atlasApi} from './chapter-types';
+import {atlasApi} from '../../lib/atlas/api-client';
 
 const monthOf=(day:string)=>day.slice(0,7);
 function shiftMonth(month:string,delta:number){const [y,m]=month.split('-').map(Number);return new Date(Date.UTC(y,m-1+delta,1)).toISOString().slice(0,7);}
