@@ -1,33 +1,26 @@
 import {z} from 'zod';
-import {emptyTravel,type PlayerTravelProgress} from '../../content/travel/types.ts';
-import {packFor,travelVocabularyLessons,encounterFor} from '../../content/travel/japan.ts';
-import {TravelSubmission,evaluateTravel} from '../../packages/mission-engine/src/travel.ts';
-import {travelUnlocked} from '../../packages/domain/src/travel.ts';
+import {emptyTravel} from '../../content/travel/types.ts';
 import {lessonById} from '../../content/english/chapter.ts';
 import {EnglishItemSchema,evaluateEnglishItem} from '../../packages/english-engine/src/chapter.ts';
-import {emptyProgress,isUnlocked,projection,type Progress,type EnglishEvidence} from '../../packages/domain/src/index.ts';
+import {emptyProgress,isUnlocked,projection,type EnglishEvidence} from '../../packages/domain/src/index.ts';
 import {missionById,missions,publicMission} from '../../content/missions/index.ts';
 import {evaluate,SubmissionSchema} from '../../packages/mission-engine/src/index.ts';
 import {forestLesson} from '../../content/english/forest.ts';
 import {EnglishSubmissionSchema,evaluateEnglish} from '../../packages/english-engine/src/index.ts';
-import type {SavedWord} from '../../content/english/vocabulary.ts';
 import {StorageUnavailable,type ExpeditionStore} from './storage.ts';
 import {sameOrigin} from './origin.ts';
-import {checkpointInput,resolveTarget,resumeFor,saveCheckpoint} from './checkpoint.ts';
-import {awardFirstClear} from './rewards.ts';
-import type {TowerNamespace} from './tower-state.ts';
-import type {StudyHistory} from '../../packages/domain/src/study.ts';
+import {checkpointInput,requireCurrentRevision,resumeFor,saveCheckpoint} from './checkpoint.ts';
+import {awardFirstClear,rewardFor} from './rewards.ts';
 import {recordStudy,studyFor} from './study.ts';
-type Attempt={id:string;missionId:string;version:number;observed:string[];status:string;createdAt:string;lastActivityRevision?:number};
-type Ledger={id:string;missionId:string;contentVersion:number;amount:number;createdAt:string};
-export type Expedition={progress:Progress;attempts:Attempt[];ledger:Ledger[];submissions:unknown[];savedVocabulary?:SavedWord[];travel?:PlayerTravelProgress;checkpoint?:unknown;tower?:TowerNamespace;studyHistory?:StudyHistory};
-class ApiError extends Error{status:number;code?:string;constructor(status:number,message:string,code?:string){super(message);this.status=status;this.code=code;}}
+import {ApiError} from './api-error.ts';
+import type {Expedition,ExpeditionAttempt} from './expedition.ts';
+import {applyTravelAction,prepareTravelCheckpoint,startTravel} from './travel.ts';
+import {readVocabulary,updateVocabulary} from './vocabulary.ts';
+
+export type {Expedition} from './expedition.ts';
+
 const uid=()=>crypto.randomUUID();
 const fresh=():Expedition=>({progress:emptyProgress(),attempts:[],ledger:[],submissions:[]});
-function rewardFor(d:Expedition,id:string,version:number,awardedXp:number){
- const entry=d.ledger.find(e=>e.missionId===id&&e.contentVersion===version);
- return {key:`${id}:v${version}`,status:awardedXp?'AWARDED':entry?'ALREADY_PROCESSED':'NOT_ELIGIBLE',awardedXp,firstClearXp:entry?.amount??0};
-}
 function view(d:Expedition,revision:number,now:Date){
  const review=new Map<string,{lessonId:string;band:string;itemId:string;correct:boolean}>();
  for(const raw of d.submissions){const entry=raw as {payload?:{type?:string;lessonId:string;band:string;itemId:string};correct?:boolean;items?:{itemId:string;correct:boolean}[]};const p=entry.payload;if(!p)continue;
@@ -61,69 +54,30 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
    if(route==='study'&&request.method==='GET')return Response.json({playerId:player,studyHistory:studyFor(d,activityTime)});
    if((route==='state'&&request.method==='GET')||(route==='session'&&request.method==='POST'))return Response.json(state());
    if(route==='resume'&&request.method==='GET')return Response.json(resumeFor(d,row.revision));
-   if(route==='attempts'&&request.method==='GET')return Response.json(d.attempts.map(a=>({id:a.id,missionId:a.missionId,version:a.version,status:a.status,createdAt:a.createdAt,completedAt:(a as Attempt & {completedAt?:string}).completedAt,lastActivityRevision:a.lastActivityRevision})));
+   if(route==='attempts'&&request.method==='GET')return Response.json(d.attempts.map(a=>({id:a.id,missionId:a.missionId,version:a.version,status:a.status,createdAt:a.createdAt,completedAt:a.completedAt,lastActivityRevision:a.lastActivityRevision})));
    if(route==='travel'&&request.method==='GET')return Response.json({travel:d.travel??emptyTravel(),state:state()});
-   if(route==='vocabulary'&&request.method==='GET')return Response.json({words:d.savedVocabulary??[]});
-   let result:unknown,studied=false;
+   if(route==='vocabulary'&&request.method==='GET')return Response.json(readVocabulary(d));
+   let result:object,studied=false,includeState=false;
    if(route==='checkpoint'&&request.method==='POST'){
     const input=checkpointInput.parse(body);
-    if(input.expectedRevision!==row.revision)throw new ApiError(409,'Adventure has moved on. Reload the latest progress.','STALE_REVISION');
-    if(input.target.kind==='travel'){
-     const found=encounterFor(input.target.encounterId);
-     if(!travelUnlocked(found?.pack,input.target.encounterId,d.travel?.encounters))throw new ApiError(403,'This travel stop is not available.');
-     d.travel??=emptyTravel();d.travel.encounters[input.target.encounterId]??={step:0,routeIndex:0,seen:[]};
-    }
-    if(!resolveTarget(d,input.target)||!saveCheckpoint(d,input.target,row.revision+1))throw new ApiError(400,'This adventure checkpoint is no longer available.','INVALID_CHECKPOINT');
-    result={state:state()};
+    requireCurrentRevision(input.expectedRevision,row.revision);
+    if(input.target.kind==='travel')prepareTravelCheckpoint(d,input.target.encounterId);
+    if(!saveCheckpoint(d,input.target,row.revision+1))throw new ApiError(400,'This adventure checkpoint is no longer available.','INVALID_CHECKPOINT');
+    result={};includeState=true;
    }else if(route==='travel/start'&&request.method==='POST'){
-    const {countryId}=z.object({countryId:z.string().length(2)}).strict().parse(body);const pack=packFor(countryId);
-    if(!pack||pack.country.availability!=='PLAYABLE')throw new ApiError(400,'No playable country pack is published here yet.');
-    d.travel??=emptyTravel();d.travel.visitedCountries=[...new Set([...d.travel.visitedCountries,countryId])];result={travel:d.travel,state:state()};
+    result=startTravel(d,body);includeState=true;
    }else if(route==='travel/action'&&request.method==='POST'){
-    const input=TravelSubmission.parse(body);d.travel??=emptyTravel();
-    if(input.action.kind==='restart'&&input.expectedRevision!==row.revision)throw new ApiError(409,'Adventure has moved on. Reload the latest progress.','STALE_REVISION');
-    const found=encounterFor(input.encounterId);
-    if(!found)throw new ApiError(400,'Unknown travel encounter');
-    if(!travelUnlocked(found.pack,input.encounterId,d.travel.encounters))throw new ApiError(403,'Finish the previous travel stop first.');
-    let outcome;try{outcome=evaluateTravel(input,d.travel);}catch{throw new ApiError(400,'Invalid travel action for this scene.');}const {pack,encounter}=found;
-    const previous=d.travel.encounters[encounter.id];
-    const step=encounter.steps[previous?.step??0],action=input.action;
-    const matchingKind=step&&(action.kind===step.kind||(step.kind==='dialogue'&&action.kind==='say')||(step.kind==='route'&&action.kind==='move'));
-    const knownTarget=action.kind!=='target'||pack.locations.find(l=>l.id===encounter.locationId)?.hotspots.some(h=>h.id===action.target);
-    studied=!!(outcome.itemId&&matchingKind&&knownTarget&&(action.kind!=='move'||action.expectedMove===(previous?.routeIndex??0)));
-    d.travel.encounters[encounter.id]=outcome.next;
-    d.travel.visitedCountries=[...new Set([...d.travel.visitedCountries,pack.country.id])];
-    const now=activityTime.toISOString();let awardedXp=0;
-    if(outcome.complete&&!previous?.completedAt){
-     outcome.next.completedAt=now;awardedXp=awardFirstClear(d,`travel:${encounter.id}`,encounter.version,encounter.rewardXp);
-     if(!d.travel.stamps.some(s=>s.id===encounter.stamp.id))d.travel.stamps.push({...encounter.stamp,countryId:pack.country.id,destinationId:encounter.destinationId,encounterId:encounter.id,earnedAt:now});
-     if(pack.encounters.every(e=>!!d.travel!.encounters[e.id]?.completedAt)&&!d.travel.stamps.some(s=>s.id===pack.completionStamp.id))d.travel.stamps.push({...pack.completionStamp,countryId:pack.country.id,destinationId:encounter.destinationId,earnedAt:now});
-    }
-    if(outcome.advanced&&outcome.skill){
-     const key=`travel:${encounter.id}:v1:${input.band}:${outcome.itemId}`,evidence=d.progress.englishEvidence??[];
-     if(!evidence.some(e=>e.key===key))d.progress.englishEvidence=[...evidence,{key,missionId:`travel:${encounter.id}`,attemptId:`travel:${encounter.id}`,lessonId:`travel:${encounter.id}`,version:1,band:input.band,skill:outcome.skill,itemId:outcome.itemId!,support:input.support,recordedAt:now}];
-    }
-    if(JSON.stringify(previous)!==JSON.stringify(outcome.next)){
-     outcome.next.lastActivityRevision=row.revision+1;
-     if(outcome.complete)d.checkpoint=null;
-     else saveCheckpoint(d,{kind:'travel',encounterId:encounter.id},row.revision+1);
-    }
-    result={correct:outcome.correct,complete:outcome.complete,feedback:outcome.feedback,awardedXp,reward:rewardFor(d,`travel:${encounter.id}`,encounter.version,awardedXp),travel:d.travel,state:state()};
+    const action=applyTravelAction(d,body,row.revision,activityTime);
+    result=action.payload;studied=action.studied;includeState=true;
    }else if(route==='vocabulary'&&request.method==='POST'){
-    const input=z.object({lessonId:z.string().max(100),version:z.literal(1),word:z.string().max(80),saved:z.boolean()}).strict().parse(body);
-    let lesson:{missionId:string;glossary:readonly {word:string}[]}|undefined=travelVocabularyLessons.find(l=>l.id===input.lessonId);if(!lesson){try{lesson=lessonById(input.lessonId,input.version);}catch{throw new ApiError(400,'Unknown vocabulary lesson');}}
-    if(!lesson.glossary.some(entry=>entry.word===input.word))throw new ApiError(400,'Unknown vocabulary word');
-    if(input.saved&&!(input.lessonId.startsWith('travel:')?travelUnlocked(encounterFor(lesson.missionId)?.pack,lesson.missionId,d.travel?.encounters):isUnlocked(lesson.missionId,d.progress)))throw new ApiError(403,'This trail is locked.');
-    const words=d.savedVocabulary??[],matches=(word:SavedWord)=>word.lessonId===input.lessonId&&word.version===input.version&&word.word===input.word;
-    d.savedVocabulary=input.saved?(words.some(matches)?words:[{lessonId:input.lessonId,version:input.version,word:input.word,savedAt:activityTime.toISOString()},...words]):words.filter(word=>!matches(word));
-    result={words:d.savedVocabulary};
+    result=updateVocabulary(d,body,activityTime);
    }else if(route==='attempts'&&request.method==='POST'){
     const input=z.object({missionId:z.string().max(100)}).strict().parse(body);
     if(!isUnlocked(input.missionId,d.progress))throw new ApiError(403,'This trail is locked. Complete the previous investigation first.');
     const m=missionById(input.missionId);
     const active=d.attempts.find(a=>a.missionId===m.id&&a.status==='ACTIVE');
     if(active)return Response.json(active,{status:201});
-    const a:Attempt={id:uid(),missionId:m.id,version:m.version,observed:[],status:'ACTIVE',createdAt:activityTime.toISOString()};d.attempts.push(a);saveCheckpoint(d,{kind:'nature',attemptId:a.id,phase:'brief'},row.revision+1);result=a;
+    const a:ExpeditionAttempt={id:uid(),missionId:m.id,version:m.version,observed:[],status:'ACTIVE',createdAt:activityTime.toISOString()};d.attempts.push(a);saveCheckpoint(d,{kind:'nature',attemptId:a.id,phase:'brief'},row.revision+1);result=a;
    }else if(path[0]==='attempts'&&path.length===3&&request.method==='POST'){
     const a=d.attempts.find(a=>a.id===path[1]);if(!a)throw new ApiError(404,'Attempt not found');
     const m=missionById(a.missionId,a.version);
@@ -146,7 +100,7 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
       awardedXp=awardFirstClear(d,m.id,m.version,m.rewards.xp);d.progress={...d.progress,completed:[...d.progress.completed,m.id],evidence:[...new Set([...d.progress.evidence,m.rewards.evidence])]};
      }}
      if(outcome.correct){a.lastActivityRevision=row.revision+1;d.checkpoint=null;}else saveCheckpoint(d,{kind:'nature',attemptId:a.id,phase:'subject'},row.revision+1);
-     result={...outcome,awardedXp,reward:rewardFor(d,m.id,m.version,awardedXp),state:state()};
+     result={...outcome,awardedXp,reward:rewardFor(d,m.id,m.version,awardedXp)};includeState=true;
     }else if(path[2]==='english-item'){
      const input=EnglishItemSchema.parse(body);
      let lesson;try{lesson=lessonById(input.lessonId,input.version);}catch{throw new ApiError(400,'Unknown English lesson version');}
@@ -159,7 +113,7 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
      const added=outcome.correct&&!evidence.some(e=>e.key===key);
      if(added)d.progress={...d.progress,englishEvidence:[...evidence,{key,missionId:lesson.missionId,attemptId:a.id,lessonId:lesson.id,version:lesson.version,band:input.band,skill:outcome.skill,itemId:input.itemId,support:input.support,recordedAt:activityTime.toISOString()}]};
      saveCheckpoint(d,{kind:'nature',attemptId:a.id,phase:'english'},row.revision+1);
-     result={...outcome,newEvidence:added?1:0,state:state()};
+     result={...outcome,newEvidence:added?1:0};includeState=true;
     }else if(path[2]==='english'){
      const s=EnglishSubmissionSchema.parse(body);
      if(a.missionId!==forestLesson.missionId||a.version!==forestLesson.missionVersion)throw new ApiError(400,'No English practice for this mission');
@@ -171,12 +125,12 @@ export async function handleAtlasForPlayer(request:Request,store:ExpeditionStore
      const additions:EnglishEvidence[]=outcome.items.filter(i=>i.correct).map(i=>({key:`${s.lessonId}:v${s.version}:${s.band}:${i.itemId}`,missionId:'silent-forest' as const,attemptId:a.id,lessonId:s.lessonId,version:s.version,band:s.band,skill:i.skill,itemId:i.itemId,support:s.support,recordedAt:activityTime.toISOString()})).filter(e=>!evidence.some(old=>old.key===e.key));
      d.progress={...d.progress,englishEvidence:[...evidence,...additions]};
      saveCheckpoint(d,{kind:'nature',attemptId:a.id,phase:'english'},row.revision+1);
-     result={...outcome,newEvidence:additions.length,state:state()};
+     result={...outcome,newEvidence:additions.length};includeState=true;
     }else throw new ApiError(404,'Unknown action');
    }else throw new ApiError(404,'Unknown route');
    if(studied)recordStudy(d,activityTime);
    const document=JSON.stringify(d),changed=document!==row.document;
-   if(result&&typeof result==='object'&&'state' in result)result.state=view(d,row.revision+(changed?1:0),activityTime);
+   if(includeState)result={...result,state:view(d,row.revision+(changed?1:0),activityTime)};
    if(!changed)return Response.json(result,{status:201});
    if(await store.compareAndSwap(player,row.revision,document))return Response.json(result,{status:201});
   }

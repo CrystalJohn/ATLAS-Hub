@@ -3,7 +3,7 @@ import {z} from 'zod';
 import {createTowerEngine} from '../../packages/tower-engine/src/index.ts';
 import {IdSchema,RevisionSchema,type TowerDefinition,type TowerAnswerKeys,type TowerRun,type TowerState,type TransitionResult} from '../../content/tower/types.ts';
 import {StorageUnavailable,type ExpeditionStore} from './storage.ts';
-import type {Expedition} from './service.ts';
+import type {Expedition} from './expedition.ts';
 import {emptyProgress} from '../../packages/domain/src/index.ts';
 import {TowerNamespaceSchema,emptyTower,persistedRun,type TowerNamespace} from './tower-state.ts';
 import {awardFirstClear} from './rewards.ts';

@@ -4,6 +4,7 @@ import {emptyTravel,type PlayerTravelProgress} from '../../content/travel/types.
 import {missionById} from '../../content/missions/index.ts';
 import {isUnlocked,type Progress} from '../../packages/domain/src/index.ts';
 import {travelUnlocked} from '../../packages/domain/src/travel.ts';
+import {ApiError} from './api-error.ts';
 import type {ResumeState, ResumeTarget} from './contracts/expedition.ts';
 import {travelRules} from './travel-rules.ts';
 
@@ -16,6 +17,10 @@ const targetInput=z.discriminatedUnion('kind',[
 export const checkpointInput=z.object({expectedRevision:z.number().int().min(0).max(Number.MAX_SAFE_INTEGER-1),target:targetInput}).strict();
 const savedCheckpoint=z.object({schemaVersion:z.literal(1),savedRevision:z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),updatedAt:z.string().datetime(),contentVersion:z.number().int().positive(),target:targetInput}).strict();
 export type CheckpointTarget=z.infer<typeof targetInput>;
+
+export function requireCurrentRevision(expectedRevision: number | undefined, currentRevision: number) {
+ if(expectedRevision!==currentRevision)throw new ApiError(409,'Adventure has moved on. Reload the latest progress.','STALE_REVISION');
+}
 
 /** Checkpoint pointers never carry an XP amount, completion flag, or client step. */
 export function resolveTarget(d:CheckpointDocument,target:CheckpointTarget):ResumeTarget|null{

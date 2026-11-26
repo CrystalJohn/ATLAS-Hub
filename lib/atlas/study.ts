@@ -1,5 +1,5 @@
 import {STUDY_TIME_ZONE,normalizeStudyDays,studyDate,summarizeStudy,type StudyHistory} from '../../packages/domain/src/study.ts';
-import type {Expedition} from './service.ts';
+import type {Expedition} from './expedition.ts';
 
 /** Recover only timestamps attached to actual saved learning; a login/attempt start is not learning. */
 export function recordedStudyDays(d:Expedition):string[]{
