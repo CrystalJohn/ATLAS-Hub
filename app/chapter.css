@@ -148,7 +148,7 @@
 .saved-words-empty{font-size:14px;line-height:1.8;color:#686b83;background:#f0edf8;border-radius:12px;padding:15px;margin-bottom:0}
 .saved-words-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:15px;margin-top:18px}
 .saved-words-grid article{border:1px solid #e1ddeb;border-radius:16px;padding:18px;background:#fff;min-width:0}.saved-words-grid p{font-size:14px;line-height:1.8}.saved-words-grid p[lang=vi]{font-size:12px;color:#68768a}.saved-words-grid article>small{font-size:10px;color:#7b7390}
-.saved-word-topline{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.saved-word-topline h3{font-size:21px;margin:0}.saved-word-topline h3 small{display:block;margin-top:7px;font-size:13px;font-weight:500;color:#68768a}.saved-word-topline button{display:grid;place-items:center;min-width:44px;height:44px;border-radius:11px;background:#f4effa;color:#7951ce;cursor:pointer}.saved-word-topline button:focus-visible{outline:3px solid #7951ce;outline-offset:3px}
+.saved-word-topline{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.saved-word-topline h3{font-size:21px;margin:0;min-width:0;overflow-wrap:anywhere}.saved-word-topline h3 small{display:block;margin-top:7px;font-size:13px;font-weight:500;color:#68768a}.saved-word-topline button{display:grid;place-items:center;min-width:44px;height:44px;border-radius:11px;background:#f4effa;color:#7951ce;cursor:pointer}.saved-word-topline button:focus-visible{outline:3px solid #7951ce;outline-offset:3px}
 @media(max-width:540px){.saved-words{padding:19px 15px}.saved-words-heading h2{font-size:21px}.word-ipa-grid{flex-direction:column;gap:5px}}
 
 /* Compact briefings with player-controlled Vietnamese assistance. */

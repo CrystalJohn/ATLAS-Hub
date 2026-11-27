@@ -203,6 +203,7 @@ export const vietnameseText:Record<string,string>={
  'Tap a word in a field note, then choose Save word.':'Chạm vào một từ trong bài đọc rồi chọn Lưu từ.',
  'Could not load saved words.':'Chưa tải được từ đã lưu.',
  'Could not save this word. Try again.':'Chưa lưu được thay đổi. Vui lòng thử lại.',
+ 'Could not remove this word. Try again.':'Chưa bỏ lưu được từ này. Vui lòng thử lại.',
  'Retry':'Thử lại',
  'Back to reading':'Tiếp tục đọc',
  'Skip practice · return to mission':'Bỏ qua luyện tập · trở lại nhiệm vụ',
