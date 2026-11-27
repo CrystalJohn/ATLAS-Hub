@@ -102,6 +102,17 @@ await compile('app/components/TrailBadge.tsx','TrailBadge');await compile('app/c
   const saved=renderToStaticMarkup(createElement(VietnameseSupport,{value:vietnamese},createElement(VocabularyContext.Provider,{value:vocabularyStore},createElement(SavedWords,{vietnamese}))));
   assert.equal((saved.match(/lang="en-US"/g)||[]).length,12);assert.equal((saved.match(/lang="en-GB"/g)||[]).length,12);assert.equal(saved.includes('lang="vi"'),vietnamese);assert.ok(saved.includes('Cambridge'));assert.ok(saved.includes(vietnamese?'Bỏ lưu: canopy':'Remove saved word: canopy'));
  }
+ const orphan={lessonId:'retired-field-note',version:2,word:'retired-glossary-word',savedAt:'2026-10-20T00:00:00Z'};
+ const orphanNotebook=(overrides={})=>createElement(VocabularyContext.Provider,{value:{...vocabularyStore,words:[orphan],...overrides}},createElement(SavedWords,{vietnamese:false}));
+ const orphanView=renderToStaticMarkup(orphanNotebook());
+ assert.match(orphanView,/<span>1<\/span>/);
+ assert.match(orphanView,/<h3>retired-glossary-word<\/h3>/);
+ assert.ok(orphanView.includes('Original learning source unavailable.')&&orphanView.includes('Remove saved word: retired-glossary-word'));
+ assert.ok(!orphanView.includes('Cambridge')&&!orphanView.includes('word-pronunciation')&&!orphanView.includes('<em>'));
+ const orphanVi=renderToStaticMarkup(inLocale('vi',orphanNotebook()));
+ assert.ok(orphanVi.includes('Nguồn học gốc không còn khả dụng.'));
+ const failedRemoval=renderToStaticMarkup(orphanNotebook({error:'Could not remove this word. Try again.'}));
+ assert.ok(failedRemoval.includes('role="alert"')&&failedRemoval.includes('Remove saved word: retired-glossary-word'));
  const wordButton=renderToStaticMarkup(createElement(VocabularyContext.Provider,{value:vocabularyStore},createElement(SaveWordButton,{lessonId:'forest-field-note',version:1,word:'canopy'})));assert.ok(wordButton.includes('aria-pressed="true"')&&wordButton.includes('Saved to My journal'));
  const failedSave=renderToStaticMarkup(createElement(VocabularyContext.Provider,{value:{...vocabularyStore,words:[],error:'Could not save this word. Try again.'}},createElement(SaveWordButton,{lessonId:'forest-field-note',version:1,word:'canopy'})));assert.ok(failedSave.includes('role="alert"')&&failedSave.includes('Retry'));assert.ok(!failedSave.includes('Saved to My journal'));
  const escape=(text:string)=>text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#x27;');

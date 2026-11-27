@@ -6,7 +6,7 @@ import {chapterLessons} from '../../content/english/chapter';
 import {vocabularyKey,type SavedWord,type VocabularyResponse} from '../../content/english/vocabulary';
 import {pronunciations} from '../../content/english/pronunciation';
 import {atlasApi} from '../../lib/atlas/api-client';
-import {Bilingual} from './Bilingual';
+import {Bilingual,UiText} from './Bilingual';
 type WordIdentity=Pick<SavedWord,'lessonId'|'version'|'word'>;
 export type VocabularyStore={words:SavedWord[];loading:boolean;pending:boolean;error:string;reload:()=>void;toggle:(word:WordIdentity,saved:boolean)=>Promise<void>};
 export const VocabularyContext=createContext<VocabularyStore|null>(null);
@@ -22,7 +22,7 @@ export function SavedVocabularyProvider({children,api=atlasApi,enabled=true}:{ch
  function reload(){setLoading(true);setError('');setReloadVersion(version=>version+1);}
  async function toggle(word:WordIdentity,saved:boolean){
   if(saving.current||loading)return;saving.current=true;setPending(true);setError('');
-  try{const response=await api<VocabularyResponse>('vocabulary',{lessonId:word.lessonId,version:word.version,word:word.word,saved});setWords(response.words);}catch{setError('Could not save this word. Try again.');}finally{saving.current=false;setPending(false);}
+  try{const response=await api<VocabularyResponse>('vocabulary',{lessonId:word.lessonId,version:word.version,word:word.word,saved});setWords(response.words);}catch{setError(saved?'Could not save this word. Try again.':'Could not remove this word. Try again.');}finally{saving.current=false;setPending(false);}
  }
  return <VocabularyContext value={{words,loading,pending,error,reload,toggle}}>{children}</VocabularyContext>;
 }
@@ -35,7 +35,51 @@ export function SaveWordButton({lessonId,version,word}:{lessonId:string;version:
  const saved=store?.words.some(item=>vocabularyKey(item)===vocabularyKey(identity))??false;
  return <div className="word-save-area"><button type="button" className={`word-save-button ${saved?'is-saved':''}`} disabled={!store||store.loading||store.pending||!!store.error} aria-pressed={saved} onClick={()=>{void store?.toggle(identity,!saved);}}>{saved?<BookmarkCheck size={18}/>:<Bookmark size={18}/>}<Bilingual text={store?.pending?'Saving…':store?.loading?'Loading saved words…':saved?'Saved word':'Save word'}/></button>{saved&&<p className="word-save-confirmation" role="status"><Bilingual text="Saved to My journal"/></p>}{store?.error&&<div role="alert" className="word-save-error"><Bilingual text={store.error}/><button type="button" disabled={store.pending||store.loading} onClick={store.reload}><RefreshCw size={14}/><Bilingual text="Retry"/></button></div>}</div>;
 }
-export function SavedWords({vietnamese}:{vietnamese:boolean}){
- const store=useContext(VocabularyContext);if(!store)return null;
- return <section className="saved-words" aria-labelledby="saved-words-title"><div className="saved-words-heading"><BookmarkCheck size={24}/><h2 id="saved-words-title"><Bilingual text="My saved words"/> <span>{store.words.length}</span></h2></div><p className="micro-copy"><Bilingual text="Words you choose to keep, saved to your account."/></p>{store.loading?<p role="status"><Bilingual text="Loading saved words…"/></p>:store.error?<div role="alert" className="word-save-error"><Bilingual text={store.error}/><button type="button" onClick={store.reload}><Bilingual text="Retry"/></button></div>:!store.words.length?<p className="saved-words-empty"><Bilingual text="Tap a word in a field note, then choose Save word."/></p>:<div className="saved-words-grid">{store.words.map(item=>{const lesson=[...chapterLessons,...travelVocabularyLessons].find(l=>l.id===item.lessonId&&l.version===item.version),entry=lesson?.glossary.find(e=>e.word===item.word);if(!entry)return null;return <article key={vocabularyKey(item)}><div className="saved-word-topline"><h3>{entry.word}{vietnamese&&<small lang="vi">{entry.meaning}</small>}</h3><button type="button" disabled={store.pending} aria-label={vietnamese?`Bỏ lưu: ${entry.word}`:`Remove saved word: ${entry.word}`} onClick={()=>{void store.toggle(item,false);}}><Trash2 size={18}/></button></div><Pronunciation word={entry.word}/><p><em>{entry.example}</em></p>{vietnamese&&<p lang="vi">{entry.exampleVi}</p>}<small><Bilingual text={lesson!.title}/></small></article>;})}</div>}</section>;
+const savedWordLessons = [...chapterLessons, ...travelVocabularyLessons];
+
+export function SavedWords({ vietnamese }: { vietnamese: boolean }) {
+  const store = useContext(VocabularyContext);
+  if (!store) return null;
+
+  return <section className="saved-words" aria-labelledby="saved-words-title">
+    <div className="saved-words-heading">
+      <BookmarkCheck size={24} />
+      <h2 id="saved-words-title"><Bilingual text="My saved words" /> <span>{store.words.length}</span></h2>
+    </div>
+    <p className="micro-copy"><Bilingual text="Words you choose to keep, saved to your account." /></p>
+    {store.loading && <p role="status"><Bilingual text="Loading saved words…" /></p>}
+    {store.error && <div role="alert" className="word-save-error">
+      <Bilingual text={store.error} />
+      <button type="button" disabled={store.pending || store.loading} onClick={store.reload}>
+        <RefreshCw size={14} /><Bilingual text="Retry" />
+      </button>
+    </div>}
+    {!store.loading && !store.error && !store.words.length &&
+      <p className="saved-words-empty"><Bilingual text="Tap a word in a field note, then choose Save word." /></p>}
+    {!store.loading && store.words.length > 0 && <div className="saved-words-grid">
+      {store.words.map(item => {
+        const lesson = savedWordLessons.find(candidate => candidate.id === item.lessonId && candidate.version === item.version);
+        const entry = lesson?.glossary.find(candidate => candidate.word === item.word);
+        return <article key={vocabularyKey(item)}>
+          <div className="saved-word-topline">
+            <h3>{item.word}{vietnamese && entry && <small lang="vi">{entry.meaning}</small>}</h3>
+            <button
+              type="button"
+              disabled={store.pending}
+              aria-label={vietnamese ? `Bỏ lưu: ${item.word}` : `Remove saved word: ${item.word}`}
+              onClick={() => { void store.toggle(item, false); }}
+            >
+              <Trash2 size={18} />
+            </button>
+          </div>
+          {entry && lesson ? <>
+            <Pronunciation word={entry.word} />
+            <p><em>{entry.example}</em></p>
+            {vietnamese && <p lang="vi">{entry.exampleVi}</p>}
+            <small><Bilingual text={lesson.title} /></small>
+          </> : <p><UiText en="Original learning source unavailable." vi="Nguồn học gốc không còn khả dụng." /></p>}
+        </article>;
+      })}
+    </div>}
+  </section>;
 }
