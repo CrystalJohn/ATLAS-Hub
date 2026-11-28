@@ -20,15 +20,15 @@ Mức P0–P2 dưới đây giữ theo AUD-01. Trạng thái và bước tiếp 
 | --- | --- | --- | --- |
 | GAP-01 | P0 | Đã chốt hướng B2-first và knowledge-driven, giữ A1–B1. Cần đối chiếu catalog, độ phủ B2 và tiêu chí biên soạn trước khi lập roadmap nội dung. | [Chiến lược](PRODUCT.md#chiến-lược-đã-chốt), [ưu tiên biên soạn Tokyo](content-authoring/content-02a-tokyo/CONTENT-02A-final-report.md) |
 | GAP-02 | P0 | Sổ từ lưu tham chiếu glossary. Cần xác định mục có ngữ cảnh, nhận diện trùng và khả năng đọc dữ liệu cũ trước khi mở rộng Library. | [Client](../app/components/SavedVocabulary.tsx), [handler Vocabulary](../lib/atlas/vocabulary.ts) |
-| GAP-03 | P0 | Chưa có lịch sử ôn hoặc SRS của Library. Tower vẫn là thử nghiệm DRAFT. Chốt bước ôn tối thiểu và quyền sở hữu dữ liệu ôn. | AUD-01, mục 16, [báo cáo Tower](game-01/t1/T1-implementation-report.md) |
-| GAP-04 | P1 | PD-03 đã chốt cách tách kết quả. Còn thiếu tiêu chí thẩm định năng lực, phạm vi bằng chứng B2 và mô hình đánh giá nghe/nói. | [Domain projection](../packages/domain/src/index.ts), [giới hạn học liệu](LEARNING-CONTENT-DIRECTION.md) |
+| GAP-03 | P0 | Chưa có lịch sử ôn hoặc SRS của Library. Tower vẫn là thử nghiệm DRAFT. Chốt bước ôn tối thiểu và quyền sở hữu dữ liệu ôn. | AUD-01, mục 16, [báo cáo Tower](history/tower/t1/T1-implementation-report.md) |
+| GAP-04 | P1 | PD-03 đã chốt cách tách kết quả. Còn thiếu tiêu chí thẩm định năng lực, phạm vi bằng chứng B2 và mô hình đánh giá nghe/nói. | [Domain projection](../packages/domain/src/index.ts), [giới hạn học liệu](history/content/LEARNING-CONTENT-DIRECTION.md) |
 | GAP-05 | P1 | Kiến trúc đang tham chiếu `824aa83`. Cập nhật sau khi Product Owner chấp nhận kết quả xác minh baseline `e8477f8`. | [Kiến trúc](ARCHITECTURE.md), AUD-01, mục 3 |
 | GAP-06 | P1 | PD-11 đã chọn OpenSpec. Checkout chưa có `openspec/`. Chốt cách duyệt và tiếp nhận đặc tả khi có thay đổi hành vi đầu tiên. | [PD-11](PRODUCT.md#chiến-lược-đã-chốt), AUD-01, mục 22 |
 | GAP-07 | P1 | Dispatcher và aggregate vẫn dùng chung. Module Travel/Vocabulary thuộc `e8477f8`, còn chờ chấp nhận làm baseline kỹ thuật. Xem xét đường ghi trong ARCH-INV-001 khi có lý do cụ thể. | [Dispatcher](../lib/atlas/service.ts), [CAS adapter](../lib/atlas/supabase-storage.ts) |
-| GAP-08 | P1 | Báo cáo từ vựng cũ ghi D1. STAB-01B đã đối chiếu hành vi qua fixture và PostgreSQL/PostgREST. Báo cáo D1 giữ vai trò bằng chứng lịch sử. | [Bằng chứng D1](verification/vocabulary-save/README.md), [test hiện hành](../scripts/test-supabase.mts), [runtime](../README.md) |
+| GAP-08 | P1 | Báo cáo từ vựng cũ ghi D1. STAB-01B đã đối chiếu hành vi qua fixture và PostgreSQL/PostgREST. Báo cáo D1 giữ vai trò bằng chứng lịch sử. | [Bằng chứng D1](history/verification/vocabulary-save/README.md), [test hiện hành](../scripts/test-supabase.mts), [runtime](../README.md) |
 | GAP-09 | P2 | Persona, JTBD và chỉ số thành công vẫn là giả thuyết. Xác thực giá trị của vòng khám phá, lưu và ôn với người học. | AUD-01, mục 6 |
 | GAP-10 | P1 | Kiểm tra độ phủ nguồn đã có. Thẩm định độc lập về nội dung, song ngữ và độ khó vẫn là cổng riêng cho các tuyên bố học tập. | [Cổng nguồn](../scripts/validate-evidence.mts), [báo cáo editorial](content-authoring/content-02b-review/CONTENT-02B-final-report.md) |
-| GAP-11 | P1 | AUD-01 chưa xác minh trực tiếp production. Phiên đăng nhập Google và luồng lưu/khôi phục cần evidence trên bản triển khai mục tiêu trước khi kết luận release readiness. | [Biên bản AUTH production](auth-04/AUTH-04-production-verification.md), AUD-01, mục 24 |
+| GAP-11 | P1 | AUD-01 chưa xác minh trực tiếp production. Phiên đăng nhập Google và luồng lưu/khôi phục cần evidence trên bản triển khai mục tiêu trước khi kết luận release readiness. | [Biên bản AUTH production](history/auth/auth-04/AUTH-04-production-verification.md), AUD-01, mục 24 |
 
 ## Quyết định còn mở
 
@@ -67,13 +67,13 @@ Xác minh fresh trên Git archive của `e8477f887b4d310d12293e41db3eeacf3b64e65
 | Vocabulary thật | `node scripts/test-vocabulary-postgres.mts`, `node scripts/test-chapter-ui.mts` với test bổ sung | **PASS** trên candidate và AUD-01 cho legacy, cô lập tài khoản, lặp lệnh và mô tả đúng hành vi orphan. Cả lưu và bỏ lưu đồng thời với first-clear đều tạo đúng một CAS conflict, retry ở revision mới, commit hai revision và chỉ có một khoản thưởng. **FAIL** so với đích LL-INV-002 cho thao tác bỏ lưu mục orphan. |
 | Hosted | Google OAuth, Supabase và Vercel production | **NOT RUN**. GAP-11 tiếp tục mở cho release readiness. Không còn blocker môi trường cho bộ test local đã chạy. |
 
-Nguồn test gồm [Vocabulary PostgreSQL](../scripts/test-vocabulary-postgres.mts), [UI SSR](../scripts/test-chapter-ui.mts), [stack loopback](../scripts/auth02/local-stack.mts) và [AUTH-02 evidence lịch sử](auth-02/AUTH-02-test-evidence.md).
+Nguồn test gồm [Vocabulary PostgreSQL](../scripts/test-vocabulary-postgres.mts), [UI SSR](../scripts/test-chapter-ui.mts), [stack loopback](../scripts/auth02/local-stack.mts) và [AUTH-02 evidence lịch sử](history/auth/auth-02/AUTH-02-test-evidence.md).
 
 ## ARCH-INV-001
 
 Hoãn điều tra cấu trúc lưu trữ. Hiện các command cập nhật một phần trạng thái **ở lớp nghiệp vụ**. Adapter lưu lại toàn bộ document của aggregate dùng chung trong `atlas_expeditions`, theo UUID của người dùng và revision qua CAS. Hồ sơ có đường cập nhật trường riêng ở `atlas_profiles`. Quyết định về partial update ở tầng lưu trữ, ranh giới aggregate, bảng riêng hay migration thuộc ARCH-INV-001. Dành phần kiểm kê persistence, quyền sở hữu và ngữ nghĩa partial update cho AUD-03, phần đo đạc, đánh giá phương án và khả năng mở rộng Library cho AUD-04.
 
-Phạm vi gồm quyền sở hữu và vòng đời Library/nguồn, tham chiếu so với snapshot hoặc mô hình lai, phiên bản và xử lý orphan, ngữ nghĩa xóa, ranh giới transaction và khả năng mở rộng lịch sử ôn. Đo kích thước/tốc độ tăng document, read/write amplification, CAS retry/409 và độ trễ ghi. So sánh phương án bảo toàn cô lập tài khoản, thưởng, checkpoint và dữ liệu cũ, kể cả chuyển đổi, khôi phục và rollback, theo LL-INV-001–008. [ADR-003](auth-02/ADR-003-player-ownership.md), [adapter](../lib/atlas/supabase-storage.ts), [profile handler](../lib/atlas/profile-handler.ts), [SQL integrity](../supabase/migrations/20261021090000_auth02_expedition_integrity.sql).
+Phạm vi gồm quyền sở hữu và vòng đời Library/nguồn, tham chiếu so với snapshot hoặc mô hình lai, phiên bản và xử lý orphan, ngữ nghĩa xóa, ranh giới transaction và khả năng mở rộng lịch sử ôn. Đo kích thước/tốc độ tăng document, read/write amplification, CAS retry/409 và độ trễ ghi. So sánh phương án bảo toàn cô lập tài khoản, thưởng, checkpoint và dữ liệu cũ, kể cả chuyển đổi, khôi phục và rollback, theo LL-INV-001–008. [ADR-003](decisions/ADR-003-player-ownership.md), [adapter](../lib/atlas/supabase-storage.ts), [profile handler](../lib/atlas/profile-handler.ts), [SQL integrity](../supabase/migrations/20261021090000_auth02_expedition_integrity.sql).
 
 ## Language Library và điều kiện vào AUD-02
 
@@ -92,4 +92,4 @@ Product Owner chấp nhận `e8477f887b4d310d12293e41db3eeacf3b64e653` làm base
 
 **AUD-02 sẵn sàng cho discovery** theo phê duyệt của Product Owner. Bản sửa chờ review trước khi tích hợp hoặc phát hành. Đề xuất một commit hành vi gồm handler, UI và regression tests, rồi đối soát tài liệu canonical riêng với bằng chứng AUD-01.
 
-**Ứng viên lưu trữ ngoài repo về sau.** Bản AUD-01 gốc, báo cáo xác minh từ vựng/Travel thời D1 và biên bản preflight AUTH-04 đã được cập nhật theo mốc sau là bằng chứng lịch sử. Chỉ chuyển sau khi được duyệt, có bản lưu có quyền truy cập phù hợp và đã kiểm tra các liên kết nguồn. AUD-01 (bằng chứng lưu riêng), [Vocabulary](verification/vocabulary-save/README.md), [Travel](world-travel/verification.md), [AUTH-04 preflight](auth-04/AUTH-04.1-production-preflight.md).
+**Ứng viên lưu trữ ngoài repo về sau.** Bản AUD-01 gốc, báo cáo xác minh từ vựng/Travel thời D1 và biên bản preflight AUTH-04 đã được cập nhật theo mốc sau là bằng chứng lịch sử. Chỉ chuyển sau khi được duyệt, có bản lưu có quyền truy cập phù hợp và đã kiểm tra các liên kết nguồn. AUD-01 (bằng chứng lưu riêng), [Vocabulary](history/verification/vocabulary-save/README.md), [Travel](history/world-travel/verification.md), [AUTH-04 preflight](history/auth/auth-04/AUTH-04.1-production-preflight.md).

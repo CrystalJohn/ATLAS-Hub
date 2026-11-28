@@ -1,6 +1,6 @@
 # C0 content contract
 
-**DRAFT · proposed acceptance contract, not runtime code, schema migration or implemented endpoints.** Date 2026-10-26; source commit `e1d07867e799e36bec6c550dca9e4f1dcf258dfe`. Architecture remains the native module proposal in [integration design](../GAME-01-proposed-integration-design.md). C0 refines content/rule semantics only. [Gate status](C0-gate-report.md).
+**DRAFT · proposed acceptance contract, not runtime code, schema migration or implemented endpoints.** Date 2026-10-26; source commit `e1d07867e799e36bec6c550dca9e4f1dcf258dfe`. Architecture remains the native module proposal in [integration design](../../history/tower/GAME-01-proposed-integration-design.md). C0 refines content/rule semantics only. [Gate status](C0-gate-report.md).
 
 ## Identity, review and publication
 

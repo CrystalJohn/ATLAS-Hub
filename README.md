@@ -71,7 +71,7 @@ Dry-run hiển thị SQL đang chờ; `db push` áp dụng và ghi lịch sử, 
 1. [`atlas_expeditions`](supabase/migrations/20261020090000_atlas_expeditions.sql): tiến trình, nhiệm vụ, thưởng và từ đã lưu.
 2. [`atlas_profiles`](supabase/migrations/20261020110000_atlas_profiles.sql): tên hiển thị, hỗ trợ tiếng Việt và reading target.
 3. [`atlas_profile_interests`](supabase/migrations/20261020130000_atlas_profile_interests.sql): thêm danh sách sở thích vào profile; chạy cả khi bảng profile đã có từ trước.
-4. [`AUTH-02 integrity`](supabase/migrations/20261021090000_auth02_expedition_integrity.sql): ràng buộc ledger duy nhất, XP/ledger cùng commit, lịch sử completion/stamp và revision. Migration đã được áp dụng lên project Supabase linked; xem [biên bản áp dụng](docs/auth-04/AUTH-04.1-migration-release-2026-10-24.md). Real OAuth E2E và xác minh production vẫn là các cổng riêng.
+4. [`AUTH-02 integrity`](supabase/migrations/20261021090000_auth02_expedition_integrity.sql): ràng buộc ledger duy nhất, XP/ledger cùng commit, lịch sử completion/stamp và revision. Migration đã được áp dụng lên project Supabase linked; xem [biên bản áp dụng](docs/history/auth/auth-04/AUTH-04.1-migration-release-2026-10-24.md). Real OAuth E2E và xác minh production vẫn là các cổng riêng.
 
 Cả hai gắn với `auth.users.id`. Profile nằm ở bảng riêng, không cập nhật document XP/progression. Browser không có quyền ghi trực tiếp vào các bảng này; các thao tác đi qua API của ứng dụng.
 
@@ -127,6 +127,19 @@ pnpm.cmd build
 
 Build không deploy và không tạo bảng Supabase. Repository không tự liên kết hoặc chuyển dữ liệu lịch sử sang tài khoản Google.
 
+## Tài liệu ATLAS
+
+| Nhóm | Tìm ở đâu |
+| --- | --- |
+| Sản phẩm và định hướng | [PRODUCT.md](docs/PRODUCT.md) |
+| Kiến trúc hệ thống | [ARCHITECTURE.md](docs/ARCHITECTURE.md) và [quyết định kỹ thuật](docs/decisions/) |
+| Baseline, kiểm thử và việc đang mở | [PROJECT_STATUS.md](docs/PROJECT_STATUS.md) |
+| Chạy local và xử lý sự cố | [Hướng dẫn kỹ thuật](docs/guides/) |
+| Báo cáo theo mốc và bằng chứng kiểm thử | [Lịch sử](docs/history/) |
+| Học liệu và Tower DRAFT | [Hồ sơ biên tập](docs/content-authoring/) và [bộ dữ liệu thử Tower](docs/game-01/c0/) |
+
+Các audit local nằm trong `docs/audits/`. Xem [AGENTS.md](AGENTS.md) để biết quy tắc làm việc với repo.
+
 ## Kiến trúc
 
 Xem [thiết kế kiến trúc hệ thống](docs/ARCHITECTURE.md) và [quy tắc phát triển](AGENTS.md).
@@ -165,7 +178,7 @@ node scripts/test-vocabulary.mts
 - Sau native Next build: `pnpm.cmd test:auth:http` kiểm tra các route HTTP với provider mô phỏng.
 - Khi `preview:profile` đang chạy: `node scripts/test-profile-http.mts` kiểm tra profile qua HTTP và xác nhận expedition không đổi sau cập nhật profile.
 
-Các fixture không xác minh Google OAuth hoặc quyền/schema PostgreSQL thật. Kết quả kiểm tra, giới hạn và phạm vi browser QA được ghi tại [báo cáo tài khoản](docs/account-profile-verification.md), [báo cáo đăng nhập](docs/auth-01/verification.md) và [báo cáo World Travel](docs/world-travel/verification.md).
+Các fixture không xác minh Google OAuth hoặc quyền/schema PostgreSQL thật. Kết quả kiểm tra, giới hạn và phạm vi browser QA được ghi tại [báo cáo tài khoản](docs/history/auth/account-profile-verification.md), [báo cáo đăng nhập](docs/history/auth/auth-01/verification.md) và [báo cáo World Travel](docs/history/world-travel/verification.md).
 
 AUTH-02 bổ sung kiểm thử **PostgreSQL 17 + PostgREST thật**, tách khỏi các fixture trong bộ nhớ ở trên. Cài binary PostgREST cho Windows một lần, rồi chạy:
 
@@ -176,7 +189,7 @@ pnpm.cmd build
 pnpm.cmd test:auth02:http
 ```
 
-Các test tự tạo database/user mô phỏng riêng trên loopback, không dùng `.env.local` để kết nối production. Browser fixture: `pnpm.cmd preview:auth02`, mở link `/login/alice` hoặc `/login/bob` được in ra terminal. Các link này **không phải Google OAuth**. Trên nền tảng khác, cung cấp `ATLAS_POSTGREST_BIN` trỏ tới executable PostgREST tương thích đã cài. Báo cáo: [implementation](docs/auth-02/AUTH-02-implementation-report.md), [test evidence](docs/auth-02/AUTH-02-test-evidence.md), [production readiness](docs/auth-02/AUTH-02-production-readiness.md).
+Các test tự tạo database/user mô phỏng riêng trên loopback, không dùng `.env.local` để kết nối production. Browser fixture: `pnpm.cmd preview:auth02`, mở link `/login/alice` hoặc `/login/bob` được in ra terminal. Các link này **không phải Google OAuth**. Trên nền tảng khác, cung cấp `ATLAS_POSTGREST_BIN` trỏ tới executable PostgREST tương thích đã cài. Báo cáo: [implementation](docs/history/auth/auth-02/AUTH-02-implementation-report.md), [test evidence](docs/history/auth/auth-02/AUTH-02-test-evidence.md), [production readiness](docs/history/auth/auth-02/AUTH-02-production-readiness.md).
 
 ## Chẩn đoán lỗi
 
@@ -190,6 +203,6 @@ Các test tự tạo database/user mô phỏng riêng trên loopback, không dù
 | `503 DATABASE_SETUP_REQUIRED` | Schema expedition chưa sẵn sàng. |
 | `/auth/error?reason=unavailable` | Google provider của backend đang dùng không bật; fixture cố ý tắt Google thật. |
 
-`GET /api/health` kiểm tra schema expedition và profile (bao gồm `interests`); không thay thế kiểm thử OAuth/gameplay hay xác minh migration integrity đã được áp dụng. [Trace `PROFILE_SETUP_REQUIRED`](docs/troubleshooting/PROFILE_SETUP_REQUIRED.md) là chẩn đoán lịch sử trước AUTH-02.
+`GET /api/health` kiểm tra schema expedition và profile (bao gồm `interests`); không thay thế kiểm thử OAuth/gameplay hay xác minh migration integrity đã được áp dụng. [Trace `PROFILE_SETUP_REQUIRED`](docs/guides/troubleshooting/PROFILE_SETUP_REQUIRED.md) là chẩn đoán lịch sử trước AUTH-02.
 
-Hướng dẫn Windows chi tiết: [LOCAL-DEVELOPMENT.md](docs/LOCAL-DEVELOPMENT.md). Tài liệu adapter Sites trước đó vẫn được giữ tại [ATLAS-SITES.md](docs/legacy/ATLAS-SITES.md) để tham khảo lịch sử; mã nguồn/cấu hình tương ứng đã được xóa khỏi repo.
+Hướng dẫn Windows chi tiết: [LOCAL-DEVELOPMENT.md](docs/guides/LOCAL-DEVELOPMENT.md). Tài liệu adapter Sites trước đó vẫn được giữ tại [ATLAS-SITES.md](docs/history/legacy/ATLAS-SITES.md) để tham khảo lịch sử; mã nguồn/cấu hình tương ứng đã được xóa khỏi repo.

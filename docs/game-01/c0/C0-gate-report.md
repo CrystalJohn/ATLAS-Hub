@@ -53,7 +53,7 @@ No approval below has been obtained by this authoring session. Review-role place
 | T01 | Future local engine/API/persistence/UI oracles actually run and pass, including wrong-versus-error distinction, lost response, all boss outcomes, exactly-once reward and travel/checkpoint isolation | RELEASE-GO |
 | H01 | Refresh inherited AUTH-04 real-Google OAuth, allowed-origin and deployment verification gaps before release. Reported migration application is not repeated here | RELEASE-GO |
 
-H01 is inherited from dated [AUTH-04.1 release record](../../auth-04/AUTH-04.1-migration-release-2026-10-24.md) and [owner decision](../../auth-04/AUTH-04.1-blocker-resolution.md#owner-decision--2026-10-24), not a fresh hosted audit. Do not reopen the waived separate-staging requirement automatically; do not treat the shared Preview database as isolated. No hosted action was performed. [Evidence limitations S6](C0-learning-objectives-and-provenance.md#s6).
+H01 is inherited from dated [AUTH-04.1 release record](../../history/auth/auth-04/AUTH-04.1-migration-release-2026-10-24.md) and [owner decision](../../history/auth/auth-04/AUTH-04.1-blocker-resolution.md#owner-decision--2026-10-24), not a fresh hosted audit. Do not reopen the waived separate-staging requirement automatically; do not treat the shared Preview database as isolated. No hosted action was performed. [Evidence limitations S6](C0-learning-objectives-and-provenance.md#s6).
 
 ## Checks performed
 

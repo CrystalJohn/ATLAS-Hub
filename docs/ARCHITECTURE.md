@@ -61,4 +61,4 @@ Next.js và Supabase tiếp tục là hai thành phần triển khai. Dùng Post
 
 Với các lát API và UI, dùng lại `test-response-types.ts`, `test-travel.mts`, `test-vocabulary.mts` và `test-navigation-v2.mts` theo phạm vi. Với lát ghi tiến trình, chạy thêm các ca PostgreSQL cho cập nhật đồng thời, retry sau mất phản hồi, revision cũ, dữ liệu cũ, cô lập tài khoản và không cộng trùng thưởng. Dùng `test-tower.mts` và kiểm tra import hiện có khi thay đổi ranh giới Tower.
 
-Các quyết định nền tảng được ghi tại [ADR World Travel](world-travel/ADR-001-authoritative-travel.md), [ADR học liệu và bản đồ](world-travel/ADR-002-content-and-map.md), [ADR danh tính và resume](auth-02/ADR-003-player-ownership.md) và [thiết kế lịch học](study-calendar/implementation.md).
+Các quyết định nền tảng được ghi tại [ADR World Travel](decisions/ADR-001-authoritative-travel.md), [ADR học liệu và bản đồ](decisions/ADR-002-content-and-map.md), [ADR danh tính và resume](decisions/ADR-003-player-ownership.md) và [thiết kế lịch học](history/study-calendar/implementation.md).
